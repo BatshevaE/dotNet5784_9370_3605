@@ -29,7 +29,7 @@ public record Task
     string Product,
     EngineerLevel Complexity,
     int Engineerid,
-    bool MileStone = false,
+    bool ?IsMileStone=null,
     DateTime? OptionalDeadline = null,
     DateTime? CreateDate = null,
     DateTime? StartDate = null,
