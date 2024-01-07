@@ -32,7 +32,7 @@ public class EngineerImplementation : IEngineer
         Engineer? ifExistEngineer = DataSource.Engineers.Find(temp => temp.Id == id);
         if (ifExistEngineer == null)
         {
-            throw new NotImplementedException("An e type ongineer bject with such an ID is not exists");
+            throw new Exception($"Engineer with ID={id} does Not exist");
         }
         DataSource.Engineers.Remove(ifExistEngineer);
     }
@@ -68,7 +68,7 @@ public class EngineerImplementation : IEngineer
       
         if (DataSource.Engineers.FirstOrDefault(item) == null)
         {
-            throw new NotImplementedException("An enginner type object with such an ID does not exists");
+            throw new Exception($"Engineer with ID={item.Id} does Not exist");
         }
         DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item));
         DataSource.Engineers.Add(item);
