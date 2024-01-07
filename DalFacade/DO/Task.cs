@@ -37,12 +37,11 @@ public record Task
     DateTime? ActualDeadline = null,
     string? Note = null
 )
-
 {
     /// <summary>
     /// This is an empty ctor
     /// </summary>
-    public Task() : this("", "", 0, 0, "", 0, 0) { }
+    public Task() : this("", "", 0,0 , "", 0, 0) { }
 }
    //We chose to write the record in the second way which the parameters ctor is already exists
    
