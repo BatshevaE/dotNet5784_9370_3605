@@ -37,7 +37,6 @@ public record Task
     DateTime? ActualDeadline = null,
     string? Note = null
 )
-
 {
     /// <summary>
     /// This is an empty ctor
