@@ -17,8 +17,8 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException"></exception>
     public int Create(Engineer item)
     {
-        if (DataSource.Engineers.FirstOrDefault(item) == null)
-                throw new NotImplementedException("An enginner type object with such an ID does not exists");
+        if (DataSource.Engineers.FirstOrDefault(item) != null)
+                throw new NotImplementedException("An enginner type object with such an ID already exists");
         DataSource.Engineers.Add(item);
          return item.Id;
     }
