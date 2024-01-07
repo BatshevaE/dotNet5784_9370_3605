@@ -11,7 +11,7 @@
 /// <param name="RiquiredEffortTime">The length of time that the task takes</param>
 /// <param name="Product">Describes the final result of the task</param>
 /// <param name="Complexity">The minimum level of engineer that can do the task</param>
-/// <parm  name="Engineerid">The level of the engineer that was assigned to the task</parm> 
+/// <parm  name="EngineerId">The id of the engineer that was assigned to the task</parm> 
 /// <param name="IsMileStone">In the Dal layer this field will be false and in the next levels it would be able to be changed to true</param>
 /// <param name="OptionalDeadline">Optional maximum final date to the task</param>
 /// <param name="CreateDate">The date of the creation of the task by the manager</param>

@@ -46,21 +46,20 @@ public static class Initialization
         };
         foreach (var _name in tasksNames) foreach (var _description in tasksDescription) foreach (var _product in tasksProduct)
                 {
-                    int effortTime = s_rand.Next(30, 180);
+                    double effortTime = s_rand.Next(30, 180);
                     EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);
-                    int engineerid = s_rand.Next(100000000, 999999999);
-                    DateTime createDateRange = new DateTime(1995, 1, 1);
+                    int engineerId = s_rand.Next(200000000, 400000000);
+                    DateTime createDateRange = new DateTime(2022, 1, 1);
                     DateTime startDateRange = new DateTime(2025, 1, 1);
                     DateTime finishDateRange = new DateTime(2026, 1, 1);
                     Random gen = new Random();
                     int rangeCreate = (DateTime.Today - createDateRange).Days;
                     DateTime createDate = createDateRange.AddDays(gen.Next(rangeCreate));
                     int rangeStart = (startDateRange - DateTime.Today).Days;
-                    DateTime startDate = createDateRange.AddDays(gen.Next(rangeStart));
+                    DateTime startDate = startDateRange.AddDays(gen.Next(rangeStart));
                     int rangeFinish = (finishDateRange - startDate).Days;
-                    DateTime finishDate = createDateRange.AddDays(gen.Next(rangeFinish));
-                    Task newTask = new(_name, _description, 0, _product, complex, engineerid, TimeSpan.FromDays(effortTime), false, finishDate, createDate, startDate, null, null, null);
-
+                    DateTime finishDate = finishDateRange.AddDays(gen.Next(rangeFinish));
+                    Task newTask = new(_name, _description, 0, _product, complex, engineerId, TimeSpan.FromDays(effortTime), false, finishDate, createDate, startDate, null, null, null);
                     s_dalTask!.Create(newTask);
                 }
     }
@@ -85,6 +84,10 @@ public static class Initialization
     }
     private static void createDependencys()
     {
+        string[] tasksNames =
+           {"Analysis","Planning","Design","Prototyping","Testing","Simulation","Integration",
+            "Coding","Evaluation","Estimation","Risk","Quality","Compliance","Management","Scheduling",
+            "Procurement","Communication","Documentation","Safety","Commissioning"};
 
         Dependency newDependency = new(0,0,0);
         s_dalDependency!.Create(newDependency);
@@ -97,8 +100,10 @@ public static class Initialization
         ITask? daITask;
 
         s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
-
+        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        s_daITask = daITask ?? throw new NullReferenceException("DAL can not be null!");
+        CreateEngineers();
     }
 
-    }
+    
 }
