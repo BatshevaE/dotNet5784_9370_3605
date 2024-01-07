@@ -71,27 +71,15 @@ public static class Initialization
         "Daniel Cohen", "Eli levi", "Yair Rosen ",
         "shir Klein", "Dina Hill ", "Shira Stone"
         };
-        string[] engineerEmailAdress =
-       {
-        "DanielC@gmail.com", "Elil@gmail.com", "YairR@gmail.com ",
-        "shirK@gmail.com", "DinaH@gmail.com ", "ShiraS@gmail.com"
-        };
-
         foreach (var _name in engineerNames)
         {
-            int _id,x=0;
+            int _id;
             do
                 _id = s_rand.Next(200000000, 400000000);
             while (s_dalEngineer!.Read(_id) != null);
             EngineerLevel _c = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);
-
-            
             double _cfh = s_rand.Next(150, 1000);
-            string? _ema= engineerEmailAdress[x];
-
-            Engineer newEngineer = new(_id, _name, _ema, _c , _cfh);
-            x++;
-
+            Engineer newEngineer = new(_id, _name,$"{_name}@gmail.com ", _c , _cfh);
             s_dalEngineer!.Create(newEngineer);
         }
     }
