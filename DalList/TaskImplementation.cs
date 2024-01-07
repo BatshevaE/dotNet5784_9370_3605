@@ -32,7 +32,7 @@ public class TaskImplementation : ITask
             DataSource.Tasks.Remove(task);
         }
         else
-            throw new Exception($"Object from type Task with ID:{id} doesn't exist");
+            throw new Exception($"Task with ID={id} does Not exist");
     }
     /// <summary>
     /// The function searches for a task with a requested id and returns the task if it actually in the list
@@ -66,7 +66,7 @@ public class TaskImplementation : ITask
                 DataSource.Tasks.Add(item);
             }
             else
-                throw new Exception($"Object from type Task with ID:{item.Id} doesn't exist");
+                throw new Exception($"Task with ID={item.Id} does Not exist");
         }
     }
 
