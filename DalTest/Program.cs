@@ -80,6 +80,7 @@ namespace DalTest
                         case SubMenue.Read:
                             break;
                         case SubMenue.ReadAll:
+                            List<Task> s = s_dalTask.ReadAll();
                             break;
                         case SubMenue.Update:
                             break;
@@ -111,6 +112,7 @@ namespace DalTest
                         case SubMenue.Read:
                             break;
                         case SubMenue.ReadAll:
+                            List<Engineer> s = s_dalEngineer.ReadAll();
                             break;
                         case SubMenue.Update:
                             break;
@@ -138,6 +140,7 @@ namespace DalTest
                         case SubMenue.Read:
                             break;
                         case SubMenue.ReadAll:
+                            List<Dependency> s = s_dalDependency.ReadAll();
                             break;
                         case SubMenue.Update:
                             break;
