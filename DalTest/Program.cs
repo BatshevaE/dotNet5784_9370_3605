@@ -68,9 +68,12 @@ namespace DalTest
                     SubMenue choiceTask;
                     Console.WriteLine(@"Choose one of the following options for Task 
                                       Exit:0
-                                      Task:1
-                                      Engineer:2
-                                      Dependency:3");
+                                      Creat:1
+                                      Read:2
+                                      ReadAll:3
+                                      Update:4
+                                       Delete:5
+                                      ");
                     choiceTask = (SubMenue)Console.Read();
                     switch (choiceTask)
                     {
@@ -113,7 +116,7 @@ namespace DalTest
                 {
                     Console.WriteLine("Please enter a task's id");
                     string? id = Console.ReadLine();
-                    int? v = int.Parse(id);    
+                    int v = int.Parse(id!);    
                     Task? task = s_dalTask.Read();
                 }
                 void readListTasks()
