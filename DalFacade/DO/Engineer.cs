@@ -12,7 +12,7 @@ public record Engineer
     int Id,
     string?  Name,
     string? EmailAsress,
-    EngineerLevel? Complexit,
+    EngineerLevel? Complexity,
     double? CostForHour
     )
 {
