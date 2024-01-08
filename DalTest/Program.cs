@@ -4,6 +4,7 @@ using DO;
 using System.Linq.Expressions;
 using System.Threading.Channels;
 using System.Xml.Serialization;
+using Task = System.Threading.Tasks.Task;
 
 namespace DalTest
 {
@@ -76,22 +77,57 @@ namespace DalTest
                         case SubMenue.Exit:
                             break;
                         case SubMenue.Creat:
+                            creatTask();
                             break;
                         case SubMenue.Read:
+                            readTask();
                             break;
                         case SubMenue.ReadAll:
-                            List<Task> s = s_dalTask.ReadAll();
+                            readListTasks();
                             break;
                         case SubMenue.Update:
+                            updateTask();
                             break;
                         case SubMenue.Delete:
+                            deleteTask();
                             break;
                         default:
                             break;
                     }
 
                 }
-                 void ChoiceEngineer()
+                void creatTask()
+                {
+
+                }
+                void updateTask()
+                {
+
+                }
+
+                void deleteTask()
+                {
+
+                }
+                void readTask()
+                {
+                    Console.WriteLine("Please enter a task's id");
+                    string? id = Console.ReadLine();
+                    int? v = int.Parse(id);    
+                    Task? task = s_dalTask.Read();
+                }
+                void readListTasks()
+                {
+                    List<Task> listTasks = s_dalTask.ReadAll();
+                    Console.WriteLine("The tasks are:");
+                    foreach (Task _task in listTasks) 
+                    {
+                        Console.WriteLine(_task.Name + " : " + _task.Descriptoin+ " " + _task.Id);
+                    }
+
+
+                }
+                void ChoiceEngineer()
                 {
                     SubMenue choiceEngineer;
                     Console.WriteLine(@"Choose one of the following options for Engineer:
