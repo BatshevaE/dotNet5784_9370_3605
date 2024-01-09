@@ -7,26 +7,25 @@ using System.Xml.Serialization;
 using Task = System.Threading.Tasks.Task;
 
 namespace DalTest
+   
 {
     internal class Program
     {
         private static ITask? s_dalTask = new TaskImplementation(); //stage 1
         private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
         private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
-        /// <summary>
-        /// enum for the main menue
-        /// </summary>
+       
         public enum MainMenue
         {
             exit, Task, Engineer, Dependency
         }
-        /// <summary>
-        /// enum for the sub menue
-        /// </summary>
+       
         public enum SubMenue
+            
         {
             Exit,Creat,Read,ReadAll,Update,Delete
         }
+      
         static void Main(string[] args)
         {
             try
