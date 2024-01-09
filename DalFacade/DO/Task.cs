@@ -11,7 +11,7 @@
 /// <param name="RiquiredEffortTime">The length of time that the task takes</param>
 /// <param name="Product">Describes the final result of the task</param>
 /// <param name="Complexity">The minimum level of engineer that can do the task</param>
-/// <parm  name="EngineerId">The id of the engineer that was assigned to the task</parm> 
+/// <parm  name="EngineerId">The id of the engineer that was assigned to the task,ist nullable because there can be a task without engineer yet</parm> 
 /// <param name="IsMileStone">In the Dal layer this field will be false and in the next levels it would be able to be changed to true</param>
 /// <param name="OptionalDeadline">Optional maximum final date to the task</param>
 /// <param name="CreateDate">The date of the creation of the task by the manager</param>
@@ -22,16 +22,16 @@
 public record Task
 (
 
-    string? Name,
-    string? Descriptoin,
+    string Name,
+    string Descriptoin,
     int Id,
     string Product,
     EngineerLevel Complexity,
-    int Engineerid,
-    TimeSpan RiquiredEffortTime=new TimeSpan(),
-    bool? IsMileStone = false,
+    int? Engineerid,
+    DateTime CreateDate,
+    TimeSpan RiquiredEffortTime =new TimeSpan(),
+    bool IsMileStone = false,
     DateTime? OptionalDeadline = null,
-    DateTime? CreateDate = null,
     DateTime? StartDate = null,
     DateTime? StartTaskDate = null,
     DateTime? ActualDeadline = null,
@@ -41,7 +41,7 @@ public record Task
     /// <summary>
     /// This is an empty ctor
     /// </summary>
-    public Task() : this("", "", 0, "", 0, 0) { }
+    public Task() : this("", "", 0, "", 0, 0, DateTime.Today) { }
 }
    //We chose to write the record in the second way which the parameters ctor is already exists
    

@@ -2,8 +2,7 @@
 namespace Dal;
 using DalApi;
 using DO;
-using System.Collections.Generic;
-using System.Linq;
+
 /// <summary>
 /// Implementation of the methods for the dependency list. 
 /// </summary>
@@ -64,13 +63,15 @@ public class DependencyImplementation : IDependency
     /// <exception cref="NotImplementedException"></exception>
     public void Update(Dependency item)
     {
-    
+        Dependency? dependency = DataSource.Dependencys.Find(Dependency => Dependency.Id == item.Id);
+
         if (DataSource.Dependencys.FirstOrDefault(item) == null)//if item wasnt found in the list of dependecys
         {
             throw new Exception($"Dependent with ID={item.Id} does Not exist");
         }
-        DataSource.Dependencys.Remove(DataSource.Dependencys.FirstOrDefault(item));//remove the found dependent
+        DataSource.Dependencys.Remove(dependency!);//remove the found dependent
         DataSource.Dependencys.Add(item);
+
         
     }
 }
