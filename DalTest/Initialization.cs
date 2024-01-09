@@ -137,22 +137,16 @@ public static class Initialization
                     int i = 0;
                     double effortTime = s_rand.Next(30, 180);//here we get a random time in days for each task
                     EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task
-                    int engineerId = s_rand.Next(200000000, 400000000);//here we get a random id for engineer for the task
 
-                   
-                    DateTime startDateRange = new DateTime(2025, 1, 1);
-                    DateTime finishDateRange = new DateTime(2026, 1, 1);
+                    //here we get a random create date  from today until 3 months from today
+                    DateTime startDateRange = new DateTime(2024, 4, 1);
                     Random gen = new Random();
                     int rangeStart = (startDateRange - DateTime.Today).Days;
-                    DateTime startDate = startDateRange.AddDays(gen.Next(rangeStart));
-                    int rangeFinish = (finishDateRange - startDate).Days;                 
-                    DateTime finishDate = finishDateRange.AddDays(gen.Next(rangeFinish));
-
-                    Task newTask = new(_name,tasksDescription[i++], 0,tasksProduct[i++], complex, engineerId, DateTime.Today,TimeSpan.FromDays(effortTime), false, finishDate, startDate, null, null, null);//ctor
+                    DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));
+                    
+                    Task newTask = new(_name,tasksDescription[i++], 0,tasksProduct[i++], complex, null, createDate, TimeSpan.FromDays(effortTime), false, null, null, null, null, null);//ctor
                     s_dalTask!.Create(newTask);
-                    //DateTime finishDate=null;
-                    //DateTime DateTime startDate = null;
-
+                  //for now we only put the creation date and later we will put the other dates therefor,for now they are null
                 }
     }
     /// <summary>

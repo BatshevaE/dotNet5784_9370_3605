@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Channels;
 using System.Xml.Serialization;
 using Task = System.Threading.Tasks.Task;
-
 namespace DalTest
 {
     internal class Program
@@ -32,37 +31,35 @@ namespace DalTest
             try
             {
                 Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependency);
-                MainMenue choice;
-                //The main menue,of the three objects
-                void MainMenue()
-                {
-                    Console.WriteLine(@"Choose one of the following options: 
+                MainMenue choice;                        
+                    do
+                    {
+                        Console.WriteLine(@"Choose one of the following options: 
                                       Exit:0
                                       Task:1
                                       Engineer:2
                                       Dependency:3");
-                    choice = (MainMenue)Console.Read();//read the int choice and convert it to MainMenue types
-                    switch (choice)
-                    {
-                        case Program.MainMenue.exit:
-                            break;
-                        case Program.MainMenue.Task:
-                            ChoiceTask();
-                            MainMenue();
-                            break;
-                        case Program.MainMenue.Engineer:
-                            ChoiceEngineer();
-                            MainMenue();
-                            break;
-                        case Program.MainMenue.Dependency:
-                            ChoiceDependency();
-                            MainMenue();
-                            break;
-                        default:
-                            throw new Exception("The selected option does not exist");
+                        choice = (MainMenue)Console.Read();//read the int choice and convert it to MainMenue types
+                        switch (choice)
+                        {
+                            case Program.MainMenue.exit:
+                                break;
+                            case Program.MainMenue.Task:
+                                ChoiceTask();
+                                break;
+                            case Program.MainMenue.Engineer:
+                                ChoiceEngineer();
+                                break;
+                            case Program.MainMenue.Dependency:
+                                ChoiceDependency();
+                                break;
+                            default:
+                                throw new Exception("The selected option does not exist");
+                        }
                     }
+                    while (choice != Program.MainMenue.exit);
 
-                }
+                
                 void ChoiceTask()//A method for the chosen option-task
 
                 {
@@ -73,7 +70,7 @@ namespace DalTest
                                       Read:2
                                       ReadAll:3
                                       Update:4
-                                       Delete:5
+                                      Delete:5
                                       ");
                     choiceTask = (SubMenue)Console.Read();//read the int choice and convert it to SubMenue types
                     switch (choiceTask)
@@ -164,8 +161,7 @@ namespace DalTest
                             break;
                     }
                 }
-
-                void creatTask()//get all the details of a task, craet a new task and add it to the list of tasks
+                void creatTask()//get all the details of a task, craete a new task and add it to the list of tasks
                 {
                     try
                     {
@@ -184,26 +180,17 @@ namespace DalTest
                         Console.WriteLine($@"The engineer's riquired effort time for the task:");
                         if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan riquiredEffortTime))
                             throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's optional dead line:");
+                        Console.WriteLine($@"What is the latest date for you to finish the priject:");
                         if (!DateTime.TryParse(Console.ReadLine(), out DateTime OptionalDeadline))
-                            throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's create Date:");
-                        if (!DateTime.TryParse(Console.ReadLine(), out DateTime CreateDate))
-                            throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's start date:");
+                            throw new FormatException("Wrong input");                       
+                        Console.WriteLine($@"When would you like to start the task:");
                         if (!DateTime.TryParse(Console.ReadLine(), out DateTime StartDate))
-                            throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's start task date:");
-                        if (!DateTime.TryParse(Console.ReadLine(), out DateTime StartTaskDate))
-                            throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's actual dead line:");
-                        if (!DateTime.TryParse(Console.ReadLine(), out DateTime ActualDeadline))
-                            throw new FormatException("Wrong input");
+                            throw new FormatException("Wrong input");                        
                         Console.WriteLine($@"Descriptoin:");
                         string? note = Console.ReadLine();
 
-                        DO.Task? task = new DO.Task(taskName, taskDescriptoin, 0, taskProduct, taskComplex, engineerId, CreateDate,riquiredEffortTime, false, OptionalDeadline, StartDate, StartTaskDate, ActualDeadline, note);
-                        s_dalTask!.Create(task);//crud
+                        DO.Task? task = new DO.Task(taskName, taskDescriptoin, 0, taskProduct, taskComplex, engineerId, DateTime.Today,riquiredEffortTime, false, OptionalDeadline, StartDate, null, null, note);
+                        s_dalTask!.Create(task);
                         Console.WriteLine($"the id of the new task is:{task.Id} ");
                     }
                     catch (FormatException ex) { Console.WriteLine(ex); };
@@ -227,24 +214,16 @@ namespace DalTest
                         Console.WriteLine($@"The engineer's riquired effort time for the task:");
                         if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan riquiredEffortTime))
                             throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's optional dead line:");
+                        Console.WriteLine($@"What is the latest date for you to finish the priject:");
                         if (!DateTime.TryParse(Console.ReadLine(), out DateTime OptionalDeadline))
                             throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's create Date:");
-                        if (!DateTime.TryParse(Console.ReadLine(), out DateTime CreateDate))
-                            throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's start date:");
+                        Console.WriteLine($@"When would you like to start the task:");
                         if (!DateTime.TryParse(Console.ReadLine(), out DateTime StartDate))
                             throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's start task date:");
-                        if (!DateTime.TryParse(Console.ReadLine(), out DateTime StartTaskDate))
-                            throw new FormatException("Wrong input");
-                        Console.WriteLine($@"The task's actual dead line:");
-                        if (!DateTime.TryParse(Console.ReadLine(), out DateTime ActualDeadline))
-                            throw new FormatException("Wrong input");
-                        Console.WriteLine($@"note:");
+                        Console.WriteLine($@"Descriptoin:");
                         string? note = Console.ReadLine();
-                        DO.Task? task = new DO.Task(taskName, taskDescriptoin, 0, taskProduct, taskComplex, engineerId, CreateDate, riquiredEffortTime, false, OptionalDeadline, StartDate, StartTaskDate, ActualDeadline, note);
+
+                        DO.Task? task = new DO.Task(taskName, taskDescriptoin, 0, taskProduct, taskComplex, engineerId, DateTime.Today, riquiredEffortTime, false, OptionalDeadline, StartDate, null, null, note);
                         s_dalTask!.Update(task);
                     }
                     catch (FormatException ex) { Console.WriteLine(ex); };
@@ -285,10 +264,7 @@ namespace DalTest
                                                ");
                             if (taskToRead.Note != null)
                                 Console.WriteLine($@"The task's Notes are:{taskToRead.Note}");
-
                         }
-
-
                     }
                     catch (FormatException ex) { Console.WriteLine(ex); };
 
@@ -331,19 +307,17 @@ namespace DalTest
                     {
                         Console.WriteLine($@"Please enter the following details about the engineer:
                                              Name:");
-                        string? engineerName = Console.ReadLine();
+                        string engineerName = Console.ReadLine()!;
                         Console.WriteLine($@"Id:");
-
                         if (!int.TryParse(Console.ReadLine(), out int engineerId))
                             throw new FormatException("Wrong input");
                         Console.WriteLine($@"Cost for an hour:");
                         if (!double.TryParse(Console.ReadLine(), out double engineerCost))
                             throw new FormatException("Wrong input");
-
                         Console.WriteLine($@"Complex of the engineer:");
                         EngineerLevel engineerComplex = (EngineerLevel)Console.Read();
                         Console.WriteLine($@"An Email address:");
-                        string? engineerEmail = Console.ReadLine();
+                        string engineerEmail = Console.ReadLine()!;
                         Engineer engineer = new Engineer(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
                         s_dalEngineer!.Create(engineer);
                         Console.WriteLine($"the id of the new engineer is:{engineerId} ");
@@ -403,7 +377,7 @@ namespace DalTest
                     {
                         Console.WriteLine($@"Please enter the following details about the engineer you would like to update:
                                              Name:");
-                        string? engineerName = Console.ReadLine();
+                        string engineerName = Console.ReadLine()!;
                         Console.WriteLine($@"Id:");
                         if (!int.TryParse(Console.ReadLine(), out int engineerId))
                             throw new FormatException("Wrong input");
@@ -413,7 +387,7 @@ namespace DalTest
                         Console.WriteLine($@"Complex of the engineer:");
                         EngineerLevel engineerComplex = (EngineerLevel)Console.Read();
                         Console.WriteLine($@"An Email address:");
-                        string? engineerEmail = Console.ReadLine();
+                        string engineerEmail = Console.ReadLine()!;
                         Engineer engineer = new Engineer(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
                         s_dalEngineer!.Update(engineer);
                     }
