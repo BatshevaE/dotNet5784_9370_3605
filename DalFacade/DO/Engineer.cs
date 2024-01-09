@@ -10,10 +10,10 @@
 public record Engineer
     (
     int Id,
-    string?  Name,
-    string? EmailAsress,
-    EngineerLevel? Complexity,
-    double? CostForHour
+    string  Name,
+    string EmailAsress,
+    EngineerLevel Complexity,
+    double CostForHour
     )
 {
     /// <summary>

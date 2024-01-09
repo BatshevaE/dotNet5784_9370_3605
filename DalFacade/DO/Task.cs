@@ -22,16 +22,16 @@
 public record Task
 (
 
-    string? Name,
-    string? Descriptoin,
+    string Name,
+    string Descriptoin,
     int Id,
     string Product,
     EngineerLevel Complexity,
     int Engineerid,
-    TimeSpan RiquiredEffortTime=new TimeSpan(),
-    bool? IsMileStone = false,
+    DateTime CreateDate,
+    TimeSpan RiquiredEffortTime =new TimeSpan(),
+    bool IsMileStone = false,
     DateTime? OptionalDeadline = null,
-    DateTime? CreateDate = null,
     DateTime? StartDate = null,
     DateTime? StartTaskDate = null,
     DateTime? ActualDeadline = null,
@@ -41,7 +41,7 @@ public record Task
     /// <summary>
     /// This is an empty ctor
     /// </summary>
-    public Task() : this("", "", 0, "", 0, 0) { }
+    public Task() : this("", "", 0, "", 0, 0, }
 }
    //We chose to write the record in the second way which the parameters ctor is already exists
    

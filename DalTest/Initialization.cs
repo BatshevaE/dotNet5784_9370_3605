@@ -136,21 +136,20 @@ public static class Initialization
                 {
                     int i = 0;
                     double effortTime = s_rand.Next(30, 180);//here we get a random time in days for each task
-                    EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task 
+                    EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task
                     int engineerId = s_rand.Next(200000000, 400000000);//here we get a random id for engineer for the task
-                    DateTime createDateRange = new DateTime(2022, 1, 1);
+
+                   
                     DateTime startDateRange = new DateTime(2025, 1, 1);
                     DateTime finishDateRange = new DateTime(2026, 1, 1);
                     Random gen = new Random();
-                    int rangeCreate = (DateTime.Today - createDateRange).Days;
-                    DateTime createDate = createDateRange.AddDays(gen.Next(rangeCreate));
                     int rangeStart = (startDateRange - DateTime.Today).Days;
                     DateTime startDate = startDateRange.AddDays(gen.Next(rangeStart));
-                    int rangeFinish = (finishDateRange - startDate).Days;
+                    int rangeFinish = (finishDateRange - startDate).Days;                 
                     DateTime finishDate = finishDateRange.AddDays(gen.Next(rangeFinish));
-                    Task newTask = new(_name,tasksDescription[i++], 0,tasksProduct[i++], complex, engineerId, TimeSpan.FromDays(effortTime), false, finishDate, createDate, startDate, null, null, null);//ctor
+
+                    Task newTask = new(_name,tasksDescription[i++], 0,tasksProduct[i++], complex, engineerId, DateTime.Today,TimeSpan.FromDays(effortTime), false, finishDate, startDate, null, null, null);//ctor
                     s_dalTask!.Create(newTask);
-                    //DateTime createDate=DateTime.Today;
                     //DateTime finishDate=null;
                     //DateTime DateTime startDate = null;
 
