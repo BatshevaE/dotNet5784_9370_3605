@@ -20,10 +20,9 @@ namespace DalTest
         {
             Exit = 0, Task, Engineer, Dependency
         }
-        /// <summary>
-        /// enum for the sub menue
-        /// </summary>
+       
         public enum SubMenue
+            
         {
             Exit, Creat, Read, ReadAll, Update, Delete
         }
