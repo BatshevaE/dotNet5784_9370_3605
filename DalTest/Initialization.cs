@@ -18,9 +18,9 @@ public static class Initialization
     
     public static void Do(ITask? dalTask, IEngineer? dalEngineer, IDependency? dalDependency)
     {
-        ITask? s_dalTask;
-        IDependency? s_dalDependency;
-        IEngineer? s_dalEngineer;
+        //ITask? s_dalTask;
+        //IDependency? s_dalDependency;
+        //IEngineer? s_dalEngineer;
        
         s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
@@ -139,8 +139,8 @@ public static class Initialization
                     EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task
 
                     //here we get a random create date  from today until 3 months from today
-                    DateTime startDateRange = new DateTime(2024, 4, 1);
-                    Random gen = new Random();
+                    DateTime startDateRange = new (2024, 4, 1);
+                    Random gen = new ();
                     int rangeStart = (startDateRange - DateTime.Today).Days;
                     DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));
                     
@@ -165,7 +165,7 @@ public static class Initialization
             int _id;
             do
                 _id = s_rand.Next(200000000, 400000000);//here we get a random id for the engineer
-            while (s_dalEngineer!.Read(_id) != null);
+            while (s_dalEngineer?.Read(_id) != null);
             EngineerLevel _c = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex level of the engineer
             double _cfh = s_rand.Next(150, 1000);//a random cost for hour of the engineer
             Engineer newEngineer = new(_id, _name,$"{_name}@gmail.com ", _c , _cfh);//ctor
@@ -181,47 +181,47 @@ public static class Initialization
     {
         Dependency[] newDependency = {
 
-            new Dependency(0,1,2),
-            new Dependency(0,3,2),
-            new Dependency(0,6,1),
-            new Dependency(0,11,1),
-            new Dependency(0,7,3),
-            new Dependency(0,4,3),
-            new Dependency(0,5,4),
-            new Dependency(0,5,4),
-            new Dependency(0,21,4),
-            new Dependency(0,12,5),
-            new Dependency(0,9,5),
-            new Dependency(0,7,6),
-            new Dependency(0,8,6),
-            new Dependency(0,8,7),
-            new Dependency(0,22,7),
-            new Dependency(0,5,8),
-            new Dependency(0,23,8),
-            new Dependency(0,13,9),
-            new Dependency(0,18,9),
-            new Dependency(0,24,10),
-            new Dependency(0,25,10),
-            new Dependency(0,26,11),
-            new Dependency(0,12,11),
-            new Dependency(0,13,12),
-            new Dependency(0,27,12),
-            new Dependency(0,28,13),
-            new Dependency(0,18,13),
-            new Dependency(0,15,14),
-            new Dependency(0,25,14),
-            new Dependency(0,29,15),
-            new Dependency(0,17,15),
-            new Dependency(0,21,25),
-            new Dependency(0,30,25),
-            new Dependency(0,31,17),
-            new Dependency(0,32,17),
-            new Dependency(0,19,18),
-            new Dependency(0,33,19),
-            new Dependency(0,9,19),
-            new Dependency(0,35,18),
-            new Dependency(0,34,36),
-            new Dependency(0,5,36)
+            new (0,1,2),
+            new (0,3,2),
+            new (0,6,1),
+            new (0,11,1),
+            new (0,7,3),
+            new (0,4,3),
+            new (0,5,4),
+            new (0,5,4),
+            new (0,21,4),
+            new (0,12,5),
+            new (0,9,5),
+            new (0,7,6),
+            new (0,8,6),
+            new (0,8,7),
+            new (0,22,7),
+            new (0,5,8),
+            new (0,23,8),
+            new (0,13,9),
+            new (0,18,9),
+            new (0,24,10),
+            new (0,25,10),
+            new (0,26,11),
+            new (0,12,11),
+            new (0,13,12),
+            new (0,27,12),
+            new (0,28,13),
+            new (0,18,13),
+            new (0,15,14),
+            new (0,25,14),
+            new (0,29,15),
+            new (0,17,15),
+            new (0,21,25),
+            new (0,30,25),
+            new (0,31,17),
+            new (0,32,17),
+            new (0,19,18),
+            new (0,33,19),
+            new (0,9,19),
+            new (0,35,18),
+            new (0,34,36),
+            new (0,5,36)
         };
     
     foreach(Dependency dependency in newDependency)

@@ -1,8 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 
 /// <summary>
 /// Implementation of the methods for the engineer.
@@ -17,8 +15,8 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException"></exception>
     public int Create(Engineer item)
     {
-        if (DataSource.Engineers.FirstOrDefault(item) != null)
-                throw new NotImplementedException("An enginner type object with such an ID already exists");
+        if(Read(item.Id) !=null)
+                throw new Exception("An enginner type object with such an ID already exists");
         DataSource.Engineers.Add(item);
          return item.Id;
     }
@@ -26,7 +24,7 @@ public class EngineerImplementation : IEngineer
     /// The function deletes an existing engineer from the list 
     /// </summary>
     /// <param name="id">ID number of an engineer</param>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="Exception"></exception>
     public void Delete(int id)
     {
         Engineer? ifExistEngineer = DataSource.Engineers.Find(temp => temp.Id == id);
@@ -62,15 +60,16 @@ public class EngineerImplementation : IEngineer
     /// Update of an existing object of enginer.
     /// </summary>
     /// <param name="item">A reference to an existing object of engineer.</param>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="Exception"></exception>
     public void Update(Engineer item)
     {
-      
+        Engineer? engineer = DataSource.Engineers.Find(Engineer => Engineer.Id == item.Id);
+
         if (DataSource.Engineers.FirstOrDefault(item) == null)
         {
             throw new Exception($"Engineer with ID={item.Id} does Not exist");
         }
-        DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item));
+        DataSource.Engineers.Remove(engineer!);
         DataSource.Engineers.Add(item);
     }
 }

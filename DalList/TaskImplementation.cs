@@ -1,7 +1,7 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
-using System.Collections.Generic;
+
 /// <summary>
 /// The CRUB functions for Task
 /// </summary>
