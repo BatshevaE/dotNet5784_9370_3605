@@ -24,7 +24,7 @@ public class TaskImplementation : ITask
     /// </summary>
     /// <param name="id">Searching the task to delete by it's id</param>
     /// <exception cref="Exception">If the requested task is not in the list an exception is thrown</exception>
-    public void Delete(int id)
+    internal void Delete(int id)
     {
         Task? task = DataSource.Tasks.Find(Task => Task.Id == id);
         if (task != null)

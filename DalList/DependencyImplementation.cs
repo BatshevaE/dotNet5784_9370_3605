@@ -25,7 +25,7 @@ public class DependencyImplementation : IDependency
     /// </summary>
     /// <param name="id">ID number of a dependecy</param>
     /// <exception cref="NotImplementedException"></exception>
-    public void Delete(int id)
+    internal void Delete(int id)
     {
         Dependency? ifExistDependency = DataSource.Dependencys.Find(temp => temp.Id == id);
         if (ifExistDependency == null)

@@ -5,7 +5,7 @@ using DO;
 /// <summary>
 /// Implementation of the methods for the engineer.
 /// </summary>
-public class EngineerImplementation : IEngineer
+internal class EngineerImplementation : IEngineer
 {
     /// <summary>
     /// Adding a new object of Engineer to a database, (to the list of objects of Engineers).
