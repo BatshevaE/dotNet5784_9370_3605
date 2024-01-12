@@ -41,20 +41,24 @@ internal class EngineerImplementation : IEngineer
     /// <returns>If there is an object in the database with the received identification number, the method will return a reference to the existing engineer.
     ///Otherwise, the method will return null.</returns>
     public Engineer? Read(int id)
-    {
-        if (DataSource.Engineers.Find(item=> item.Id == id) != null)
-        {
-            return DataSource.Engineers.Find(item => item.Id == id);
-        }
-        return null;
+    { 
+     return DataSource.Engineers.FirstOrDefault(item => item.Id == id);//stage 2
     }
     /// <summary>
     /// Return a copy of the list of references to all objects of engineer.
     /// </summary>
     /// <returns>The method returns a new list that is a copy of the existing list of all objects of engineer.</returns>
-    public List<Engineer> ReadAll()
+    //public List<Engineer> ReadAll() stage 1
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
-        return new List<Engineer>(DataSource.Engineers);
+        if (filter != null)
+        {
+            return from item in DataSource.Engineers
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Engineers
+               select item;
     }
     /// <summary>
     /// Update of an existing object of enginer.

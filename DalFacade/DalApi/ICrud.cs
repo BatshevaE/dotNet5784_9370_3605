@@ -18,7 +18,9 @@ public interface ICrud<T> where T : class
     /// stage 1 only, Reads all entity of objects
     /// </summary>
     /// <returns>return the list of objects</returns>
-    List<T> ReadAll();
+    //List<T> ReadAll();stage 1
+    IEnumerable<T?> ReadAll(Func<T, bool>? filter = null); // stage 2
+
     /// <summary>
     /// Updates entity of object
     /// </summary>

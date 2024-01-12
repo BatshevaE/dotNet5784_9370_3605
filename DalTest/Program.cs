@@ -1,6 +1,7 @@
 ﻿using Dal;
 using DalApi;
 using DO;
+using System.Diagnostics;
 
 namespace DalTest
 {    
@@ -9,9 +10,11 @@ namespace DalTest
     /// </summary>
     internal class Program
     {
-        private static ITask? s_dalTask = new TaskImplementation(); //stage 1
-        private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
-        private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
+        //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
+        //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
+        //private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
+        static readonly IDal s_dal = new DalList(); //stage 2
+
 
         /// <summary>
         /// enum for the main menue
@@ -33,8 +36,9 @@ namespace DalTest
         static void Main(string[] args)
         {
             try
-            {               
-                Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependency);
+            {
+                //Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependency);stage 1
+                Initialization.Do(s_dal); //stage 2
                 MainMenue choice;                
                 do
                 {
@@ -238,8 +242,9 @@ Delete:5");
                 Console.WriteLine($@"Note:");
                 string? note = Console.ReadLine();
                 DO.Task? task = new(taskName, taskDescriptoin, 0, taskProduct, taskComplex, engineerId, DateTime.Today, riquiredEffortTime, false, OptionalDeadline, StartDate, null, null, note);
-                int idTask=s_dalTask!.Create(task);
-                Console.WriteLine($"The id of the new task is:{idTask} ");                
+            //int idTask=s_dalTask!.Create(task);stage 1
+            int idTask = s_dal!.Task!.Create(task);//stage 2
+                Console.WriteLine($"The id of the new task is:{idTask}");                
             }
         /// <summary>
         /// get all the details of a task, check if the new task in the list and if is - change the details
@@ -275,8 +280,9 @@ Delete:5");
                 string? note = Console.ReadLine();
 
                 DO.Task? task = new(taskName, taskDescriptoin, id, taskProduct, taskComplex, engineerId, DateTime.Today, riquiredEffortTime, false, OptionalDeadline, StartDate, null, null, note);
-                s_dalTask!.Update(task);               
-            }
+            //int idTask=s_dalTask!.Create(task);stage 1
+            int idTask=s_dal!.Task!.Create(task);//stage 2
+        }
         /// <summary>
         /// get id of task and delete the task with this id from the list
         /// </summary>
@@ -285,7 +291,8 @@ Delete:5");
                 Console.WriteLine($@"Please enter the id of the task you would like to delete from the list:");
                 if (!int.TryParse(Console.ReadLine(), out int id))
                     throw new FormatException("Wrong input");
-                s_dalTask!.Delete(id);                
+            //s_dalTask!.Delete(id);stage 1
+            s_dal!.Task!.Delete(id);//stage 2
             }
         /// <summary>
         /// gets a id of a task and print the task's details
@@ -297,18 +304,20 @@ Delete:5");
                     throw new FormatException("Wrong input");
                 else
                 {
-                    DO.Task? taskToRead = s_dalTask!.Read(id)!;
-                    Console.WriteLine($@"The task's name is:{taskToRead.Name},
+                //DO.Task? taskToRead = s_dalTask!.Read(id)!;stage 1
+                DO.Task? taskToRead = s_dal!.Task.Read(id)!;//stage 2
+
+                Console.WriteLine($@"The task's name is:{taskToRead.Name},
 The task's descriptoin  is:{taskToRead.Descriptoin},
-The task's id  is:{taskToRead.Id},
+The task's id is:{taskToRead.Id},
 The task's complexity is:{taskToRead.Complexity},
 The task's product is:{taskToRead.Product}");
                     if (taskToRead.Engineerid == null)
                         Console.WriteLine($@"the task does not  have an engineer yet");
                     else
                         Console.WriteLine($@"The task's engineer id is:{taskToRead.Engineerid}");
-                    Console.WriteLine($@"The task's riquired effort time  is:{taskToRead.RiquiredEffortTime}.                                              
-The task's optional dead line  is:{taskToRead.OptionalDeadline}.
+                    Console.WriteLine($@"The task's riquired effort time is:{taskToRead.RiquiredEffortTime}.                                              
+The task's optional dead line is:{taskToRead.OptionalDeadline}.
 The task's create date is:{taskToRead.CreateDate}.
 The task's start date is:{taskToRead.StartDate}.
 The task's start task date id is:{taskToRead.StartTaskDate}.
@@ -323,34 +332,31 @@ The task's actual dead line is:{taskToRead.ActualDeadline}.
         /// </summary>
         static void readListTasks()
             {
-                List<DO.Task> listTasks = s_dalTask!.ReadAll();
-                if (listTasks.Count == 0)
-                    throw new Exception("The list of tasks is empty");
-                else
-                {
+            // List<DO.Task> listTasks = s_dalTask!.ReadAll();stage 1
+            IEnumerable<DO.Task?> listTasks = s_dal!.Task!.ReadAll();//stage 2
+            
                     Console.WriteLine("The tasks are:");
-                    foreach (DO.Task task in listTasks)//a loop that goes over the list of tasks
+                    foreach (DO.Task? task in listTasks)//a loop that goes over the list of tasks
                     {
-                        Console.WriteLine($@"The task's name is:{task.Name},
-The task's descriptoin  is:{task.Descriptoin},
-The task's id  is:{task.Id},
-The task's complexity is:{task.Complexity},
-The task's product is:{task.Product}");
-                        if (task.Engineerid == null)
+                        Console.WriteLine($@"The task's name is:{task?.Name},
+The task's descriptoin is:{task?.Descriptoin},
+The task's id is:{task?.Id},
+The task's complexity is:{task?.Complexity},
+The task's product is:{task?.Product}");
+                        if (task?.Engineerid == null)
                             Console.WriteLine($@"the task does not  have an engineer yet");
                         else
                             Console.WriteLine($@"The task's engineer id is:{task.Engineerid}");
-                        Console.WriteLine($@"The task's riquired effort time  is:{task.RiquiredEffortTime}.                                               
-The task's optional dead line  is:{task.OptionalDeadline}.
-The task's create date is:{task.CreateDate}.
-The task's start date is:{task.StartDate}.
-The task's start task date id is:{task.StartTaskDate}.
-The task's actual dead line is:{task.ActualDeadline}.
+                        Console.WriteLine($@"The task's riquired effort time is:{task?.RiquiredEffortTime}.                                               
+The task's optional dead line  is:{task?.OptionalDeadline}.
+The task's create date is:{task?.CreateDate}.
+The task's start date is:{task?.StartDate}.
+The task's start task date id is:{task?.StartTaskDate}.
+The task's actual dead line is:{task?.ActualDeadline}.
  ");
-                        if (task.Note != null)
-                            Console.WriteLine($@"The task's Notes are:{task.Note}");
-                    }
-                }
+                        if (task?.Note != null)
+                            Console.WriteLine($@"The task's Notes are:{task?.Note}");
+                    }               
             }
         /// <summary>
         /// gets all the details of an engineer, craetes a new task and adds it to the list of engineer
@@ -372,8 +378,10 @@ Name:");
                 Console.WriteLine($@"An Email address:");
                 string engineerEmail = Console.ReadLine()!;
                 Engineer engineer = new(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
-                s_dalEngineer!.Create(engineer);
-                Console.WriteLine($"the id of the new engineer is:{engineerId} ");              
+                //s_dalEngineer!.Create(engineer);stage 1
+                s_dal!.Engineer.Create(engineer);//stage 2
+
+            Console.WriteLine($"the id of the new engineer is:{engineerId} ");              
             }
         /// <summary>
         /// gets a id of an engineer and print the task's details
@@ -385,8 +393,9 @@ Name:");
                 if (!int.TryParse(Console.ReadLine(), out int engineerId))
                     throw new FormatException("Wrong input");
                 Engineer? engineerToRead = new();
-                engineerToRead = s_dalEngineer!.Read(engineerId);
-                if (engineerToRead == null)
+                //engineerToRead = s_dalEngineer!.Read(engineerId);stage 1
+                engineerToRead = s_dal!.Engineer.Read(engineerId);//stage 2
+            if (engineerToRead == null)
                     throw new Exception("The engineer with the requested id wasn't found in the list");
                 else
                 {
@@ -403,22 +412,19 @@ The engineer's complexity is:{engineerToRead.Complexity}.
         /// </summary>
         static void readAllEngineers()
             {
-                
-                List<Engineer> engineers = s_dalEngineer!.ReadAll();
-                if (engineers.Count == 0)
-                    throw new Exception("The list of engineers is empty");
-                else
-                {
-                    foreach (Engineer engineer in engineers)//a loop that goes over the list of engineers
+
+            //List<Engineer> engineers = s_dalEngineer!.ReadAll();stage 1
+            IEnumerable<Engineer?> engineers = s_dal!.Engineer.ReadAll();//stage 2            
+                    foreach (Engineer? engineer in engineers)//a loop that goes over the list of engineers
                     {
-                        Console.WriteLine($@"The engineer's id is:{engineer.Id}
-The engineer's name is:{engineer.Name},
-The engineer's email address is:{engineer.EmailAsress},
-The engineer's cost for an hour is:{engineer.CostForHour},
-The engineer's complexity is:{engineer.Complexity}.
+                        Console.WriteLine($@"The engineer's id is:{engineer?.Id}
+The engineer's name is:{engineer?.Name},
+The engineer's email address is:{engineer?.EmailAsress},
+The engineer's cost for an hour is:{engineer?.CostForHour},
+The engineer's complexity is:{engineer?.Complexity}.
 ");
                     }
-                }
+                
 
                 // }
                 //catch (Exception ex) { Console.WriteLine(ex); };
@@ -444,8 +450,9 @@ Name:");
                 Console.WriteLine($@"An Email address:");
                 string engineerEmail = Console.ReadLine()!;
                 Engineer engineer = new(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
-                s_dalEngineer!.Update(engineer);               
-            }
+            //s_dalEngineer!.Update(engineer);stage 1
+            s_dal!.Engineer.Update(engineer);//stage 2
+        }
         /// <summary>
         ///get id of engineer and delete the engineer with this id from the list 
         /// </summary>
@@ -455,8 +462,10 @@ Name:");
                 Console.WriteLine($@"Please enter the id of the engineer you would like to delete from the list:");
                 if (!int.TryParse(Console.ReadLine(), out int id))
                     throw new FormatException("Wrong input");
-                s_dalEngineer!.Delete(id);              
-            }
+            //s_dalEngineer!.Delete(id);stage 1
+            s_dal!.Engineer.Delete(id);//stage 2              
+
+        }
         /// <summary>
         ///get all the details of a dependency, craet a new task and add it to the list of taskdependencys 
         /// </summary>
@@ -471,7 +480,7 @@ The dependent task");
                 if (!int.TryParse(Console.ReadLine(), out int firstTaskaskNum))
                     throw new FormatException("Wrong input");
                 Dependency dependence = new(0, dependTaskNum, firstTaskaskNum);
-                Console.WriteLine("The id of the dependency is: " + s_dalDependency!.Create(dependence));              
+                Console.WriteLine("The id of the dependency is: " + s_dal!.Dependency.Create(dependence));              
             }
         /// <summary>
         ///gets a id of a dependency and print the task's details
@@ -483,7 +492,7 @@ The dependent task");
                 if (!int.TryParse(Console.ReadLine(), out int dependencyId))
                     throw new FormatException("Wrong input");
                 Dependency? dependencyToRead = new();
-                dependencyToRead = s_dalDependency!.Read(dependencyId);                            
+                dependencyToRead = s_dal!.Dependency.Read(dependencyId);                            
                 Console.WriteLine($@"The dependent task's number is:{dependencyToRead!.DependentTask},
 The task depends on task number:{dependencyToRead.DependentOnTask}.");                          
             }
@@ -493,18 +502,15 @@ The task depends on task number:{dependencyToRead.DependentOnTask}.");
         /// <exception cref="Exception">The list of dependencies is empty</exception>
         static void readAllDependencies()
             {
-                List<Dependency> dependencies = s_dalDependency!.ReadAll();
-                if (dependencies.Count == 0)
-                 Console.WriteLine("The list of dependencies is empty");
-                else
-                {
-                    foreach (Dependency dependency in dependencies)//a loop that goes over the list of dependencies
+                IEnumerable<Dependency?> dependencies = s_dal!.Dependency.ReadAll();
+                              
+                    foreach (Dependency? dependency in dependencies)//a loop that goes over the list of dependencies
                     {
-                        Console.WriteLine($@"The dependent task's number is:{dependency.DependentTask},
-The task depends on task number:{dependency.DependentOnTask}.
+                        Console.WriteLine($@"The dependent task's number is:{dependency?.DependentTask},
+The task depends on task number:{dependency?.DependentOnTask}.
 ");
                     }
-                }
+                
             }
         /// <summary>
         ///get all the details of a dependency, check if the new dependency in the list and if yes-change the details
@@ -523,7 +529,7 @@ The dependent's id:");
                 if (!int.TryParse(Console.ReadLine(), out int firstTaskaskNum))
                     throw new FormatException("Wrong input");
                 Dependency dependence = new(dependencyId, dependTaskNum, firstTaskaskNum);
-                s_dalDependency!.Update(dependence);
+                s_dal!.Dependency.Update(dependence);
         }
         /// <summary>
         /// deletes the requested dependency
@@ -534,7 +540,7 @@ The dependent's id:");
                 Console.WriteLine($@"Please enter the id of the dependency you would like to delete:");
                 if (!int.TryParse(Console.ReadLine(), out int dependencyId))
                     throw new FormatException("Wrong input");
-                s_dalDependency!.Delete(dependencyId);
+                 s_dal!.Dependency.Delete(dependencyId);
             }
         }
 }

@@ -5,7 +5,7 @@ using DO;
 /// <summary>
 /// The CRUB functions for Task
 /// </summary>
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
 {
     /// <summary>
     /// Adding a new task fir the list
@@ -24,7 +24,7 @@ public class TaskImplementation : ITask
     /// </summary>
     /// <param name="id">Searching the task to delete by it's id</param>
     /// <exception cref="Exception">If the requested task is not in the list an exception is thrown</exception>
-    internal void Delete(int id)
+    public void Delete(int id)
     {
         Task? task = DataSource.Tasks.Find(Task => Task.Id == id);
         if (task != null)
@@ -41,16 +41,27 @@ public class TaskImplementation : ITask
     /// <returns>Returns the task if it's in the list and if the task is not in the list, the function returns null</returns>
     public Task? Read(int id)
     {
-       return(DataSource.Tasks.Find(Task => Task.Id == id));  
+        //return(DataSource.Tasks.Find(Task => Task.Id == id));stage 1  
+        return (DataSource.Tasks.FirstOrDefault(Task => Task.Id == id));//stage 2 
+
     }
     /// <summary>
     /// The function needs to return a copy of the list with all the tasks
     /// </summary>
     /// <returns>Returns the list of tasks</returns>
-    public List<Task> ReadAll()
+    //public List<Task> ReadAll() stage 1
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null) //stage 2
     {
-        return new List<Task>(DataSource.Tasks);
+        if (filter != null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
+    
     /// <summary>
     /// The function updates details of an existing task and swich it with the old task and recognizes the requested task by it's id
     /// </summary>

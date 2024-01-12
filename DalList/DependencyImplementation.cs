@@ -6,7 +6,7 @@ using DO;
 /// <summary>
 /// Implementation of the methods for the dependency list. 
 /// </summary>
-public class DependencyImplementation : IDependency
+internal class DependencyImplementation : IDependency
 {
     /// <summary>
     /// Adding a new object of dependecy  to a database, (to the list of objects of dependecys).
@@ -25,7 +25,7 @@ public class DependencyImplementation : IDependency
     /// </summary>
     /// <param name="id">ID number of a dependecy</param>
     /// <exception cref="NotImplementedException"></exception>
-    internal void Delete(int id)
+    public void Delete(int id)
     {
         Dependency? ifExistDependency = DataSource.Dependencys.Find(temp => temp.Id == id);
         if (ifExistDependency == null)
@@ -43,8 +43,8 @@ public class DependencyImplementation : IDependency
     ///Otherwise, the method will return null.</returns>
     public Dependency? Read(int id)
     {
-        if (DataSource.Dependencys.Find(item => item.Id == id) != null)//if there is a dependecy with the given id
-            return DataSource.Dependencys.Find(item => item.Id == id);//return this dependecy
+        if (DataSource.Dependencys.FirstOrDefault(item => item.Id == id) != null)//if there is a dependecy with the given id
+            return DataSource.Dependencys.FirstOrDefault(item => item.Id == id);//return this dependecy
         //else
         return null;
     }
@@ -52,9 +52,17 @@ public class DependencyImplementation : IDependency
     /// Return a copy of the list of references to all objects dependecy
     /// </summary>
     /// <returns>The method returns a new list that is a copy of the existing list of all objects of dependecy.</returns>
-    public List<Dependency> ReadAll()
+    //public List<Dependency> ReadAll()//stage 1
+    public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
     {
-        return new List<Dependency>(DataSource.Dependencys);
+        if (filter != null)
+        {
+            return from item in DataSource.Dependencys
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Dependencys
+               select item;
     }
     /// <summary>
     /// Update of an existing object of dependect.

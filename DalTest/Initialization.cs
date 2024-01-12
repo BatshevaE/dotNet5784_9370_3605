@@ -4,10 +4,11 @@ using DO;
 
 public static class Initialization
 {
-    private static ITask? s_dalTask; //stage 1
-    private static IEngineer? s_dalEngineer; //stage 1
-    private static IDependency? s_dalDependency; //stage 1
+//    private static ITask? s_dalTask; //stage 1
+//    private static IEngineer? s_dalEngineer; //stage 1
+//    private static IDependency? s_dalDependency; //stage 1
     private static readonly Random s_rand = new();//The entities will use this random in order to fill the objects values
+    private static IDal? s_dal;//stage 2
     /// <summary>
     /// This method will schedule the private methods we prepared and start the initialization of the lists.
     /// </summary>
@@ -15,17 +16,13 @@ public static class Initialization
     /// <param name="dalEngineer">The access variables of engineer</param>
     /// <param name="dalDependency">The access variables of dependency</param>
     /// <exception cref="NullReferenceException"></exception>
-    
-    public static void Do(ITask? dalTask, IEngineer? dalEngineer, IDependency? dalDependency)
-    {
-        //ITask? s_dalTask;
-        //IDependency? s_dalDependency;
-        //IEngineer? s_dalEngineer;
-       
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
 
+    public static void Do(IDal dal)//ITask? dalTask, IEngineer? dalEngineer, IDependency? dalDependency)
+    {
+        s_dal= dal?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
         createTasks();
         createDependencys();
         createEngineers();
@@ -145,7 +142,8 @@ public static class Initialization
                     DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));
                     
                     Task newTask = new(_name,tasksDescription[i++], 0,tasksProduct[i++], complex, null, createDate, TimeSpan.FromDays(effortTime), false, null, null, null, null, null);//ctor
-                    s_dalTask!.Create(newTask);
+                    //s_dalTask!.Create(newTask);stage 1
+                    s_dal!.Task.Create(newTask);//stage 2  
                   //for now we only put the creation date and later we will put the other dates therefor,for now they are null
                 }
     }
@@ -157,20 +155,30 @@ public static class Initialization
         //array of names of engineers
         string[] engineerNames =
         {
-        "Daniel Cohen", "Eli levi", "Yair Rosen ",
-        "shir Klein", "Dina Hill ", "Shira Stone"
+        "Daniel Cohen", "Eli levi", "Yair Rosen",
+        "shir Klein", "Dina Hill", "Shira Stone"
         };
+        string[] engineerEmails =
+        {
+        "DanielCohen", "Elilevi", "YairRosen",
+        "shirKlein", "DinaHill", "ShiraStone"
+        };
+        int i = 0;
         foreach (var _name in engineerNames)//a loop that going over the array
         {
             int _id;
             do
                 _id = s_rand.Next(200000000, 400000000);//here we get a random id for the engineer
-            while (s_dalEngineer?.Read(_id) != null);
+            while (s_dal?.Engineer.Read(_id) != null);
             EngineerLevel _c = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex level of the engineer
             double _cfh = s_rand.Next(150, 1000);//a random cost for hour of the engineer
-            Engineer newEngineer = new(_id, _name,$"{_name}@gmail.com ", _c , _cfh);//ctor
+           
+            Engineer newEngineer = new(_id, _name, $"{engineerEmails[i++]}@gmail.com ", _c, _cfh);//ctor
+            
+                
 
-            s_dalEngineer!.Create(newEngineer);
+            //s_dalEngineer!.Create(newEngineer);stage 1
+            s_dal!.Engineer.Create(newEngineer);//stage 2 
         }
     }
     /// <summary>
@@ -225,7 +233,8 @@ public static class Initialization
         };
     
     foreach(Dependency dependency in newDependency)
-            s_dalDependency!.Create(dependency);
+            //s_dalDependency!.Create(dependency); stage 1
+            s_dal!.Dependency.Create(dependency);//stage 2 
     }
    
    
