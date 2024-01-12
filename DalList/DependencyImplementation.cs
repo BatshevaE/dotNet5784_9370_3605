@@ -16,7 +16,7 @@ internal class DependencyImplementation : IDependency
     public int Create(Dependency item)
     {
         int id = DataSource.Config.NextDependentTaskId;//A new ID number with the value of the next running number.
-        Dependency copy = item with { Id = id};//creating a copy of item withe the new id
+        Dependency copy = item with { Id = id };//creating a copy of item withe the new id
         DataSource.Dependencys.Add(copy);//add the new copy to the list of dependecys
         return id;
     }
@@ -79,7 +79,16 @@ internal class DependencyImplementation : IDependency
         }
         DataSource.Dependencys.Remove(dependency!);//remove the found dependent
         DataSource.Dependencys.Add(item);
-
-        
+    }
+   public Dependency? Read(Func<Dependency, bool>? filter)//stage 2
+    {
+        if (filter == null)
+        {
+            return null;
+        }
+        else
+        return DataSource.Dependencys.FirstOrDefault(filter);
     }
 }
+
+

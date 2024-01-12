@@ -31,5 +31,5 @@ public interface ICrud<T> where T : class
     /// </summary>
     /// <param name="id">Gets an id of a object to delete</param>
     void Delete(int id);
-
+    T? Read(Func<T, bool>? filter);//stage 2
 }

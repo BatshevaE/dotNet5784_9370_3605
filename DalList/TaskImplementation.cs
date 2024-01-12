@@ -79,6 +79,15 @@ internal class TaskImplementation : ITask
             else
                 throw new Exception($"Task with ID={item.Id} does Not exist");
         }
+    public Task? Read(Func<Task, bool>? filter)//stage 2
+    {
+        if (filter == null)
+        {
+            return null;
+        }
+        else
+            return DataSource.Tasks.FirstOrDefault(filter);
     }
+}
 
 

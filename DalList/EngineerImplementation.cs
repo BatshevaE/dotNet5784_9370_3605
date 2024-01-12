@@ -76,4 +76,13 @@ internal class EngineerImplementation : IEngineer
         DataSource.Engineers.Remove(engineer!);
         DataSource.Engineers.Add(item);
     }
+    public Engineer? Read(Func<Engineer, bool>? filter)//stage 2
+    {
+        if (filter == null)
+        {
+            return null;
+        }
+        else
+            return DataSource.Engineers.FirstOrDefault(filter);
+    }
 }
