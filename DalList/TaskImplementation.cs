@@ -23,7 +23,7 @@ internal class TaskImplementation : ITask
     /// The function deletes an existing task from the list 
     /// </summary>
     /// <param name="id">Searching the task to delete by it's id</param>
-    /// <exception cref="Exception">If the requested task is not in the list an exception is thrown</exception>
+    /// <exception cref="DalDoesNotExistException">If the requested task is not in the list an exception is thrown</exception>
     public void Delete(int id)
     {
         Task? task = DataSource.Tasks.Find(Task => Task.Id == id);
@@ -32,7 +32,7 @@ internal class TaskImplementation : ITask
             DataSource.Tasks.Remove(task);
         }
         else
-            throw new Exception($"Task with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
     }
     /// <summary>
     /// The function searches for a task with a requested id and returns the task if it actually in the list
@@ -61,12 +61,12 @@ internal class TaskImplementation : ITask
         return from item in DataSource.Tasks
                select item;
     }
-    
+
     /// <summary>
     /// The function updates details of an existing task and swich it with the old task and recognizes the requested task by it's id
     /// </summary>
     /// <param name="item">A new item that contains the task with the old details if it's actually was found in the list</param>
-    /// <exception cref="Exception">Throws that the requested task is not in the list if a task with the requested id wasn't found</exception>
+    /// <exception cref="DalDoesNotExistException">Throws that the requested task is not in the list if a task with the requested id wasn't found</exception>
     public void Update(Task item)
     {
        
@@ -77,8 +77,13 @@ internal class TaskImplementation : ITask
                 DataSource.Tasks.Add(item);
             }
             else
-                throw new Exception($"Task with ID={item.Id} does Not exist");
-        }
+                throw new DalDoesNotExistException($"Task with ID={item.Id} does Not exist");
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public Task? Read(Func<Task, bool>? filter)//stage 2
     {
         if (filter == null)

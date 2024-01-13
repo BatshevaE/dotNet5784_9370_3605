@@ -24,13 +24,13 @@ internal class DependencyImplementation : IDependency
     /// The function deletes an existing Dependency from the list 
     /// </summary>
     /// <param name="id">ID number of a dependecy</param>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="DalDoesNotExistException"></exception>
     public void Delete(int id)
     {
         Dependency? ifExistDependency = DataSource.Dependencys.Find(temp => temp.Id == id);
         if (ifExistDependency == null)
         {
-            throw new Exception($"Dependent with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"Dependent with ID={id} does Not exist");
         }
         DataSource.Dependencys.Remove(ifExistDependency);
 
@@ -68,18 +68,23 @@ internal class DependencyImplementation : IDependency
     /// Update of an existing object of dependect.
     /// </summary>
     /// <param name="item">A reference to an existing object of dependect</param>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="DalDoesNotExistException"></exception>
     public void Update(Dependency item)
     {
         Dependency? dependency = DataSource.Dependencys.Find(Dependency => Dependency.Id == item.Id);
 
         if (DataSource.Dependencys.FirstOrDefault(item) == null)//if item wasnt found in the list of dependecys
         {
-            throw new Exception($"Dependent with ID={item.Id} does Not exist");
+            throw new DalDoesNotExistException($"Dependent with ID={item.Id} does Not exist");
         }
         DataSource.Dependencys.Remove(dependency!);//remove the found dependent
         DataSource.Dependencys.Add(item);
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
    public Dependency? Read(Func<Dependency, bool>? filter)//stage 2
     {
         if (filter == null)

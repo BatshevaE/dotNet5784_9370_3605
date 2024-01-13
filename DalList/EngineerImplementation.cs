@@ -12,11 +12,11 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item">A reference to an existing object of engineer.</param>
     /// <returns>The method will return the running number of the newly created engineer in the list.</returns>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <exception cref="DalAlreadyExistException"></exception>
     public int Create(Engineer item)
     {
         if(Read(item.Id) !=null)
-                throw new Exception("An enginner type object with such an ID already exists");
+                throw new DalAlreadyExistException("An enginner type object with such an ID already exists");
         DataSource.Engineers.Add(item);
          return item.Id;
     }
@@ -24,13 +24,13 @@ internal class EngineerImplementation : IEngineer
     /// The function deletes an existing engineer from the list 
     /// </summary>
     /// <param name="id">ID number of an engineer</param>
-    /// <exception cref="Exception"></exception>
+    /// <exception cref="DalDoesNotExistException"></exception>
     public void Delete(int id)
     {
         Engineer? ifExistEngineer = DataSource.Engineers.Find(temp => temp.Id == id);
         if (ifExistEngineer == null)
         {
-            throw new Exception($"Engineer with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
         }
         DataSource.Engineers.Remove(ifExistEngineer);
     }
@@ -64,18 +64,23 @@ internal class EngineerImplementation : IEngineer
     /// Update of an existing object of enginer.
     /// </summary>
     /// <param name="item">A reference to an existing object of engineer.</param>
-    /// <exception cref="Exception"></exception>
+    /// <exception cref="DalDoesNotExistException"></exception>
     public void Update(Engineer item)
     {
         Engineer? engineer = DataSource.Engineers.Find(Engineer => Engineer.Id == item.Id);
 
         if (DataSource.Engineers.FirstOrDefault(item) == null)
         {
-            throw new Exception($"Engineer with ID={item.Id} does Not exist");
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
         }
         DataSource.Engineers.Remove(engineer!);
         DataSource.Engineers.Add(item);
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public Engineer? Read(Func<Engineer, bool>? filter)//stage 2
     {
         if (filter == null)
