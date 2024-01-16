@@ -77,10 +77,10 @@ internal class EngineerImplementation : IEngineer
         DataSource.Engineers.Add(item);
     }
     /// <summary>
-    /// 
+    ///  goes over the list of engineers and return the first engineer in the list on which the filter returns True.
     /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
+    /// <param name="filter">a bool function</param>
+    /// <returns>return the first engineer in the list on which the filter returns True</returns>
     public Engineer? Read(Func<Engineer, bool>? filter)//stage 2
     {
         if (filter == null)

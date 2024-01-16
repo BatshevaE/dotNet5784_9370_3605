@@ -43,34 +43,38 @@ namespace DalTest
                 Main1();
               
             }
-            catch (Exception ex) { Console.WriteLine(ex);Main1(); };
+            catch (Exception ex) { Console.WriteLine(ex); };
         }
         public static void Main1()
         {
             MainMenue choice;
-            do
-            {
-                choice = MainChoice();
-
-                switch (choice)
+            try {
+               
+                do
                 {
-                    case Program.MainMenue.Exit:
-                        return;
-                    case Program.MainMenue.Task:
-                        ChoiceTask();
-                        break;
-                    case Program.MainMenue.Engineer:
-                        ChoiceEngineer();
-                        break;
-                    case Program.MainMenue.Dependency:
-                        ChoiceDependency();
-                        break;
-                    default:
-                        return;
+                    choice = MainChoice();
+
+                    switch (choice)
+                    {
+                        case Program.MainMenue.Exit:
+                            return;
+                        case Program.MainMenue.Task:
+                            ChoiceTask();
+                            break;
+                        case Program.MainMenue.Engineer:
+                            ChoiceEngineer();
+                            break;
+                        case Program.MainMenue.Dependency:
+                            ChoiceDependency();
+                            break;
+                        default:
+                            return;
+                    }
                 }
+                while (choice != 0);
             }
-            while (choice != 0);
-        }
+            catch (Exception ex) { Console.WriteLine(ex); Main1(); }
+            }
         /// <summary>
         /// A function that gets from the user his chice(task/engineer/dependency/exit)
         /// </summary>
@@ -79,8 +83,7 @@ namespace DalTest
 
        public static MainMenue MainChoice()
         {
-            try
-            {
+         
                 Console.WriteLine(@"Choose one of the following options: 
 Exit:0
 Task:1
@@ -90,8 +93,7 @@ Dependency:3");
                     return choice;
                 else
                     throw new FormatException("Wrong input");
-            }
-            catch (Exception ex) { Console.WriteLine(ex); return MainChoice(); };
+            
         }
 
         /// <summary>
@@ -139,7 +141,7 @@ Delete:5
                 }
                 while (choiceTask != 0);
             }
-            catch (Exception ex) { Console.WriteLine(ex); Main1(); };
+            catch (Exception ex) { Console.WriteLine(ex);  };
         }
         /// <summary>
         /// A method for the chosen option-engineer
@@ -186,7 +188,7 @@ Delete:5");
                 }
                 while (choiceEngineer != 0);
             }
-            catch (Exception ex) { Console.WriteLine(ex); Main1(); };
+            catch (Exception ex) { Console.WriteLine(ex); };
         }
         /// <summary>
         /// A method for the chosen option-dependency
@@ -231,7 +233,7 @@ Delete:5");
                 }
                 while (choiceDependency != 0);
             }
-            catch (Exception ex) { Console.WriteLine(ex); Main1(); };
+            catch (Exception ex) { Console.WriteLine(ex);  };
         }
 
         /// <summary>
@@ -370,7 +372,7 @@ The task's product is:{task?.Product}");
                         else
                             Console.WriteLine($@"The task's engineer id is:{task.Engineerid}");
                         Console.WriteLine($@"The task's riquired effort time is:{task?.RiquiredEffortTime}.                                               
-The task's optional dead line  is:{task?.OptionalDeadline}.
+The task's optional dead line is:{task?.OptionalDeadline}.
 The task's create date is:{task?.CreateDate}.
 The task's start date is:{task?.StartDate}.
 The task's start task date id is:{task?.StartTaskDate}.

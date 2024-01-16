@@ -80,10 +80,10 @@ internal class TaskImplementation : ITask
                 throw new DalDoesNotExistException($"Task with ID={item.Id} does Not exist");
     }
     /// <summary>
-    /// 
+    ///goes over the list of tasks and return the first task in the list on which the filter returns True.
     /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
+    /// <param name="filter">a bool function</param>
+    /// <returns>return the first task in the list on which the filter returns True</returns>
     public Task? Read(Func<Task, bool>? filter)//stage 2
     {
         if (filter == null)

@@ -81,11 +81,11 @@ internal class DependencyImplementation : IDependency
         DataSource.Dependencys.Add(item);
     }
     /// <summary>
-    /// 
+    /// goes over the list of dependencys and return the first dependency in the list on which the filter returns True.
     /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
-   public Dependency? Read(Func<Dependency, bool>? filter)//stage 2
+    /// <param name="filter">a bool function</param>
+    /// <returns>return the first dependency in the list on which the filter returns True.</returns>
+    public Dependency? Read(Func<Dependency, bool>? filter)//stage 2
     {
         if (filter == null)
         {
