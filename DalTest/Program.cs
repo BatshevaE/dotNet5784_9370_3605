@@ -286,7 +286,7 @@ Delete:5");
                 Console.WriteLine($@"A task's complex:");
                if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel taskComplex))
                 throw new FormatException("Wrong input");
-                Console.WriteLine($@"A task's product:");
+                Console.WriteLine($@"A task's product:"); 
                 string taskProduct = Console.ReadLine()!;
                 Console.WriteLine($@"The engineer's id:");
                 if (!int.TryParse(Console.ReadLine(), out int engineerId))
