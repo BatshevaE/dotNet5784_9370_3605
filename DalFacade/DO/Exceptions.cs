@@ -9,11 +9,7 @@ public class DalAlreadyExistException : Exception
 {
     public DalAlreadyExistException(string? massage) : base(massage) { }
 }
-[Serializable]
-public class  DalWrongInputException: Exception
-{
-    public DalWrongInputException(string? massage) : base(massage) { }
-}
+
 [Serializable]
 public class NullReferenceException : Exception
 {

@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Diagnostics;
+using System.Linq.Expressions;
 
 namespace DalTest
 {    
@@ -39,38 +40,46 @@ namespace DalTest
             {
                 //Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependency);stage 1
                 Initialization.Do(s_dal); //stage 2
-                MainMenue choice;                
-                do
-                {
-                    choice = MainChoice();
+                Main1();
               
-                    switch (choice)
-                    {
-                        case Program.MainMenue.Exit:
-                            break;
-                        case Program.MainMenue.Task:
-                            ChoiceTask();
-                            break;
-                        case Program.MainMenue.Engineer:
-                            ChoiceEngineer();
-                            break;
-                        case Program.MainMenue.Dependency:
-                            ChoiceDependency();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                while (choice != 0);
             }
-            catch (Exception ex) { Console.WriteLine(ex); };
+            catch (Exception ex) { Console.WriteLine(ex);Main1(); };
+        }
+        public static void Main1()
+        {
+            MainMenue choice;
+            do
+            {
+                choice = MainChoice();
+
+                switch (choice)
+                {
+                    case Program.MainMenue.Exit:
+                        return;
+                    case Program.MainMenue.Task:
+                        ChoiceTask();
+                        break;
+                    case Program.MainMenue.Engineer:
+                        ChoiceEngineer();
+                        break;
+                    case Program.MainMenue.Dependency:
+                        ChoiceDependency();
+                        break;
+                    default:
+                        return;
+                }
+            }
+            while (choice != 0);
         }
         /// <summary>
         /// A function that gets from the user his chice(task/engineer/dependency/exit)
         /// </summary>
         /// <returns>the choice of the user</returns>
-        /// <exception cref="DalWrongInputException">Wrong input</exception>
-        static MainMenue MainChoice()
+        /// <exception cref="FormatException">Wrong input</exception>
+
+       public static MainMenue MainChoice()
+        {
+            try
             {
                 Console.WriteLine(@"Choose one of the following options: 
 Exit:0
@@ -80,18 +89,22 @@ Dependency:3");
                 if (MainMenue.TryParse(Console.ReadLine(), out MainMenue choice))
                     return choice;
                 else
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
             }
+            catch (Exception ex) { Console.WriteLine(ex); return MainChoice(); };
+        }
 
         /// <summary>
         /// A method for the chosen option-task
         /// </summary>
         static void ChoiceTask()
+        {
+            try
             {
-            SubMenue choiceTask;
-            do
-            {
-                Console.WriteLine(@"Choose one of the following options for Task 
+                SubMenue choiceTask;
+                do
+                {
+                    Console.WriteLine(@"Choose one of the following options for Task 
 Exit:0
 Creat:1
 Read:2
@@ -99,117 +112,126 @@ ReadAll:3
 Update:4
 Delete:5
  ");
-                if (!SubMenue.TryParse(Console.ReadLine(), out  choiceTask)) //read the int choice and convert it to SubMenue types
-                    throw new DalWrongInputException("wrong input");           
-                switch (choiceTask)
-                {
-                    case SubMenue.Exit:
-                        return;
-                    case SubMenue.Creat:
-                        creatTask();
-                        break;
-                    case SubMenue.Read:
-                        readTask();
-                        break;
-                    case SubMenue.ReadAll:
-                        readListTasks();
-                        break;
-                    case SubMenue.Update:
-                        updateTask();
-                        break;
-                    case SubMenue.Delete:
-                        deleteTask();
-                        break;
-                    default:
-                        break;
+                    if (!SubMenue.TryParse(Console.ReadLine(), out choiceTask)) //read the int choice and convert it to SubMenue types
+                        throw new FormatException("wrong input");
+                    switch (choiceTask)
+                    {
+                        case SubMenue.Exit:
+                            return;
+                        case SubMenue.Creat:
+                            creatTask();
+                            break;
+                        case SubMenue.Read:
+                            readTask();
+                            break;
+                        case SubMenue.ReadAll:
+                            readListTasks();
+                            break;
+                        case SubMenue.Update:
+                            updateTask();
+                            break;
+                        case SubMenue.Delete:
+                            deleteTask();
+                            break;
+                        default:
+                            return;
+                    }
                 }
+                while (choiceTask != 0);
             }
-            while (choiceTask!=0);
-            }
+            catch (Exception ex) { Console.WriteLine(ex); Main1(); };
+        }
         /// <summary>
         /// A method for the chosen option-engineer
         /// </summary>
         static void ChoiceEngineer()
             {
-            SubMenue choiceEngineer;
-            do
+            try
             {
-                Console.WriteLine(@"Choose one of the following options for Engineer:
+                SubMenue choiceEngineer;
+                do
+                {
+                    Console.WriteLine(@"Choose one of the following options for Engineer:
 Exit:0
 Creat:1
 Read:2
 ReadAll:3
 Update:4
 Delete:5");
-                if (!SubMenue.TryParse(Console.ReadLine(), out  choiceEngineer)) //read the int choice and convert it to SubMenue types
-                    throw new DalWrongInputException("wrong input");
-           
-                switch (choiceEngineer)
-                {
-                    case SubMenue.Exit:
-                        return;
-                    case SubMenue.Creat:
-                        createEngineer();
-                        break;
-                    case SubMenue.Read:
-                        readEngineer();
-                        break;
-                    case SubMenue.ReadAll:
-                        readAllEngineers();
-                        break;
-                    case SubMenue.Update:
-                        updateEngineer();
-                        break;
-                    case SubMenue.Delete:
-                        deleteEngineer();
-                        break;
-                    default:
-                        break;
+                    if (!SubMenue.TryParse(Console.ReadLine(), out choiceEngineer)) //read the int choice and convert it to SubMenue types
+                        throw new FormatException("wrong input");
+
+                    switch (choiceEngineer)
+                    {
+                        case SubMenue.Exit:
+                            return;
+                        case SubMenue.Creat:
+                            createEngineer();
+                            break;
+                        case SubMenue.Read:
+                            readEngineer();
+                            break;
+                        case SubMenue.ReadAll:
+                            readAllEngineers();
+                            break;
+                        case SubMenue.Update:
+                            updateEngineer();
+                            break;
+                        case SubMenue.Delete:
+                            deleteEngineer();
+                            break;
+                        default:
+                            return;
+                    }
                 }
+                while (choiceEngineer != 0);
             }
-            while (choiceEngineer != 0);            
-            }
+            catch (Exception ex) { Console.WriteLine(ex); Main1(); };
+        }
         /// <summary>
         /// A method for the chosen option-dependency
         /// </summary>
         static void ChoiceDependency()
-            {
-            SubMenue choiceDependency;
-            do
-            {
-                Console.WriteLine(@"Choose one of the following options for Dependency: 
+        {
+            try {
+                SubMenue choiceDependency;
+                do
+                {
+                    Console.WriteLine(@"Choose one of the following options for Dependency: 
 Exit:0
 Creat:1
 Read:2
 ReadAll:3
 Update:4
 Delete:5");
-                if (!SubMenue.TryParse(Console.ReadLine(), out choiceDependency)) //read the int choice and convert it to SubMenue types
-                    throw new DalWrongInputException("wrong input");
-                switch (choiceDependency)
-                {
-                    case SubMenue.Exit:
-                        return;
-                    case SubMenue.Creat:
-                        createDependency();
-                        break;
-                    case SubMenue.Read:
-                        readDependency();
-                        break;
-                    case SubMenue.ReadAll:
-                        readAllDependencies();
-                        break;
-                    case SubMenue.Update:
-                        updateDependency();
-                        break;
-                    case SubMenue.Delete:
-                        deleteDependency();
-                        break;
-                    default:
-                        break;
+                    if (!SubMenue.TryParse(Console.ReadLine(), out choiceDependency)) //read the int choice and convert it to SubMenue types
+                        throw new FormatException("wrong input");
+                    switch (choiceDependency)
+                    {
+                        case SubMenue.Exit:
+                            return;
+                        case SubMenue.Creat:
+                            createDependency();
+                            break;
+                        case SubMenue.Read:
+                            readDependency();
+                            break;
+                        case SubMenue.ReadAll:
+                            readAllDependencies();
+                            break;
+                        case SubMenue.Update:
+                            updateDependency();
+                            break;
+                        case SubMenue.Delete:
+                            deleteDependency();
+                            break;
+                        default:
+                            return;
+                    }
                 }
+                while (choiceDependency != 0);
             }
-            while (choiceDependency != 0);
+            catch (Exception ex) { Console.WriteLine(ex); Main1(); };
         }
 
         /// <summary>
@@ -224,21 +246,21 @@ Delete:5");
                 string taskDescriptoin = Console.ReadLine()!;
                 Console.WriteLine($@"A task's complex:");
             if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel taskComplex))
-                throw new DalWrongInputException("Wrong input");
+                throw new FormatException("Wrong input");
                 Console.WriteLine($@"A task's product:");
                 string taskProduct = Console.ReadLine()!;
                 Console.WriteLine($@"The engineer's id:");
                 if (!int.TryParse(Console.ReadLine(), out int engineerId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"The engineer's riquired effort time for the task:");
                 if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan riquiredEffortTime))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"What is the latest date for you to finish the project:");
                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime OptionalDeadline))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"When would you like to start the task:");
                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime StartDate))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"Note:");
                 string? note = Console.ReadLine();
                 DO.Task? task = new(taskName, taskDescriptoin, 0, taskProduct, taskComplex, engineerId, DateTime.Today, riquiredEffortTime, false, OptionalDeadline, StartDate, null, null, note);
@@ -258,24 +280,24 @@ Delete:5");
                 string taskDescriptoin = Console.ReadLine()!;
                 Console.WriteLine($@"Id:");
                if (!int.TryParse(Console.ReadLine(), out int id))
-                throw new DalWrongInputException("Wrong input");
+                throw new FormatException("Wrong input");
                 Console.WriteLine($@"A task's complex:");
                if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel taskComplex))
-                throw new DalWrongInputException("Wrong input");
+                throw new FormatException("Wrong input");
                 Console.WriteLine($@"A task's product:");
                 string taskProduct = Console.ReadLine()!;
                 Console.WriteLine($@"The engineer's id:");
                 if (!int.TryParse(Console.ReadLine(), out int engineerId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"The engineer's riquired effort time for the task:");
                 if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan riquiredEffortTime))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"What is the latest date for you to finish the project:");
                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime OptionalDeadline))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"When would you like to start the task:");
                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime StartDate))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"Note:");
                 string? note = Console.ReadLine();
 
@@ -290,7 +312,7 @@ Delete:5");
             {
                 Console.WriteLine($@"Please enter the id of the task you would like to delete from the list:");
                 if (!int.TryParse(Console.ReadLine(), out int id))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
             //s_dalTask!.Delete(id);stage 1
             s_dal!.Task!.Delete(id);//stage 2
             }
@@ -301,7 +323,7 @@ Delete:5");
             {
                 Console.WriteLine($@"Please enter the task's id that you would like to read:");
                 if (!int.TryParse(Console.ReadLine(), out int id))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 else
                 {
                 //DO.Task? taskToRead = s_dalTask!.Read(id)!;stage 1
@@ -368,13 +390,13 @@ Name:");
                 string engineerName = Console.ReadLine()!;
                 Console.WriteLine($@"Id:");
                 if (!int.TryParse(Console.ReadLine(), out int engineerId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"Cost for an hour:");
                 if (!double.TryParse(Console.ReadLine(), out double engineerCost))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"Complex of the engineer:");
                 if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel engineerComplex))
-                throw new DalWrongInputException("Wrong input");
+                throw new FormatException("Wrong input");
                 Console.WriteLine($@"An Email address:");
                 string engineerEmail = Console.ReadLine()!;
                 Engineer engineer = new(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
@@ -391,7 +413,7 @@ Name:");
                 
                 Console.WriteLine($@"Please enter the id of the engineer you would like to read:");
                 if (!int.TryParse(Console.ReadLine(), out int engineerId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Engineer? engineerToRead = new();
                 //engineerToRead = s_dalEngineer!.Read(engineerId);stage 1
                 engineerToRead = s_dal!.Engineer.Read(engineerId);//stage 2
@@ -428,7 +450,7 @@ The engineer's complexity is:{engineer?.Complexity}.
         /// <summary>
         ///get all the details of an engineer, check if the new engineer in the list and if yes-change the details
         /// </summary>
-        /// <exception cref="DalWrongInputException">Wrong input</exception>
+        /// <exception cref="FormatException">Wrong input</exception>
         static void updateEngineer()
             {            
                 Console.WriteLine($@"Please enter the following details about the engineer you would like to update:
@@ -436,13 +458,13 @@ Name:");
                 string engineerName = Console.ReadLine()!;
                 Console.WriteLine($@"Id:");
                 if (!int.TryParse(Console.ReadLine(), out int engineerId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"Cost for an hour:");
                 if (!double.TryParse(Console.ReadLine(), out double engineerCost))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine($@"Complex of the engineer:");
                 if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel engineerComplex))
-                throw new DalWrongInputException("Wrong input");
+                throw new FormatException("Wrong input");
                 Console.WriteLine($@"An Email address:");
                 string engineerEmail = Console.ReadLine()!;
                 Engineer engineer = new(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
@@ -452,12 +474,12 @@ Name:");
         /// <summary>
         ///get id of engineer and delete the engineer with this id from the list 
         /// </summary>
-        /// <exception cref="DalWrongInputException">Wrong input</exception>
+        /// <exception cref="FormatException">Wrong input</exception>
         static void deleteEngineer()
             {
                 Console.WriteLine($@"Please enter the id of the engineer you would like to delete from the list:");
                 if (!int.TryParse(Console.ReadLine(), out int id))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
             //s_dalEngineer!.Delete(id);stage 1
             s_dal!.Engineer.Delete(id);//stage 2              
 
@@ -465,16 +487,16 @@ Name:");
         /// <summary>
         ///get all the details of a dependency, craet a new task and add it to the list of taskdependencys 
         /// </summary>
-        /// <exception cref="DalWrongInputException">Wrong input</exception>
+        /// <exception cref="FormatException">Wrong input</exception>
         static void createDependency()
             {
                 Console.WriteLine(@$"Please enter the following details about the task you would like to create:
 The dependent task");
                 if (!int.TryParse(Console.ReadLine(), out int dependTaskNum))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine("The number of the task that needs to be done before:");
                 if (!int.TryParse(Console.ReadLine(), out int firstTaskaskNum))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Dependency dependence = new(0, dependTaskNum, firstTaskaskNum);
                 Console.WriteLine("The id of the dependency is: " + s_dal!.Dependency.Create(dependence));              
             }
@@ -486,7 +508,7 @@ The dependent task");
             {
                 Console.WriteLine($@"Please enter the id of the dependency you would like to read");
                 if (!int.TryParse(Console.ReadLine(), out int dependencyId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Dependency? dependencyToRead = new();
                 dependencyToRead = s_dal!.Dependency.Read(dependencyId);                            
                 Console.WriteLine($@"The dependent task's number is:{dependencyToRead!.DependentTask},
@@ -510,31 +532,31 @@ The task depends on task number:{dependency?.DependentOnTask}.
         /// <summary>
         ///get all the details of a dependency, check if the new dependency in the list and if yes-change the details
         /// </summary>
-        /// <exception cref="DalWrongInputException">Wrong input</exception>
+        /// <exception cref="FormatException">Wrong input</exception>
         static void updateDependency()
             {
                 Console.WriteLine(@$"Please enter the following details about the task you would like to update:
 The dependent's id:");
                 if (!int.TryParse(Console.ReadLine(), out int dependencyId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine(@$"The dependent task's number:");
                 if (!int.TryParse(Console.ReadLine(), out int dependTaskNum))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Console.WriteLine("The number of the task that needs to be done before:");
                 if (!int.TryParse(Console.ReadLine(), out int firstTaskaskNum))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                 Dependency dependence = new(dependencyId, dependTaskNum, firstTaskaskNum);
                 s_dal!.Dependency.Update(dependence);
         }
         /// <summary>
         /// deletes the requested dependency
         /// </summary>
-        /// <exception cref="DalWrongInputException">Wrong input</exception>
+        /// <exception cref="FormatException">Wrong input</exception>
         static void deleteDependency()
             {
                 Console.WriteLine($@"Please enter the id of the dependency you would like to delete:");
                 if (!int.TryParse(Console.ReadLine(), out int dependencyId))
-                    throw new DalWrongInputException("Wrong input");
+                    throw new FormatException("Wrong input");
                  s_dal!.Dependency.Delete(dependencyId);
             }
         }
