@@ -135,7 +135,7 @@ Delete:5
                         case SubMenue.Delete:
                             deleteTask();
                             break;
-                        default:
+                        default:                           
                             return;
                     }
                 }
