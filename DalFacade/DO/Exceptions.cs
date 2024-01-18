@@ -25,3 +25,11 @@ public class NullReferenceException : Exception
 {
     public NullReferenceException(string? massage) : base(massage) { }
 }
+/// <summary>
+/// 
+/// </summary>
+    [Serializable]
+public class DalXMLFileLoadCreateException : Exception
+{
+    public DalXMLFileLoadCreateException(string? massage) : base(massage) { }
+}
