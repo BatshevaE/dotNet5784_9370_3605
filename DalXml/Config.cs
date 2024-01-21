@@ -1,7 +1,5 @@
-﻿using Dal;
+﻿namespace Dal;
 
-namespace DalXml
-{
     internal static class Config
     {
         static string s_data_config_xml = "data-config";
@@ -10,4 +8,4 @@ namespace DalXml
         internal static int NextDependentTaskId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextDependentTaskId"); }
        
     }
-}
+
