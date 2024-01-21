@@ -1,6 +1,9 @@
 ﻿namespace Dal;
 using DalApi;
 using DO;
+using System.Data.Common;
+using System.Diagnostics.Metrics;
+using System.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -31,9 +34,7 @@ internal class TaskImplementation : ITask
     public Task? Read(int id)
     {
         List<Task> Tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
-        Task? task= Tasks.FirstOrDefault(Task => Task.Id == id);//stage 2 
-        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
-        return task;
+        return Tasks.FirstOrDefault(Task => Task.Id == id);//stage 2 
 
     }
 
@@ -43,12 +44,12 @@ internal class TaskImplementation : ITask
 
         if (filter == null)
         {
-            XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+            //XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
             return null;
         }
         else
         {
-            XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+            //XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
 
             return Tasks.FirstOrDefault(filter);
         }
@@ -62,13 +63,11 @@ internal class TaskImplementation : ITask
 
         if (filter != null)
         {
-            XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
             return from item in Tasks
                    where filter(item)
                    select item;
 
         }
-        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
         return from item in Tasks
                select item;
     }
@@ -77,14 +76,13 @@ internal class TaskImplementation : ITask
     {
         List<Task> Tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
         Task? task = Tasks.Find(Task => Task.Id == item.Id);
-        if (task != null)
+        if (Tasks.FirstOrDefault(item) == null)
         {
-            Tasks.Remove(task);
-            Tasks.Add(item);
-        }
-        else
             throw new DalDoesNotExistException($"Task with ID={item.Id} does Not exist");
-       
-        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+        }
+        Tasks.Remove(task!);
+        Tasks.Add(item);       
+       XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+        
     }
 }
