@@ -38,7 +38,7 @@ internal class DependencyImplementation : IDependency
         dependencyRoot = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         XElement? elemDependency;
         elemDependency=(from item in dependencyRoot.Elements()
-                        where Convert.ToInt32(item.Element("Id")!.Value)==id
+                        where (Convert.ToInt32(item.Element("Id")!.Value))==id
                         select item).FirstOrDefault();
         if(elemDependency!=null)
            elemDependency.Remove();
