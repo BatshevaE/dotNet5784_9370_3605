@@ -90,4 +90,5 @@ internal class EngineerImplementation : IEngineer
         else
             return DataSource.Engineers.FirstOrDefault(filter);
     }
+    public void clear() { DataSource.Engineers.Clear(); }
 }

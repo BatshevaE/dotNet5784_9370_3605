@@ -16,22 +16,22 @@ internal class DependencyImplementation : IDependency
     /// <returns></returns>
     public int Create(Dependency item)
     {
-        dependencyRoot=XMLTools.LoadListFromXMLElement(s_dependencys_xml);    
+        dependencyRoot = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         XElement elemDependency = new XElement("Dependency");
         int id = Config.NextDependentTaskId;
 
-        XElement elemId =new XElement("Id",id);
+        XElement elemId = new XElement("Id", id);
         elemDependency.Add(elemId);
 
-        XElement dependentTask = new XElement("DependentTask", item.DependentTask) ;
+        XElement dependentTask = new XElement("DependentTask", item.DependentTask);
         elemDependency.Add(dependentTask);
 
         XElement dependentOnTask = new XElement("DependentOnTask", item.DependentOnTask);
         elemDependency.Add(dependentOnTask);
 
-        
+
         dependencyRoot.Add(elemDependency);
-        XMLTools.SaveListToXMLElement(dependencyRoot,s_dependencys_xml);
+        XMLTools.SaveListToXMLElement(dependencyRoot, s_dependencys_xml);
         return id;
 
     }
@@ -42,9 +42,9 @@ internal class DependencyImplementation : IDependency
     public void Delete(int id)
     {
         dependencyRoot = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
-        XElement? elemDependency= dependencyRoot.Elements().FirstOrDefault(s=>(int?)s.Element("Id")==id);
-        if (elemDependency!=null)
-           elemDependency.Remove();
+        XElement? elemDependency = dependencyRoot.Elements().FirstOrDefault(s => (int?)s.Element("Id") == id);
+        if (elemDependency != null)
+            elemDependency.Remove();
         XMLTools.SaveListToXMLElement(dependencyRoot, s_dependencys_xml);
     }
     /// <summary>
@@ -61,7 +61,7 @@ internal class DependencyImplementation : IDependency
             return getDependency(elemDependency);
         }
         else
-         return null; 
+            return null;
 
 
     }
@@ -73,7 +73,7 @@ internal class DependencyImplementation : IDependency
     public Dependency? Read(Func<Dependency, bool>? filter)
     {
 
-       return XMLTools.LoadListFromXMLElement(s_dependencys_xml).Elements().Select(d=>getDependency(d)).FirstOrDefault(filter!);
+        return XMLTools.LoadListFromXMLElement(s_dependencys_xml).Elements().Select(d => getDependency(d)).FirstOrDefault(filter!);
     }
     /// <summary>
     /// returns all the dependencies from the xml file that stands under a condition
@@ -96,7 +96,7 @@ internal class DependencyImplementation : IDependency
     /// <param name="item">the dependency to update</param>
     public void Update(Dependency item)
     {
-        dependencyRoot= XMLTools.LoadListFromXMLElement(s_dependencys_xml);
+        dependencyRoot = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         XElement? elemDependency = dependencyRoot.Elements().FirstOrDefault(s => (int?)s.Element("Id") == item.Id);
 
         elemDependency!.Element("DependentTask")!.Value = Convert.ToString(item.DependentTask);
@@ -120,8 +120,16 @@ internal class DependencyImplementation : IDependency
             DependentOnTask = int.TryParse((string?)dependency.Element("DependentOnTask"), out var dependentOnTask) ? dependentOnTask : throw new FormatException("can't convert DepenDependentOnTaskdentTask")
 
         };
-        
-    }    
-    
+
+    }
+   public void clear()
+    {
+        dependencyRoot= XMLTools.LoadListFromXMLElement(s_dependencys_xml);
+        dependencyRoot.RemoveAll();
+        XMLTools.SaveListToXMLElement(dependencyRoot, s_dependencys_xml);
+    }
+
 }
+
+
     

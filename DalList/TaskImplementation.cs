@@ -93,6 +93,7 @@ internal class TaskImplementation : ITask
         else
             return DataSource.Tasks.FirstOrDefault(filter);
     }
+    public void clear() { DataSource.Tasks.Clear(); }
 }
 
 

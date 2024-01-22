@@ -94,6 +94,7 @@ internal class DependencyImplementation : IDependency
         else
         return DataSource.Dependencys.FirstOrDefault(filter);
     }
+   public void clear() { DataSource.Dependencys.Clear(); }
 }
 
 

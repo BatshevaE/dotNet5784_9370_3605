@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 namespace DalTest
 {
-    /// <summary>
+    /// <summary> 
     /// the main class
     /// </summary>
     internal class Program
@@ -20,7 +20,7 @@ namespace DalTest
         /// </summary>
         public enum MainMenue
         {
-            Exit = 0, Task, Engineer, Dependency
+            Exit = 0, Task, Engineer, Dependency, Initialization
         }
 
         public enum SubMenue
@@ -37,10 +37,7 @@ namespace DalTest
             try
             {
                 //Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependency);stage 1
-                Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
-                string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-                if (ans == "Y") //stage 3
-                    Initialization.Do(s_dal); //stage 2
+               
                 Main1();
 
             }
@@ -69,6 +66,17 @@ namespace DalTest
                         case Program.MainMenue.Dependency:
                             ChoiceDependency();
                             break;
+                        case Program.MainMenue.Initialization:
+                            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                            if (ans == "Y") //stage 3
+                            {
+                                s_dal.Engineer.clear();
+                                s_dal.Task.clear();
+                                s_dal.Dependency.clear();
+                                Initialization.Do(s_dal); //stage 2
+                            }
+                            break;
                         default:
                             return;
                     }
@@ -90,7 +98,8 @@ namespace DalTest
 Exit:0
 Task:1
 Engineer:2
-Dependency:3");
+Dependency:3
+Initialization:4");
             if (MainMenue.TryParse(Console.ReadLine(), out MainMenue choice))
                 return choice;
             else
@@ -532,7 +541,8 @@ The task depends on task number:{dependencyToRead.DependentOnTask}.");
 
             foreach (Dependency? dependency in dependencies)//a loop that goes over the list of dependencies
             {
-                Console.WriteLine($@"The dependent task's number is:{dependency?.DependentTask},
+                Console.WriteLine($@"The dependency id is:{dependency?.Id},
+The dependent task's number is:{dependency?.DependentTask},
 The task depends on task number:{dependency?.DependentOnTask}.
 ");
             }
