@@ -110,4 +110,13 @@ internal class EngineerImplementation:IEngineer
             return Engineers.FirstOrDefault(filter);
         }
     }
+    /// <summary>
+    /// deletes all the Engineers from the xml file
+    /// </summary>
+    public void clear()
+    {
+        List<Engineer> Engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
+        Engineers.Clear();
+        XMLTools.SaveListToXMLSerializer(Engineers, s_engineers_xml);
+    }
 }

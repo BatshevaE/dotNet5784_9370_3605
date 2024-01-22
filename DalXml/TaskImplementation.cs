@@ -113,4 +113,13 @@ internal class TaskImplementation : ITask
        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
         
     }
+    /// <summary>
+    /// deletes all the tasks from the xml file
+    /// </summary>
+   public void clear()
+    {
+        List<Task> Tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
+        Tasks.Clear();
+        XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+    }
 }
