@@ -1,5 +1,7 @@
 ﻿namespace Dal;
-
+/// <summary>
+/// has the id of the next task and dependency by it's order
+/// </summary>
     internal static class Config
     {
         static string s_data_config_xml = "data-config";

@@ -42,6 +42,12 @@ public record Task
     /// This is an empty ctor
     /// </summary>
     public Task() : this("", "", 0, "", 0, 0, DateTime.Today) { }
+
+    public bool ShouldSerializeOptionalDeadline() { return OptionalDeadline.HasValue; }
+    public bool ShouldSerializeStartDate() { return StartDate.HasValue; }
+    public bool ShouldSerializeStartTaskDate() { return StartTaskDate.HasValue; }
+    public bool ShouldSerializeActualDeadline() { return ActualDeadline.HasValue; }
+    public bool ShouldSerializeNote() { return !string.IsNullOrEmpty(Note); }
+    
 }
-   //We chose to write the record in the second way which the parameters ctor is already exists
-   
+//We chose to write the record in the second way which the parameters ctor is already exists
