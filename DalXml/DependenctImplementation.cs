@@ -127,6 +127,7 @@ internal class DependencyImplementation : IDependency
         dependencyRoot= XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         dependencyRoot.RemoveAll();
         XMLTools.SaveListToXMLElement(dependencyRoot, s_dependencys_xml);
+        Config.NextDependentTaskId = 1;//initialize the running number
     }
 
 }

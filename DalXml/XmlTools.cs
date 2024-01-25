@@ -33,6 +33,18 @@ static class XMLTools
         XMLTools.SaveListToXMLElement(root, data_config_xml);
         return nextId;
     }
+    /// <summary>
+    /// Initialize the running numbers in the xml file data config
+    /// </summary>
+    /// <param name="data_config_xml"></param>
+    /// <param name="elemName"></param>
+    /// <param name="val"></param>
+    public static void SetNextId(string data_config_xml,string elemName,int val) 
+    {
+        XElement root = LoadListFromXMLElement(data_config_xml);
+        root.Element(elemName)?.SetValue((val).ToString());
+        SaveListToXMLElement(root, data_config_xml);    
+    }
     #endregion
 
     #region SaveLoadWithXElement
