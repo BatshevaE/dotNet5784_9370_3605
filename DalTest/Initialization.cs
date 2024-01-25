@@ -17,9 +17,11 @@ public static class Initialization
     /// <param name="dalDependency">The access variables of dependency</param>
     /// <exception cref="NullReferenceException"></exception>
 
-    public static void Do(IDal dal)//ITask? dalTask, IEngineer? dalEngineer, IDependency? dalDependency)
+    //public static void Do(IDal dal)//ITask? dalTask, IEngineer? dalEngineer, IDependency? dalDependency)//stage 2
+    public static void Do()
     {
-        s_dal= dal?? throw new NullReferenceException("DAL can not be null!");
+        s_dal = DalApi.Factory.Get; //stage 4
+        //s_dal= dal?? throw new NullReferenceException("DAL can not be null!");//stage 2
         //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
