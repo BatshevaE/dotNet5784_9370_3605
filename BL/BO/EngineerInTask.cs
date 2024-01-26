@@ -2,8 +2,9 @@
 
 public class EngineerInTask
 {
-    int Id { get; init; }    
-    string Name { get; set; }
+    int TaskId { get; init; }    
+    string TaskName { get; set; }
+    
     public override string ToString() => this.ToStringProperty();
 
 }
