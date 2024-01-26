@@ -9,5 +9,5 @@ public class Engineer
     string Email { get; set; }
     EngineerLevel Level { get; set; }
     double Cost { get; set; }
-    BO.TaskInEngineer? Task { get; set; }
+    Tuple<int,string>? Task { get; set; }
 }
