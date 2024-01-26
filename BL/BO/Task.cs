@@ -23,7 +23,7 @@ public class Task
     
     string? Remarks { get; set; }//free remarks from project meetings']
     EngineerLevel Copmlexity { get; set; }    //task: minimum expirience for engineer to assign
-    EngineerInTask? Engineer  { get; set; }
+    Tuple<int, string>? Engineer  { get; set; }
 
     public override string ToString() => this.ToStringProperty();
 
