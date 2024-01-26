@@ -10,4 +10,6 @@ public class Engineer
     EngineerLevel Level { get; set; }
     double Cost { get; set; }
     Tuple<int,string>? Task { get; set; }
+    public override string ToString() => this.ToStringProperty();
+
 }
