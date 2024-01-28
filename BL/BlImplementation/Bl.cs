@@ -4,9 +4,9 @@ internal class Bl : IBl
 {
     public ITask Task =>  new TaskImplemenation();
 
-    public IEngineer Engineer =>  new EngineerImplemented();
+    public IEngineer Engineer =>  new EngineerImplemenation();
 
-    public ITaskInList TaskInList =>  new TaskInListImplemented();
+    public ITaskInList TaskInList =>  new TaskInListImplemenation();
 
-    public IEngineerInTask EngineerInTask =>  new EngineerInTaskImplemented();
+    public IEngineerInTask EngineerInTask =>  new EngineerInTaskImplemenation();
 }

@@ -42,7 +42,7 @@ internal class TaskImplemenation : ITask
             Name = doTask.Name,
             Description = doTask.Descriptoin,
             Copmlexity=(BO.EngineerLevel)doTask.Complexity,
-            EngineerTask = Tuple(doTask.Engineerid,""),
+            EngineerTask = (doTask.Engineerid,""),
             CreatedAtDate = doTask.CreateDate,
             RequiredEffortTime= doTask.RiquiredEffortTime,
             ForecastDate= doTask.OptionalDeadline,
@@ -55,7 +55,14 @@ internal class TaskImplemenation : ITask
 
     public IEnumerable<TaskInList> ReadAll()
     {
-        throw new NotImplementedException();
+        return (from DO.Task doTask in _dal.Task.ReadAll()
+                select new BO.TaskInList
+                {
+                    Id = doTask.Id,
+                    Name = doTask.Name,
+                    CurrentYear = (BO.Year)(DateTime.Now.Year - doStudent.RegistrationDate.Year)
+                });
+
     }
 
     public void Update(BO.Task item)
