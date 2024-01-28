@@ -1,7 +1,5 @@
-﻿
-
-namespace BlApi;
-
+﻿namespace BlApi;
 public interface ITaskInList
 {
+
 }
