@@ -5,7 +5,10 @@
 [Serializable]
 public class BlDoesNotExistException : Exception
 {
-    public BlDoesNotExistException(string? massage) : base(massage) { }
+    public BlDoesNotExistException(string? message) : base(message) { }
+    public BlDoesNotExistException(string message, Exception innerException)
+                : base(message, innerException) { }
+
 }
 /// <summary>
 /// /// id is already  exist
@@ -13,7 +16,9 @@ public class BlDoesNotExistException : Exception
 [Serializable]
 public class BlAlreadyExistException : Exception
 {
-    public BlAlreadyExistException(string? massage) : base(massage) { }
+    public BlAlreadyExistException(string? message) : base(message) { }
+    public BlAlreadyExistException(string message, Exception innerException)
+                : base(message, innerException) { }
 }
 
 /// <summary>
@@ -23,7 +28,9 @@ public class BlAlreadyExistException : Exception
 [Serializable]
 public class NullReferenceException : Exception
 {
-    public NullReferenceException(string? massage) : base(massage) { }
+    public NullReferenceException(string? message) : base(message) { }
+    public NullReferenceException(string message, Exception innerException)
+                : base(message, innerException) { }
 }
 /// <summary>
 /// 
@@ -31,5 +38,7 @@ public class NullReferenceException : Exception
 [Serializable]
 public class BlXMLFileLoadCreateException : Exception
 {
-    public BlXMLFileLoadCreateException(string? massage) : base(massage) { }
+    public BlXMLFileLoadCreateException(string? message) : base(message) { }
+    public BlXMLFileLoadCreateException(string message, Exception innerException)
+                : base(message, innerException) { }
 }
