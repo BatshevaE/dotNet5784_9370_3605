@@ -35,14 +35,22 @@ internal class TaskImplemenation : ITask
         DO.Task? doTask = _dal.Task.Read(id);
         if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-
+        Tuple<int?, string> EngTask;
+        if (doTask != null)
+        {
+            EngTask = new Tuple<int?, string>(doTask.Id, doTask.Name);
+        }
+        else
+        {
+            EngTask = new Tuple<int?, string>(0,""); 
+        }
         return new BO.Task()
         {
             Id = id,
             Name = doTask.Name,
             Description = doTask.Descriptoin,
             Copmlexity=(BO.EngineerLevel)doTask.Complexity,
-            EngineerTask = (doTask.Engineerid,""),
+            EngineerTask = EngTask,
             CreatedAtDate = doTask.CreateDate,
             RequiredEffortTime= doTask.RiquiredEffortTime,
             ForecastDate= doTask.OptionalDeadline,
