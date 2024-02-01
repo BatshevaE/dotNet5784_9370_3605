@@ -6,14 +6,12 @@ namespace BlImplementation;
 internal class TaskImplemenation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-
     public int Create(BO.Task item)
     {
         if (item.Id < 0 || item.Name == "")
             throw new FormatException("wrong input");
         DO.Task doTask = new DO.Task
-              (item.Name,item.Description,item.Id, null,(DO.EngineerLevel)item.Copmlexity,item.Engineers?.Item1,item.CreatedAtDate
-              ,item.RequiredEffortTime,false,item.ForecastDate,item.StartDate,item.CreatedAtDate,item.DeadlineDate,item.Remarks);
+              (item.Name,item.Description,item.Id, null,(DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1,item.CreatedAtDate,item.RequiredEffortTime,false,item.DeadlineDate,item.ScheduledDate,item.StartDate,item.CompleteDate,item.Remarks);
         try
         {
             int idTask = _dal.Task.Create(doTask);
@@ -35,6 +33,15 @@ internal class TaskImplemenation : ITask
         DO.Task? doTask = _dal.Task.Read(id);
         if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+        Tuple<int?, string>? tempEng;
+        if(doTask.Engineerid==null) { tempEng = null; }
+        else
+        {
+            DO.Engineer engineerName = _dal.Engineer.ReadAll().FirstOrDefault(item => item!.Id == doTask.Engineerid)!;
+            string name = engineerName.Name;
+            tempEng = new Tuple<int?, string>(doTask.Engineerid, name);
+        }
+
 
         return new BO.Task()
         {
@@ -42,7 +49,7 @@ internal class TaskImplemenation : ITask
             Name = doTask.Name,
             Description = doTask.Descriptoin,
             Copmlexity=(BO.EngineerLevel)doTask.Complexity,
-            EngineerTask = (doTask.Engineerid,""),
+            EngineerTask = tempEng,
             CreatedAtDate = doTask.CreateDate,
             RequiredEffortTime= doTask.RiquiredEffortTime,
             ForecastDate= doTask.OptionalDeadline,
