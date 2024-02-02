@@ -56,3 +56,15 @@ public class BlWrongInput : Exception
     public BlWrongInput(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+public class BlcanotUpdateStartdate : Exception
+{
+    public BlcanotUpdateStartdate(string? message) : base(message) { }
+    public BlcanotUpdateStartdate(string message, Exception innerException)
+                : base(message, innerException) { }
+}
+public class BlTooEarlyDate : Exception
+{
+    public BlTooEarlyDate(string? message) : base(message) { }
+    public BlTooEarlyDate(string message, Exception innerException)
+                : base(message, innerException) { }
+}

@@ -7,6 +7,6 @@ internal static class Tools
     {
         if (obj == null)
             return "null";
-        return
+        Type type = obj.GetType();
     }
 }

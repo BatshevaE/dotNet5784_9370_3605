@@ -91,7 +91,8 @@ internal class EngineerImplementation : IEngineer
         throw new NotImplementedException();
     }
    public Tuple<int,string>? CalculateTaskInEngineer(int id)
-    { DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(item => item!.Id == id);
+    { 
+     DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(item => item!.Id == id);
     Tuple<int, string>? EngTask;
         if (doTask != null)
         {

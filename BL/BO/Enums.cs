@@ -15,6 +15,12 @@ public enum Status
     InJeopardy,
     Done
 }
+public enum Stage
+{
+    Planning,
+    MiddleStage,
+    Doing
 
+}
 
 
