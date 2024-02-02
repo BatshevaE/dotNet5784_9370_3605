@@ -42,3 +42,17 @@ public class BlXMLFileLoadCreateException : Exception
     public BlXMLFileLoadCreateException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+[Serializable]
+public class BlCanNotDelete : Exception
+{
+    public BlCanNotDelete(string? message) : base(message) { }
+    public BlCanNotDelete(string message, Exception innerException)
+                : base(message, innerException) { }
+}
+[Serializable]
+public class BlWrongInput : Exception
+{
+    public BlWrongInput(string? message) : base(message) { }
+    public BlWrongInput(string message, Exception innerException)
+                : base(message, innerException) { }
+}
