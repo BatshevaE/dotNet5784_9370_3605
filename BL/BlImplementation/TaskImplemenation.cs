@@ -25,7 +25,20 @@ internal class TaskImplemenation : ITask
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        
+        DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Engineerid == id);
+        if (doTask == null)
+            throw new BO.BlCanNotDelete($"");
+
+
+        try
+        {
+            _dal.Engineer.Delete(id);
+        }
+        catch (DO.DalAlreadyExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist", ex);
+        }
     }
 
     public BO.Task? Read(int id)
@@ -81,4 +94,5 @@ internal class TaskImplemenation : ITask
     {
         throw new NotImplementedException();
     }
+    
 }
