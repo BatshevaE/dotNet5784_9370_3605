@@ -156,35 +156,67 @@ Delete:5");
         }
         catch (Exception ex) { Console.WriteLine(ex); };
     }
-    //   static void creatTask()
-    //   {
-    //       Console.WriteLine($@"Please enter the following details about the task:
-    //Name:");
-    //       string taskName = Console.ReadLine()!;
-    //       Console.WriteLine($@"Descriptoin:");
-    //       string taskDescriptoin = Console.ReadLine()!;
-    //       Console.WriteLine($@"A task's complex:");
-    //       if (!BO.EngineerLevel.TryParse(Console.ReadLine(), out BO.EngineerLevel taskComplex))
-    //           throw new FormatException("Wrong input");
-    //       Console.WriteLine($@"The engineer's id:");
-    //       if (!int.TryParse(Console.ReadLine(), out int engineerId))
-    //           throw new FormatException("Wrong input");
-    //       Console.WriteLine($@"The engineer's riquired effort time for the task:");
-    //       if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan riquiredEffortTime))
-    //           throw new FormatException("Wrong input");
-    //       Console.WriteLine($@"What is the latest date for you to finish the project:");
-    //       if (!DateTime.TryParse(Console.ReadLine(), out DateTime OptionalDeadline))
-    //           throw new FormatException("Wrong input");
-    //       Console.WriteLine($@"When would you like to start the task:");
-    //       if (!DateTime.TryParse(Console.ReadLine(), out DateTime StartDate))
-    //           throw new FormatException("Wrong input");
-    //       Console.WriteLine($@"Remarks:");
-    //       string? Remarks = Console.ReadLine();
-    //       BO.Task? task = new (0,taskName, taskDescriptoin, taskComplex, engineerId,null, riquiredEffortTime, OptionalDeadline, StartDate,null, Remarks);
-    //       int idTask = s_bl!.Task!.Create(task);//stage 2
-    //       Console.WriteLine($"The id of the new task is:{idTask}");
-    //   }
-    static void deleteTask()
+    static void creatTask()
+    {
+        Console.WriteLine($@"Please enter the following details about the task:
+    Name:");
+        string taskName = Console.ReadLine()!;
+        Console.WriteLine($@"Descriptoin:");
+        string taskDescriptoin = Console.ReadLine()!;
+        Console.WriteLine($@"A task's complex:");
+        if (!BO.EngineerLevel.TryParse(Console.ReadLine(), out BO.EngineerLevel taskComplex))
+            throw new FormatException("Wrong input");
+        Console.WriteLine($@"The engineer's riquired effort time for the task:");
+        if (!TimeSpan.TryParse(Console.ReadLine(), out TimeSpan riquiredEffortTime))
+            throw new FormatException("Wrong input");
+        string? Remarks = Console.ReadLine();
+        string? answer = null;
+        List<BO.TaskInList>? dependencies = null;
+        while (answer != "No")
+        {
+            Console.WriteLine($@"Does the current task depends on privious tasks?Yes/No");
+            answer = Console.ReadLine();
+            if (answer == "Yes")
+            {
+                Console.WriteLine($@"The id of the tasks that the current task depends on:");
+                if (int.TryParse(Console.ReadLine(), out int dependency))
+                    throw new FormatException("Wrong input");
+                BO.Task? task1 = s_bl.Task.Read(dependency);
+                if (task1 != null)
+                {
+                    TaskInList newTask = new TaskInList
+                    { Id = task1.Id,
+                        Description = task1.Description,
+                        Name = task1.Name,
+                        Status = task1.Status
+                    };
+                    dependencies?.Add(newTask);
+                }
+
+            }
+        }
+        BO.Task? task = new BO.Task
+        {
+            Id = 0,
+            Name = taskName,
+            Description = taskDescriptoin,
+            CreatedAtDate = DateTime.Now,
+            Status = BO.Status.Unschedeled,
+            Dependencies = dependencies,
+            RequiredEffortTime = riquiredEffortTime,
+            StartDate = null,
+            ScheduledDate = null,
+            ForecastDate = null,
+            DeadlineDate = null,
+            CompleteDate = null,
+            Remarks = Remarks,
+            Copmlexity = taskComplex,
+            EngineerTask = null
+        };
+               int idTask = s_bl!.Task!.Create(task);//stage 2
+             Console.WriteLine($"The id of the new task is:{idTask}");
+    }
+        static void deleteTask()
     {
         Console.WriteLine($@"Please enter the id of the task you would like to delete from the list:");
         if (!int.TryParse(Console.ReadLine(), out int id))

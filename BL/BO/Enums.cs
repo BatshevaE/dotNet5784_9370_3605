@@ -9,8 +9,8 @@ public enum EngineerLevel
 }
 public enum Status
 {
-    Unschedeked,
-    Schedeked,
+    Unschedeled,
+    Schedeled,
     OnTrack,
     InJeopardy,
     Done
