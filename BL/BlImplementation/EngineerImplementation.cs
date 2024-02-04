@@ -88,7 +88,20 @@ internal class EngineerImplementation : IEngineer
 
     public  void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0))
+            throw new BlWrongInput("wrong input");
+
+        DO.Engineer doEngineer = new DO.Engineer
+          (item.Id, item.Name, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
+        try
+        {
+             _dal.Engineer.Update(doEngineer);
+            
+        }
+        catch (DO.DalAlreadyExistException ex)
+        {
+            throw new BO.BlAlreadyExistException($"Engineer with ID={item.Id} already exists", ex);
+        }
     }
    public Tuple<int,string>? CalculateTaskInEngineer(int id)
     { 

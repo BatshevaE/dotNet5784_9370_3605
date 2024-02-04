@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using DO;
 using System.Linq;
 
 namespace BlImplementation;
@@ -15,6 +16,7 @@ internal class TaskImplemenation : ITask
               (item.Name,item.Description,item.Id, " ",(DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1,item.CreatedAtDate,item.RequiredEffortTime,false,item.DeadlineDate,item.ScheduledDate,item.StartDate,item.CompleteDate,item.Remarks);
         try
         {
+            foreach( TaskInList dependency in item.Dependencies!) { _dal.Dependency.Create(new DO.Dependency(0, item.Id, dependency.Id)); }
             int idTask = _dal.Task.Create(doTask);
             return idTask;
         }
@@ -37,6 +39,13 @@ internal class TaskImplemenation : ITask
             throw new BlCanNotDelete($"Task with ID {id} can't be deleted");
         try
         {
+            foreach (Dependency dependency in dependentList)
+            {
+                if (dependency.DependentTask==doTask.Id)
+                {
+                    _dal.Dependency.Delete(dependency.Id);
+                }
+            }
             _dal.Task.Delete(id);
         }
         catch (DO.DalAlreadyExistException ex)
@@ -54,14 +63,16 @@ internal class TaskImplemenation : ITask
             Id = id,
             Name = doTask.Name,
             Description = doTask.Descriptoin,
-            Copmlexity=(BO.EngineerLevel)doTask.Complexity,
+            Copmlexity = (BO.EngineerLevel)doTask.Complexity,
             EngineerTask = calculateEngineerTask(doTask.Engineerid),
             CreatedAtDate = doTask.CreateDate,
-            RequiredEffortTime= doTask.RiquiredEffortTime,
-            ForecastDate= doTask.OptionalDeadline,
-            StartDate= doTask.StartDate,
-            DeadlineDate= doTask.ActualDeadline,
-            Remarks=doTask.Note
+            RequiredEffortTime = doTask.RiquiredEffortTime,
+            ForecastDate = doTask.OptionalDeadline,
+            StartDate = doTask.StartDate,
+            DeadlineDate = doTask.ActualDeadline,
+            Remarks = doTask.Note,
+            Status = GetStatus(doTask),
+            Dependencies= GetAllDependencys(doTask)
         };
 
     }
@@ -84,7 +95,9 @@ internal class TaskImplemenation : ITask
             ForecastDate = item.OptionalDeadline,
             StartDate = item.StartDate,
             DeadlineDate = item.ActualDeadline,
-            Remarks = item.Note
+            Remarks = item.Note,
+            Status = GetStatus(item),
+            Dependencies = GetAllDependencys(item)
         };
         if (filter != null)
         { return BOTaskList.Where(filter); }
@@ -94,7 +107,26 @@ internal class TaskImplemenation : ITask
 
     public void Update(BO.Task item)
     {
-        throw new NotImplementedException();
+        if (item.Id < 0 || item.Name == "")
+            throw new BlWrongInput("wrong input");
+        DO.Task doTask = new DO.Task
+              (item.Name, item.Description, item.Id, " ", (DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1, item.CreatedAtDate, item.RequiredEffortTime, false, item.DeadlineDate, item.ScheduledDate, item.StartDate, item.CompleteDate, item.Remarks);
+        try
+        {
+            foreach (TaskInList dependency in item.Dependencies!)
+            {
+                if (_dal.Dependency.FindDependent(item.Id, dependency.Id) != 0)
+                {
+                    _dal.Dependency.Update(new DO.Dependency(_dal.Dependency.FindDependent(item.Id, dependency.Id), item.Id, dependency.Id));
+                }
+            }
+             _dal.Task.Update(doTask);
+            
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Task with ID={item.Id} does Not exist", ex);
+        }
     }
 
     public void updateStartDate(int id, DateTime startDate)
@@ -115,7 +147,7 @@ internal class TaskImplemenation : ITask
                         select item.StartDate;
         if (taskDependent != null)
             throw new BO.BlTooEarlyDate($"The date {startDate} is too early");
-
+        
         DO.Task updateTask = new DO.Task
          (doTask.Name, doTask.Descriptoin, doTask.Id, doTask.Product, doTask.Complexity, doTask.Engineerid, doTask.CreateDate, doTask.RiquiredEffortTime, false, doTask.OptionalDeadline, startDate, doTask.StartTaskDate, doTask.ActualDeadline, doTask.Note);
         try
@@ -123,11 +155,12 @@ internal class TaskImplemenation : ITask
             _dal.Task.Update(updateTask);
 
         }
-        catch (DO.DalAlreadyExistException ex)
+        catch (DO.DalDoesNotExistException ex)
         {
-            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
+            throw new BO.BlDoesNotExistException($"Task with ID={updateTask.Id} does Not exist", ex);
         }
     }
+
 
         public Tuple<int?,string>? calculateEngineerTask(int? id)
     {
@@ -136,5 +169,66 @@ internal class TaskImplemenation : ITask
         string name = engineerName.Name;
         return new Tuple<int?, string>(id, name);
     }
-    
+    public void updateEngineerToTask(int idEngineer, int idTask)
+    {
+        if (BlImplementation.Project.getStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
+        DO.Engineer? engineer = _dal.Engineer.Read(idEngineer);
+        DO.Task? task = _dal.Task.Read(idTask);
+        if ((task!=null)&&(engineer!=null)&&(task.Complexity<=engineer.Complexity))
+        {
+            IEnumerable<DO.Task> taskList=
+                from  DO.Task item in _dal.Task.ReadAll()
+                where item.Engineerid == idEngineer
+                select item;
+            if (taskList != null) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn is alreade assigned to other task");
+            IEnumerable<DO.Task> taskDependencys =
+              from DO.Dependency item in _dal.Dependency.ReadAll()
+              where item.DependentTask == idTask
+              select _dal.Task.Read(item.DependentOnTask);
+            taskDependencys.Where(item => (item.StartDate + item.RiquiredEffortTime) !< DateTime.Today);
+            if(taskDependencys!=null) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn can't be assigned to the riquested task");
+            DO.Task taskToUpdate = new DO.Task(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);
+            try { _dal.Task.Update(taskToUpdate);
+            }
+           
+             catch (DO.DalDoesNotExistException ex)
+            {
+                throw new BO.BlDoesNotExistException($"Task with ID={idTask} does Not exist", ex);
+            }
+        }
+
+        }
+public BO.Status GetStatus( DO.Task task)
+{
+        if (task.StartDate == null)
+            return BO.Status.Unschedeled;
+        else if ((task.StartDate != null) && (task.StartDate > DateTime.Today))
+            return BO.Status.Schedeled;
+        else if ((task.StartDate < DateTime.Today)&&(task.StartDate+task.RiquiredEffortTime > DateTime.Today))
+            return BO.Status.OnTrack;
+        else //if (task.StartDate + task.RiquiredEffortTime < DateTime.Today)
+            return BO.Status.Done;
 }
+    public List<TaskInList>? GetAllDependencys(DO.Task task)
+    {
+        IEnumerable<DO.Task> taskDependencys =
+             from DO.Dependency item in _dal.Dependency.ReadAll()
+             where item.DependentTask == task.Id
+             select _dal.Task.Read(item.DependentOnTask);
+        List<TaskInList>? dependencys=null;
+        foreach (var taskDependency in taskDependencys)
+        {
+            TaskInList? task1 = new TaskInList
+            {
+                Id = taskDependency.Id,
+                Description = taskDependency.Descriptoin,
+                Name = taskDependency.Name,
+                Status = GetStatus(taskDependency)
+            };
+            dependencys!.Add(task1);
+        }
+        return dependencys;
+    }
+}
+
+

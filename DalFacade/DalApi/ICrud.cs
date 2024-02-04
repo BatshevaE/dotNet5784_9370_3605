@@ -1,4 +1,6 @@
-﻿namespace DalApi;
+﻿using DO;
+
+namespace DalApi;
 
 public interface ICrud<T> where T : class
 {
@@ -41,5 +43,7 @@ public interface ICrud<T> where T : class
     /// function to delete initial data
     /// </summary>
     void clear();//stage 3
+    public int FindDependent(int idDependency, int idDependentOn);
+
 
 }

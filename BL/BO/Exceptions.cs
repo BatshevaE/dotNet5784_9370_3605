@@ -68,3 +68,16 @@ public class BlTooEarlyDate : Exception
     public BlTooEarlyDate(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+public class BlNotAtTheRightStageException : Exception
+{
+    public BlNotAtTheRightStageException(string? message) : base(message) { }
+    public BlNotAtTheRightStageException(string message, Exception innerException)
+                : base(message, innerException) { }
+}
+public class BlCanNotAssignRequestedEngineer : Exception
+{
+    public BlCanNotAssignRequestedEngineer(string? message) : base(message) { }
+    public BlCanNotAssignRequestedEngineer(string message, Exception innerException)
+                : base(message, innerException) { }
+}
+

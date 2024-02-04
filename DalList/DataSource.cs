@@ -12,7 +12,7 @@ internal static class DataSource
     /// </summary>
     internal static class Config
     {
-      //this is for the task id
+        //this is for the task id
         internal const int taskId = 1;
         private static int nextTaskId = taskId;
         internal static int NextTaskId { get => nextTaskId++; }
@@ -21,7 +21,7 @@ internal static class DataSource
         internal const int dependentTaskId = 1;
         private static int nextDependentTaskId = dependentTaskId;
         internal static int NextDependentTaskId { get => nextDependentTaskId++; }
-        public static DateTime? startWorkProject = null;
+        public static DateTime? startWorkProject {  get; set; } 
         public static DateTime? planEndProject = null;
          
     }
