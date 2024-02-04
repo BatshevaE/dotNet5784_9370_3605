@@ -280,28 +280,32 @@ The task's complexity is:{taskToRead.Copmlexity},");
                 Console.WriteLine($@"The task's engineer is:{taskToRead.EngineerTask}");
         }
     }
-//    static void createEngineer()
-//    {
-//        Console.WriteLine($@"Please enter the following details about the engineer:
-//Name:");
-//        string engineerName = Console.ReadLine()!;
-//        Console.WriteLine($@"Id:");
-//        if (!int.TryParse(Console.ReadLine(), out int engineerId))
-//            throw new FormatException("Wrong input");
-//        Console.WriteLine($@"Cost for an hour:");
-//        if (!double.TryParse(Console.ReadLine(), out double engineerCost))
-//            throw new FormatException("Wrong input");
-//        Console.WriteLine($@"Complex of the engineer:");
-//        if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel engineerComplex))
-//            throw new FormatException("Wrong input");
-//        Console.WriteLine($@"An Email address:");
-//        string engineerEmail = Console.ReadLine()!;
-//        Engineer engineer = new(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
-//        //s_dalEngineer!.Create(engineer);stage 1
-//        s_bl!.Engineer.Create(engineer);//stage 2
-
-//        Console.WriteLine($"the id of the new engineer is:{engineerId} ");
-//    }
+    static void createEngineer()
+    {
+        Console.WriteLine($@"Please enter the following details about the engineer:
+Name:");
+        string engineerName = Console.ReadLine()!;
+        Console.WriteLine($@"Id:");
+        if (!int.TryParse(Console.ReadLine(), out int engineerId))
+            throw new FormatException("Wrong input");
+        Console.WriteLine($@"Cost for an hour:");
+        if (!double.TryParse(Console.ReadLine(), out double engineerCost))
+            throw new FormatException("Wrong input");
+        Console.WriteLine($@"Complex of the engineer:");
+        if (!BO.EngineerLevel.TryParse(Console.ReadLine(), out BO.EngineerLevel engineerComplex))
+            throw new FormatException("Wrong input");
+        Console.WriteLine($@"An Email address:");
+        string engineerEmail = Console.ReadLine()!;
+        BO.Engineer engineer = new BO.Engineer
+        { Id=engineerId,
+            Name=engineerName,
+            Email=engineerEmail,
+            Level=engineerComplex,
+            Cost=engineerCost
+        };
+        s_bl!.Engineer.Create(engineer);
+        Console.WriteLine($"the id of the new engineer is:{engineerId} ");
+    }
 
     static void readEngineer()
     {
