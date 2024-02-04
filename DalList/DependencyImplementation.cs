@@ -2,6 +2,7 @@
 namespace Dal;
 using DalApi;
 using DO;
+using System.Security.Cryptography.X509Certificates;
 
 /// <summary>
 /// Implementation of the methods for the dependency list. 
@@ -95,6 +96,12 @@ internal class DependencyImplementation : IDependency
         return DataSource.Dependencys.FirstOrDefault(filter);
     }
    public void clear() { DataSource.Dependencys.Clear(); }
+    public static int FindDependent(int idDependency, int idDependentOn)
+    {
+
+        foreach (Dependency? dependency in DataSource.Dependencys) { if ((dependency != null) && (dependency.DependentTask == idDependency) && (dependency.DependentOnTask == idDependentOn)) return dependency.Id; };
+        return 0;
+    }
 }
 
 

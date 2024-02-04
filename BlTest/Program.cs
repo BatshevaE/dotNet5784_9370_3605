@@ -16,7 +16,7 @@ internal class Program
     public enum SubMenue
 
     {
-        Exit, Creat, Read, ReadAll, Update, Delete,
+        Exit, Creat, Read, ReadAll, Update, Delete,UpdateStartDate,AssignEngineerToTask
     }
 
 
@@ -79,9 +79,10 @@ Exit:0
 Creat:1
 Read:2
 ReadAll:3
-Update:4
+Update generall details of task:4
 Delete:5
-updateStartDate:6
+Update Start Date of task:6
+Assign engineer to task:7
  ");
                 if (!SubMenue.TryParse(Console.ReadLine(), out choiceTask)) //read the int choice and convert it to SubMenue types
                     throw new FormatException("wrong input");
@@ -158,6 +159,7 @@ Delete:5");
     }
     static void creatTask()
     {
+        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the following details about the task:
     Name:");
         string taskName = Console.ReadLine()!;
@@ -218,6 +220,7 @@ Delete:5");
     }
         static void deleteTask()
     {
+        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the id of the task you would like to delete from the list:");
         if (!int.TryParse(Console.ReadLine(), out int id))
             throw new FormatException("Wrong input");
@@ -282,26 +285,27 @@ The task's complexity is:{taskToRead.Copmlexity},");
     }
 //    static void createEngineer()
 //    {
-//        Console.WriteLine($@"Please enter the following details about the engineer:
-//Name:");
-//        string engineerName = Console.ReadLine()!;
-//        Console.WriteLine($@"Id:");
-//        if (!int.TryParse(Console.ReadLine(), out int engineerId))
-//            throw new FormatException("Wrong input");
-//        Console.WriteLine($@"Cost for an hour:");
-//        if (!double.TryParse(Console.ReadLine(), out double engineerCost))
-//            throw new FormatException("Wrong input");
-//        Console.WriteLine($@"Complex of the engineer:");
-//        if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel engineerComplex))
-//            throw new FormatException("Wrong input");
-//        Console.WriteLine($@"An Email address:");
-//        string engineerEmail = Console.ReadLine()!;
-//        Engineer engineer = new(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
-//        //s_dalEngineer!.Create(engineer);stage 1
-//        s_bl!.Engineer.Create(engineer);//stage 2
+ //if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+    //        Console.WriteLine($@"Please enter the following details about the engineer:
+    //Name:");
+    //        string engineerName = Console.ReadLine()!;
+    //        Console.WriteLine($@"Id:");
+    //        if (!int.TryParse(Console.ReadLine(), out int engineerId))
+    //            throw new FormatException("Wrong input");
+    //        Console.WriteLine($@"Cost for an hour:");
+    //        if (!double.TryParse(Console.ReadLine(), out double engineerCost))
+    //            throw new FormatException("Wrong input");
+    //        Console.WriteLine($@"Complex of the engineer:");
+    //        if (!EngineerLevel.TryParse(Console.ReadLine(), out EngineerLevel engineerComplex))
+    //            throw new FormatException("Wrong input");
+    //        Console.WriteLine($@"An Email address:");
+    //        string engineerEmail = Console.ReadLine()!;
+    //        Engineer engineer = new(engineerId, engineerName, engineerEmail, engineerComplex, engineerCost);
+    //        //s_dalEngineer!.Create(engineer);stage 1
+    //        s_bl!.Engineer.Create(engineer);//stage 2
 
-//        Console.WriteLine($"the id of the new engineer is:{engineerId} ");
-//    }
+    //        Console.WriteLine($"the id of the new engineer is:{engineerId} ");
+    //    }
 
     static void readEngineer()
     {
@@ -338,6 +342,7 @@ The engineer's complexity is:{engineerToRead.Level}.
     }
     static void deleteEngineer()
     {
+        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the id of the engineer you would like to delete from the list:");
         if (!int.TryParse(Console.ReadLine(), out int id))
             throw new FormatException("Wrong input");
