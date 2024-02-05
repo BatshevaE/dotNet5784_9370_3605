@@ -5,10 +5,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>1</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-03T00:00:00</CreateDate>
-    <RiquiredEffortTime>P174D</RiquiredEffortTime>
+    <CreateDate>2024-05-02T00:00:00</CreateDate>
+    <RiquiredEffortTime>P131D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -16,10 +16,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>2</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-11T00:00:00</CreateDate>
-    <RiquiredEffortTime>P115D</RiquiredEffortTime>
+    <CreateDate>2024-05-17T00:00:00</CreateDate>
+    <RiquiredEffortTime>P169D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -27,10 +27,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>3</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-06-04T00:00:00</CreateDate>
-    <RiquiredEffortTime>P172D</RiquiredEffortTime>
+    <CreateDate>2024-04-14T00:00:00</CreateDate>
+    <RiquiredEffortTime>P41D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -38,10 +38,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>4</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-21T00:00:00</CreateDate>
-    <RiquiredEffortTime>P38D</RiquiredEffortTime>
+    <CreateDate>2024-05-12T00:00:00</CreateDate>
+    <RiquiredEffortTime>P130D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -49,10 +49,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>5</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-06-06T00:00:00</CreateDate>
-    <RiquiredEffortTime>P165D</RiquiredEffortTime>
+    <CreateDate>2024-05-13T00:00:00</CreateDate>
+    <RiquiredEffortTime>P158D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -60,10 +60,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>6</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-14T00:00:00</CreateDate>
-    <RiquiredEffortTime>P32D</RiquiredEffortTime>
+    <CreateDate>2024-05-04T00:00:00</CreateDate>
+    <RiquiredEffortTime>P61D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -71,10 +71,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>7</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-20T00:00:00</CreateDate>
-    <RiquiredEffortTime>P129D</RiquiredEffortTime>
+    <CreateDate>2024-05-18T00:00:00</CreateDate>
+    <RiquiredEffortTime>P34D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -84,8 +84,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-05T00:00:00</CreateDate>
-    <RiquiredEffortTime>P84D</RiquiredEffortTime>
+    <CreateDate>2024-05-03T00:00:00</CreateDate>
+    <RiquiredEffortTime>P48D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -93,10 +93,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>9</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-15T00:00:00</CreateDate>
-    <RiquiredEffortTime>P175D</RiquiredEffortTime>
+    <CreateDate>2024-04-29T00:00:00</CreateDate>
+    <RiquiredEffortTime>P87D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -104,10 +104,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>10</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-20T00:00:00</CreateDate>
-    <RiquiredEffortTime>P108D</RiquiredEffortTime>
+    <CreateDate>2024-05-05T00:00:00</CreateDate>
+    <RiquiredEffortTime>P164D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -115,10 +115,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>11</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-21T00:00:00</CreateDate>
-    <RiquiredEffortTime>P121D</RiquiredEffortTime>
+    <CreateDate>2024-05-05T00:00:00</CreateDate>
+    <RiquiredEffortTime>P178D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -128,8 +128,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-19T00:00:00</CreateDate>
-    <RiquiredEffortTime>P158D</RiquiredEffortTime>
+    <CreateDate>2024-04-04T00:00:00</CreateDate>
+    <RiquiredEffortTime>P91D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -139,8 +139,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-06-05T00:00:00</CreateDate>
-    <RiquiredEffortTime>P144D</RiquiredEffortTime>
+    <CreateDate>2024-04-23T00:00:00</CreateDate>
+    <RiquiredEffortTime>P166D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -148,10 +148,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>14</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-04T00:00:00</CreateDate>
-    <RiquiredEffortTime>P30D</RiquiredEffortTime>
+    <CreateDate>2024-05-11T00:00:00</CreateDate>
+    <RiquiredEffortTime>P114D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -159,10 +159,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>15</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-02T00:00:00</CreateDate>
-    <RiquiredEffortTime>P120D</RiquiredEffortTime>
+    <CreateDate>2024-05-06T00:00:00</CreateDate>
+    <RiquiredEffortTime>P86D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -172,8 +172,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-30T00:00:00</CreateDate>
-    <RiquiredEffortTime>P163D</RiquiredEffortTime>
+    <CreateDate>2024-04-02T00:00:00</CreateDate>
+    <RiquiredEffortTime>P153D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -181,10 +181,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>17</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-30T00:00:00</CreateDate>
-    <RiquiredEffortTime>P33D</RiquiredEffortTime>
+    <CreateDate>2024-04-19T00:00:00</CreateDate>
+    <RiquiredEffortTime>P158D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -194,7 +194,7 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-06T00:00:00</CreateDate>
+    <CreateDate>2024-04-05T00:00:00</CreateDate>
     <RiquiredEffortTime>P36D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
@@ -203,10 +203,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>19</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-07T00:00:00</CreateDate>
-    <RiquiredEffortTime>P93D</RiquiredEffortTime>
+    <CreateDate>2024-04-04T00:00:00</CreateDate>
+    <RiquiredEffortTime>P140D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -216,8 +216,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-02T00:00:00</CreateDate>
-    <RiquiredEffortTime>P136D</RiquiredEffortTime>
+    <CreateDate>2024-05-16T00:00:00</CreateDate>
+    <RiquiredEffortTime>P61D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -225,10 +225,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>21</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-01T00:00:00</CreateDate>
-    <RiquiredEffortTime>P84D</RiquiredEffortTime>
+    <CreateDate>2024-04-11T00:00:00</CreateDate>
+    <RiquiredEffortTime>P106D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -236,10 +236,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>22</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-31T00:00:00</CreateDate>
-    <RiquiredEffortTime>P147D</RiquiredEffortTime>
+    <CreateDate>2024-05-20T00:00:00</CreateDate>
+    <RiquiredEffortTime>P34D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -249,8 +249,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-06-03T00:00:00</CreateDate>
-    <RiquiredEffortTime>P72D</RiquiredEffortTime>
+    <CreateDate>2024-04-04T00:00:00</CreateDate>
+    <RiquiredEffortTime>P42D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -260,8 +260,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-21T00:00:00</CreateDate>
-    <RiquiredEffortTime>P35D</RiquiredEffortTime>
+    <CreateDate>2024-04-28T00:00:00</CreateDate>
+    <RiquiredEffortTime>P140D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -269,10 +269,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>25</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-09T00:00:00</CreateDate>
-    <RiquiredEffortTime>P152D</RiquiredEffortTime>
+    <CreateDate>2024-05-23T00:00:00</CreateDate>
+    <RiquiredEffortTime>P101D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -280,10 +280,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>26</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-09T00:00:00</CreateDate>
-    <RiquiredEffortTime>P145D</RiquiredEffortTime>
+    <CreateDate>2024-04-20T00:00:00</CreateDate>
+    <RiquiredEffortTime>P123D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -291,10 +291,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>27</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-19T00:00:00</CreateDate>
-    <RiquiredEffortTime>P89D</RiquiredEffortTime>
+    <CreateDate>2024-05-05T00:00:00</CreateDate>
+    <RiquiredEffortTime>P65D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -304,8 +304,8 @@
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
     <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-27T00:00:00</CreateDate>
-    <RiquiredEffortTime>P140D</RiquiredEffortTime>
+    <CreateDate>2024-05-17T00:00:00</CreateDate>
+    <RiquiredEffortTime>P53D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -313,10 +313,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>29</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-12T00:00:00</CreateDate>
-    <RiquiredEffortTime>P43D</RiquiredEffortTime>
+    <CreateDate>2024-05-03T00:00:00</CreateDate>
+    <RiquiredEffortTime>P177D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -324,10 +324,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>30</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-13T00:00:00</CreateDate>
-    <RiquiredEffortTime>P174D</RiquiredEffortTime>
+    <CreateDate>2024-05-01T00:00:00</CreateDate>
+    <RiquiredEffortTime>P43D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -335,10 +335,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>31</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-19T00:00:00</CreateDate>
-    <RiquiredEffortTime>P152D</RiquiredEffortTime>
+    <CreateDate>2024-04-28T00:00:00</CreateDate>
+    <RiquiredEffortTime>P67D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -346,10 +346,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>32</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-05T00:00:00</CreateDate>
-    <RiquiredEffortTime>P73D</RiquiredEffortTime>
+    <CreateDate>2024-04-10T00:00:00</CreateDate>
+    <RiquiredEffortTime>P94D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -357,10 +357,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>33</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-30T00:00:00</CreateDate>
-    <RiquiredEffortTime>P56D</RiquiredEffortTime>
+    <CreateDate>2024-04-25T00:00:00</CreateDate>
+    <RiquiredEffortTime>P117D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -368,10 +368,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>34</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-29T00:00:00</CreateDate>
-    <RiquiredEffortTime>P52D</RiquiredEffortTime>
+    <CreateDate>2024-05-13T00:00:00</CreateDate>
+    <RiquiredEffortTime>P179D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -379,10 +379,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>35</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-06T00:00:00</CreateDate>
-    <RiquiredEffortTime>P174D</RiquiredEffortTime>
+    <CreateDate>2024-05-18T00:00:00</CreateDate>
+    <RiquiredEffortTime>P164D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
@@ -390,10 +390,10 @@
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>36</Id>
     <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-07T00:00:00</CreateDate>
-    <RiquiredEffortTime>P156D</RiquiredEffortTime>
+    <CreateDate>2024-05-18T00:00:00</CreateDate>
+    <RiquiredEffortTime>P130D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
 </ArrayOfTask>

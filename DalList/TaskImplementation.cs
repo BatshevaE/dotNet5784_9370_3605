@@ -3,12 +3,12 @@ using DalApi;
 using DO;
 
 /// <summary>
-/// The CRUB functions for Task
+/// The CRUD functions for Task
 /// </summary>
 internal class TaskImplementation : ITask
 {
     /// <summary>
-    /// Adding a new task fir the list
+    /// Adding a new task for the list
     /// </summary>
     /// <param name="item">The item that is needed to be added to the list</param>
     /// <returns>The function returns the id of the new task</returns>

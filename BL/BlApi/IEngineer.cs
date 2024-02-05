@@ -9,5 +9,9 @@ public interface IEngineer
     public void Update(BO.Engineer item);
     public void Delete(int id);
     public Tuple<int, string>? CalculateTaskInEngineer(int id);
+    public void clear();
+    public IEnumerable<BO.Engineer>? EngineersAtRequestedLevel(BO.EngineerLevel level);
+
+
 
 }
