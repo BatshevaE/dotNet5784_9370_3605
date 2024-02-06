@@ -131,9 +131,10 @@ public static class Initialization
             "Completed project deliverables, documentation, post-implementation review reports, and any necessary handover materials for ongoing maintenance or future reference.",
             "A comprehensive technical plan encompassing:Technical Specifications, Development Process, Testing Protocols, Documentation and Manuals",
             " A comprehensive commissioning plan incorporating:Testing and Verification, Operational Readiness, Handover and Acceptance, Post-Commissioning Support"};
+        int i = 0;
         foreach (var _name in tasksNames)//goes over the array of names foreach (var _description in tasksDescription) foreach (var _product in tasksProduct)
                 {
-                    int i = 0;
+                   
                     double effortTime = s_rand.Next(30, 180);//here we get a random time in days for each task
                     EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task
 
@@ -141,9 +142,9 @@ public static class Initialization
                     DateTime startDateRange = new (2024, 4, 1);
                     Random gen = new ();
                     int rangeStart = (startDateRange - DateTime.Today).Days;
-                    DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));
-                    
-                    Task newTask = new(_name,tasksDescription[i++], 0,tasksProduct[i++], complex, null, createDate, TimeSpan.FromDays(effortTime), false, null, null, null, null, null);//ctor
+                    DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));                 
+                    Task newTask = new(_name,tasksDescription[i], 0,tasksProduct[i], complex, null, createDate, TimeSpan.FromDays(effortTime), false, null, null, null, null, null);//ctor
+                     i++;
                     //s_dalTask!.Create(newTask);stage 1
                     s_dal!.Task.Create(newTask);//stage 2  
                   //for now we only put the creation date and later we will put the other dates therefor,for now they are null
