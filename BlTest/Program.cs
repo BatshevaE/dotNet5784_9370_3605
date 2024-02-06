@@ -15,17 +15,21 @@ internal class Program
     /// </summary>
     public enum MainMenue
     {
-        Exit = 0, Task, Engineer,
+        Exit = 0, Task, Engineer,CreateStartDate
     }
     /// <summary>
     /// enum for the sub menue
     /// </summary>
-    public enum SubMenue
+    public enum SubMenueTask
 
     {
-        Exit, Creat, Read, ReadAll, Update, Delete,UpdateStartDate,AssignEngineerToTask, EngineersAtRequestedLevel
+        Exit, Creat, Read, ReadAll, Update, Delete,UpdateStartDate,AssignEngineerToTask, AutomaticCreateSchedele
     }
+    public enum SubMenueEng
 
+    {
+        Exit, Creat, Read, ReadAll, Update, Delete, EngineersAtRequestedLevel
+    }
 
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
@@ -56,6 +60,9 @@ internal class Program
                     case Program.MainMenue.Engineer:
                         ChoiceEngineer();
                         break;
+                    case Program.MainMenue.CreateStartDate:
+                        CreateStartDate();
+                        break;
                     default:
                         return;
                 }
@@ -75,7 +82,8 @@ internal class Program
         Console.WriteLine(@"Choose one of the following options: 
 Exit:0
 Task:1
-Engineer:2");
+Engineer:2
+Create start date of the project:3");
         if (MainMenue.TryParse(Console.ReadLine(), out MainMenue choice))
             return choice;
         else
@@ -90,7 +98,7 @@ Engineer:2");
     {
         try
         {
-            SubMenue choiceTask;
+            SubMenueTask choiceTask;
             do
             {
                 Console.WriteLine(@"Choose one of the following options for Task 
@@ -102,34 +110,38 @@ Update generall details of task:4
 Delete:5
 Update Start Date of all tasks:6
 Assign engineer to task:7
+Automatic Create Schedele:8
  ");
-                if (!SubMenue.TryParse(Console.ReadLine(), out choiceTask)) //read the int choice and convert it to SubMenue types
+                if (!SubMenueTask.TryParse(Console.ReadLine(), out choiceTask)) //read the int choice and convert it to SubMenue types
                     throw new FormatException("wrong input");
                 switch (choiceTask)
                 {
-                    case SubMenue.Exit:
+                    case SubMenueTask.Exit:
                         return;
-                    case SubMenue.Creat:
+                    case SubMenueTask.Creat:
                         createTask();
                         break;
-                    case SubMenue.Read:
+                    case SubMenueTask.Read:
                         readTask();
                         break;
-                    case SubMenue.ReadAll:
+                    case SubMenueTask.ReadAll:
                         readListTasks();
                         break;
-                    case SubMenue.Update:
+                    case SubMenueTask.Update:
                         updateTask();
                         break;
-                    case SubMenue.Delete:
+                    case SubMenueTask.Delete:
                         deleteTask();
                         break;
-                    case SubMenue.UpdateStartDate:
+                    case SubMenueTask.UpdateStartDate:
                         updateStartDate();
                         break;
-                    case SubMenue.AssignEngineerToTask:
+                    case SubMenueTask.AssignEngineerToTask:
                         assignEngineerToTask();
                         break;
+                    case SubMenueTask.AutomaticCreateSchedele:
+                        AutomaticCreateSchedele();
+                        break;                    
                     default:
                         return;
                 }
@@ -146,7 +158,7 @@ Assign engineer to task:7
     {
         try
         {
-            SubMenue choiceEngineer;
+            SubMenueEng choiceEngineer;
             do
             {
                 Console.WriteLine(@"Choose one of the following options for Engineer:
@@ -157,29 +169,29 @@ ReadAll:3
 Update:4
 Delete:5
 Read all engineer in certain level:6");
-                if (!SubMenue.TryParse(Console.ReadLine(), out choiceEngineer)) //read the int choice and convert it to SubMenue types
+                if (!SubMenueEng.TryParse(Console.ReadLine(), out choiceEngineer)) //read the int choice and convert it to SubMenue types
                     throw new FormatException("wrong input");
 
                 switch (choiceEngineer)
                 {
-                    case SubMenue.Exit:
+                    case SubMenueEng.Exit:
                         return;
-                    case SubMenue.Creat:
+                    case SubMenueEng.Creat:
                         createEngineer();
                         break;
-                    case SubMenue.Read:
+                    case SubMenueEng.Read:
                         readEngineer();
                         break;
-                    case SubMenue.ReadAll:
+                    case SubMenueEng.ReadAll:
                         readAllEngineers();
                         break;
-                    case SubMenue.Update:
+                    case SubMenueEng.Update:
                         updateEngineer();
                         break;
-                    case SubMenue.Delete:
+                    case SubMenueEng.Delete:
                         deleteEngineer();
                         break;
-                    case SubMenue.EngineersAtRequestedLevel:
+                    case SubMenueEng.EngineersAtRequestedLevel:
                         EngineersAtRequestedLevel();
                         break;  
                     default:
@@ -189,6 +201,19 @@ Read all engineer in certain level:6");
             while (choiceEngineer != 0);
         }
         catch (Exception ex) { Console.WriteLine(ex); };
+    }
+    static void CreateStartDate()
+    {
+        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        Console.WriteLine($@"Please enter the date to start the project");
+        if (!DateTime.TryParse(Console.ReadLine(), out DateTime startDate))
+            throw new FormatException("Wrong input");
+        try
+        {
+            BlImplementation.Project.CreateSchedele(startDate);
+        }
+        catch (BlcanotUpdateStartdate ex) { Console.WriteLine(ex); };
+
     }
     /// <summary>
     /// create a new task
@@ -307,12 +332,18 @@ Read all engineer in certain level:6");
     static void updateStartDate()
     {
         if (BlImplementation.Project.getStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
-        foreach (var item in s_bl!.Task.ReadAll())
-        {
+        //foreach (var item in s_bl!.Task.ReadAll())
+        //{
+        Console.WriteLine($@"Please enter the id of the task");
+
+        if (!int.TryParse(Console.ReadLine(), out int id))
+            throw new FormatException("Wrong input");
+        Console.WriteLine($@"Please enter the date to start the {id} task");
+
             if (!DateTime.TryParse(Console.ReadLine(), out DateTime planStartDate))
                 throw new FormatException("Wrong input");
-            s_bl!.Task!.UpdateStartDate(item.Id, planStartDate);
-        }
+            s_bl!.Task!.UpdateStartDate(id, planStartDate);
+        //}
     }
     /// <summary>
     /// assign Engineer To the Task
@@ -564,7 +595,7 @@ Id:");
     }
     static void EngineersAtRequestedLevel()
     {
-        Console.WriteLine($@"please enter the level of engineer you would like to reed:");
+        Console.WriteLine($@"please enter the level of engineer you would like to read:");
         if (!BO.EngineerLevel.TryParse(Console.ReadLine(), out BO.EngineerLevel engineerComplex))
             throw new FormatException("Wrong input");
         if(s_bl.Engineer.EngineersAtRequestedLevel(engineerComplex)!=null)
@@ -573,7 +604,10 @@ Id:");
     }
 
 
-
+     static void AutomaticCreateSchedele()
+    {
+        s_bl.Task.createAutomaticLuz();
+    }
 
 }
 

@@ -180,13 +180,13 @@ internal class TaskImplemenation :ITask
                                                 let item = _dal.Task.Read(dependent.DependentOnTask)
                                                 where (item != null) && (item.StartDate == null)
                                                 select item.StartDate;
-        if (taskDependent != null)//there ia a task that this task dependent on that didnt start yet
+        if (taskDependent.Any())//there ia a task that this task dependent on that didnt start yet
             throw new BO.BlcanotUpdateStartdate($"Can not update the date becuse task with {id} dependent on other task that didnt start yet ");
         taskDependent = from dependent in dependentList
                         let item = _dal.Task.Read(dependent.DependentOnTask)
-                        where (item != null) && (item.StartDate+item.RiquiredEffortTime > startDate)
+                        where (item != null) && (item.StartDate+item.RiquiredEffortTime > startDate)&&(item.StartDate>=item.CreateDate)
                         select item.StartDate;
-        if (taskDependent != null)//there ia a task that this task dependent on that finish after the new start date
+        if (taskDependent.Any())//there ia a task that this task dependent on that finish after the new start date
             throw new BO.BlTooEarlyDate($"The date {startDate} is too early");
         
         DO.Task updateTask = new DO.Task
@@ -235,13 +235,13 @@ internal class TaskImplemenation :ITask
                 from  DO.Task item in _dal.Task.ReadAll()
                 where item.Engineerid == idEngineer//the engineer is already assigned to another task
                 select item;
-            if (taskList != null) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn is alreade assigned to other task");
+            if (taskList.Any()) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn is alreade assigned to other task");
             IEnumerable<DO.Task> taskDependencys =
               from DO.Dependency item in _dal.Dependency.ReadAll()
               where item.DependentTask == idTask//the task dependent on other task
               select _dal.Task.Read(item.DependentOnTask);
             taskDependencys.Where(item => (item.StartDate + item.RiquiredEffortTime) !< DateTime.Today);//the task's that this task dependent on finish day, is before today
-            if (taskDependencys!=null) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn can't be assigned to the riquested task");
+            if (taskDependencys.Any()) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn can't be assigned to the riquested task");
             DO.Task taskToUpdate = new DO.Task(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);
             try { _dal.Task.Update(taskToUpdate);
             }
@@ -310,6 +310,31 @@ public BO.Status GetStatus( DO.Task task)
         _dal.Dependency.clear();
         _dal.Task.clear();
         
+    }
+    public void createAutomaticLuz()
+    {
+        while(_dal.Task.ReadAll().Where(item=>item!.StartDate==null).Any())
+        {
+            IEnumerable<DO.Task> tasks=from DO.Task item in _dal.Task.ReadAll()
+                                      where GetAllDependencys(item)!.Any()==false
+                                      select item;
+            foreach (DO.Task task in tasks) { UpdateStartDate(task.Id, IBl.startWorkProject); }
+            IEnumerable<DO.Task> tasks1 = from DO.Task item1 in _dal.Task.ReadAll()
+                                          where GetAllDependencys(item1)!.Any()
+                                          select item1;
+            foreach (DO.Task task in tasks1) 
+            {
+                IEnumerable<DateTime?> tasks5 = from BO.TaskInList dependency in GetAllDependencys(task)!
+                                              where _dal.Task.Read(dependency.Id)!.StartDate != null
+                                              select _dal.Task.Read(dependency.Id)!.StartDate+ _dal.Task.Read(dependency.Id)!.RiquiredEffortTime;
+                if(tasks5.Count()== GetAllDependencys(task)!.Count())//the collection is empty-all dependencies have starsdate
+                {
+                    UpdateStartDate(task.Id, tasks5.Max());
+                }
+            }
+
+
+        }
     }
 }
 

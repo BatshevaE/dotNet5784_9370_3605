@@ -1,5 +1,7 @@
 ﻿using BlApi;
+using BO;
 using DalApi;
+using System.Data.Common;
 
 namespace BlImplementation;
 
@@ -22,8 +24,15 @@ public class Project
 
         }
     }
-    public static void CreateSchedele()
+    public static void CreateSchedele(DateTime startDate)
     {
+        //if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (startDate >= DateTime.Now)
+            IBl.startWorkProject = startDate;
+        else
+            throw new BlcanotUpdateStartdate("too early date");
+
 
     }
+  
 }

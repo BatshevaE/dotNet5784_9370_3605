@@ -11,6 +11,7 @@ public interface ITask
     public void updateEngineerToTask(int idEngineer, int idTask);
     public  int FindDependent(int idDependency, int idDependentOn);
     public void clear();
+    public void createAutomaticLuz();
 
 
 
