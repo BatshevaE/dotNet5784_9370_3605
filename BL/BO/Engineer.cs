@@ -9,11 +9,11 @@ public class Engineer
     /// <summary>
     /// the Engineer name
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
     /// <summary>
     /// the Engineer mail
     /// </summary>
-     public string Email { get; set; }
+     public string? Email { get; set; }
     /// <summary>
     /// the Engineer complex
     /// </summary>

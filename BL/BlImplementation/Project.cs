@@ -18,7 +18,7 @@ public class Project
             IEnumerable<DO.Task?> tasksWhithoutDate=from task in TaskList
                                                  where task.StartDate==null
                                                  select task;
-            if (tasksWhithoutDate != null)
+            if (tasksWhithoutDate .Any())
                 return BO.Stage.MiddleStage;
             else return BO.Stage.Doing;
 

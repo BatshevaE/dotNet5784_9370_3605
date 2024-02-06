@@ -229,7 +229,6 @@ public static class Initialization
             new (0,32,17),
             new (0,19,18),
             new (0,33,19),
-            new (0,9,19),
             new (0,35,18),
             new (0,34,36),
             new (0,5,36)

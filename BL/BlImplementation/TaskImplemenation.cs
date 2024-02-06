@@ -25,8 +25,8 @@ internal class TaskImplemenation :ITask
               (item.Name,item.Description,item.Id, " ",(DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1,item.CreatedAtDate,item.RequiredEffortTime,false,item.DeadlineDate,item.ScheduledDate,item.StartDate,item.CompleteDate,item.Remarks);
         try
         {
-            foreach( TaskInList dependency in item.Dependencies!) { _dal.Dependency.Create(new DO.Dependency(0, item.Id, dependency.Id)); }//add the list of dependecis in the bo task to the dependecies list in the data source in the dal
             int idTask = _dal.Task.Create(doTask);
+            foreach ( TaskInList dependency in item.Dependencies!) { _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id)); }//add the list of dependecis in the bo task to the dependecies list in the data source in the dal
             return idTask;
         }
         catch (DO.DalAlreadyExistException ex)
@@ -147,15 +147,13 @@ internal class TaskImplemenation :ITask
               (item.Name, item.Description, item.Id, " ", (DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1, item.CreatedAtDate, item.RequiredEffortTime, false, item.DeadlineDate, item.ScheduledDate, item.StartDate, item.CompleteDate, item.Remarks);
        try
         {
-          // IEnumerable<DO.Dependency>? oldDependency = _dal.Dependency.ReadAll().Where(item1 => item1!.DependentTask == item.Id)!;
-           // foreach (DO.Dependency dep in oldDependency) { _dal.Dependency.Delete(dep.Id); }
-           // foreach (TaskInList dependency in item.Dependencies!)
-           // {
+            //IEnumerable<DO.Dependency>? oldDependency = _dal.Dependency.ReadAll().Where(item1 => item1!.DependentTask == item.Id)!;
+            //foreach (DO.Dependency dep in oldDependency) { _dal.Dependency.Delete(dep.Id); }
+            //foreach (TaskInList dependency in item.Dependencies!)
+            //{
             //    _dal.Dependency.Create(new DO.Dependency(FindDependent(item.Id, dependency.Id), item.Id, dependency.Id));
-
-          //  }
+            //}
             _dal.Task.Update(doTask);
-
     }
         catch (DO.DalDoesNotExistException ex) 
         {
@@ -201,7 +199,6 @@ internal class TaskImplemenation :ITask
             throw new BO.BlDoesNotExistException($"Task with ID={updateTask.Id} does Not exist", ex);
         }
     }
-
     /// <summary>
     /// return the engineer that assign to the task
     /// </summary>
@@ -225,17 +222,20 @@ internal class TaskImplemenation :ITask
     /// <exception cref="BO.BlDoesNotExistException"></exception>
     public void updateEngineerToTask (int idEngineer, int idTask)
     {
+        if(_dal.Task.Read(idTask)==null) throw new BO.BlDoesNotExistException($"Task with ID={idTask} does Not exist");
+        if(_dal.Engineer.Read(idEngineer)==null) throw new BO.BlDoesNotExistException($"Engineer with ID={idEngineer} does Not exist");
         if (BlImplementation.Project.getStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
         //only in stage of doing we can assign engineer to a task
         DO.Engineer? engineer = _dal.Engineer.Read(idEngineer);
         DO.Task? task = _dal.Task.Read(idTask);
-        if ((task!=null)&&(engineer!=null)&&(task.Complexity<=engineer.Complexity))
+        if ((task!=null)&&(engineer!=null))
         {
-            IEnumerable<DO.Task> taskList=
+            if (task.Complexity > engineer.Complexity) throw new BlCanNotAssignRequestedEngineer("the level of the engineer is too low in order to de to requested task");
+                IEnumerable<DO.Task> taskList=
                 from  DO.Task item in _dal.Task.ReadAll()
                 where item.Engineerid == idEngineer//the engineer is already assigned to another task
                 select item;
-            if (taskList.Any()) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn is alreade assigned to other task");
+            if (taskList.Any()) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn is already assigned to other task");
             IEnumerable<DO.Task> taskDependencys =
               from DO.Dependency item in _dal.Dependency.ReadAll()
               where item.DependentTask == idTask//the task dependent on other task
@@ -270,9 +270,9 @@ public BO.Status GetStatus( DO.Task task)
             return BO.Status.Done;
 }
     /// <summary>
-    /// 
+    /// return a list of all dependencies that dependence on the given task
     /// </summary>
-    /// <param name="task"></param>
+    /// <param name="task">the task we search the dependencies of it</param>
     /// <returns></returns>
     public List<TaskInList>? GetAllDependencys(DO.Task task)
     {
@@ -294,6 +294,12 @@ public BO.Status GetStatus( DO.Task task)
         }
         return dependencys;
     }
+    /// <summary>
+    /// return the id of the dependency
+    /// </summary>
+    /// <param name="idDependency">the dependent task</param>
+    /// <param name="idDependentOn">the task </param>
+    /// <returns></returns>
     public  int FindDependent(int idDependency, int idDependentOn)
     {
         foreach (DO.Dependency? dependency in _dal.Dependency.ReadAll())
@@ -303,39 +309,40 @@ public BO.Status GetStatus( DO.Task task)
         };
         return 0;
     }
+    /// <summary>
+    /// clear the data source
+    /// </summary>
     public  void clear()
     {
-        //s_dal.Engineer.clear();
-        //_dal.Task.clear();
         _dal.Dependency.clear();
         _dal.Task.clear();
         
     }
-    public void createAutomaticLuz()
-    {
-        while(_dal.Task.ReadAll().Where(item=>item!.StartDate==null).Any())
-        {
-            IEnumerable<DO.Task> tasks=from DO.Task item in _dal.Task.ReadAll()
-                                      where GetAllDependencys(item)!.Any()==false
-                                      select item;
-            foreach (DO.Task task in tasks) { UpdateStartDate(task.Id, IBl.startWorkProject); }
-            IEnumerable<DO.Task> tasks1 = from DO.Task item1 in _dal.Task.ReadAll()
-                                          where GetAllDependencys(item1)!.Any()
-                                          select item1;
-            foreach (DO.Task task in tasks1) 
-            {
-                IEnumerable<DateTime?> tasks5 = from BO.TaskInList dependency in GetAllDependencys(task)!
-                                              where _dal.Task.Read(dependency.Id)!.StartDate != null
-                                              select _dal.Task.Read(dependency.Id)!.StartDate+ _dal.Task.Read(dependency.Id)!.RiquiredEffortTime;
-                if(tasks5.Count()== GetAllDependencys(task)!.Count())//the collection is empty-all dependencies have starsdate
-                {
-                    UpdateStartDate(task.Id, tasks5.Max());
-                }
-            }
+    //public void createAutomaticLuz()
+    //{
+    //    while(_dal.Task.ReadAll().Where(item=>item!.StartDate==null).Any())
+    //    {
+    //        IEnumerable<DO.Task> tasks=from DO.Task item in _dal.Task.ReadAll()
+    //                                  where GetAllDependencys(item)!.Any()==false
+    //                                  select item;
+    //        foreach (DO.Task task in tasks) { UpdateStartDate(task.Id, IBl.startWorkProject); }
+    //        IEnumerable<DO.Task> tasks1 = from DO.Task item1 in _dal.Task.ReadAll()
+    //                                      where GetAllDependencys(item1)!.Any()
+    //                                      select item1;
+    //        foreach (DO.Task task in tasks1) 
+    //        {
+    //            IEnumerable<DateTime?> tasks5 = from BO.TaskInList dependency in GetAllDependencys(task)!
+    //                                          where _dal.Task.Read(dependency.Id)!.StartDate != null
+    //                                          select _dal.Task.Read(dependency.Id)!.StartDate+ _dal.Task.Read(dependency.Id)!.RiquiredEffortTime;
+    //            if(tasks5.Count()== GetAllDependencys(task)!.Count())//the collection is empty-all dependencies have starsdate
+    //            {
+    //                UpdateStartDate(task.Id, tasks5.Max());
+    //            }
+    //        }
 
 
-        }
+    //    }
     }
-}
+
 
 

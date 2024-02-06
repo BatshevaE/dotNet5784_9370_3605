@@ -1,4 +1,7 @@
 ﻿namespace BO;
+/// <summary>
+/// all levels of engineer
+/// </summary>
 public enum EngineerLevel
 {
     Beginner,
@@ -7,6 +10,9 @@ public enum EngineerLevel
     Advanced,
     Expert
 }
+/// <summary>
+/// status of task
+/// </summary>
 public enum Status
 {
     Unschedeled,
@@ -15,6 +21,9 @@ public enum Status
     InJeopardy,
     Done
 }
+/// <summary>
+/// stage of project
+/// </summary>
 public enum Stage
 {
     Planning,

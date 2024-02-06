@@ -46,6 +46,12 @@ static class XMLTools
         SaveListToXMLElement(root, data_config_xml);    
     }
     #endregion
+    //public static void SetstartWorkProject(string data_config_xml, string elemName, DateTime val)
+    //{
+    //    XElement root = LoadListFromXMLElement(data_config_xml);
+    //    root.Element(elemName)?.SetValue((val).ToString());
+    //    SaveListToXMLElement(root, data_config_xml);
+    //}
 
     #region SaveLoadWithXElement
     public static void SaveListToXMLElement(XElement rootElem, string entity)

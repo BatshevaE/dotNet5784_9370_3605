@@ -21,7 +21,7 @@ internal static class DataSource
         internal const int dependentTaskId = 1;
         private static int nextDependentTaskId = dependentTaskId;
         internal static int NextDependentTaskId { get => nextDependentTaskId++; }
-        public static DateTime? startWorkProject {  get; set; } 
+        public static DateTime? startWorkProject = null;
         public static DateTime? planEndProject = null;
          
     }

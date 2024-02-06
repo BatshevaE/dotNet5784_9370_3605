@@ -33,7 +33,7 @@ public class NullReferenceException : Exception
                 : base(message, innerException) { }
 }
 /// <summary>
-/// 
+/// XML File Load Create 
 /// </summary>
 [Serializable]
 public class BlXMLFileLoadCreateException : Exception
@@ -42,6 +42,9 @@ public class BlXMLFileLoadCreateException : Exception
     public BlXMLFileLoadCreateException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+/// <summary>
+/// CanNot Delete
+/// </summary>
 [Serializable]
 public class BlCanNotDelete : Exception
 {
@@ -49,6 +52,9 @@ public class BlCanNotDelete : Exception
     public BlCanNotDelete(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+/// <summary>
+/// Wrong Input
+/// </summary>
 [Serializable]
 public class BlWrongInput : Exception
 {
@@ -56,24 +62,44 @@ public class BlWrongInput : Exception
     public BlWrongInput(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+/// <summary>
+/// canot Update Start date
+/// </summary>
+ [Serializable]
+
 public class BlcanotUpdateStartdate : Exception
 {
     public BlcanotUpdateStartdate(string? message) : base(message) { }
     public BlcanotUpdateStartdate(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+/// <summary>
+/// Too Early Date
+/// </summary>
+[Serializable]
+
 public class BlTooEarlyDate : Exception
 {
     public BlTooEarlyDate(string? message) : base(message) { }
     public BlTooEarlyDate(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+/// <summary>
+/// Not At The Right Stage 
+/// </summary>
+[Serializable]
+
 public class BlNotAtTheRightStageException : Exception
 {
     public BlNotAtTheRightStageException(string? message) : base(message) { }
     public BlNotAtTheRightStageException(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+/// <summary>
+/// CanNot Assign Requested Engineer
+/// </summary>
+[Serializable]
+
 public class BlCanNotAssignRequestedEngineer : Exception
 {
     public BlCanNotAssignRequestedEngineer(string? message) : base(message) { }

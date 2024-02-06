@@ -110,8 +110,11 @@ Update generall details of task:4
 Delete:5
 Update Start Date of all tasks:6
 Assign engineer to task:7
-Automatic Create Schedele:8
- ");
+ ");//if you want to assign an engineer to a task you need to update all task's start date.
+    //the order of task's id to update is:36,16,14,2,1,3,4,6,7,8,5,9,11,10,12,13,15,17,18,19,22,23,24,25,21,20,26,27,28,29,30,31,32,33,34,35
+              
+ //Automatic Create Schedele:8
+
                 if (!SubMenueTask.TryParse(Console.ReadLine(), out choiceTask)) //read the int choice and convert it to SubMenue types
                     throw new FormatException("wrong input");
                 switch (choiceTask)
@@ -139,9 +142,9 @@ Automatic Create Schedele:8
                     case SubMenueTask.AssignEngineerToTask:
                         assignEngineerToTask();
                         break;
-                    case SubMenueTask.AutomaticCreateSchedele:
-                        AutomaticCreateSchedele();
-                        break;                    
+                    //case SubMenueTask.AutomaticCreateSchedele:
+                    //    AutomaticCreateSchedele();
+                    //    break;                    
                     default:
                         return;
                 }
@@ -202,6 +205,11 @@ Read all engineer in certain level:6");
         }
         catch (Exception ex) { Console.WriteLine(ex); };
     }
+    /// <summary>
+    /// Create Start Date
+    /// </summary>
+    /// <exception cref="BlNotAtTheRightStageException"></exception>
+    /// <exception cref="FormatException"></exception>
     static void CreateStartDate()
     {
         if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
@@ -245,7 +253,7 @@ Read all engineer in certain level:6");
             if (answer == "Yes")
             {
                 Console.WriteLine($@"The id of the tasks that the current task depends on:");
-                if (int.TryParse(Console.ReadLine(), out int dependency))
+                if (!int.TryParse(Console.ReadLine(), out int dependency))
                     throw new FormatException("Wrong input");
                 BO.Task? task1 = s_bl.Task.Read(dependency);
                 if (task1 != null)
@@ -531,30 +539,31 @@ Id:");
             DateTime? startDate = taskToUpdate.StartDate;
             Console.WriteLine($@"Remarks about the task:");
             string? Remarks = Console.ReadLine();
-        //    Console.WriteLine($@"Do you want to also update the dependencies of the task to other dependencies?Yes/No");
-          //  string? answer = Console.ReadLine();
-            List<BO.TaskInList>? dependencies = new List<TaskInList>();
-          //  if (answer == "Yes")
-           // {
-             //   Console.WriteLine($@"please enter the id of the tasks that the current updated task depends on and when you finish please enter 0:");
-             //   if (!int.TryParse(Console.ReadLine(), out int dependent))
-              //      throw new FormatException("Wrong input");
-               ///*/ while (dependent != 0)
-              /*  {
-                    BO.Task? task1 = s_bl.Task.Read(dependent);
-                    if (task1 != null)
-                    {
-                        TaskInList newTask = new TaskInList
-                        {
-                            Id = task1.Id,
-                            Description = task1.Description,
-                            Name = task1.Name,
-                            Status = task1.Status
-                        };
-                        dependencies?.Add(newTask);
-                    }
-                }
-            }*/
+        List<BO.TaskInList>? dependencies = new List<TaskInList>();
+
+        //Console.WriteLine($@"Do you want to also update the dependencies of the task to other dependencies?Yes/No");
+        //string? answer = Console.ReadLine();
+        //if (answer == "Yes")
+        //{
+        //    Console.WriteLine($@"please enter the id of the tasks that the current updated task depends on and when you finish please enter 0:");
+        //    if (!int.TryParse(Console.ReadLine(), out int dependent))
+        //        throw new FormatException("Wrong input");
+        //     while (dependent != 0)
+        //    {
+        //          BO.Task? task1 = s_bl.Task.Read(dependent);
+        //          if (task1 != null)
+        //          {
+        //              TaskInList newTask = new TaskInList
+        //              {
+        //                  Id = task1.Id,
+        //                  Description = task1.Description,
+        //                  Name = task1.Name,
+        //                  Status = task1.Status
+        //              };
+        //              dependencies?.Add(newTask);
+        //          }
+        //      }
+        //  }
             dependencies = taskToUpdate.Dependencies;
 
         if (BlImplementation.Project.getStage() == BO.Stage.MiddleStage) //throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
@@ -593,6 +602,10 @@ Id:");
             s_bl!.Task!.Update(task);
         
     }
+    /// <summary>
+    /// read all engineers in certain level
+    /// </summary>
+    /// <exception cref="FormatException"></exception>
     static void EngineersAtRequestedLevel()
     {
         Console.WriteLine($@"please enter the level of engineer you would like to read:");
@@ -602,12 +615,10 @@ Id:");
        foreach  (BO.Engineer engineer in s_bl.Engineer.EngineersAtRequestedLevel(engineerComplex)!)
               Console.WriteLine(engineer.ToString());
     }
-
-
-     static void AutomaticCreateSchedele()
-    {
-        s_bl.Task.createAutomaticLuz();
-    }
+    // static void AutomaticCreateSchedele()
+    //{
+    //    s_bl.Task.createAutomaticLuz();
+    //}
 
 }
 

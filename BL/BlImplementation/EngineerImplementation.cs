@@ -23,7 +23,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlAlreadyExistException"></exception>
     public int Create(BO.Engineer item)
     {
-        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0))
+        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0) || (item.Name == null))
             throw new BlWrongInput("wrong input");
 
         DO.Engineer doEngineer = new DO.Engineer
@@ -112,11 +112,11 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlAlreadyExistException"></exception>
     public void Update(BO.Engineer item)
     {
-        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0))
+        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0)|| (item.Name == null))
             throw new BlWrongInput("wrong input");
 
         DO.Engineer doEngineer = new DO.Engineer
-          (item.Id, item.Name, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
+          (item.Id, item.Name!, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
         try
         {
              _dal.Engineer.Update(doEngineer);
@@ -134,7 +134,7 @@ internal class EngineerImplementation : IEngineer
     /// <returns></returns>
    public Tuple<int,string>? CalculateTaskInEngineer(int id)
     { 
-     DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(item => item!.Id == id);
+     DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(item => item!.Engineerid == id);
     Tuple<int, string>? EngTask;
         if (doTask != null)
         {
@@ -147,11 +147,18 @@ internal class EngineerImplementation : IEngineer
         }
         return EngTask;
     }
-
+    /// <summary>
+    /// clear the data source
+    /// </summary>
     public void clear()
     {
        _dal.Engineer.clear();
     }
+    /// <summary>
+    /// return a collection of engineers in certain level
+    /// </summary>
+    /// <param name="level"></param>
+    /// <returns></returns>
     public IEnumerable<BO.Engineer>? EngineersAtRequestedLevel(BO.EngineerLevel level)
     {
         IEnumerable<IGrouping <BO.EngineerLevel, BO.Engineer>> engineers = from item in ReadAll()
