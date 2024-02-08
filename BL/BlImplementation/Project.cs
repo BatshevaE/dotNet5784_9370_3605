@@ -43,4 +43,8 @@ public class Project
     {
         _dal.StartProject = null;
     }
+    public static DateTime? getStartProject()
+    {
+         return _dal.StartProject;
+    }
 }

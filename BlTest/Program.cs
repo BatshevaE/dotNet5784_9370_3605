@@ -3,6 +3,7 @@ using BO;
 using DalApi;
 using DalTest;
 using DO;
+using System.Data.Common;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -43,6 +44,7 @@ internal class Program
             s_bl.Engineer.clear();
             BlImplementation.Project.zeroStartProject();
             DalTest.Initialization.Do();
+            
         }
         MainMenue choice;
         try
