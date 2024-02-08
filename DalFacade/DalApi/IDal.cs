@@ -1,4 +1,6 @@
-﻿namespace DalApi;
+﻿using System.Data.Common;
+
+namespace DalApi;
 /// <summary>
 /// /
 /// </summary>
@@ -10,4 +12,6 @@ public interface IDal
     ITask Task { get; }
     IEngineer Engineer { get; }
     IDependency Dependency { get; }
-}
+    DateTime? StartProject { get; set; }
+    //public void setStartProject(DateTime start);
+   }

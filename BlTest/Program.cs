@@ -15,7 +15,7 @@ internal class Program
     /// </summary>
     public enum MainMenue
     {
-        Exit = 0, Task, Engineer,CreateStartDate
+        Exit = 0, Task, Engineer,CreateStartDate, LuzCreateStartDate
     }
     /// <summary>
     /// enum for the sub menue
@@ -41,6 +41,7 @@ internal class Program
         {
             s_bl.Task.clear();
             s_bl.Engineer.clear();
+            BlImplementation.Project.zeroStartProject();
             DalTest.Initialization.Do();
         }
         MainMenue choice;
@@ -63,6 +64,9 @@ internal class Program
                     case Program.MainMenue.CreateStartDate:
                         CreateStartDate();
                         break;
+                    //case Program.MainMenue.LuzCreateStartDate:
+                    //   s_bl!.Task!.createAutomaticLuz();
+                    //    break;
                     default:
                         return;
                 }
@@ -71,6 +75,7 @@ internal class Program
         }
         catch (Exception ex) { Console.WriteLine(ex); };
     }
+
     /// <summary>
     /// the sub menue,chose task or engineer
     /// </summary>
@@ -108,7 +113,7 @@ Read:2
 ReadAll:3
 Update generall details of task:4
 Delete:5
-Update Start Date of all tasks:6
+Update Start Date of a certain task:6
 Assign engineer to task:7
  ");//if you want to assign an engineer to a task you need to update all task's start date.
     //the order of task's id to update is:36,16,14,2,1,3,4,6,7,8,5,9,11,10,12,13,15,17,18,19,22,23,24,25,21,20,26,27,28,29,30,31,32,33,34,35
@@ -219,8 +224,9 @@ Read all engineer in certain level:6");
         try
         {
             BlImplementation.Project.CreateSchedele(startDate);
+            //s_bl.setStartProject(startDate);    
         }
-        catch (BlcanotUpdateStartdate ex) { Console.WriteLine(ex); };
+        catch (Exception ex) { Console.WriteLine(ex); };
 
     }
     /// <summary>

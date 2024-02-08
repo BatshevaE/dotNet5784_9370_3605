@@ -19,7 +19,7 @@ internal static class Config
     //internal static int startWorkProject
     //{
     //    get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "startWorkProject");
-    //    set => XMLTools.SetstartWorkProject(s_data_config_xml, "startWorkProject", value);
+    //    set => XMLTools.SetstartWorkProject(s_data_config_xml, "startWorkProject", val);
     //}
 
 }
