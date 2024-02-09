@@ -149,9 +149,9 @@ Assign engineer to task:7
                     case SubMenueTask.AssignEngineerToTask:
                         assignEngineerToTask();
                         break;
-                    //case SubMenueTask.AutomaticCreateSchedele:
-                    //    AutomaticCreateSchedele();
-                    //    break;                    
+                    case SubMenueTask.AutomaticCreateSchedele:
+                       AutomaticCreateSchedele();
+                        break;                    
                     default:
                         return;
                 }
@@ -623,10 +623,10 @@ Id:");
        foreach  (BO.Engineer engineer in s_bl.Engineer.EngineersAtRequestedLevel(engineerComplex)!)
               Console.WriteLine(engineer.ToString());
     }
-    // static void AutomaticCreateSchedele()
-    //{
-    //    s_bl.Task.createAutomaticLuz();
-    //}
+     static void AutomaticCreateSchedele()
+    {
+        s_bl.Task.createAutomaticLuz();
+    }
 
 }
 

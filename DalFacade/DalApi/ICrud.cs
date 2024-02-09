@@ -32,7 +32,7 @@ public interface ICrud<T> where T : class
     /// Deletes a object by its Id
     /// </summary>
     /// <param name="id">Gets an id of a object to delete</param>
-    void Delete(int id);
+    bool Delete(int id);
     /// <summary>
     /// reads all objects under a condition
     /// </summary>

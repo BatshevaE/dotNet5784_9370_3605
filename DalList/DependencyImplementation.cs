@@ -26,7 +26,7 @@ internal class DependencyImplementation : IDependency
     /// </summary>
     /// <param name="id">ID number of a dependecy</param>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         Dependency? ifExistDependency = DataSource.Dependencys.Find(temp => temp.Id == id);
         if (ifExistDependency == null)
@@ -34,6 +34,7 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"Dependent with ID={id} does Not exist");
         }
         DataSource.Dependencys.Remove(ifExistDependency);
+        return true;
 
     }
     /// <summary>

@@ -25,7 +25,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="id">ID number of an engineer</param>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         Engineer? ifExistEngineer = DataSource.Engineers.Find(temp => temp.Id == id);
         if (ifExistEngineer == null)
@@ -33,6 +33,7 @@ internal class EngineerImplementation : IEngineer
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
         }
         DataSource.Engineers.Remove(ifExistEngineer);
+        return true;
     }
     /// <summary>
     /// Returning a reference to a single object of Engineer with a certain ID.

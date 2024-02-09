@@ -1,14 +1,18 @@
 ﻿using BlApi;
 using BO;
-//using DalApi;
+using DalApi;
 using DO;
+
+
+//using DalApi;
+//using DO;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlImplementation;
 
-internal class TaskImplemenation : ITask
+internal class TaskImplemenation : BlApi.ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     /// <summary>
@@ -27,7 +31,8 @@ internal class TaskImplemenation : ITask
         try
         {
             int idTask = _dal.Task.Create(doTask);
-            foreach (TaskInList dependency in item.Dependencies!) { _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id)); }//add the list of dependecis in the bo task to the dependecies list in the data source in the dal
+            //  foreach (TaskInList dependency in item.Dependencies!) { _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id)); }//add the list of dependecis in the bo task to the dependecies list in the data source in the dal
+            item.Dependencies!.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id)));
             return idTask;
         }
         catch (DO.DalAlreadyExistException ex)
@@ -54,13 +59,16 @@ internal class TaskImplemenation : ITask
             throw new BlCanNotDelete($"Task with ID {id} can't be deleted");
         try
         {
-            foreach (Dependency dependency in dependentList)
-            {
-                if (dependency.DependentTask == doTask.Id)
-                {
-                    _dal.Dependency.Delete(dependency.Id);
-                }
-            }
+          //  foreach ( DO.Dependency dependency in dependentList)
+            //{
+            //    if (dependency.DependentTask == doTask.Id)
+            //    {
+            //        _dal.Dependency.Delete(dependency.Id);
+            //    }
+          //  }
+            dependentList.Where(dependency => dependency.DependentTask == doTask.Id).Select(dependency => _dal.Dependency.Delete(dependency.Id));
+
+
             _dal.Task.Delete(id);
         }
         catch (DO.DalAlreadyExistException ex)
@@ -283,19 +291,26 @@ internal class TaskImplemenation : ITask
              from DO.Dependency item in _dal.Dependency.ReadAll()
              where item.DependentTask == task.Id
              select _dal.Task.Read(item.DependentOnTask);
-        List<TaskInList>? dependencys = new List<TaskInList>();
-        foreach (var taskDependency in taskDependencys)
+      //  List<TaskInList>? dependencys = new List<TaskInList>();
+      //  foreach (var taskDependency in taskDependencys)
+       // {
+       //     TaskInList task1 = new TaskInList
+         //   {
+          //      Id = taskDependency.Id,
+         //       Description = taskDependency.Descriptoin,
+          //      Name = taskDependency.Name,
+        //        Status = GetStatus(taskDependency)
+        //    };
+        //    dependencys.Add(task1);
+        //}
+        List<TaskInList>? dependencys1 = (taskDependencys.Select(taskDependency => new TaskInList
         {
-            TaskInList task1 = new TaskInList
-            {
-                Id = taskDependency.Id,
-                Description = taskDependency.Descriptoin,
-                Name = taskDependency.Name,
-                Status = GetStatus(taskDependency)
-            };
-            dependencys.Add(task1);
-        }
-        return dependencys;
+            Id = taskDependency.Id,
+            Description = taskDependency.Descriptoin,
+            Name = taskDependency.Name,
+            Status = GetStatus(taskDependency)
+        })).ToList();
+        return dependencys1;
     }
     /// <summary>
     /// return the id of the dependency
@@ -305,11 +320,14 @@ internal class TaskImplemenation : ITask
     /// <returns></returns>
     public int FindDependent(int idDependency, int idDependentOn)
     {
-        foreach (DO.Dependency? dependency in _dal.Dependency.ReadAll())
-        {
-            if ((dependency != null) && (dependency.DependentTask == idDependency) && (dependency.DependentOnTask == idDependentOn))
-                return dependency.Id;
-        };
+       // foreach (DO.Dependency? dependency in _dal.Dependency.ReadAll())
+       // {
+       //     if ((dependency != null) && (dependency.DependentTask == idDependency) && (dependency.DependentOnTask == idDependentOn))
+       //         return dependency.Id;
+      //  };
+        List<int> dependencysId= _dal.Dependency.ReadAll().Where(dependency=>(dependency != null) && (dependency.DependentTask == idDependency) && (dependency.DependentOnTask == idDependentOn)).Select(dependency=>dependency!.Id).ToList();
+        if(dependencysId.Any())
+        return dependencysId.First();
         return 0;
     }
     /// <summary>
@@ -321,40 +339,55 @@ internal class TaskImplemenation : ITask
         _dal.Task.clear();
 
     }
-    //public void createAutomaticLuz()
-    //{
-    //    //IEnumerable<DO.Task> tasks = from DO.Task item in _dal.Task.ReadAll()
-    //    //                             where GetAllDependencys(item)!.Any() == false
-    //    //                             select item;
-    //    //foreach (DO.Task task in tasks) { UpdateStartDate(task.Id, IBl.startWorkProject); }
-    //                                 (from DO.Task task in _dal.Task.ReadAll()
-    //                                 where GetAllDependencys(task)!.Any() == false
-    //                                 select UpdateStartDate(task.Id, IBl.startWorkProject)).ToList();   
-
-    //    while (_dal.Task.ReadAll().Where(item => item!.StartDate == null).Any())
-    //    {
+    public void createAutomaticLuz()
+    {
+   IEnumerable<DO.Task> tasks = from DO.Task item in _dal.Task.ReadAll()
+                              where GetAllDependencys(item)!.Any() == false
+                              select item;
+        //  foreach (DO.Task task in tasks) { UpdateStartDate(task.Id, IBl.startWorkProject); }
+        //   (from DO.Task task in _dal.Task.ReadAll()
+        //  where GetAllDependencys(task)!.Any() == false
+        //  select UpdateStartDate(task.Id, IBl.startWorkProject)).ToList();
+        List<int> lst = new List<int>();
+        List<Tuple<int, DateTime?>>? toUpdate;
+        toUpdate             = (from DO.Task task in _dal.Task.ReadAll()
+                                                        where GetAllDependencys(task)!.Any() == false
+                                                        select new Tuple<int, DateTime?>(task.Id, Project.getStartProject())).ToList();
+       
+              foreach(var item in toUpdate) { lst.Add(item.Item1); };
+        while (_dal.Task.ReadAll().Count()> toUpdate.ToList().Count())
+        {
             
-    //        IEnumerable<DO.Task> tasks1 = from DO.Task item1 in _dal.Task.ReadAll()
-    //                                      where GetAllDependencys(item1)!.Any()
-    //                                      select item1;
-    //        foreach (DO.Task task in tasks1)
-    //        {
-    //            IEnumerable<DateTime?> tasks5 = from BO.TaskInList dependency in GetAllDependencys(task)!
-    //                                            let doDep = _dal.Task.Read(dependency.Id)!
-    //                                            where doDep.StartDate != null
-    //                                            select doDep.StartDate + doDep.RiquiredEffortTime;
+           IEnumerable<DO.Task> tasks1 = (from DO.Task item1 in _dal.Task.ReadAll()
+                                        where (GetAllDependencys(item1)!.Any())
+                                         select item1).ToList();
+           foreach (DO.Task task in tasks1)
+           {
+                IEnumerable<DateTime?> tasks5 = (from BO.TaskInList dependency in GetAllDependencys(task)!
+                                                let doDep = _dal.Task.Read(dependency.Id)!
+                                                // where doDep.StartDate != null
+                                               where lst.Contains(dependency.Id)
+                                               select (DateTime?)(toUpdate.FirstOrDefault((item=>item.Item1== dependency.Id))!.Item2 + doDep.RiquiredEffortTime)).ToList();
 
-    //            Console.WriteLine($"{tasks5.Count()}" );
-    //            //if (tasks5.Count() == GetAllDependencys(task)!.Count())//the collection is empty-all dependencies have starsdate
-    //            //{
-    //            //    //UpdateStartDate(task.Id, tasks5.Max());
-    //            //    Console.WriteLine($"{ task.Id},{ tasks5.Max()}");
-    //            //}
-    //        }
+             //  Console.WriteLine($"{tasks5.Count()}" );
+               if (tasks5.Count() == GetAllDependencys(task)!.Count())//the collection is empty-all dependencies have starsdate
+               {
+                    Tuple<int, DateTime?>? toPush = new Tuple<int, DateTime?>(task.Id, tasks5.Max());
+                    //toUpdate.Add(toPush);
+                    //toUpdate.ToList().Add(toPush);
+                    //  toUpdate.ToList().Add(toPush);
+                    toUpdate.Insert(toUpdate.Count(), toPush);
+                    lst.Add(task.Id);
+                 //  UpdateStartDate(task.Id, tasks5.Max());
+                   Console.WriteLine($"{ task.Id},{ tasks5.Max()}");
+               }
+                
+           }
 
 
-    //    }
-   // }
+        }
+        toUpdate.Select(item => UpdateStartDate(item.Item1, item.Item2)).ToList();
+   }
 }
 
 

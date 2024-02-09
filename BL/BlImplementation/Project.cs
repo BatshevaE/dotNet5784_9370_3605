@@ -2,6 +2,7 @@
 using BO;
 using DalApi;
 using System.Data.Common;
+using Dal;
 
 namespace BlImplementation;
 
@@ -11,7 +12,8 @@ public class Project
     public static BO.Stage getStage()
     {
         //if (IBl.startWorkProject == null)
-       if(_dal.StartProject == null)
+      // if(_dal.StartProject == null)
+      if(Project.getStartProject()==null)
             return BO.Stage.Planning;
         else
         {
@@ -33,6 +35,7 @@ public class Project
             //IBl.startWorkProject = startDate;
             // _dal.setStartProject(startDate);
             _dal.StartProject = startDate;
+         
         else
             throw new BlcanotUpdateStartdate("too early date");
 

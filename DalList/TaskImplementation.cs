@@ -24,12 +24,13 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="id">Searching the task to delete by it's id</param>
     /// <exception cref="DalDoesNotExistException">If the requested task is not in the list an exception is thrown</exception>
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         Task? task = DataSource.Tasks.Find(Task => Task.Id == id);
         if (task != null)
         {
             DataSource.Tasks.Remove(task);
+            return true;
         }
         else
             throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
