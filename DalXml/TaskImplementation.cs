@@ -29,7 +29,7 @@ internal class TaskImplementation : ITask
     /// <param name="id">the id of the deleted task</param>
     /// <exception cref="DalDoesNotExistException"></exception>
 
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         List<Task> Tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
         Task? task = Tasks.Find(Task => Task.Id == id);
@@ -40,6 +40,8 @@ internal class TaskImplementation : ITask
         else
             throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
         XMLTools.SaveListToXMLSerializer(Tasks, s_tasks_xml);
+        return true;
+
 
     }
     /// <summary>

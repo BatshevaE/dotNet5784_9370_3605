@@ -66,9 +66,6 @@ internal class Program
                     case Program.MainMenue.CreateStartDate:
                         CreateStartDate();
                         break;
-                    //case Program.MainMenue.LuzCreateStartDate:
-                    //   s_bl!.Task!.createAutomaticLuz();
-                    //    break;
                     default:
                         return;
                 }
@@ -117,11 +114,11 @@ Update generall details of task:4
 Delete:5
 Update Start Date of a certain task:6
 Assign engineer to task:7
+Create automatic luz:8
+
  ");//if you want to assign an engineer to a task you need to update all task's start date.
     //the order of task's id to update is:36,16,14,2,1,3,4,6,7,8,5,9,11,10,12,13,15,17,18,19,22,23,24,25,21,20,26,27,28,29,30,31,32,33,34,35
               
- //Automatic Create Schedele:8
-
                 if (!SubMenueTask.TryParse(Console.ReadLine(), out choiceTask)) //read the int choice and convert it to SubMenue types
                     throw new FormatException("wrong input");
                 switch (choiceTask)
@@ -368,9 +365,10 @@ Read all engineer in certain level:6");
     static void assignEngineerToTask()
     {
         if (BlImplementation.Project.getStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
-        Console.WriteLine($@"Please enter the id of the task and the engineer you want to assign for the task:");
+        Console.WriteLine($@"Please enter the id of the task:");
         if (!int.TryParse(Console.ReadLine(), out int taskId))
             throw new FormatException("Wrong input");
+        Console.WriteLine($@"Please enter  the engineer's id you want to assign for the task:");
         if (!int.TryParse(Console.ReadLine(), out int enginnerId))
             throw new FormatException("Wrong input");
         s_bl!.Task!.updateEngineerToTask(enginnerId,taskId);
@@ -547,33 +545,7 @@ Id:");
             DateTime? startDate = taskToUpdate.StartDate;
             Console.WriteLine($@"Remarks about the task:");
             string? Remarks = Console.ReadLine();
-        List<BO.TaskInList>? dependencies = new List<TaskInList>();
-
-        //Console.WriteLine($@"Do you want to also update the dependencies of the task to other dependencies?Yes/No");
-        //string? answer = Console.ReadLine();
-        //if (answer == "Yes")
-        //{
-        //    Console.WriteLine($@"please enter the id of the tasks that the current updated task depends on and when you finish please enter 0:");
-        //    if (!int.TryParse(Console.ReadLine(), out int dependent))
-        //        throw new FormatException("Wrong input");
-        //     while (dependent != 0)
-        //    {
-        //          BO.Task? task1 = s_bl.Task.Read(dependent);
-        //          if (task1 != null)
-        //          {
-        //              TaskInList newTask = new TaskInList
-        //              {
-        //                  Id = task1.Id,
-        //                  Description = task1.Description,
-        //                  Name = task1.Name,
-        //                  Status = task1.Status
-        //              };
-        //              dependencies?.Add(newTask);
-        //          }
-        //      }
-        //  }
-            dependencies = taskToUpdate.Dependencies;
-
+        List<BO.TaskInList>? dependencies = taskToUpdate.Dependencies;
         if (BlImplementation.Project.getStage() == BO.Stage.MiddleStage) //throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         {
             //only in the stage planing we can change the effort time and start date of a task
@@ -623,6 +595,9 @@ Id:");
        foreach  (BO.Engineer engineer in s_bl.Engineer.EngineersAtRequestedLevel(engineerComplex)!)
               Console.WriteLine(engineer.ToString());
     }
+    /// <summary>
+    /// add start date to all tasks
+    /// </summary>
      static void AutomaticCreateSchedele()
     {
         s_bl.Task.createAutomaticLuz();

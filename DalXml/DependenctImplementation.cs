@@ -39,13 +39,15 @@ internal class DependencyImplementation : IDependency
     /// deletes a requested dependency from the xml file
     /// </summary>
     /// <param name="id">the id of the dependency to delete</param>
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         dependencyRoot = XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         XElement? elemDependency = dependencyRoot.Elements().FirstOrDefault(s => (int?)s.Element("Id") == id);
         if (elemDependency != null)
             elemDependency.Remove();
         XMLTools.SaveListToXMLElement(dependencyRoot, s_dependencys_xml);
+        return true;
+
     }
     /// <summary>
     /// reads from the xml file a requested dependency

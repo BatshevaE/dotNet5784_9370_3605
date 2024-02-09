@@ -13,5 +13,4 @@ public interface IDal
     IEngineer Engineer { get; }
     IDependency Dependency { get; }
     DateTime? StartProject { get; set; }
-    //public void setStartProject(DateTime start);
    }

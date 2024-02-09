@@ -28,7 +28,7 @@ internal class EngineerImplementation:IEngineer
     /// </summary>
     /// <param name="id">ID number of an engineer to delete</param>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         List<Engineer> Engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
@@ -39,7 +39,7 @@ internal class EngineerImplementation:IEngineer
         }
         Engineers.Remove(ifExistEngineer);
         XMLTools.SaveListToXMLSerializer(Engineers, s_engineers_xml);
-
+        return true;
     }
     /// <summary>
     /// Returning a reference to a single object of Engineer with a certain ID from the xml file.

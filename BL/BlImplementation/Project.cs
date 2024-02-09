@@ -11,8 +11,6 @@ public class Project
     private static  DalApi.IDal _dal = DalApi.Factory.Get;
     public static BO.Stage getStage()
     {
-        //if (IBl.startWorkProject == null)
-      // if(_dal.StartProject == null)
       if(Project.getStartProject()==null)
             return BO.Stage.Planning;
         else
@@ -25,21 +23,14 @@ public class Project
                 return BO.Stage.MiddleStage;
             else
                 return BO.Stage.Doing;
-
         }
     }
     public static void CreateSchedele(DateTime startDate)
     {
-        //if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
-        if (startDate >= DateTime.Now)
-            //IBl.startWorkProject = startDate;
-            // _dal.setStartProject(startDate);
-            _dal.StartProject = startDate;
-         
+        if ((startDate >= DateTime.Now )&& (_dal.StartProject == null))
+            _dal.StartProject = startDate;       
         else
             throw new BlcanotUpdateStartdate("too early date");
-
-
     }
 
     public static void zeroStartProject()
