@@ -1,76 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Name>Planning</Name>
-    <Descriptoin>Define project goals, scope, and objectives.</Descriptoin>
-    <Id>2</Id>
-    <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
-    <Complexity>Beginner</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-09T00:00:00</CreateDate>
-    <RiquiredEffortTime>P140D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <StartDate>2025-01-01T00:00:00</StartDate>
-  </Task>
-  <Task>
-    <Name>Estimation</Name>
-    <Descriptoin> Estimate project costs, resources, and timelines.</Descriptoin>
-    <Id>10</Id>
-    <Product>Detailed estimate of project costs, resources, and timelines</Product>
-    <Complexity>Intermediate</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-22T00:00:00</CreateDate>
-    <RiquiredEffortTime>P90D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <StartDate>2025-01-01T00:00:00</StartDate>
-  </Task>
-  <Task>
-    <Name>Management</Name>
-    <Descriptoin>Oversee project activities, resources, and team coordination.</Descriptoin>
-    <Id>14</Id>
-    <Product>Overview of project activities, resources, and coordination.</Product>
-    <Complexity>AdvancedBeginner</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-07T00:00:00</CreateDate>
-    <RiquiredEffortTime>P64D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <StartDate>2025-01-01T00:00:00</StartDate>
-  </Task>
-  <Task>
-    <Name>Procurement</Name>
-    <Descriptoin>Acquire necessary materials, equipment, and services.</Descriptoin>
-    <Id>16</Id>
-    <Product>Necessary materials, equipment, and services procured for the project.</Product>
-    <Complexity>Intermediate</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-19T00:00:00</CreateDate>
-    <RiquiredEffortTime>P58D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <StartDate>2025-01-01T00:00:00</StartDate>
-  </Task>
-  <Task>
-    <Name>Commissioning</Name>
-    <Descriptoin> Initiate and oversee the deployment of the project.</Descriptoin>
-    <Id>20</Id>
-    <Product>Successfully deployed and fully operational project.</Product>
-    <Complexity>Intermediate</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-02T00:00:00</CreateDate>
-    <RiquiredEffortTime>P105D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <StartDate>2025-01-01T00:00:00</StartDate>
-  </Task>
-  <Task>
     <Name>Analysis</Name>
     <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
     <Id>1</Id>
     <Product>Detailed report assessing project feasibility, risks, and requirements</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-01T00:00:00</CreateDate>
-    <RiquiredEffortTime>P121D</RiquiredEffortTime>
+    <CreateDate>2024-04-17T00:00:00</CreateDate>
+    <RiquiredEffortTime>P61D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-05-21T00:00:00</StartDate>
+  </Task>
+  <Task>
+    <Name>Planning</Name>
+    <Descriptoin>Define project goals, scope, and objectives.</Descriptoin>
+    <Id>2</Id>
+    <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-07T00:00:00</CreateDate>
+    <RiquiredEffortTime>P92D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
     <Name>Design</Name>
@@ -79,22 +29,20 @@
     <Product>Comprehensive design plans for project implementation.</Product>
     <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-19T00:00:00</CreateDate>
-    <RiquiredEffortTime>P140D</RiquiredEffortTime>
+    <CreateDate>2024-05-09T00:00:00</CreateDate>
+    <RiquiredEffortTime>P162D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-05-21T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Prototyping</Name>
     <Descriptoin>Build initial models or prototypes for testing and validation.</Descriptoin>
     <Id>4</Id>
     <Product> Initial working model or prototype for testing and validation</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-11T00:00:00</CreateDate>
-    <RiquiredEffortTime>P44D</RiquiredEffortTime>
+    <CreateDate>2024-04-19T00:00:00</CreateDate>
+    <RiquiredEffortTime>P108D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-10-08T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Testing</Name>
@@ -103,46 +51,42 @@
     <Product>Documented results of comprehensive tests ensuring functionality.</Product>
     <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-09T00:00:00</CreateDate>
-    <RiquiredEffortTime>P53D</RiquiredEffortTime>
+    <CreateDate>2024-04-06T00:00:00</CreateDate>
+    <RiquiredEffortTime>P118D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2026-05-26T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Simulation</Name>
     <Descriptoin>Use simulations to model and analyze system behavior</Descriptoin>
     <Id>6</Id>
     <Product>Detailed model illustrating system behavior under different conditions.</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-27T00:00:00</CreateDate>
-    <RiquiredEffortTime>P98D</RiquiredEffortTime>
+    <CreateDate>2024-04-02T00:00:00</CreateDate>
+    <RiquiredEffortTime>P57D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-09-19T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Integration</Name>
     <Descriptoin>Combine individual components into a unified system.</Descriptoin>
     <Id>7</Id>
     <Product>Fully assembled and functional system.</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-08T00:00:00</CreateDate>
-    <RiquiredEffortTime>P85D</RiquiredEffortTime>
+    <CreateDate>2024-05-09T00:00:00</CreateDate>
+    <RiquiredEffortTime>P118D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-12-26T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Coding</Name>
     <Descriptoin>Write and implement software or programming code.</Descriptoin>
     <Id>8</Id>
     <Product>Software or programming code implemented and ready for use.</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-15T00:00:00</CreateDate>
-    <RiquiredEffortTime>P66D</RiquiredEffortTime>
+    <CreateDate>2024-05-01T00:00:00</CreateDate>
+    <RiquiredEffortTime>P65D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2026-03-21T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Evaluation</Name>
@@ -151,58 +95,86 @@
     <Product>Assessment of project performance against predefined criteria.</Product>
     <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-12T00:00:00</CreateDate>
-    <RiquiredEffortTime>P163D</RiquiredEffortTime>
+    <CreateDate>2024-05-18T00:00:00</CreateDate>
+    <RiquiredEffortTime>P46D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2026-07-18T00:00:00</StartDate>
+  </Task>
+  <Task>
+    <Name>Estimation</Name>
+    <Descriptoin> Estimate project costs, resources, and timelines.</Descriptoin>
+    <Id>10</Id>
+    <Product>Detailed estimate of project costs, resources, and timelines</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-05-06T00:00:00</CreateDate>
+    <RiquiredEffortTime>P155D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
     <Name>Risk</Name>
     <Descriptoin>Identify, analyze, and mitigate potential project risks.</Descriptoin>
     <Id>11</Id>
     <Product>Documented strategies to identify, analyze, and mitigate potential risks.</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-27T00:00:00</CreateDate>
-    <RiquiredEffortTime>P111D</RiquiredEffortTime>
+    <CreateDate>2024-04-04T00:00:00</CreateDate>
+    <RiquiredEffortTime>P179D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-09-19T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Quality</Name>
     <Descriptoin>Implement measures to ensure high standards of product or service.</Descriptoin>
     <Id>12</Id>
     <Product>Implementation measures ensuring high standards of the final product.</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-25T00:00:00</CreateDate>
-    <RiquiredEffortTime>P167D</RiquiredEffortTime>
+    <CreateDate>2024-05-22T00:00:00</CreateDate>
+    <RiquiredEffortTime>P41D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2026-07-18T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Compliance</Name>
     <Descriptoin>Ensure adherence to relevant regulations and standards.</Descriptoin>
     <Id>13</Id>
     <Product>Documented proof of adherence to relevant regulations and standards.</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-16T00:00:00</CreateDate>
-    <RiquiredEffortTime>P127D</RiquiredEffortTime>
+    <CreateDate>2024-05-03T00:00:00</CreateDate>
+    <RiquiredEffortTime>P167D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2027-01-01T00:00:00</StartDate>
+  </Task>
+  <Task>
+    <Name>Management</Name>
+    <Descriptoin>Oversee project activities, resources, and team coordination.</Descriptoin>
+    <Id>14</Id>
+    <Product>Overview of project activities, resources, and coordination.</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-05-15T00:00:00</CreateDate>
+    <RiquiredEffortTime>P66D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
     <Name>Scheduling</Name>
     <Descriptoin>Develop and manage project timelines and milestones.</Descriptoin>
     <Id>15</Id>
     <Product> Detailed project timeline with milestones and deadlines</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-11T00:00:00</CreateDate>
-    <RiquiredEffortTime>P86D</RiquiredEffortTime>
+    <CreateDate>2024-04-13T00:00:00</CreateDate>
+    <RiquiredEffortTime>P151D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-03-06T00:00:00</StartDate>
+  </Task>
+  <Task>
+    <Name>Procurement</Name>
+    <Descriptoin>Acquire necessary materials, equipment, and services.</Descriptoin>
+    <Id>16</Id>
+    <Product>Necessary materials, equipment, and services procured for the project.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-05-11T00:00:00</CreateDate>
+    <RiquiredEffortTime>P34D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
   </Task>
   <Task>
     <Name>Communication</Name>
@@ -211,10 +183,9 @@
     <Product>Documented plan for effective information exchange within the team.</Product>
     <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-10T00:00:00</CreateDate>
-    <RiquiredEffortTime>P75D</RiquiredEffortTime>
+    <CreateDate>2024-04-16T00:00:00</CreateDate>
+    <RiquiredEffortTime>P35D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-05-31T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Documentation</Name>
@@ -223,34 +194,42 @@
     <Product>Comprehensive and organized documentation related to the project.</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-06T00:00:00</CreateDate>
-    <RiquiredEffortTime>P41D</RiquiredEffortTime>
+    <CreateDate>2024-05-16T00:00:00</CreateDate>
+    <RiquiredEffortTime>P179D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2027-05-08T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Safety</Name>
     <Descriptoin> Implement measures to ensure a safe working environment.</Descriptoin>
     <Id>19</Id>
     <Product>Documented implementation of safety measures in the project.</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-13T00:00:00</CreateDate>
+    <RiquiredEffortTime>P112D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Commissioning</Name>
+    <Descriptoin> Initiate and oversee the deployment of the project.</Descriptoin>
+    <Id>20</Id>
+    <Product>Successfully deployed and fully operational project.</Product>
     <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-22T00:00:00</CreateDate>
-    <RiquiredEffortTime>P114D</RiquiredEffortTime>
+    <CreateDate>2024-04-17T00:00:00</CreateDate>
+    <RiquiredEffortTime>P175D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2027-06-18T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Material</Name>
     <Descriptoin> Developing a system to manage and track materials used in a project, including inventory, procurement, and usage</Descriptoin>
     <Id>21</Id>
     <Product>A database-driven software or application that allows for easy input, tracking, and analysis of materials, their quantities, suppliers, and utilization within the project</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-04T00:00:00</CreateDate>
-    <RiquiredEffortTime>P89D</RiquiredEffortTime>
+    <CreateDate>2024-04-19T00:00:00</CreateDate>
+    <RiquiredEffortTime>P35D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-11-21T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>System</Name>
@@ -259,10 +238,9 @@
     <Product>An efficient, scalable, and well-documented system architecture that meets the project's requirements, including hardware, software, networking components, and protocols.</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-16T00:00:00</CreateDate>
-    <RiquiredEffortTime>P72D</RiquiredEffortTime>
+    <CreateDate>2024-05-17T00:00:00</CreateDate>
+    <RiquiredEffortTime>P112D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2026-03-21T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Software</Name>
@@ -271,10 +249,9 @@
     <Product>A functional software application that meets defined specifications, with well-documented code and user-friendly interfaces, catering to the intended user base.</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-02T00:00:00</CreateDate>
-    <RiquiredEffortTime>P84D</RiquiredEffortTime>
+    <CreateDate>2024-04-22T00:00:00</CreateDate>
+    <RiquiredEffortTime>P32D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2026-05-26T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Budgeting</Name>
@@ -283,106 +260,97 @@
     <Product>A comprehensive budget document outlining expenses, resource allocation, timelines, and potential financial risks, often managed through specialized software or spreadsheets.</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-08T00:00:00</CreateDate>
-    <RiquiredEffortTime>P176D</RiquiredEffortTime>
+    <CreateDate>2024-05-14T00:00:00</CreateDate>
+    <RiquiredEffortTime>P43D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-04-01T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Procurement</Name>
     <Descriptoin>Managing the process of purchasing goods or services required for the project.</Descriptoin>
     <Id>25</Id>
     <Product>A procurement strategy outlining vendor selection criteria, purchase orders, contracts, and a streamlined process for acquiring necessary resources or services.</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-15T00:00:00</CreateDate>
-    <RiquiredEffortTime>P147D</RiquiredEffortTime>
+    <CreateDate>2024-04-13T00:00:00</CreateDate>
+    <RiquiredEffortTime>P158D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-04-01T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Mitigation</Name>
     <Descriptoin>Identifying and addressing potential risks or threats to the project's success.</Descriptoin>
     <Id>26</Id>
     <Product>A risk mitigation plan outlining identified risks, their impact, and strategies to minimize or eliminate these risks, ensuring project continuity.</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-25T00:00:00</CreateDate>
-    <RiquiredEffortTime>P66D</RiquiredEffortTime>
+    <CreateDate>2024-04-26T00:00:00</CreateDate>
+    <RiquiredEffortTime>P31D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2026-01-08T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Assurance</Name>
     <Descriptoin>Ensuring the quality and compliance of deliverables with specified standards and requirements.</Descriptoin>
     <Id>27</Id>
     <Product>Quality assurance protocols, test plans, and compliance documentation demonstrating that project deliverables meet or exceed defined criteria.</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-28T00:00:00</CreateDate>
-    <RiquiredEffortTime>P169D</RiquiredEffortTime>
+    <CreateDate>2024-04-10T00:00:00</CreateDate>
+    <RiquiredEffortTime>P97D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2027-01-01T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Approvals</Name>
     <Descriptoin>Managing the process of obtaining necessary permissions or authorizations for project milestones or changes.</Descriptoin>
     <Id>28</Id>
     <Product>A documented approval workflow indicating responsible parties, timelines, and required signatures or endorsements for project phases or modifications.</Product>
-    <Complexity>Intermediate</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-15T00:00:00</CreateDate>
-    <RiquiredEffortTime>P94D</RiquiredEffortTime>
+    <CreateDate>2024-04-15T00:00:00</CreateDate>
+    <RiquiredEffortTime>P50D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2027-05-08T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Timeline</Name>
     <Descriptoin>Creating and managing a project schedule outlining key milestones and activities.</Descriptoin>
     <Id>29</Id>
     <Product>A detailed project timeline with tasks, dependencies, start and end dates, critical paths, and Gantt charts, providing a visual representation of the project's progress.</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-11T00:00:00</CreateDate>
-    <RiquiredEffortTime>P131D</RiquiredEffortTime>
+    <CreateDate>2024-04-07T00:00:00</CreateDate>
+    <RiquiredEffortTime>P111D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-05-31T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Supplier</Name>
     <Descriptoin>Managing the selection, relationship, and procurement of goods or services from external vendors or suppliers to support the project's needs.</Descriptoin>
     <Id>30</Id>
     <Product>A structured supplier management system comprising:Supplier Database, Selection Criteria, Contracts and Agreements, Performance Evaluation, Risk Mitigation Plan</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-05-08T00:00:00</CreateDate>
-    <RiquiredEffortTime>P175D</RiquiredEffortTime>
+    <CreateDate>2024-04-17T00:00:00</CreateDate>
+    <RiquiredEffortTime>P43D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-08-26T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Collaboration</Name>
     <Descriptoin>Facilitating effective communication, cooperation, and information sharing among project team members and external stakeholders.</Descriptoin>
     <Id>31</Id>
     <Product>An efficient collaboration framework that includes:Communication Channels, Roles and Responsibilities, Collaboration Tools, Feedback Mechanisms, Conflict Resolution Strategies</Product>
-    <Complexity>Beginner</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-09T00:00:00</CreateDate>
-    <RiquiredEffortTime>P81D</RiquiredEffortTime>
+    <CreateDate>2024-05-14T00:00:00</CreateDate>
+    <RiquiredEffortTime>P153D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-08-14T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Stakeholder</Name>
     <Descriptoin>Managing relationships and communication with individuals or groups affected by or interested in the project.</Descriptoin>
     <Id>32</Id>
     <Product>A stakeholder engagement plan outlining strategies to involve and communicate with stakeholders, addressing their concerns, expectations, and feedback throughout the project lifecycle.</Product>
-    <Complexity>Advanced</Complexity>
+    <Complexity>Intermediate</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-13T00:00:00</CreateDate>
-    <RiquiredEffortTime>P52D</RiquiredEffortTime>
+    <CreateDate>2024-04-20T00:00:00</CreateDate>
+    <RiquiredEffortTime>P99D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-08-14T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Ergonomics</Name>
@@ -391,10 +359,9 @@
     <Product>An ergonomic design plan ensuring that workstations, interfaces, or tools utilized in the project are tailored to support user comfort, productivity, and health.</Product>
     <Complexity>Advanced</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-22T00:00:00</CreateDate>
-    <RiquiredEffortTime>P157D</RiquiredEffortTime>
+    <CreateDate>2024-04-20T00:00:00</CreateDate>
+    <RiquiredEffortTime>P43D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2027-10-10T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Final</Name>
@@ -403,33 +370,30 @@
     <Product>Completed project deliverables, documentation, post-implementation review reports, and any necessary handover materials for ongoing maintenance or future reference.</Product>
     <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-17T00:00:00</CreateDate>
-    <RiquiredEffortTime>P52D</RiquiredEffortTime>
+    <CreateDate>2024-05-10T00:00:00</CreateDate>
+    <RiquiredEffortTime>P59D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-05-09T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Technical</Name>
     <Descriptoin>Addressing the technical aspects and requirements of the project, including design, development, implementation, and maintenance of technical solutions.</Descriptoin>
     <Id>35</Id>
     <Product>A comprehensive technical plan encompassing:Technical Specifications, Development Process, Testing Protocols, Documentation and Manuals</Product>
-    <Complexity>AdvancedBeginner</Complexity>
+    <Complexity>Beginner</Complexity>
     <Engineerid xsi:nil="true" />
-    <CreateDate>2024-04-26T00:00:00</CreateDate>
-    <RiquiredEffortTime>P161D</RiquiredEffortTime>
+    <CreateDate>2024-04-13T00:00:00</CreateDate>
+    <RiquiredEffortTime>P134D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2027-06-18T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Commissioning</Name>
     <Descriptoin>The process of ensuring that all systems and components of the project are designed, installed, tested, operated, and maintained according to the operational requirements.</Descriptoin>
     <Id>36</Id>
     <Product> A comprehensive commissioning plan incorporating:Testing and Verification, Operational Readiness, Handover and Acceptance, Post-Commissioning Support</Product>
-    <Complexity>Advanced</Complexity>
-    <Engineerid>330846321</Engineerid>
-    <CreateDate>2024-04-03T00:00:00</CreateDate>
-    <RiquiredEffortTime>P128D</RiquiredEffortTime>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-12T00:00:00</CreateDate>
+    <RiquiredEffortTime>P96D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
-    <StartDate>2025-01-01T00:00:00</StartDate>
   </Task>
 </ArrayOfTask>
