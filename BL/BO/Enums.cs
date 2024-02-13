@@ -8,7 +8,8 @@ public enum EngineerLevel
     AdvancedBeginner,
     Intermediate,
     Advanced,
-    Expert
+    Expert,
+    None
 }
 /// <summary>
 /// status of task

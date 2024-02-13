@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using DalApi;
+using PL.Engineer;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,5 +22,20 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        private void btnEngineers_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerListWindow().Show();
+        }
+
+        private void btnIntilization_Click(object sender, RoutedEventArgs e)
+        {
+           MessageBoxResult mbResult= MessageBox.Show("Are you sure you want to initialize the data?","Initialize Data",MessageBoxButton.YesNo);
+            if(mbResult == MessageBoxResult.Yes)
+            {
+                BlApi.Factory.Get().Engineer.clear();
+                DalTest.Initialization.Do(); }
+
+            }
     }
 }
