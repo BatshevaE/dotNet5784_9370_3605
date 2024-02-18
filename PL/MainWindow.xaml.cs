@@ -18,17 +18,28 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// constractor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        private void btnEngineers_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// button to open the list of all engineers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnEngineers_Click(object sender, RoutedEventArgs e)
         {
             new EngineerListWindow().Show();
         }
-
-        private void btnIntilization_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// button to initialize the data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnIntilization_Click(object sender, RoutedEventArgs e)
         {
            MessageBoxResult mbResult= MessageBox.Show("Are you sure you want to initialize the data?","Initialize Data",MessageBoxButton.YesNo);
             if(mbResult == MessageBoxResult.Yes)

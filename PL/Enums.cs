@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace PL;
 
+/// <summary>
+/// enum of the engineer level from the do
+/// </summary>
 internal class EngineerLevelCollection : IEnumerable
 {
     static readonly IEnumerable<BO.EngineerLevel> s_enums =

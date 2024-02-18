@@ -23,7 +23,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlAlreadyExistException"></exception>
     public int Create(BO.Engineer item)
     {
-        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0) || (item.Name == null))
+        if ((item.Id <= 0) || (item.Name == "") ||  (item.Cost <= 0) )
             throw new BlWrongInput("wrong input");
 
         DO.Engineer doEngineer = new DO.Engineer

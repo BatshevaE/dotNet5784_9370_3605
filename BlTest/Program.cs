@@ -387,14 +387,15 @@ Read all engineer in certain level:6");
         Console.WriteLine($@"Id:");
         if (!int.TryParse(Console.ReadLine(), out int engineerId))
             throw new FormatException("Wrong input");
-        Console.WriteLine($@"Cost for an hour:");
-        if (!double.TryParse(Console.ReadLine(), out double engineerCost))
-            throw new FormatException("Wrong input");
+        Console.WriteLine($@"An Email address:");
+        string engineerEmail = Console.ReadLine()!;
+        
         Console.WriteLine($@"Complex of the engineer:");
         if (!BO.EngineerLevel.TryParse(Console.ReadLine(), out BO.EngineerLevel engineerComplex))
             throw new FormatException("Wrong input");
-        Console.WriteLine($@"An Email address:");
-        string engineerEmail = Console.ReadLine()!;
+        Console.WriteLine($@"Cost for an hour:");
+        if (!double.TryParse(Console.ReadLine(), out double engineerCost))
+            throw new FormatException("Wrong input");
         BO.Engineer engineer = new BO.Engineer
         {
             Id = engineerId,

@@ -6,23 +6,35 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
-    <Grid>
+    <Window.Resources>
+        <!--style for all the buttons-->
+        <Style x:Key="myButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid RenderTransformOrigin="0.845,0.875" >
+        <Grid.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <StackPanel Background="White">
+                        <MediaElement Source="C:\Users\ASUS\Desktop\x.mp4" LoadedBehavior="Play" >
+                        </MediaElement>
+                    </StackPanel>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
         <!--Button to handle engineers-->
-        <Button  Content="Handle &#xD;&#xA;Engineers" HorizontalAlignment="Left" Margin="52,21,0,0" VerticalAlignment="Top" Height="70" Width="145" FontFamily="Sitka Banner" FontWeight="Bold" FontSize="16" Click="btnEngineers_Click" >
-            <Button.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="black"/>
-                </LinearGradientBrush>
-            </Button.Foreground>
-        </Button>
+        <Button  Style="{StaticResource myButtonStyle}" Content="Handle &#xD;&#xA;Engineers" Click="BtnEngineers_Click" Margin="500,242,0,0" />
         <!--Button to initialize data-->
-        <Button Content="Initialize&#xD;&#xA;Data" HorizontalAlignment="Left" Margin="233,22,0,0" VerticalAlignment="Top"  Height="70" Width="145" FontFamily="Sitka Banner" FontWeight="Bold" FontSize="16" Click="btnIntilization_Click">
-        <Button.Foreground>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="black"/>
-            </LinearGradientBrush>
-        </Button.Foreground>
-        </Button>
-
+        <Button Style="{StaticResource myButtonStyle}" Content="Initialize&#xD;&#xA;Data" Click="BtnIntilization_Click"  Margin="200,242,0,0" />
     </Grid>
 </Window>

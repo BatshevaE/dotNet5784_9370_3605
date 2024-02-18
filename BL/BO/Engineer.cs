@@ -9,11 +9,11 @@ public class Engineer
     /// <summary>
     /// the Engineer name
     /// </summary>
-    public string? Name { get; set; }
+    public string Name { get; set; }
     /// <summary>
     /// the Engineer mail
     /// </summary>
-     public string? Email { get; set; }
+     public string Email { get; set; }
     /// <summary>
     /// the Engineer complex
     /// </summary>
@@ -27,6 +27,7 @@ public class Engineer
     /// </summary>
     public Tuple<int,string>? Task { get; set; }
     public override string ToString() => this.ToStringProperty();
+    public Engineer()  { Id = 0; Name = ""; Email = ""; Level = 0; Cost = 0.0; Task = null; }
 
 
 }

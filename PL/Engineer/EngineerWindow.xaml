@@ -5,8 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="EngineerWindow" Height="450" Width="800"
+   	    DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Window.Resources>
+        <!--style for all labels in this window-->
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <!--style for all TextBoxs in this window-->
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <!--style for all ComboBoxs in this window-->
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Name of engineer-->
+        <Label Content="Name" Grid.Column="0"  Margin="0,0,0,0"  />
+        <TextBox Grid.Column="1"  Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
+        <!--id of engineer-->
+        <Label Content="Id" Grid.Column="0" Grid.Row="1"  Margin="0,0,0,0" />
+        <TextBox  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolKey}}"   Grid.Column="1" Grid.Row="1"  Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  />
+        <!--email adress of engineer-->
+        <Label Content="Email" Grid.Column="0" Grid.Row="2"  Margin="0,0,0,0" />
+        <TextBox Grid.Column="1" Grid.Row="2"  Margin="0,0,0,0" TextWrapping="Wrap"  Text="{Binding Email, Mode=TwoWay, ValidatesOnExceptions=true}"  />
+        <!--level of engineer-->
+        <Label Content="Level" Grid.Column="0" Grid.Row="3"  Margin="0,0,0,0" />
+        <ComboBox Grid.Column="1"  Margin="0,0,0,0" Grid.Row="3" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <!--cost for hour of the engineer-->
+        <Label Content="Cost for hour" Grid.Column="0" Grid.Row="4" Margin="0,0,0,0"/>
+        <TextBox Grid.Column="1" Grid.Row="4"  Margin="0,0,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  />
+        <!--button of update or add,depends if we get an id(update)or not(add)-->
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625"  Click="BtnAddOrUpdate_Click" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Grid.ColumnSpan="2" Margin="350,0,0,0" />
+<!--in the line above we binding the name to a class that return wheter the button will be name add or update,depends on the id-->
     </Grid>
 </Window>

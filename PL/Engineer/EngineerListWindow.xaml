@@ -9,7 +9,6 @@
          DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--Extrnal Grid-->
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
@@ -21,11 +20,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Label" Grid.Column="0" HorizontalAlignment="Left" Margin="162,8,0,0" VerticalAlignment="Top"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}"
-          Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectedValue="{Binding Path=Level, Mode=TwoWay}" SelectionChanged="cbEngineerLevel_SelectionChanged"/>
+
+            <Label Content="List of engineers" HorizontalAlignment="Center"  FontWeight="Bold" Grid.Column="0"  VerticalAlignment="Stretch" FontSize="20" Foreground="Black"/>
+            <!---combo box for the level of the engineer,it will sor the list acordding to the level-->
+            <ComboBox ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectedValue="{Binding Path=Level, Mode=TwoWay}" SelectionChanged="CbEngineerLevel_SelectionChanged"/>
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=EngineerList}">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="DoubleClicItem" BorderBrush="{x:Null}" Foreground="Black" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -33,7 +33,6 @@
             </ListView.View>
         </ListView>
         <!--Button to add item to the list of Engineers-->
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
-
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAdd_Click" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black"/>
     </Grid>
 </Window>
