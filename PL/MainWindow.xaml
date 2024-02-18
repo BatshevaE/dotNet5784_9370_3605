@@ -26,7 +26,7 @@
             <VisualBrush>
                 <VisualBrush.Visual>
                     <StackPanel Background="White">
-                        <MediaElement Source="C:\Users\ASUS\Desktop\x.mp4" LoadedBehavior="Play" >
+                        <MediaElement Source="https://v.ftcdn.net/02/08/19/24/700_F_208192454_wQkdzbltgMVSPevbjAdGkIcy9Hfu2gto_ST.mp4" LoadedBehavior="Play" >
                         </MediaElement>
                     </StackPanel>
                 </VisualBrush.Visual>
