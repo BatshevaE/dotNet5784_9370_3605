@@ -26,7 +26,9 @@
             <VisualBrush>
                 <VisualBrush.Visual>
                     <StackPanel Background="White">
-                        <MediaElement Source="https://v.ftcdn.net/02/08/19/24/700_F_208192454_wQkdzbltgMVSPevbjAdGkIcy9Hfu2gto_ST.mp4" LoadedBehavior="Play" >
+                       <MediaElement Source="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHhod3l2bTVtMmU5dzNudHN6MDYweW9wYm84MTFieHBxODBzNmIwbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QpVUMRUJGokfqXyfa1/giphy.gif" LoadedBehavior="Play" >
+
+                            <!--<MediaElement Source="https://v.ftcdn.net/02/08/19/24/700_F_208192454_wQkdzbltgMVSPevbjAdGkIcy9Hfu2gto_ST.mp4" LoadedBehavior="Play" >-->
                         </MediaElement>
                     </StackPanel>
                 </VisualBrush.Visual>
