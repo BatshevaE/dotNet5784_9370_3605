@@ -22,10 +22,7 @@ public class Task
     /// </summary>
     public Status Status { get; set; }
 
-    /// <summary>
-    ////relevant only before schedule is built']
-    /// </summary>
-    public List<BO.TaskInList>? Dependencies { get; set; }
+   
     /// <summary>
     ////how many men-days needed for the task (for MS it is null)
     /// </summary>
@@ -62,6 +59,10 @@ public class Task
     /// engineer that assign to do the task
     /// </summary>
     public Tuple<int?, string>? EngineerTask { get; set; }
+    /// <summary>
+    ////relevant only before schedule is built']
+    /// </summary>
+    public List<BO.TaskInList>? Dependencies { get; set; }
     /// <summary>
     /// empty ctor
     /// </summary>

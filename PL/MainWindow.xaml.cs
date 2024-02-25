@@ -1,5 +1,6 @@
 ﻿using DalApi;
 using PL.Engineer;
+using PL.Task;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,5 +49,11 @@ namespace PL
                 DalTest.Initialization.Do(); }
 
             }
+
+        private void btnTaskClick(object sender, RoutedEventArgs e)
+        {
+            TaskListWindow task = new();
+            task.Show();    
+        }
     }
 }

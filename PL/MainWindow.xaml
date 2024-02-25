@@ -37,6 +37,8 @@
         <!--Button to handle engineers-->
         <Button  Style="{StaticResource myButtonStyle}" Content="Handle &#xD;&#xA;Engineers" Click="BtnEngineers_Click" Margin="500,242,0,0" />
         <!--Button to initialize data-->
-        <Button Style="{StaticResource myButtonStyle}" Content="Initialize&#xD;&#xA;Data" Click="BtnIntilization_Click"  Margin="200,242,0,0" />
+        <Button Style="{StaticResource myButtonStyle}" Content="Initialize&#xD;&#xA;Data" Click="BtnIntilization_Click"  Margin="0,59,0,0" HorizontalAlignment="Center" />
+        <!--Button to Handle Task-->
+        <Button Style="{StaticResource myButtonStyle}" Content="Handle&#xD;&#xA;Task"  Margin="125,242,0,0" Click="btnTaskClick" />
     </Grid>
 </Window>

@@ -99,31 +99,22 @@ internal class TaskImplemenation : BlApi.ITask
     /// The function needs to return a copy of the list with all the tasks
     /// </summary>
     /// <returns>Returns the list of tasks</returns>
-    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
+    public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? filter = null)
     {
         IEnumerable<DO.Task?> TaskList = _dal.Task.ReadAll();
-        IEnumerable<BO.Task> BOTaskList =
+        IEnumerable<BO.TaskInList> BOTaskList =
         from item in TaskList
         orderby item.Id
-        select new BO.Task
+        select new BO.TaskInList
         {
             Id = item.Id,
             Name = item.Name,
             Description = item.Descriptoin,
-            Copmlexity = (BO.EngineerLevel)item.Complexity,
-            EngineerTask = calculateEngineerTask(item.Engineerid),
-            CreatedAtDate = item.CreateDate,
-            RequiredEffortTime = item.RiquiredEffortTime,
-            ForecastDate = item.OptionalDeadline,
-            StartDate = item.StartDate,
-            DeadlineDate = item.ActualDeadline,
-            Remarks = item.Note,
             Status = GetStatus(item),
-            Dependencies = GetAllDependencys(item)
+            Copmlexity = (BO.EngineerLevel) item.Complexity
         };
         if (filter != null)
         { return BOTaskList.Where(filter); }
-
         else { return BOTaskList; }
     }
     /// <summary>
@@ -346,6 +337,18 @@ internal class TaskImplemenation : BlApi.ITask
         }
         toUpdate.Select(item => UpdateStartDate(item.Item1, item.Item2)).ToList();
    }
+    public void AddDependency(int id,int dependency)
+    {
+        BO.Task task = Read(id)!;
+        if (task.Dependencies!.FirstOrDefault(item => item.Id == dependency) != null)
+            throw new BO.BlAlreadyExistException("Such dependency is already exists");
+        else
+        {
+            BO.Task dependent = Read(dependency)!;
+            DO.Dependency newDependent = new DO.Dependency(0,dependency, id);
+            _dal.Dependency.Create(newDependent);
+        }
+    }
 }
 
 

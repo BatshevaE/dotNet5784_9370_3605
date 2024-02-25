@@ -329,10 +329,10 @@ Read all engineer in certain level:6");
     /// </summary>
     static void readListTasks()
     {
-        IEnumerable<BO.Task?> listTasks = s_bl!.Task!.ReadAll();
+        IEnumerable<BO.TaskInList?> listTasks = s_bl!.Task!.ReadAll();
 
         Console.WriteLine("The tasks are:");
-        foreach (BO.Task? taskToRead in listTasks)//a loop that goes over the list of tasks
+        foreach (BO.TaskInList? taskToRead in listTasks)//a loop that goes over the list of tasks
         {
             Console.WriteLine(taskToRead!.ToString());
         }

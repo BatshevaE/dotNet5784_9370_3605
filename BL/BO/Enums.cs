@@ -20,7 +20,8 @@ public enum Status
     Schedeled,
     OnTrack,
     InJeopardy,
-    Done
+    Done,
+    None
 }
 /// <summary>
 /// stage of project
