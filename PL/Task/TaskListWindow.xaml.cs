@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL.Engineer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,10 +64,11 @@ namespace PL.Task
 
         private void DoubleClicTask(object sender, MouseButtonEventArgs e)
         {
-            BO.Task? task=(sender as ListView)?.SelectedItem as BO.Task;    
-            TaskWindow newTask =new(task!.Id);
+            BO.TaskInList? task=(sender as ListView)?.SelectedItem as BO.TaskInList;    
+            TaskWindow newTask = new(task!.Id);
             newTask.ShowDialog();
             this.Close();
+           
         }
     }
 

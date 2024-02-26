@@ -19,6 +19,19 @@ class ConvertIdToContent : IValueConverter
     }
     
 }
+class ConvertIdToContentDependency : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (int)value == 0 ? "Add" : "Delete";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+
+}
 /// <summary>
 /// convert the id to bool.if you send an id you are in update mode and you cant change the id. if  you dont send an id you are in add mode and you can change the id. 
 /// </summary>
@@ -35,3 +48,17 @@ class ConvertIdToBool : IValueConverter
         throw new NotImplementedException();
     }
 }
+    class ConvertIdToBoolOposite : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if((int)value != 0)
+              return true;
+            return false;   
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }

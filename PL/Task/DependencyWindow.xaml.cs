@@ -34,6 +34,7 @@ namespace PL.Task
                 try
                 {
                     CurrentDependency = s_bl.Task.ReadAll()!.FirstOrDefault(item => item.Id == id)!;
+               
 
                 }
                 catch (BO.BlDoesNotExistException ch) { MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK); }
@@ -49,31 +50,34 @@ namespace PL.Task
         public static readonly DependencyProperty DependencyProperty =
             DependencyProperty.Register("CurrentDependency", typeof(BO.TaskInList), typeof(DependencyWindow), new PropertyMetadata(null));
 
-        private void BtnAddOrUpdateDependency_Click(object sender, RoutedEventArgs e)
+        private void BtnAddDeleteDependency_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    if (s_bl.Task.ReadAll().FirstOrDefault(item => item.Id == CurrentDependency!.Id) == null)//if there is not an task with such an id-we are on add mode
-            //    {
-            //        s_bl.Task.(CurrentDependency!);
-            //        MessageBox.Show("successsfull create Task", "succeeded", MessageBoxButton.OK);
-            //        this.Close();
-            //        new TaskListWindow().Show();
+            try
+            {
+                if (CurrentDependency.Id == 0)//if there is not an engineer with such an id-we are on add mode
+                {
+                    //s_bl.Task.AddDependency();
+                    MessageBox.Show("successsfull create dependency", "succeeded", MessageBoxButton.OK);
+                    this.Close();
+                   
+                }
+                else//there is  an engineer with such an id-we are on update mode
+                {
+                    s_bl.Task.deleteDependency(CurrentDependency.Id);
+                    MessageBox.Show("successsfull delete dependency", "succeedes", MessageBoxButton.OK);
+                    this.Close();
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
 
-            //    }
-            //    else//there is  an task with such an id-we are on update mode
-            //    {
-            //        s_bl.Task.AddDependency(0,0);
-            //        MessageBox.Show("successsfull update dependency", "succeedes", MessageBoxButton.OK);
-            //        this.Close();
-            //        new TaskListWindow().Show();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    Close();
-            //}
+
+
+          
         }
     }
 }

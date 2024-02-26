@@ -8,5 +8,7 @@
         <local:TaskStatusCollection x:Key="TaskStatusCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey"/>
+        <local:ConvertIdToBoolOposite x:Key="ConvertIdToBoolOpositeKey"/>
+        <local:ConvertIdToContentDependency x:Key="ConvertIdToContentDependencyKey"/>
     </Application.Resources>
 </Application>

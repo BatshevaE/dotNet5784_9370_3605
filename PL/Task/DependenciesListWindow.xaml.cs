@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,7 +25,11 @@ namespace PL.Task
         public DependenciesListWindow(int id)
         {
             InitializeComponent();
-            Dependencies = s_bl.Task.Read(id)!.Dependencies!;
+            if (s_bl.Task.Read(id)!.Dependencies!=null)
+               Dependencies = s_bl.Task.Read(id)!.Dependencies!;
+            else
+                MessageBox.Show("The task doesn't have dependencies,you can add.", "", MessageBoxButton.OK);
+          
         }
 
 
@@ -51,6 +56,8 @@ namespace PL.Task
             DependencyWindow newDependency = new(dependency!.Id);
             newDependency.ShowDialog();
             this.Close();
+            /*.Task? t = s_bl.Task.ReadAll2().FirstOrDefault(m => m.Id == dependency!.Id);
+            new DependenciesListWindow(t!.Id).Show();*/
         }
     }
 

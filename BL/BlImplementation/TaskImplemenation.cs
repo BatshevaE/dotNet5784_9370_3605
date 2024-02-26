@@ -9,6 +9,7 @@ using DO;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BlImplementation;
 
@@ -31,7 +32,8 @@ internal class TaskImplemenation : BlApi.ITask
         try
         {
             int idTask = _dal.Task.Create(doTask);
-            item.Dependencies!.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id))).ToList();
+            if(item.Dependencies!=null)
+               item.Dependencies!.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id))).ToList();
             return idTask;
         }
         catch (DO.DalAlreadyExistException ex)
@@ -112,6 +114,32 @@ internal class TaskImplemenation : BlApi.ITask
             Description = item.Descriptoin,
             Status = GetStatus(item),
             Copmlexity = (BO.EngineerLevel) item.Complexity
+        };
+        if (filter != null)
+        { return BOTaskList.Where(filter); }
+        else { return BOTaskList; }
+    }
+    public IEnumerable<BO.Task> ReadAll2(Func<BO.Task, bool>? filter = null)
+    {
+        IEnumerable<DO.Task?> TaskList = _dal.Task.ReadAll();
+        IEnumerable<BO.Task> BOTaskList =
+        from item in TaskList
+        orderby item.Id
+        select new BO.Task
+        {
+            Id = item.Id,
+            Name = item.Name,
+            Description = item.Descriptoin,
+            Copmlexity = (BO.EngineerLevel)item.Complexity,
+            EngineerTask = calculateEngineerTask(item.Engineerid),
+            CreatedAtDate = item.CreateDate,
+            RequiredEffortTime = item.RiquiredEffortTime,
+            ForecastDate = item.OptionalDeadline,
+            StartDate = item.StartDate,
+            DeadlineDate = item.ActualDeadline,
+            Remarks = item.Note,
+            Status = GetStatus(item),
+            Dependencies = GetAllDependencys(item)
         };
         if (filter != null)
         { return BOTaskList.Where(filter); }
@@ -339,6 +367,7 @@ internal class TaskImplemenation : BlApi.ITask
    }
     public void AddDependency(int id,int dependency)
     {
+       
         BO.Task task = Read(id)!;
         if (task.Dependencies!.FirstOrDefault(item => item.Id == dependency) != null)
             throw new BO.BlAlreadyExistException("Such dependency is already exists");
@@ -348,6 +377,11 @@ internal class TaskImplemenation : BlApi.ITask
             DO.Dependency newDependent = new DO.Dependency(0,dependency, id);
             _dal.Dependency.Create(newDependent);
         }
+    }
+    public void deleteDependency(int id)//, int dependency)
+    {
+     
+      _dal.Dependency.Delete(id);
     }
 }
 

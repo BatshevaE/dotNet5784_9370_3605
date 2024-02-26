@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="DependenciesListWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
@@ -22,9 +23,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="List of Dependencies" HorizontalAlignment="Left"  FontWeight="Bold" Grid.Column="0" FontSize="20" Foreground="Black" Grid.ColumnSpan="2" Margin="265,-10,0,10"/>
+            <Label Content="List of Dependencies" HorizontalAlignment="Left"  FontWeight="Bold" Grid.Column="0" FontSize="20" Foreground="Black" Grid.ColumnSpan="2" Margin="265,-10,0,0"/>
         </Grid>
-        <ListView x:Name="m" Margin="5" Grid.Row="1"  ItemsSource="{Binding TaskList}" BorderBrush="{x:Null}" Foreground="Black" MouseDoubleClick="UpdateDependency_DoubleClick"   >
+        <ListView x:Name="m" Margin="5" Grid.Row="1"  ItemsSource="{Binding Dependencies}" BorderBrush="{x:Null}" Foreground="Black" MouseDoubleClick="UpdateDependency_DoubleClick"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
