@@ -317,6 +317,7 @@ internal class TaskImplemenation : BlApi.ITask
         return dependencysId.First();
         return 0;
     }
+    
     /// <summary>
     /// clear the data source
     /// </summary>
@@ -367,21 +368,23 @@ internal class TaskImplemenation : BlApi.ITask
    }
     public void AddDependency(int id,int dependency)
     {
-       
         BO.Task task = Read(id)!;
         if (task.Dependencies!.FirstOrDefault(item => item.Id == dependency) != null)
             throw new BO.BlAlreadyExistException("Such dependency is already exists");
         else
         {
-            BO.Task dependent = Read(dependency)!;
-            DO.Dependency newDependent = new DO.Dependency(0,dependency, id);
-            _dal.Dependency.Create(newDependent);
+            DO.Dependency newDependentDo = new DO.Dependency(0, dependency, id);
+            _dal.Dependency.Create(newDependentDo);
+            BO.TaskInList newDependent = new BO.TaskInList() {Id=dependency};
+            task.Dependencies!.Add(newDependent);
         }
     }
-    public void deleteDependency(int id)//, int dependency)
+    public void deleteDependency(int id, int dependency)
     {
-     
-      _dal.Dependency.Delete(id);
+        BO.Task task = Read(id)!;
+        BO.TaskInList d=task.Dependencies!.FirstOrDefault(item => item.Id==dependency)!;
+        task.Dependencies!.Remove(d);
+        _dal.Dependency.Delete(id);
     }
 }
 

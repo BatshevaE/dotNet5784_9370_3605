@@ -13,9 +13,8 @@ public interface ITask
     public void clear();
     public void createAutomaticLuz();
     public void AddDependency(int id, int dependency);
-    public void deleteDependency(int id);//, int dependency);
+    public void deleteDependency(int id, int dependency);
     public IEnumerable<BO.Task> ReadAll2(Func<BO.Task, bool>? filter = null);
-
 
 
 }
