@@ -59,7 +59,7 @@ namespace PL.Task
             DependenciesListWindow dependency = new(CurrentTask.Id);
             dependency.Show();
             //dependency.ShowDialog();
-            //this.Close();
+            this.Close();
         }
 
         private void BtnAddOrUpdateTask_Click(object sender, RoutedEventArgs e)

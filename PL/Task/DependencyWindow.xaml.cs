@@ -63,9 +63,11 @@ namespace PL.Task
                 }
                 else//there is  an engineer with such an id-we are on update mode
                 {
-                    s_bl.Task.deleteDependency(CurrentDependency.Id);
+                    s_bl.Task.DeleteDependency(CurrentDependency.Id);
                     MessageBox.Show("successsfull delete dependency", "succeedes", MessageBoxButton.OK);
                     this.Close();
+                    new TaskListWindow().Show();
+
                     
                 }
             }

@@ -378,10 +378,16 @@ internal class TaskImplemenation : BlApi.ITask
             _dal.Dependency.Create(newDependent);
         }
     }
-    public void deleteDependency(int id)//, int dependency)
+    public void DeleteDependency(int id)//, int dependency)
     {
-     
-      _dal.Dependency.Delete(id);
+        try
+        {
+            _dal.Dependency.Delete(id);
+        }
+        catch (DO.DalAlreadyExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Dependency with ID={id} does Not exist", ex);
+        }
     }
 }
 
