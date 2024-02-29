@@ -13,4 +13,7 @@ public interface IDal
     IEngineer Engineer { get; }
     IDependency Dependency { get; }
     DateTime? StartProject { get; set; }
+    DateTime? EndProject { get; set; }
+
+    IUser User { get; }
    }

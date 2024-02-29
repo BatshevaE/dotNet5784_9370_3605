@@ -42,6 +42,7 @@ internal class Program
         {
             s_bl.Task.clear();
             s_bl.Engineer.clear();
+            s_bl.User.clear(); 
             BlImplementation.Project.zeroStartProject();
             DalTest.Initialization.Do();
             

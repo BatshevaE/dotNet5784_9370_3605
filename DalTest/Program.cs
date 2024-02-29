@@ -75,6 +75,7 @@ namespace DalTest
                                 s_dal.Engineer.clear();
                                 s_dal.Task.clear();
                                 s_dal.Dependency.clear();
+                                s_dal.User.clear();
                                 // Initialization.Do(s_dal); //stage 2
                                 Initialization.Do(); //stage 4
 

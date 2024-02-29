@@ -62,3 +62,18 @@ class ConvertIdToBool : IValueConverter
             throw new NotImplementedException();
         }
     }
+
+class ConvertClockToString : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+         return value.GetType().ToString();
+      //  return "nnn";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+

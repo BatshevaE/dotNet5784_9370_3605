@@ -5,7 +5,7 @@ sealed internal class DalList : IDal
 {
     public static IDal Instance { get; } = new DalList();
     private DalList() { }
-
+    public IUser User => new UserImplementation();
     public ITask Task => new TaskImplementation();
 
     public IEngineer Engineer => new EngineerImplementation();
@@ -16,6 +16,11 @@ sealed internal class DalList : IDal
         get { return DataSource.Config.startWorkProject; } 
         set { DataSource.Config.startWorkProject = value; } 
     }
-    
+    public DateTime? EndProject
+    {
+        get { return DataSource.Config.endWorkProject; }
+        set { DataSource.Config.endWorkProject = value; }
+    }
+
 }
 

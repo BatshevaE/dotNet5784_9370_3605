@@ -1,6 +1,7 @@
 ﻿using DalApi;
 using PL.Engineer;
 using PL.Task;
+using System.Printing.IndexedProperties;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,10 +23,25 @@ namespace PL
         /// <summary>
         /// constractor
         /// </summary>
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public MainWindow()
         {
             InitializeComponent();
+            CurrentTime = s_bl.Clock;
         }
+
+
+        public DateTime CurrentTime
+        {
+            get { return (DateTime)GetValue(CurrentTimeProperty); }
+            set { SetValue(CurrentTimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentTimeProperty =
+            DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+
+
         /// <summary>
         /// button to open the list of all engineers
         /// </summary>
@@ -50,7 +66,7 @@ namespace PL
 
             }
 
-        private void btnTaskClick(object sender, RoutedEventArgs e)
+        private void BtnTaskClick(object sender, RoutedEventArgs e)
         {
             TaskListWindow task = new();
             task.Show();    

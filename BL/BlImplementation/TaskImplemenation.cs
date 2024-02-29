@@ -13,9 +13,12 @@ using System.Xml.Linq;
 
 namespace BlImplementation;
 
+
 internal class TaskImplemenation : BlApi.ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    private readonly IBl _bl;
+    internal TaskImplemenation(IBl bl) => _bl = bl;
     /// <summary>
     /// Adding a new task for the list
     /// </summary>
@@ -277,9 +280,9 @@ internal class TaskImplemenation : BlApi.ITask
     {
         if (task.StartDate == null)
             return BO.Status.Unschedeled;
-        else if ((task.StartDate != null) && (task.StartDate > DateTime.Today))
+        else if ((task.StartDate != null) && (task.StartDate > _bl.Clock))
             return BO.Status.Schedeled;
-        else if ((task.StartDate < DateTime.Today) && (task.StartDate + task.RiquiredEffortTime > DateTime.Today))
+        else if ((task.StartDate < _bl.Clock) && (task.StartDate + task.RiquiredEffortTime > _bl.Clock))
             return BO.Status.OnTrack;
         else //if (task.StartDate + task.RiquiredEffortTime < DateTime.Today)
             return BO.Status.Done;
@@ -317,6 +320,7 @@ internal class TaskImplemenation : BlApi.ITask
         return dependencysId.First();
         return 0;
     }
+    
     /// <summary>
     /// clear the data source
     /// </summary>
@@ -364,30 +368,29 @@ internal class TaskImplemenation : BlApi.ITask
 
         }
         toUpdate.Select(item => UpdateStartDate(item.Item1, item.Item2)).ToList();
+        IEnumerable<DateTime?> endProject= toUpdate.Select(item=>item.Item2).ToList();
+        { Project.CreateEndDate(endProject.Max()); }
+
    }
     public void AddDependency(int id,int dependency)
     {
-       
         BO.Task task = Read(id)!;
         if (task.Dependencies!.FirstOrDefault(item => item.Id == dependency) != null)
             throw new BO.BlAlreadyExistException("Such dependency is already exists");
         else
         {
-            BO.Task dependent = Read(dependency)!;
-            DO.Dependency newDependent = new DO.Dependency(0,dependency, id);
-            _dal.Dependency.Create(newDependent);
+            DO.Dependency newDependentDo = new DO.Dependency(0, dependency, id);
+            _dal.Dependency.Create(newDependentDo);
+            BO.TaskInList newDependent = new BO.TaskInList() {Id=dependency};
+            task.Dependencies!.Add(newDependent);
         }
     }
-    public void DeleteDependency(int id)//, int dependency)
+    public void deleteDependency(int id, int dependency)
     {
-        try
-        {
-            _dal.Dependency.Delete(id);
-        }
-        catch (DO.DalAlreadyExistException ex)
-        {
-            throw new BO.BlDoesNotExistException($"Dependency with ID={id} does Not exist", ex);
-        }
+        BO.Task task = Read(id)!;
+        BO.TaskInList d=task.Dependencies!.FirstOrDefault(item => item.Id==dependency)!;
+        task.Dependencies!.Remove(d);
+        _dal.Dependency.Delete(id);
     }
 }
 

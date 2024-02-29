@@ -28,6 +28,7 @@ public static class Initialization
         createTasks();
         createDependencys();
         createEngineers();
+        createUsers();
 
     }
     /// <summary>
@@ -177,11 +178,14 @@ public static class Initialization
             double _cfh = s_rand.Next(150, 1000);//a random cost for hour of the engineer
            
             Engineer newEngineer = new(_id, _name, $"{engineerEmails[i++]}@gmail.com ", _c, _cfh);//ctor
+            User newUser = new(_id, _name, false);
+
             
                 
 
             //s_dalEngineer!.Create(newEngineer);stage 1
             s_dal!.Engineer.Create(newEngineer);//stage 2 
+            s_dal!.User.Create(newUser);
         }
     }
     /// <summary>
@@ -238,6 +242,22 @@ public static class Initialization
             //s_dalDependency!.Create(dependency); stage 1
             s_dal!.Dependency.Create(dependency);//stage 2 
     }
-   
-   
+
+
+    private static void createUsers()
+
+    {
+        User[] newUser = {
+
+           new(209859370,"Esti Walles",true),
+           new(326673605,"Batsheva Eisenbach",true)
+        };
+
+        foreach (User user in newUser)
+            //s_dalDependency!.Create(dependency); stage 1
+            s_dal!.User.Create(user);//stage 2 
+    }
+
+
 }
+

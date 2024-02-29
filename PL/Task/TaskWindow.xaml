@@ -99,7 +99,7 @@
 
         <!-- Create date of the task-->
         <Label Content="Created Date" Grid.Column="0" Grid.Row="4" Margin="100,1,100,0"/>
-        <DatePicker Grid.Column="1" Grid.Row="3"  Margin="72,31,85,2" Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5"  >
+        <DatePicker Grid.Column="1" Grid.Row="3"  Margin="72,31,85,2"  Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5"  >
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

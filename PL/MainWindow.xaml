@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="640" Width="800">
+        Title="MainWindow" Height="640" Width="800"
+        DataContext="{Binding CurrentTime, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Window.Resources>
         <!--style for all the buttons-->
         <Style x:Key="myButtonStyle" TargetType="Button">
@@ -26,7 +27,7 @@
             <VisualBrush>
                 <VisualBrush.Visual>
                     <StackPanel Background="White">
-                       <MediaElement Source="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHhod3l2bTVtMmU5dzNudHN6MDYweW9wYm84MTFieHBxODBzNmIwbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QpVUMRUJGokfqXyfa1/giphy.gif" LoadedBehavior="Play" >
+                        <MediaElement Source="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHhod3l2bTVtMmU5dzNudHN6MDYweW9wYm84MTFieHBxODBzNmIwbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QpVUMRUJGokfqXyfa1/giphy.gif" LoadedBehavior="Play" >
 
                             <!--<MediaElement Source="https://v.ftcdn.net/02/08/19/24/700_F_208192454_wQkdzbltgMVSPevbjAdGkIcy9Hfu2gto_ST.mp4" LoadedBehavior="Play" >-->
                         </MediaElement>
@@ -39,6 +40,7 @@
         <!--Button to initialize data-->
         <Button Style="{StaticResource myButtonStyle}" Content="Initialize&#xD;&#xA;Data" Click="BtnIntilization_Click"  Margin="0,59,0,0" HorizontalAlignment="Center" />
         <!--Button to Handle Task-->
-        <Button Style="{StaticResource myButtonStyle}" Content="Handle&#xD;&#xA;Task"  Margin="125,242,0,0" Click="btnTaskClick" />
+        <Button Style="{StaticResource myButtonStyle}" Content="Handle&#xD;&#xA;Task"  Margin="125,242,0,0" Click="BtnTaskClick" />
+        <TextBlock  TextWrapping="Wrap" Text="{Binding CurrentTime,Mode=TwoWay, StringFormat='{}{0:dd/MM/yyyy}'}" HorizontalAlignment="Left" Margin="288,374,0,0" VerticalAlignment="Top" Height="87" Width="207" Foreground="White"/>
     </Grid>
 </Window>

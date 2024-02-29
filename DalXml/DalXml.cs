@@ -17,6 +17,8 @@ sealed  internal class DalXml : IDal
     public IEngineer Engineer => new EngineerImplementation();
 
     public IDependency Dependency => new DependencyImplementation();
+    public IUser User => new UserImplementation();
+
 
     public DateTime? StartProject
     {
@@ -39,5 +41,27 @@ sealed  internal class DalXml : IDal
 
         }
     }
+    public DateTime? EndProject
+    {
+        set
+        {
+            XElement root = XMLTools.LoadListFromXMLElement("data-config");
+            if (root.Element("EndProject") == null)
+            {
+                XElement end = new XElement("EndProject", value);
+                root.Add(end);
+            }
+            else
+                root.Element("EndProject")?.SetValue((value).ToString()!);
+            XMLTools.SaveListToXMLElement(root, "data-config");
+        }
+        get
+        {
+            XElement root = XMLTools.LoadListFromXMLElement("data-config");
+            return root.ToDateTimeNullable("EndProject");
+
+        }
+    }
+
 
 }

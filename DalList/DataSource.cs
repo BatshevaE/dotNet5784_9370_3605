@@ -22,13 +22,14 @@ internal static class DataSource
         private static int nextDependentTaskId = dependentTaskId;
         internal static int NextDependentTaskId { get => nextDependentTaskId++; }
         public static DateTime? startWorkProject = null;
-        public static DateTime? planEndProject = null;
+        public static DateTime? endWorkProject = null;
          
     }
    
     internal static List<DO.Task> Tasks { get; } = new();//a list for al the tasks
     internal static List<DO.Dependency> Dependencys { get; } = new();//a list for al the Dependency tasks
     internal static List<DO.Engineer> Engineers { get; } = new();//a list for al the Engineers
+    internal static List<DO.User> Users { get; } = new();//a list for al the Users
 
 
 }

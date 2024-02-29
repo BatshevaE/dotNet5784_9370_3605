@@ -25,11 +25,13 @@ namespace PL.Task
         public DependenciesListWindow(int id)
         {
             InitializeComponent();
+            CurrentTaskDependency1 = s_bl.Task.Read(id)!;
             if (s_bl.Task.Read(id)!.Dependencies!=null)
                Dependencies = s_bl.Task.Read(id)!.Dependencies!;
             else
                 MessageBox.Show("The task doesn't have dependencies,you can add.", "", MessageBoxButton.OK);
-          
+
+
         }
 
 
@@ -42,10 +44,18 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty dependenciesProperty =
             DependencyProperty.Register("Dependencies", typeof(IEnumerable<TaskInList>), typeof(DependenciesListWindow), new PropertyMetadata(null));
+        public BO.Task CurrentTaskDependency1
+        {
+            get { return (BO.Task)GetValue(CurrentTaskProperty); }
+            set { SetValue(CurrentTaskProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for CurrentTask.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentTaskProperty =
+            DependencyProperty.Register("CurrentTaskDependency1", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
         private void BtnAddDependency_Click(object sender, RoutedEventArgs e)
         {
-            DependencyWindow dependency = new();
+            DependencyWindow dependency = new(CurrentTaskDependency1.Id,0);
             dependency.ShowDialog();
             this.Close();
         }
@@ -53,7 +63,7 @@ namespace PL.Task
         private void UpdateDependency_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.TaskInList? dependency = (sender as ListView)?.SelectedItem as BO.TaskInList;
-            DependencyWindow newDependency = new(dependency!.Id);
+            DependencyWindow newDependency = new(CurrentTaskDependency1.Id,dependency!.Id);
             newDependency.ShowDialog();
             this.Close();
             /*.Task? t = s_bl.Task.ReadAll2().FirstOrDefault(m => m.Id == dependency!.Id);

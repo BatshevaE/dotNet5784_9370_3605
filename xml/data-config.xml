@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-  <NextTaskId>1532</NextTaskId>
-  <NextDependentTaskId>1401</NextDependentTaskId>
+  <NextTaskId>1742</NextTaskId>
+  <NextDependentTaskId>1561</NextDependentTaskId>
   <StartProject></StartProject>
+  <EndProject></EndProject>
 </config>

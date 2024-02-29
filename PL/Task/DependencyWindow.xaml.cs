@@ -19,12 +19,13 @@ namespace PL.Task
     /// Interaction logic for DependencyWindow.xaml
     /// </summary>
     public partial class DependencyWindow : Window
-    {
+    { 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        public DependencyWindow(int id = 0)
+        public DependencyWindow(int TaskId=0,int id = 0)
         {
             InitializeComponent();
+            CurrentTaskDependency = s_bl.Task.Read(TaskId)!;
             if (id == 0)//we click  the add button
             {
                 CurrentDependency = new BO.TaskInList();
@@ -33,14 +34,15 @@ namespace PL.Task
             {
                 try
                 {
-                    CurrentDependency = s_bl.Task.ReadAll()!.FirstOrDefault(item => item.Id == id)!;
-               
+                    CurrentDependency = CurrentTaskDependency.Dependencies!.FirstOrDefault(item => item.Id == id)!;
+                    
+
 
                 }
                 catch (BO.BlDoesNotExistException ch) { MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK); }
             }
         }
-        public BO.TaskInList CurrentDependency
+        public BO.TaskInList CurrentDependency//the dependent task 
         {
             get { return (BO.TaskInList)GetValue(DependencyProperty); }
             set { SetValue(DependencyProperty, value); }
@@ -49,21 +51,31 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for EngineerList.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DependencyProperty =
             DependencyProperty.Register("CurrentDependency", typeof(BO.TaskInList), typeof(DependencyWindow), new PropertyMetadata(null));
+        public BO.Task CurrentTaskDependency//the dependent on task
+        {
+            get { return (BO.Task)GetValue(CurrentTaskProperty); }
+            set { SetValue(CurrentTaskProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for CurrentTask.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentTaskProperty =
+            DependencyProperty.Register("CurrentTaskDependency", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+ 
         private void BtnAddDeleteDependency_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (CurrentDependency.Id == 0)//if there is not an engineer with such an id-we are on add mode
+                if (CurrentTaskDependency.Dependencies!.FirstOrDefault(m => m.Id == CurrentDependency!.Id) == null)//if there is not a dependency with such an id-we are on add mode
                 {
-                    //s_bl.Task.AddDependency();
+
+                    s_bl.Task.AddDependency(CurrentTaskDependency.Id,CurrentDependency.Id);
                     MessageBox.Show("successsfull create dependency", "succeeded", MessageBoxButton.OK);
                     this.Close();
                    
                 }
                 else//there is  an engineer with such an id-we are on update mode
                 {
-                    s_bl.Task.DeleteDependency(CurrentDependency.Id);
+                    s_bl.Task.deleteDependency(CurrentTaskDependency.Id,CurrentDependency.Id);
                     MessageBox.Show("successsfull delete dependency", "succeedes", MessageBoxButton.OK);
                     this.Close();
                     new TaskListWindow().Show();

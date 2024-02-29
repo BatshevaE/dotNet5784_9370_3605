@@ -10,5 +10,6 @@
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey"/>
         <local:ConvertIdToBoolOposite x:Key="ConvertIdToBoolOpositeKey"/>
         <local:ConvertIdToContentDependency x:Key="ConvertIdToContentDependencyKey"/>
+        <local:ConvertClockToString x:Key="ConvertClockToStringKey"/>
     </Application.Resources>
 </Application>

@@ -32,7 +32,8 @@ public class Project
         else
             throw new BlcanotUpdateStartdate("too early date");
     }
-
+    public static void CreateEndDate(DateTime? endDate)
+    { _dal.EndProject = endDate; }
     public static void zeroStartProject()
     {
         _dal.StartProject = null;

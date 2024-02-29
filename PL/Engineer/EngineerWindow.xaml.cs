@@ -89,9 +89,6 @@ namespace PL.Engineer
                 Close();
             }
 
-           
-
-
         }
 
     }

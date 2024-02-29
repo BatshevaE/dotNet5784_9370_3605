@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Dal;
+using DalApi;
+using DO;
+
+internal class UserImplementation:IUser
+{
+    /// <summary>
+    /// Adding a new object of Engineer to a database, (to the list of objects of users).
+    /// </summary>
+    /// <param name="item">A reference to an existing object of engineer.</param>
+    /// <returns>The method will return the running number of the newly created engineer in the list.</returns>
+    /// <exception cref="DalAlreadyExistException"></exception>
+    public int Create(User item)
+    {
+        if (Read(item.Id) != null)
+            throw new DalAlreadyExistException("An user type object with such an ID already exists");
+        if((DataSource.Engineers.FirstOrDefault(t=>t.Id==item.Id)==null)&&(item.Id!=209859370)&&(item.Id!=326673605))
+            throw new DalDoesNotExistException("An user with such Id can't be assigend to the system");
+        DataSource.Users.Add(item);
+        return item.Id;
+    }
+    /// <summary>
+    /// The function deletes an existing user from the list 
+    /// </summary>
+    /// <param name="id">ID number of an engineer</param>
+    /// <exception cref="DalDoesNotExistException"></exception>
+    public bool Delete(int id)
+    {
+        User? ifUser = DataSource.Users.Find(temp => temp.Id == id);
+        if (ifUser == null)
+        {
+            throw new DalDoesNotExistException($"User with ID={id} does Not exist");
+        }
+        DataSource.Users.Remove(ifUser);
+        return true;
+    }
+    /// <summary>
+    /// Returning a reference to a single object of Engineer with a certain ID.
+    /// </summary>
+    /// <param name="id">ID number of an user.</param>
+    /// <returns>If there is an object in the database with the received identification number, the method will return a reference to the existing engineer.
+    ///Otherwise, the method will return null.</returns>
+    public User? Read(int id)
+    {
+        return DataSource.Users.FirstOrDefault(item => item.Id == id);//stage 2
+    }
+    /// <summary>
+    /// Return a copy of the list of references to all objects of users.
+    /// </summary>
+    /// <returns>The method returns a new list that is a copy of the existing list of all objects of engineer.</returns>
+    //public List<Engineer> ReadAll() stage 1
+    public IEnumerable<User> ReadAll(Func<User, bool>? filter = null) //stage 2
+    {
+        if (filter != null)
+        {
+            return from item in DataSource.Users
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Users
+               select item;
+    }
+    /// <summary>
+    /// Update of an existing object of enginer.
+    /// </summary>
+    /// <param name="item">A reference to an existing object of user.</param>
+    /// <exception cref="DalDoesNotExistException"></exception>
+    public void Update(User item)
+    {
+        User? user = DataSource.Users.Find(User => User.Id == item.Id);
+
+        if (DataSource.Users.FirstOrDefault(item) == null)
+        {
+            throw new DalDoesNotExistException($"User with ID={item.Id} does Not exist");
+        }
+        DataSource.Users.Remove(user!);
+        DataSource.Users.Add(item);
+    }
+    /// <summary>
+    ///  goes over the list of users and return the first user in the list on which the filter returns True.
+    /// </summary>
+    /// <param name="filter">a bool function</param>
+    /// <returns>return the first engineer in the list on which the filter returns True</returns>
+    public User? Read(Func<User, bool>? filter)//stage 2
+    {
+        if (filter == null)
+        {
+            return null;
+        }
+        else
+            return DataSource.Users.FirstOrDefault(filter);
+    }
+    public void clear() { DataSource.Users.Clear(); }
+}
