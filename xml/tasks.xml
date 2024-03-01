@@ -18997,4 +18997,301 @@
     <RiquiredEffortTime>P177D</RiquiredEffortTime>
     <IsMileStone>false</IsMileStone>
   </Task>
+  <Task>
+    <Name>Analysis</Name>
+    <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
+    <Id>1742</Id>
+    <Product>Detailed report assessing project feasibility, risks, and requirements</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-29T00:00:00</CreateDate>
+    <RiquiredEffortTime>P169D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Planning</Name>
+    <Descriptoin>Define project goals, scope, and objectives.</Descriptoin>
+    <Id>1743</Id>
+    <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-14T00:00:00</CreateDate>
+    <RiquiredEffortTime>P41D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Design</Name>
+    <Descriptoin>Develop conceptual and detailed plans for project implementation</Descriptoin>
+    <Id>1744</Id>
+    <Product>Comprehensive design plans for project implementation.</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-20T00:00:00</CreateDate>
+    <RiquiredEffortTime>P170D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Prototyping</Name>
+    <Descriptoin>Build initial models or prototypes for testing and validation.</Descriptoin>
+    <Id>1745</Id>
+    <Product> Initial working model or prototype for testing and validation</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-25T00:00:00</CreateDate>
+    <RiquiredEffortTime>P117D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Testing</Name>
+    <Descriptoin> Conduct comprehensive tests to ensure functionality and reliability.</Descriptoin>
+    <Id>1746</Id>
+    <Product>Documented results of comprehensive tests ensuring functionality.</Product>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-19T00:00:00</CreateDate>
+    <RiquiredEffortTime>P110D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Simulation</Name>
+    <Descriptoin>Use simulations to model and analyze system behavior</Descriptoin>
+    <Id>1747</Id>
+    <Product>Detailed model illustrating system behavior under different conditions.</Product>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-02T00:00:00</CreateDate>
+    <RiquiredEffortTime>P101D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Integration</Name>
+    <Descriptoin>Combine individual components into a unified system.</Descriptoin>
+    <Id>1748</Id>
+    <Product>Fully assembled and functional system.</Product>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-19T00:00:00</CreateDate>
+    <RiquiredEffortTime>P77D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Coding</Name>
+    <Descriptoin>Write and implement software or programming code.</Descriptoin>
+    <Id>1749</Id>
+    <Product>Software or programming code implemented and ready for use.</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-05-01T00:00:00</CreateDate>
+    <RiquiredEffortTime>P94D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Evaluation</Name>
+    <Descriptoin>Assess project performance against predefined criteria</Descriptoin>
+    <Id>1750</Id>
+    <Product>Assessment of project performance against predefined criteria.</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-26T00:00:00</CreateDate>
+    <RiquiredEffortTime>P109D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Estimation</Name>
+    <Descriptoin> Estimate project costs, resources, and timelines.</Descriptoin>
+    <Id>1751</Id>
+    <Product>Detailed estimate of project costs, resources, and timelines</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-26T00:00:00</CreateDate>
+    <RiquiredEffortTime>P39D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Risk</Name>
+    <Descriptoin>Identify, analyze, and mitigate potential project risks.</Descriptoin>
+    <Id>1752</Id>
+    <Product>Documented strategies to identify, analyze, and mitigate potential risks.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-05T00:00:00</CreateDate>
+    <RiquiredEffortTime>P150D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Quality</Name>
+    <Descriptoin>Implement measures to ensure high standards of product or service.</Descriptoin>
+    <Id>1753</Id>
+    <Product>Implementation measures ensuring high standards of the final product.</Product>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-27T00:00:00</CreateDate>
+    <RiquiredEffortTime>P167D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Compliance</Name>
+    <Descriptoin>Ensure adherence to relevant regulations and standards.</Descriptoin>
+    <Id>1754</Id>
+    <Product>Documented proof of adherence to relevant regulations and standards.</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-27T00:00:00</CreateDate>
+    <RiquiredEffortTime>P110D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Analysis</Name>
+    <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
+    <Id>1756</Id>
+    <Product>Detailed report assessing project feasibility, risks, and requirements</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-05T00:00:00</CreateDate>
+    <RiquiredEffortTime>P113D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Planning</Name>
+    <Descriptoin>Define project goals, scope, and objectives.</Descriptoin>
+    <Id>1757</Id>
+    <Product>Comprehensive project plan outlining goals, scope, and objectives</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-08T00:00:00</CreateDate>
+    <RiquiredEffortTime>P35D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Design</Name>
+    <Descriptoin>Develop conceptual and detailed plans for project implementation</Descriptoin>
+    <Id>1758</Id>
+    <Product>Comprehensive design plans for project implementation.</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-28T00:00:00</CreateDate>
+    <RiquiredEffortTime>P53D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Prototyping</Name>
+    <Descriptoin>Build initial models or prototypes for testing and validation.</Descriptoin>
+    <Id>1759</Id>
+    <Product> Initial working model or prototype for testing and validation</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-22T00:00:00</CreateDate>
+    <RiquiredEffortTime>P130D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Testing</Name>
+    <Descriptoin> Conduct comprehensive tests to ensure functionality and reliability.</Descriptoin>
+    <Id>1760</Id>
+    <Product>Documented results of comprehensive tests ensuring functionality.</Product>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-26T00:00:00</CreateDate>
+    <RiquiredEffortTime>P88D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Simulation</Name>
+    <Descriptoin>Use simulations to model and analyze system behavior</Descriptoin>
+    <Id>1761</Id>
+    <Product>Detailed model illustrating system behavior under different conditions.</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-09T00:00:00</CreateDate>
+    <RiquiredEffortTime>P74D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Integration</Name>
+    <Descriptoin>Combine individual components into a unified system.</Descriptoin>
+    <Id>1762</Id>
+    <Product>Fully assembled and functional system.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-17T00:00:00</CreateDate>
+    <RiquiredEffortTime>P103D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Coding</Name>
+    <Descriptoin>Write and implement software or programming code.</Descriptoin>
+    <Id>1763</Id>
+    <Product>Software or programming code implemented and ready for use.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-15T00:00:00</CreateDate>
+    <RiquiredEffortTime>P106D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Evaluation</Name>
+    <Descriptoin>Assess project performance against predefined criteria</Descriptoin>
+    <Id>1764</Id>
+    <Product>Assessment of project performance against predefined criteria.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-12T00:00:00</CreateDate>
+    <RiquiredEffortTime>P101D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Estimation</Name>
+    <Descriptoin> Estimate project costs, resources, and timelines.</Descriptoin>
+    <Id>1765</Id>
+    <Product>Detailed estimate of project costs, resources, and timelines</Product>
+    <Complexity>Intermediate</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-15T00:00:00</CreateDate>
+    <RiquiredEffortTime>P83D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Risk</Name>
+    <Descriptoin>Identify, analyze, and mitigate potential project risks.</Descriptoin>
+    <Id>1766</Id>
+    <Product>Documented strategies to identify, analyze, and mitigate potential risks.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-23T00:00:00</CreateDate>
+    <RiquiredEffortTime>P163D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Quality</Name>
+    <Descriptoin>Implement measures to ensure high standards of product or service.</Descriptoin>
+    <Id>1767</Id>
+    <Product>Implementation measures ensuring high standards of the final product.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-25T00:00:00</CreateDate>
+    <RiquiredEffortTime>P99D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Compliance</Name>
+    <Descriptoin>Ensure adherence to relevant regulations and standards.</Descriptoin>
+    <Id>1768</Id>
+    <Product>Documented proof of adherence to relevant regulations and standards.</Product>
+    <Complexity>Beginner</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-22T00:00:00</CreateDate>
+    <RiquiredEffortTime>P140D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
+  <Task>
+    <Name>Management</Name>
+    <Descriptoin>Oversee project activities, resources, and team coordination.</Descriptoin>
+    <Id>1769</Id>
+    <Product>Overview of project activities, resources, and coordination.</Product>
+    <Complexity>Advanced</Complexity>
+    <Engineerid xsi:nil="true" />
+    <CreateDate>2024-04-26T00:00:00</CreateDate>
+    <RiquiredEffortTime>P45D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+  </Task>
 </ArrayOfTask>

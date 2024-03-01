@@ -17,21 +17,12 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Content=" Doesn't have an account?&#xD;&#xA;Click here to Sign Up" HorizontalAlignment="Left" Margin="147,0,0,0" VerticalAlignment="Center" Height="86" Width="170" Grid.Row="2" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-1.086"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <Button Content="Sign In" HorizontalAlignment="Left" Margin="154,0,0,0" VerticalAlignment="Center" Height="73" Width="139" Grid.Row="2" Grid.Column="1" Click="BtnSignInClick"/>
+        <Button Content=" Doesn't have an account?&#xD;&#xA;Click here to Sign Up" HorizontalAlignment="Left" Margin="130,0,0,0" VerticalAlignment="Center" Height="67" Width="145" Grid.Row="2" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click" Grid.Column="1"/>
+        <Button Content="Sign In" HorizontalAlignment="Left" VerticalAlignment="Center" Height="67" Width="150" Grid.Row="2" Click="BtnSignInClick" Margin="132,0,0,0"/>
         <Label Content="User Name" HorizontalAlignment="Left" Margin="167,43,0,0" VerticalAlignment="Top"/>
         <Label Content="Password (Id)" HorizontalAlignment="Left" Margin="167,30,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,43,0,0" TextWrapping="Wrap" Text="{Binding Id,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="53,43,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,43,0,0" TextWrapping="Wrap" Text="{Binding Name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,43,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Id,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29"/>
 
     </Grid>
 </Window>

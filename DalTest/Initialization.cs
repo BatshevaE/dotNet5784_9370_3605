@@ -247,7 +247,8 @@ public static class Initialization
     private static void createUsers()
 
     {
-        User[] newUser = {
+        User[] newUser = 
+            {
 
            new(209859370,"Esti Walles",true),
            new(326673605,"Batsheva Eisenbach",true)

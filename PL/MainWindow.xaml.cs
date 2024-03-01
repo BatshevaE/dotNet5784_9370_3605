@@ -26,9 +26,14 @@ namespace PL
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public MainWindow()
         {
+            UserWindow us=new UserWindow();
+            us.ShowDialog();
+           this.Close();
             InitializeComponent();
-            CurrentTime = s_bl.Clock;
+            //CurrentTime = s_bl.Clock;
+            CurrentTime=DateTime.Now;
         }
+
 
 
         public DateTime CurrentTime
@@ -40,6 +45,8 @@ namespace PL
         // Using a DependencyProperty as the backing store for CurrentTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentTimeProperty =
             DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+
+
 
 
         /// <summary>
