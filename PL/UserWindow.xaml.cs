@@ -35,7 +35,7 @@ namespace PL
             try
             {
                CurrentUser = s_bl.User.Read(CurrentUser.Id)!;     
-                MainWindow main=new MainWindow();   
+                MainWindow main=new ();   
                 main.Show();    
                 this.Close();   
             }
@@ -48,7 +48,7 @@ namespace PL
             try
             {
                 s_bl.User.Create(CurrentUser);
-                MainWindow main = new MainWindow();
+                MainWindow main = new ();
                 main.Show();
                 this.Close();
             }

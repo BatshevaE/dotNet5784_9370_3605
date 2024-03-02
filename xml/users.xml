@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
-    <Id>243350051</Id>
+    <Id>393773989</Id>
     <Name>Daniel Cohen</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>302268292</Id>
+    <Id>314393722</Id>
     <Name>Eli levi</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>230355378</Id>
+    <Id>352849923</Id>
     <Name>Yair Rosen</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>216903303</Id>
+    <Id>266989192</Id>
     <Name>shir Klein</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>342774436</Id>
+    <Id>214437389</Id>
     <Name>Dina Hill</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>239968842</Id>
+    <Id>331788375</Id>
     <Name>Shira Stone</Name>
     <IsManager>false</IsManager>
   </User>
@@ -39,95 +39,5 @@
     <Id>326673605</Id>
     <Name>Batsheva Eisenbach</Name>
     <IsManager>true</IsManager>
-  </User>
-  <User>
-    <Id>311519164</Id>
-    <Name>Daniel Cohen</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>325815306</Id>
-    <Name>Eli levi</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>261381349</Id>
-    <Name>Yair Rosen</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>296157968</Id>
-    <Name>shir Klein</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>339946528</Id>
-    <Name>Dina Hill</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>330830906</Id>
-    <Name>Shira Stone</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>372424997</Id>
-    <Name>Daniel Cohen</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>233784824</Id>
-    <Name>Eli levi</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>373288514</Id>
-    <Name>Yair Rosen</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>211028516</Id>
-    <Name>shir Klein</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>273389517</Id>
-    <Name>Dina Hill</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>221370004</Id>
-    <Name>Shira Stone</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>206955070</Id>
-    <Name>Daniel Cohen</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>362967173</Id>
-    <Name>Eli levi</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>395980271</Id>
-    <Name>Yair Rosen</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>297189184</Id>
-    <Name>shir Klein</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>359795150</Id>
-    <Name>Dina Hill</Name>
-    <IsManager>false</IsManager>
-  </User>
-  <User>
-    <Id>301685819</Id>
-    <Name>Shira Stone</Name>
-    <IsManager>false</IsManager>
   </User>
 </ArrayOfUser>

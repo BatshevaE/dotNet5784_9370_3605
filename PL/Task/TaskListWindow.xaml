@@ -29,7 +29,7 @@
             <!---combo box for the status of the task,it will sor the list acordding to the status-->
             <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" SelectedValue="{Binding Status, Mode=TwoWay}"  Margin="200,0,0,0" SelectionChanged="CbStatusSelectionChanged"/>
         </Grid>
-        <ListView Margin="10,10,5,5" Grid.Row="1"  ItemsSource="{Binding TaskList}" MouseDoubleClick="DoubleClicTask" BorderBrush="{x:Null}" Foreground="Black"   >
+        <ListView Margin="10,10,5,5" Grid.Row="1" MouseDoubleClick="DoubleClicTask" BorderBrush="{x:Null}" Foreground="Black"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -37,6 +37,8 @@
             </ListView.View>
         </ListView>
         <!--Button to add item to the list of Engineers-->
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click"/>
+        <Button Content="Add" Grid.Row="1" HorizontalAlignment="Left" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" RenderTransformOrigin="-1.153,0.547" Margin="518,342,0,10"/>
+        <Button Content="Create Schedule" Foreground="Black" Margin="196,342,486,15" Grid.Row="1" HorizontalAlignment="Left" Height="50" Width="100" Background="{x:Null}" FontSize="13"  FontFamily="Sitka Banner" FontWeight="Bold" RenderTransformOrigin="-1.153,0.547" Click="BtnSchedule_Click"/>
+
     </Grid>
 </Window>

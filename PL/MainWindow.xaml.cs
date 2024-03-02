@@ -26,12 +26,13 @@ namespace PL
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public MainWindow()
         {
-            UserWindow us=new UserWindow();
-            us.ShowDialog();
-           this.Close();
+            //  UserWindow us=new();
+            // us.ShowDialog();
+            // this.Close();
             InitializeComponent();
-            //CurrentTime = s_bl.Clock;
-            CurrentTime=DateTime.Now;
+            CurrentTime = s_bl.Clock.ToLocalTime();
+            //CurrentTime=DateTime.Now;
+
         }
 
 
@@ -65,18 +66,57 @@ namespace PL
         /// <param name="e"></param>
         private void BtnIntilization_Click(object sender, RoutedEventArgs e)
         {
-           MessageBoxResult mbResult= MessageBox.Show("Are you sure you want to initialize the data?","Initialize Data",MessageBoxButton.YesNo);
-            if(mbResult == MessageBoxResult.Yes)
+            MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to initialize the data?", "Initialize Data", MessageBoxButton.YesNo);
+            if (mbResult == MessageBoxResult.Yes)
             {
                 BlApi.Factory.Get().Engineer.clear();
-                DalTest.Initialization.Do(); }
-
+                BlApi.Factory.Get().Task.clear();
+                BlApi.Factory.Get().User.clear();
+                DalTest.Initialization.Do();
             }
+
+        }
 
         private void BtnTaskClick(object sender, RoutedEventArgs e)
         {
             TaskListWindow task = new();
-            task.Show();    
+            task.Show();
+        }
+
+        private void BtnAddYear_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentTime = s_bl.AddYear();
+        }
+
+        private void BtnAddMonth_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentTime = s_bl.AddMonth();
+        }
+
+        private void BtnAddDay_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentTime = s_bl.AddDay();
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+
+            MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to delete all data?", "Clear Data", MessageBoxButton.YesNo);
+            if (mbResult == MessageBoxResult.Yes)
+            {
+                BlApi.Factory.Get().Engineer.clear();
+                BlApi.Factory.Get().Task.clear();
+                BlApi.Factory.Get().User.clear();
+            }
+        }
+
+        private void BtnStartProjectDate_Click(object sender, RoutedEventArgs e)
+        {
+           DatePicker datePicker = new DatePicker();
+
+           datePicker.SelectedDate= DateTime.Now;
+          
+            BlImplementation.Project.CreateSchedele(DateTime.Today.AddDays(1));
         }
     }
 }

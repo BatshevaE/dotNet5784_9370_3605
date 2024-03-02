@@ -38,9 +38,23 @@
         <!--Button to handle engineers-->
         <Button  Style="{StaticResource myButtonStyle}" Content="Handle &#xD;&#xA;Engineers" Click="BtnEngineers_Click" Margin="500,242,0,0" />
         <!--Button to initialize data-->
-        <Button Style="{StaticResource myButtonStyle}" Content="Initialize&#xD;&#xA;Data" Click="BtnIntilization_Click"  Margin="0,59,0,0" HorizontalAlignment="Center" />
+        <Button Style="{StaticResource myButtonStyle}" Content="Initialize&#xD;&#xA;Data" Click="BtnIntilization_Click"  Margin="125,58,0,0" />
         <!--Button to Handle Task-->
         <Button Style="{StaticResource myButtonStyle}" Content="Handle&#xD;&#xA;Task"  Margin="125,242,0,0" Click="BtnTaskClick" />
         <Label Content="{Binding Date ,StringFormat='{}{0:dd/MM/yyyy}'}" HorizontalAlignment="Left" Margin="288,374,0,0" VerticalAlignment="Top" Height="87" Width="207" Foreground="White" FontSize="35" FontFamily="Sitka Banner" FontWeight="Bold"/>
+        <Button Content="Add Year" HorizontalAlignment="Left" Margin="180,520,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="85" Click="BtnAddYear_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.913"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Content="Add Month" HorizontalAlignment="Left" Margin="325,520,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.057,0.754" Height="51" Width="75" Click="BtnAddMonth_Click"/>
+        <Button Content="Add Day" HorizontalAlignment="Left" Margin="457,520,0,0" VerticalAlignment="Top" Height="51" Width="83" Click="BtnAddDay_Click"/>
+        <Button Style="{StaticResource myButtonStyle}" Content="Clear&#xD;&#xA;Data&#xD;&#xA;" Margin="0,58,0,0" Click="BtnClear_Click" HorizontalAlignment="Center" />
+        <Button Style="{StaticResource myButtonStyle}" FontSize="20" Content="Setting a&#xD;&#xA; start date&#xD;&#xA; for the project" Margin="536,58,0,0" Click="BtnStartProjectDate_Click"  />
     </Grid>
 </Window>

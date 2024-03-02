@@ -10,7 +10,7 @@ internal class UserImplementation:IUser
         if ((item.Id <= 0) || (item.Name == ""))
             throw new BlWrongInput("wrong input");
 
-        DO.User doUser = new DO.User
+        DO.User doUser = new
           (item.Id, item.Name, item.IsManager);
         try
         {

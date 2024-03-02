@@ -70,6 +70,21 @@ namespace PL.Task
             this.Close();
            
         }
+
+        private void BtnSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                s_bl.Task.createAutomaticLuz(); 
+            }
+            catch (BO.BlNotAtTheRightStageException ch)
+            {
+                MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK);
+            }
+        
+    }
+
+      
     }
 
 

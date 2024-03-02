@@ -178,10 +178,7 @@ public static class Initialization
             double _cfh = s_rand.Next(150, 1000);//a random cost for hour of the engineer
            
             Engineer newEngineer = new(_id, _name, $"{engineerEmails[i++]}@gmail.com ", _c, _cfh);//ctor
-            User newUser = new(_id, _name, false);
-
-            
-                
+            User newUser = new(_id, _name, false);              
 
             //s_dalEngineer!.Create(newEngineer);stage 1
             s_dal!.Engineer.Create(newEngineer);//stage 2 
