@@ -7,11 +7,11 @@ internal class UserImplementation:IUser
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public int Create(BO.User item)
     {
-        if ((item.Id <= 0) || (item.Name == ""))
+        if ((item.Password <= 0) || (item.Name == ""))
             throw new BlWrongInput("wrong input");
 
         DO.User doUser = new
-          (item.Id, item.Name, item.IsManager);
+          (item.Password, item.Name, item.IsManager);
         try
         {
             int idUser = _dal.User.Create(doUser);
@@ -19,17 +19,17 @@ internal class UserImplementation:IUser
         }
         catch (DO.DalAlreadyExistException ex)
         {
-            throw new BO.BlAlreadyExistException($"User doesn't exist or Engineer with ID={item.Id} already exists ", ex);
+            throw new BO.BlAlreadyExistException($"User doesn't exist or Engineer with Password={item.Password} already exists ", ex);
         }
     }
-    public BO.User? Read(int id)
+    public BO.User? Read(int password)
     {
-        DO.User? doUser = _dal.User.Read(id);
+        DO.User? doUser = _dal.User.Read(password);
         if (doUser == null)
-            throw new BO.BlDoesNotExistException($"User with ID={id} does Not exist");
+            throw new BO.BlDoesNotExistException($"User with Password={password} does Not exist");
         return new BO.User()
         {
-            Id = id,
+            Password = password,
             Name = doUser.Name,
             IsManager= doUser.IsManager
         };
@@ -39,10 +39,10 @@ internal class UserImplementation:IUser
         IEnumerable<DO.User?> UserList = _dal.User.ReadAll();
         IEnumerable<BO.User> BOUserList =
         from item in UserList
-        orderby item.Id
+        orderby item.Password
         select new BO.User
         {
-            Id = item.Id,
+            Password = item.Password,
             Name = item.Name,
             IsManager = item.IsManager
         };
@@ -51,11 +51,11 @@ internal class UserImplementation:IUser
     }
     public void Update(BO.User item)
     {
-        if ((item.Id <= 0) || (item.Name == ""))
+        if ((item.Password <= 0) || (item.Name == ""))
             throw new BlWrongInput("wrong input");
 
         DO.User doUser = new DO.User
-          (item.Id, item.Name!, item.IsManager);
+          (item.Password, item.Name!, item.IsManager);
         try
         {
             _dal.User.Update(doUser);
@@ -63,18 +63,18 @@ internal class UserImplementation:IUser
         }
         catch (DO.DalAlreadyExistException ex)
         {
-            throw new BO.BlAlreadyExistException($"User with ID={item.Id} already exists", ex);
+            throw new BO.BlAlreadyExistException($"User with Password={item.Password} already exists", ex);
         }
     }
-    public void Delete(int id)
+    public void Delete(int password)
     {
         try
         {
-            _dal.User.Delete(id);
+            _dal.User.Delete(password);
         }
         catch (DO.DalAlreadyExistException ex)
         {
-            throw new BO.BlDoesNotExistException($"User with ID={id} does Not exist", ex);
+            throw new BO.BlDoesNotExistException($"User with Password={password} does Not exist", ex);
         }
     }
     public void clear()

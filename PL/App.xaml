@@ -10,6 +10,8 @@
         <local:ConvertIdToBool x:Key="ConvertIdToBoolKey"/>
         <local:ConvertIdToBoolOposite x:Key="ConvertIdToBoolOpositeKey"/>
         <local:ConvertIdToContentDependency x:Key="ConvertIdToContentDependencyKey"/>
-       
+        <local:ConvertTaskInEngToBool x:Key="ConvertTaskInEngToBoolKey"/>
+
+        
     </Application.Resources>
 </Application>

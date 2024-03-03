@@ -2,6 +2,8 @@
 using BO;
 using DalApi;
 using DO;
+using System.Collections.Generic;
+
 
 
 //using DalApi;
@@ -257,7 +259,7 @@ internal class TaskImplemenation : BlApi.ITask
               where item.DependentTask == idTask//the task dependent on other task
               select _dal.Task.Read(item.DependentOnTask);
             taskDependencys.Where(item => (item.StartDate + item.RiquiredEffortTime)! < DateTime.Today);//the task's that this task dependent on finish day, is before today
-            if (taskDependencys.Any()) throw new BlCanNotAssignRequestedEngineer("The Task dependent on othe task that didnt start yet,can't assign the engineer to the requested task");
+            if (taskDependencys.Any()) throw new BlCanNotAssignRequestedEngineer("The Task dependent on other tasks that didnt start yet,can't assign the engineer to the requested task");
             DO.Task taskToUpdate = new DO.Task(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);
             try
             {
@@ -345,9 +347,9 @@ internal class TaskImplemenation : BlApi.ITask
         foreach(var item in toUpdate) { lst.Add(item.Item1); };//put every item in toUpdate in the list of id
         while (_dal.Task.ReadAll().Count()> toUpdate.ToList().Count())//while not all the tasks in the list "toUpdate"
         {
-            
-           IEnumerable<DO.Task> tasks1 = (from DO.Task item1 in _dal.Task.ReadAll()//collection of all tasks the dependent on other task
-                                        where (GetAllDependencys(item1)!.Any())
+
+            IEnumerable<DO.Task> tasks1 = (from DO.Task item1 in _dal.Task.ReadAll()//collection of all tasks the dependent on other task
+                                           where ((GetAllDependencys(item1)!.Any()))
                                          select item1).ToList();
            foreach (DO.Task task in tasks1)
            {
@@ -372,26 +374,29 @@ internal class TaskImplemenation : BlApi.ITask
         { Project.CreateEndDate(endProject.Max()); }
 
    }
-    public void AddDependency(int id,int dependency)
+    public void AddDependency(int dependency,int id)
     {
         BO.Task task = Read(id)!;
         if (task.Dependencies!.FirstOrDefault(item => item.Id == dependency) != null)
             throw new BO.BlAlreadyExistException("Such dependency is already exists");
         else
         {
-            DO.Dependency newDependentDo = new DO.Dependency(0, dependency, id);
+            DO.Dependency newDependentDo = new(0, dependency,id);
             _dal.Dependency.Create(newDependentDo);
-            BO.TaskInList newDependent = new BO.TaskInList() {Id=dependency};
-            task.Dependencies!.Add(newDependent);
         }
     }
-    public void deleteDependency(int id, int dependency)
+    public void deleteDependency(int dependency, int id)
     {
         BO.Task task = Read(id)!;
-        BO.TaskInList d=task.Dependencies!.FirstOrDefault(item => item.Id==dependency)!;
-        task.Dependencies!.Remove(d);
-        _dal.Dependency.Delete(id);
+       DO.Dependency d=_dal.Dependency.ReadAll().FirstOrDefault(item=>(item!.DependentOnTask==id)&&(item.DependentTask==dependency))!;  
+        _dal.Dependency.Delete(d.Id);
     }
+    public bool GetAllDependentOnTasks(int id, List<int> lst)
+    {
+       List<DO.Dependency> t= _dal.Dependency.ReadAll().Where(item=>(item!.DependentTask==id)).ToList()!;
+        List<DO.Dependency> t2 = t.Where(item => lst.Contains(item.DependentOnTask)).ToList()!; 
+       return t.Count==t2.Count;
+     }
 }
 
 

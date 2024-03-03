@@ -72,6 +72,7 @@ namespace PL
                 BlApi.Factory.Get().Engineer.clear();
                 BlApi.Factory.Get().Task.clear();
                 BlApi.Factory.Get().User.clear();
+                BlImplementation.Project.zeroStartProject();
                 DalTest.Initialization.Do();
             }
 
@@ -107,6 +108,7 @@ namespace PL
                 BlApi.Factory.Get().Engineer.clear();
                 BlApi.Factory.Get().Task.clear();
                 BlApi.Factory.Get().User.clear();
+                BlImplementation.Project.zeroStartProject();
             }
         }
 

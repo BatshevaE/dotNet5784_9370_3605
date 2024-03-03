@@ -15,6 +15,6 @@ public interface ITask
     public void AddDependency(int id, int dependency);
     public void deleteDependency(int id, int dependency);
     public IEnumerable<BO.Task> ReadAll2(Func<BO.Task, bool>? filter = null);
-
+    public bool GetAllDependentOnTasks(int id, List<int> lst);
 
 }

@@ -79,6 +79,8 @@
         <TextBox Grid.Column="1" Grid.Row="4"  Margin="100,12,57,11" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  />
         <!--button of update or add,depends if we get an id(update)or not(add)-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625"  Click="BtnAddOrUpdate_Click" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Grid.ColumnSpan="2" Margin="350,0,0,0" />
+        <Button Content="Assign to task" HorizontalAlignment="Center" Height="51" Grid.Row="5" VerticalAlignment="Center" Width="100" Click="BtnAssignToTask_Click" IsEnabled="{Binding Task, Mode=OneTime, Converter={StaticResource ConvertTaskInEngToBoolKey}}"/>
+        <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625"   Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="150,12,0,0" Grid.Column="1" Click="BtnDeleteEngineer_Click" />
         <!--in the line above we binding the name to a class that return wheter the button will be name add or update,depends on the id-->
     </Grid>
 </Window>

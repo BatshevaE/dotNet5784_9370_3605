@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
-        <Grid Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,329" Grid.RowSpan="2">
+        <Grid Height="auto" Grid.Row="0" Width="auto" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -29,7 +29,7 @@
             <!---combo box for the status of the task,it will sor the list acordding to the status-->
             <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" SelectedValue="{Binding Status, Mode=TwoWay}"  Margin="200,0,0,0" SelectionChanged="CbStatusSelectionChanged"/>
         </Grid>
-        <ListView Margin="10,10,5,5" Grid.Row="1" MouseDoubleClick="DoubleClicTask" BorderBrush="{x:Null}" Foreground="Black"   >
+        <ListView Margin="10,10,5,5" Grid.Row="1" MouseDoubleClick="DoubleClicTask" BorderBrush="{x:Null}" Foreground="Black" ItemsSource="{Binding TaskList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

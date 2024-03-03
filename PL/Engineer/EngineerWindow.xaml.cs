@@ -91,5 +91,32 @@ namespace PL.Engineer
 
         }
 
+        private void BtnDeleteEngineer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                s_bl.Engineer.Delete(CurrentEngineer.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
+        }
+
+        private void BtnAssignToTask_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                PL.Task.taskToEnginner t = new(CurrentEngineer);
+                t.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace PL
         {
             try
             {
-               CurrentUser = s_bl.User.Read(CurrentUser.Id)!;     
+               CurrentUser = s_bl.User.Read(CurrentUser.Password)!;     
                 MainWindow main=new ();   
                 main.Show();    
                 this.Close();   

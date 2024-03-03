@@ -3,7 +3,7 @@
 namespace DO;
 public record User
 (
-    int Id,
+    int Password,
     string Name,
     bool IsManager
 )

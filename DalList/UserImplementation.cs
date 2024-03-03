@@ -18,24 +18,24 @@ internal class UserImplementation:IUser
     /// <exception cref="DalAlreadyExistException"></exception>
     public int Create(User item)
     {
-        if (Read(item.Id) != null)
-            throw new DalAlreadyExistException("An user type object with such an ID already exists");
-        if((DataSource.Engineers.FirstOrDefault(t=>t.Id==item.Id)==null)&&(item.Id!=209859370)&&(item.Id!=326673605))
+        if (Read(item.Password) != null)
+            throw new DalAlreadyExistException("An user type object with such Password already exists");
+        if((DataSource.Engineers.FirstOrDefault(t=>t.Name==item.Name)==null)&&(item.Password!=209859370)&&(item.Password!=326673605))
             throw new DalDoesNotExistException("An user with such Id can't be assigend to the system");
         DataSource.Users.Add(item);
-        return item.Id;
+        return item.Password;
     }
     /// <summary>
     /// The function deletes an existing user from the list 
     /// </summary>
     /// <param name="id">ID number of an engineer</param>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public bool Delete(int id)
+    public bool Delete(int Password)
     {
-        User? ifUser = DataSource.Users.Find(temp => temp.Id == id);
+        User? ifUser = DataSource.Users.Find(temp => temp.Password == Password);
         if (ifUser == null)
         {
-            throw new DalDoesNotExistException($"User with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"User with Password={Password} does Not exist");
         }
         DataSource.Users.Remove(ifUser);
         return true;
@@ -46,9 +46,9 @@ internal class UserImplementation:IUser
     /// <param name="id">ID number of an user.</param>
     /// <returns>If there is an object in the database with the received identification number, the method will return a reference to the existing engineer.
     ///Otherwise, the method will return null.</returns>
-    public User? Read(int id)
+    public User? Read(int password)
     {
-        return DataSource.Users.FirstOrDefault(item => item.Id == id);//stage 2
+        return DataSource.Users.FirstOrDefault(item => item.Password == password);//stage 2
     }
     /// <summary>
     /// Return a copy of the list of references to all objects of users.
@@ -73,11 +73,11 @@ internal class UserImplementation:IUser
     /// <exception cref="DalDoesNotExistException"></exception>
     public void Update(User item)
     {
-        User? user = DataSource.Users.Find(User => User.Id == item.Id);
+        User? user = DataSource.Users.Find(User => User.Password == item.Password);
 
         if (DataSource.Users.FirstOrDefault(item) == null)
         {
-            throw new DalDoesNotExistException($"User with ID={item.Id} does Not exist");
+            throw new DalDoesNotExistException($"User with Password={item.Password} does Not exist");
         }
         DataSource.Users.Remove(user!);
         DataSource.Users.Add(item);

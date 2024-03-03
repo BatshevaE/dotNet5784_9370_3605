@@ -71,7 +71,8 @@ namespace PL.Task
                     s_bl.Task.AddDependency(CurrentTaskDependency.Id,CurrentDependency.Id);
                     MessageBox.Show("successsfull create dependency", "succeeded", MessageBoxButton.OK);
                     this.Close();
-                   
+                    new TaskListWindow().Show();
+
                 }
                 else//there is  an engineer with such an id-we are on update mode
                 {

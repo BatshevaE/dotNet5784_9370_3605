@@ -1,4 +1,5 @@
 ﻿
+using DalApi;
 using System.Globalization;
 using System.Windows.Data;
 namespace PL;
@@ -18,6 +19,28 @@ class ConvertIdToContent : IValueConverter
         throw new NotImplementedException();
     }
     
+}
+class ConvertTaskInEngToBool: IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((Tuple<int, string>)value == null)
+           return true;
+        return false;
+        //IEnumerable<DO.Task> taskList =
+        //  from DO.Task item in _dal.Task.ReadAll()
+        //  where item.Engineerid == idEngineer//the engineer is already assigned to another task
+        //  select item;
+        //if (taskList.Any())
+        //    return false;
+        //return true;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+
 }
 class ConvertIdToContentDependency : IValueConverter
 {
@@ -52,15 +75,16 @@ class ConvertIdToBool : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if((int)value != 0)
+            if(((int)value != 0)&& ((BO.Stage)BlImplementation.Project.getStage() == BO.Stage.Doing))
               return true;
-            return false;   
-        }
+        return false;
+    }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
     }
+
 
 

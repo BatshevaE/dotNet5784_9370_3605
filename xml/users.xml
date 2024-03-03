@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
-    <Id>393773989</Id>
+    <Password>123</Password>
     <Name>Daniel Cohen</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>314393722</Id>
+    <Password>124</Password>
     <Name>Eli levi</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>352849923</Id>
+    <Password>125</Password>
     <Name>Yair Rosen</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>266989192</Id>
+    <Password>126</Password>
     <Name>shir Klein</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>214437389</Id>
+    <Password>127</Password>
     <Name>Dina Hill</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>331788375</Id>
+    <Password>128</Password>
     <Name>Shira Stone</Name>
     <IsManager>false</IsManager>
   </User>
   <User>
-    <Id>209859370</Id>
+    <Password>209859370</Password>
     <Name>Esti Walles</Name>
     <IsManager>true</IsManager>
   </User>
   <User>
-    <Id>326673605</Id>
+    <Password>326673605</Password>
     <Name>Batsheva Eisenbach</Name>
     <IsManager>true</IsManager>
   </User>

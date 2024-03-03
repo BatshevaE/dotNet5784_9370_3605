@@ -17,27 +17,27 @@ public class UserImplementation:IUser
     public int Create(User item)
     {
         List<User> Users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
-        if (Read(item.Id) != null)
-            throw new DalAlreadyExistException("An user type object with such an ID already exists");
+        if (Read(item.Password) != null)
+            throw new DalAlreadyExistException("An user type object with such an Password already exists");
         List<Engineer> Engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
-        Engineer? eng = Engineers.FirstOrDefault(item1 => (item1.Id == item.Id)&&(item1.Name==item.Name));//stage 2
-        if((eng==null)&&(item.Id!=209859370)&&(item.Id!=326673605))
-        throw new DalDoesNotExistException("An user with such Id can't be assigend to the system");
+        Engineer? eng = Engineers.FirstOrDefault(item1 => (item1.Name == item.Name)&&(item1.Name==item.Name));//stage 2
+        if((eng==null)&&(item.Password!=209859370)&&(item.Password!=326673605))
+        throw new DalDoesNotExistException("An user with such Name or Password can't be assigend to the system");
         Users.Add(item);
         XMLTools.SaveListToXMLSerializer(Users, s_users_xml);
 
-        return item.Id;
+        return item.Password;
     }
     /// <summary>
     /// The function deletes an existing engineer from the xml file of engineers
     /// </summary>
     /// <param name="id">ID number of an engineer to delete</param>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public bool Delete(int id)
+    public bool Delete(int password)
     {
         List<User> Users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
 
-        User? ifUser = Users.Find(temp => temp.Id == id) ?? throw new DalDoesNotExistException($"User with ID={id} does Not exist");
+        User? ifUser = Users.Find(temp => temp.Password == password) ?? throw new DalDoesNotExistException($"User with Password: {password} does Not exist");
         Users.Remove(ifUser);
         XMLTools.SaveListToXMLSerializer(Users, s_users_xml);
         return true;
@@ -48,10 +48,10 @@ public class UserImplementation:IUser
     /// <param name="id">ID number of an engineer.</param>
     /// <returns>If there is an object in the database with the received identification number, the method will return a reference to the existing engineer.
     ///Otherwise, the method will return null.</returns>
-    public User? Read(int id)
+    public User? Read(int password)
     {
         List<User> Users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
-        User? user = Users.FirstOrDefault(item => item.Id == id);//stage 2
+        User? user = Users.FirstOrDefault(item => item.Password == password);//stage 2
         XMLTools.SaveListToXMLSerializer(Users, s_users_xml);
         return user;
     }
@@ -82,7 +82,7 @@ public class UserImplementation:IUser
     public void Update(User item)
     {
         List<User> Users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
-        User? user = Users.Find(user1 => user1.Id == item.Id) ?? throw new DalDoesNotExistException($"User with ID={item.Id} does Not exist");
+        User? user = Users.Find(user1 => user1.Password == item.Password) ?? throw new DalDoesNotExistException($"User with Password: {item.Password} does Not exist");
         Users.Remove(user!);
         Users.Add(item);
         XMLTools.SaveListToXMLSerializer(Users, s_users_xml);

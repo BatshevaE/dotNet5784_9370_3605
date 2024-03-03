@@ -74,6 +74,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -99,32 +101,22 @@
 
         <!-- Create date of the task-->
         <Label Content="Created Date" Grid.Column="0" Grid.Row="4" Margin="100,1,100,0"/>
-        <DatePicker Grid.Column="1" Grid.Row="3"  Margin="72,31,85,2"  Text="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5"  >
-            <DatePicker.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.144"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </DatePicker.RenderTransform>
-        </DatePicker>
-
+        <Label Grid.Column="1" Grid.Row="3"  Margin="72,31,85,2"  Content="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5"  />
         <!-- Planned date of the task-->
         <Label Content="Planned Date" Grid.Column="0" Grid.Row="5" Margin="100,1,100,0"/>
-        <DatePicker Grid.Column="1" Grid.Row="4"  Margin="72,31,85,1"  Text="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
+        <Label Grid.Column="1" Grid.Row="4"  Margin="72,31,85,1"  Content="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
         <!--  Calculated planned complition  date of the task-->
         <Label Content="Complition Planned Date" Grid.Column="0" Grid.Row="5" Margin="100,31,100,1" Grid.RowSpan="2"/>
-        <DatePicker Grid.Column="1" Grid.Row="5"  Margin="72,30,85,2" Text="{Binding ForecastDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
+        <Label Grid.Column="1" Grid.Row="5"  Margin="72,30,85,2" Content="{Binding ForecastDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
         <!-- Latest complit date of the task-->
         <Label Content="DeadLine Date" Grid.Column="0" Grid.Row="7" Margin="100,1,100,0"/>
-        <DatePicker Grid.Column="1" Grid.Row="6"  Margin="72,31,85,1" Text="{Binding DeadLineDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
+        <TextBox Grid.Column="1" Grid.Row="6"  Margin="72,31,85,1" Text="{Binding DeadlineDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
         <!-- Actuall complition date of the task-->
         <Label Content="Actual Complition Date" Grid.Column="0" Grid.Row="7" Margin="100,31,100,1" Grid.RowSpan="2"/>
-        <DatePicker Grid.Column="1" Grid.Row="7"  Margin="72,31,85,1" Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
+        <TextBox Grid.Column="1" Grid.Row="7"  Margin="72,31,85,1" Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
         <!-- Status of the task-->
         <Label Content="Status" Grid.Column="0" Grid.Row="8" Margin="100,31,100,1" Grid.RowSpan="2"/>
@@ -142,10 +134,13 @@
         <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="11"  Margin="100,31,100,1" Grid.RowSpan="2" />
 
         <!--button of update or add,depends if we get an id(update)or not(add)-->
-        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="364,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="364,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />
+        <Label Content="The tasks that thecurrent task depends on" FontSize="11" Grid.Column="0" Grid.Row="12"  Margin="34,28,64,0" Grid.RowSpan="2"  >
+           
+        </Label>
 
         <!--button to watch the dependencies of the selected task-->
-        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="12" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Margin="72,0,85,0" Grid.Column="1" Click="BtnDependencyClick" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" />
+        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Margin="72,0,0,0" Grid.Column="1" Click="BtnDependencyClick" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" />
         <!--in the line above we binding the name to a class that return wheter the button will be name add or update,depends on the id-->
     </Grid>
 </Window>
