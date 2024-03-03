@@ -104,15 +104,15 @@
         <Label Grid.Column="1" Grid.Row="3"  Margin="72,31,85,2"  Content="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5"  />
         <!-- Planned date of the task-->
         <Label Content="Planned Date" Grid.Column="0" Grid.Row="5" Margin="100,1,100,0"/>
-        <Label Grid.Column="1" Grid.Row="4"  Margin="72,31,85,1"  Content="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
+        <Label Grid.Column="1" Grid.Row="4"  Margin="72,31,85,1"  Content="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
         <!--  Calculated planned complition  date of the task-->
         <Label Content="Complition Planned Date" Grid.Column="0" Grid.Row="5" Margin="100,31,100,1" Grid.RowSpan="2"/>
         <Label Grid.Column="1" Grid.Row="5"  Margin="72,30,85,2" Content="{Binding ForecastDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
-        <!-- Latest complit date of the task-->
-        <Label Content="DeadLine Date" Grid.Column="0" Grid.Row="7" Margin="100,1,100,0"/>
-        <TextBox Grid.Column="1" Grid.Row="6"  Margin="72,31,85,1" Text="{Binding DeadlineDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
+        <!--Actual start date-->
+        <Label Content="Actual Start Date" Grid.Column="0" Grid.Row="7" Margin="100,1,100,0"/>
+        <TextBox Grid.Column="1" Grid.Row="6"  Margin="72,31,85,1" Text="{Binding StartDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
         <!-- Actuall complition date of the task-->
         <Label Content="Actual Complition Date" Grid.Column="0" Grid.Row="7" Margin="100,31,100,1" Grid.RowSpan="2"/>

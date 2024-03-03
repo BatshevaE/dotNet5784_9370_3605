@@ -94,7 +94,8 @@ internal class TaskImplemenation : BlApi.ITask
             CreatedAtDate = doTask.CreateDate,
             RequiredEffortTime = doTask.RiquiredEffortTime,
             ForecastDate = doTask.OptionalDeadline,
-            StartDate = doTask.StartDate,
+            StartDate = doTask.StartTaskDate,
+            ScheduledDate=doTask.StartDate,
             DeadlineDate = doTask.ActualDeadline,
             Remarks = doTask.Note,
             Status = GetStatus(doTask),
@@ -206,7 +207,7 @@ internal class TaskImplemenation : BlApi.ITask
             throw new BO.BlTooEarlyDate($"The date {startDate} is too early");
 
         DO.Task updateTask = new DO.Task
-         (doTask.Name, doTask.Descriptoin, doTask.Id, doTask.Product, doTask.Complexity, doTask.Engineerid, doTask.CreateDate, doTask.RiquiredEffortTime, false, doTask.OptionalDeadline, startDate, doTask.StartTaskDate, doTask.ActualDeadline, doTask.Note);
+         (doTask.Name, doTask.Descriptoin, doTask.Id, doTask.Product, doTask.Complexity, doTask.Engineerid, doTask.CreateDate, doTask.RiquiredEffortTime, false, startDate+doTask.RiquiredEffortTime, startDate, doTask.StartTaskDate, doTask.ActualDeadline, doTask.Note);
         try
         {
             _dal.Task.Update(updateTask);

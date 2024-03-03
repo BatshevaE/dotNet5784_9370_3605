@@ -138,13 +138,12 @@ public static class Initialization
                     double effortTime = s_rand.Next(30, 180);//here we get a random time in days for each task
                     EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task
 
-                    //here we get a random create date  from today until 3 months from today
-                    DateTime startDateRange = new (2024, 4, 1);
-                    Random gen = new ();
-                    int rangeStart = (startDateRange - DateTime.Today).Days;
-                    DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));
-                    
-                    Task newTask = new(_name,tasksDescription[i], 0,tasksProduct[i], complex, null, createDate, TimeSpan.FromDays(effortTime), false, null, null, null, null, null);//ctor
+            //here we get a random create date  from today until 3 months from today
+              DateTime startDateRange = new (2024, 4, 1);
+               Random gen = new ();
+              int rangeStart = (startDateRange - DateTime.Today).Days;
+             DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));
+                    Task newTask = new(_name,tasksDescription[i], 0,tasksProduct[i], complex, null, DateTime.Today, TimeSpan.FromDays(effortTime), false, null, null, null, null, null);//ctor
             i++;
             //s_dalTask!.Create(newTask);stage 1
                     s_dal!.Task.Create(newTask);//stage 2  
