@@ -55,5 +55,11 @@ namespace PL
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); };
 
         }
+
+        private void BtnInitialize_Click(object sender, RoutedEventArgs e)
+        {
+            DalTest.Initialization.Do();
+
+        }
     }
 }

@@ -6,23 +6,57 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding CurrentUser,RelativeSource={RelativeSource self},Mode=TwoWay}"
-        Title="UserWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Button Content=" Doesn't have an account?&#xD;&#xA;Click here to Sign Up" HorizontalAlignment="Left" Margin="130,0,0,0" VerticalAlignment="Center" Height="67" Width="145" Grid.Row="2" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click" Grid.Column="1"/>
-        <Button Content="Sign In" HorizontalAlignment="Left" VerticalAlignment="Center" Height="67" Width="150" Grid.Row="2" Click="BtnSignInClick" Margin="132,0,0,0"/>
-        <Label Content="User Name" HorizontalAlignment="Left" Margin="167,43,0,0" VerticalAlignment="Top"/>
-        <Label Content="Password " HorizontalAlignment="Left" Margin="167,30,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,43,0,0" TextWrapping="Wrap" Text="{Binding Name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Margin="0,43,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29"/>
+        Title="UserWindow" >
+    <Window.Resources>
+        <!--style for all the buttons-->
+        <Style  TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style  TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label Content="welcome to the project" FontSize="40" Margin="0,55,0,0" Height="63" Width="564" HorizontalAlignment="Center" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontFamily="MV Boli" FontWeight="Bold">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3509A4" Offset="0"/>
+                    <GradientStop Color="#FF4800FF" Offset="0.275"/>
+                    <GradientStop Color="#FF0DB4ED" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Label Content="Doesn't have an account?" Margin="574,325,0,0" Width="216" Height="32" FontSize="20"/>
+        <!--Button to sign up as new engineer-->
+        <Button Content="Click here &#xD;&#xA;to Sign Up" Height="67" Width="150" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click" Margin="596,357,0,0"/>
+        <!--Button to sign in as manager or existing engineer-->
+        <Button Content="Sign In" Height="67" Width="150" Click="BtnSignInClick" Margin="59,357,0,0"/>
+        <Label Content="User Name" Margin="147,158,0,0"/>
+        <!--text box for the user name-->
+        <TextBox HorizontalAlignment="Left" Margin="400,168,0,0" TextWrapping="Wrap" Text="{Binding Name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="30" Background="{x:Null}"/>
+
+        <Label Content="Password " Margin="147,213,0,0" Height="37"/>
+        <!--text box for the password-->
+        <TextBox HorizontalAlignment="Left" Margin="400,217,0,0" TextWrapping="Wrap" Text="{Binding Password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29" Background="{x:Null}"/>
+        <Button Content="Button" Margin="726,0,0,0" Height="34" Width="64" Click="BtnInitialize_Click"/>
 
     </Grid>
 </Window>

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
-        Title="TaskListWindow" Height="450" Width="800">
-    <Grid>
+        Title="TaskListWindow"  Height="640" Width="800">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
@@ -17,19 +17,19 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
-        <Grid Height="auto" Grid.Row="0" Width="auto" Grid.RowSpan="2">
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
+            
             <Label Content="List of tasks" HorizontalAlignment="Center"  FontWeight="Bold" Grid.Column="0" FontSize="18" Foreground="Black" Width="109"/>
             <!---combo box for the level of the engineer,it will sor the list acordding to the level-->
             <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectedValue="{Binding Path=Level,Mode=TwoWay}" SelectionChanged="CbComplexity_SelectionChanged" Margin="0,0,200,0"/>
             <!---combo box for the status of the task,it will sor the list acordding to the status-->
             <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" SelectedValue="{Binding Status, Mode=TwoWay}"  Margin="200,0,0,0" SelectionChanged="CbStatusSelectionChanged"/>
         </Grid>
-        <ListView Margin="10,10,5,5" Grid.Row="1" MouseDoubleClick="DoubleClicTask" BorderBrush="{x:Null}" Foreground="Black" ItemsSource="{Binding TaskList}">
+        <ListView Margin="5" Grid.Row="1" MouseDoubleClick="DoubleClicTask" BorderBrush="{x:Null}" Foreground="Black" ItemsSource="{Binding TaskList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -37,8 +37,8 @@
             </ListView.View>
         </ListView>
         <!--Button to add item to the list of Engineers-->
-        <Button Content="Add" Grid.Row="1" HorizontalAlignment="Left" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" RenderTransformOrigin="-1.153,0.547" Margin="518,342,0,10"/>
-        <Button Content="Create Schedule" Foreground="Black" Margin="196,342,486,15" Grid.Row="1" HorizontalAlignment="Left" Height="50" Width="100" Background="{x:Null}" FontSize="13"  FontFamily="Sitka Banner" FontWeight="Bold" RenderTransformOrigin="-1.153,0.547" Click="BtnSchedule_Click"/>
+        <Button Content="Add" Grid.Row="2"  Margin="150,0,0,0" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" />
+        <Button Content="  Create&#xA; Schedule" Foreground="Black" Margin="-150,0,0,0" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="20"  FontFamily="Sitka Banner" FontWeight="Bold" Click="BtnSchedule_Click"/>
 
     </Grid>
 </Window>

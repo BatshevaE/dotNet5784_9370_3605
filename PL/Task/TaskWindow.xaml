@@ -58,7 +58,7 @@
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -134,13 +134,13 @@
         <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="11"  Margin="100,31,100,1" Grid.RowSpan="2" />
 
         <!--button of update or add,depends if we get an id(update)or not(add)-->
-        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="364,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />
-        <Label Content="The tasks that thecurrent task depends on" FontSize="11" Grid.Column="0" Grid.Row="12"  Margin="34,28,64,0" Grid.RowSpan="2"  >
-           
-        </Label>
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="525,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />
+        <Label Content="The tasks that the current task depends on" FontSize="11" Grid.Column="0" Grid.Row="12"  Margin="34,28,64,0" Grid.RowSpan="2" />
 
         <!--button to watch the dependencies of the selected task-->
-        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Margin="72,0,0,0" Grid.Column="1" Click="BtnDependencyClick" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" />
-        <!--in the line above we binding the name to a class that return wheter the button will be name add or update,depends on the id-->
+        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Margin="72,0,0,0" Grid.Column="1" Click="BtnDependencyClick"  />
+
+        <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="150,0,0,0" Click="BtnDeleteTask_Click" />
+
     </Grid>
 </Window>

@@ -89,5 +89,18 @@ namespace PL.Task
                 Close();
             }
         }
+
+        private void BtnDeleteTask_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                s_bl.Task.Delete(CurrentTask.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+            }
+        }
     }
 }

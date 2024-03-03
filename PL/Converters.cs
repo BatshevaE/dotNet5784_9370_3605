@@ -75,7 +75,7 @@ class ConvertIdToBool : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(((int)value != 0)&& ((BO.Stage)BlImplementation.Project.getStage() == BO.Stage.Doing))
+            if((int)value != 0)
               return true;
         return false;
     }
