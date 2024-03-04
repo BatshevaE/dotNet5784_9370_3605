@@ -420,6 +420,13 @@ internal class TaskImplemenation : BlApi.ITask
         IEnumerable<BO.TaskInList> toReturn = toAssign2.Select(item => item);
         return toReturn.ToList();
     }
+    public void UpdateActuallStartDate(DateTime? actuallStartDate,int id) 
+    {
+        BO.Task task = Read(id)!;
+        DO.Task doTask = new(task.Name, task.Description, task.Id, "", (DO.EngineerLevel)task.Copmlexity,task.EngineerTask!.Item1, task.CreatedAtDate, task.RequiredEffortTime, false, task.ForecastDate, task.ScheduledDate, actuallStartDate, actuallStartDate + task.RequiredEffortTime, task.Remarks);
+        _dal.Task.Update(doTask);
+        //to put try and catch!!
+    }
 }
 
 

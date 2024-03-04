@@ -25,7 +25,7 @@ public class Project
                 return BO.Stage.Doing;
         }
     }
-    public static void CreateSchedele(DateTime startDate)
+    public static void CreateSchedele(DateTime? startDate)
     {
         if ((startDate >= DateTime.Now )&& (_dal.StartProject == null))
             _dal.StartProject = startDate;       

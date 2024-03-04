@@ -11,7 +11,6 @@
         <local:ConvertIdToBoolOposite x:Key="ConvertIdToBoolOpositeKey"/>
         <local:ConvertIdToContentDependency x:Key="ConvertIdToContentDependencyKey"/>
         <local:ConvertTaskInEngToBool x:Key="ConvertTaskInEngToBoolKey"/>
-
-        
+        <local:ConvertTupleToContext x:Key="ConvertTupleToContextKey"/>
     </Application.Resources>
 </Application>

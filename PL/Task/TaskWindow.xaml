@@ -132,6 +132,7 @@
 
         <!--Enginner in Task  of Task-->
         <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="11"  Margin="100,31,100,1" Grid.RowSpan="2" />
+        <TextBox Grid.Column="1" Grid.Row="11"  Margin="72,31,85,0" TextWrapping="Wrap"  Text="{Binding EngineerTask, Mode=TwoWay, Converter={StaticResource ConvertTupleToContextKey }}" Grid.RowSpan="2" />
 
         <!--button of update or add,depends if we get an id(update)or not(add)-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="525,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />

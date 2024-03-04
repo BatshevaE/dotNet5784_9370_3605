@@ -17,5 +17,6 @@ public interface ITask
     public IEnumerable<BO.Task> ReadAll2(Func<BO.Task, bool>? filter = null);
     public bool GetAllDependentOnTasks(int id, List<int> lst);
     public IEnumerable<BO.TaskInList> AllTasksToAssign(BO.Engineer engineer);
+    public void UpdateActuallStartDate(DateTime? actuallStartDate, int id);
 
 }

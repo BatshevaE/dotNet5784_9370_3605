@@ -114,11 +114,8 @@ namespace PL
 
         private void BtnStartProjectDate_Click(object sender, RoutedEventArgs e)
         {
-           DatePicker datePicker = new DatePicker();
 
-           datePicker.SelectedDate= DateTime.Now;
-          
-            BlImplementation.Project.CreateSchedele(DateTime.Today.AddDays(1));
+            new DatePickerWindow().Show();
         }
     }
 }
