@@ -283,11 +283,13 @@ internal class TaskImplemenation : BlApi.ITask
     {
         if (task.StartDate == null)
             return BO.Status.Unschedeled;
-        else if ((task.StartDate != null) && (task.StartDate > _bl.Clock))
+        else if ((task.StartDate != null) && (task.StartDate > _bl.Clock) && (task.StartTaskDate == null))
             return BO.Status.Schedeled;
-        else if ((task.StartDate < _bl.Clock) && (task.StartDate + task.RiquiredEffortTime > _bl.Clock))
+        else if ((task.StartDate < _bl.Clock) && (task.StartTaskDate == null))
+            return BO.Status.InJeopardy;
+        else if ((task.StartTaskDate !=null)&&(task.StartTaskDate<_bl.Clock) && (task.StartTaskDate + task.RiquiredEffortTime > _bl.Clock))
             return BO.Status.OnTrack;
-        else //if (task.StartDate + task.RiquiredEffortTime < DateTime.Today)
+        else //if (task.StartTaskDate + task.RiquiredEffortTime < DateTime.Today)
             return BO.Status.Done;
     }
     /// <summary>
@@ -398,6 +400,26 @@ internal class TaskImplemenation : BlApi.ITask
         List<DO.Dependency> t2 = t.Where(item => lst.Contains(item.DependentOnTask)).ToList()!; 
        return t.Count==t2.Count;
      }
+    public IEnumerable<BO.TaskInList> AllTasksToAssign(BO.Engineer engineer) 
+    {
+   
+        List < TaskInList >? toAssign= ReadAll().Where(item => (BO.EngineerLevel)item!.Copmlexity <= engineer.Level)!.ToList()!;
+        List<TaskInList> toAssign2=new();
+        foreach (TaskInList task in toAssign)
+        {
+            DO.Task doTTask = _dal.Task.Read(task.Id)!;
+            if (GetAllDependencys(doTTask!)!.Any() == false) { toAssign2.Add(task); }
+            else
+            {
+                List<TaskInList>lst=GetAllDependencys(doTTask!)!;
+                IEnumerable<DO.Task>deps=lst.Select(item=>_dal.Task.Read(item.Id))!;
+                deps = deps.Where(item => GetStatus(item) != Status.Done).ToList();
+                if(deps.Any()==false) { toAssign2.Add(task); }  
+            }
+        }
+        IEnumerable<BO.TaskInList> toReturn = toAssign2.Select(item => item);
+        return toReturn.ToList();
+    }
 }
 
 

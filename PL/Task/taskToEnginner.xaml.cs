@@ -26,8 +26,8 @@ namespace PL.Task
         public taskToEnginner(BO.Engineer eng)
         {
             InitializeComponent();
-            TaskForEngList = (Level <= eng.Level) ?
-            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => (item.Copmlexity == Level))!;
+            TaskForEngList = s_bl?.Task.AllTasksToAssign(eng)!;
+            //s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => (item.Copmlexity <= Level))!;
         }
         public IEnumerable<BO.TaskInList> TaskForEngList
         {
@@ -36,7 +36,7 @@ namespace PL.Task
         }
         // Using a DependencyProperty as the backing store for .  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskListProperty =
-            DependencyProperty.Register("TaskForEngList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("TaskForEngList", typeof(IEnumerable<BO.TaskInList>), typeof(taskToEnginner), new PropertyMetadata(null));
 
     }
 }

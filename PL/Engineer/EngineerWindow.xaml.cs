@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Task;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -106,10 +107,13 @@ namespace PL.Engineer
 
         private void BtnAssignToTask_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                PL.Task.taskToEnginner t = new(CurrentEngineer);
-                t.ShowDialog();
+            try 
+            { 
+            //{
+            //    PL.Task.taskToEnginner t = new(CurrentEngineer);
+            //    t.Show();
+            new taskToEnginner(CurrentEngineer).Show();
+             this.Close();
 
             }
             catch (Exception ex)
