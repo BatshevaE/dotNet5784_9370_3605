@@ -16,7 +16,7 @@
             <Setter Property="Height" Value="150"/>
             <Setter Property="Background" Value="{x:Null}"/>
             <Setter Property="BorderBrush" Value="{x:Null}" />
-            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="35" />
             <Setter Property="FontFamily" Value="Sitka Banner" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -24,34 +24,27 @@
     </Window.Resources>
     <Grid RenderTransformOrigin="0.845,0.875" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.Background>
-            <VisualBrush>
-                <VisualBrush.Visual>
-                    <StackPanel Background="White">
-                        <MediaElement Source="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHhod3l2bTVtMmU5dzNudHN6MDYweW9wYm84MTFieHBxODBzNmIwbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QpVUMRUJGokfqXyfa1/giphy.gif" LoadedBehavior="Play" >
-                            <!--<MediaElement Source="https://v.ftcdn.net/02/08/19/24/700_F_208192454_wQkdzbltgMVSPevbjAdGkIcy9Hfu2gto_ST.mp4" LoadedBehavior="Play" >-->
-                        </MediaElement>
-                    </StackPanel>
-                </VisualBrush.Visual>
-            </VisualBrush>
+            <ImageBrush ImageSource="https://cdni.iconscout.com/illustration/premium/thumb/online-sign-up-4489361-3723268.png" Stretch="None" />
         </Grid.Background>
         <!--Button to handle engineers-->
-        <Button  Style="{StaticResource myButtonStyle}" Content="Handle &#xD;&#xA;Engineers" Click="BtnEngineers_Click" Margin="437,312,0,0" />
+        <Button  Style="{StaticResource myButtonStyle}" Content="Handle &#xD;&#xA;Engineers" Click="BtnEngineers_Click" Margin="640,278,0,0" />
         <!--Button to initialize data-->
         <Button Style="{StaticResource myButtonStyle}" Content="Initialize&#xD;&#xA;Data" Click="BtnIntilization_Click"  Margin="10,464,0,0" />
         <!--Button to Handle Task-->
-        <Button Style="{StaticResource myButtonStyle}" Content="Handle&#xD;&#xA;Task"  Margin="250,312,0,0" Click="BtnTaskClick" />
+        <Button Style="{StaticResource myButtonStyle}" Content="Handle&#xD;&#xA;Task"  Margin="10,278,0,0" Click="BtnTaskClick" />
         <!--show the current time-->
-        <Label Content="{Binding Date ,StringFormat='{}{0:dd/MM/yyyy}'}" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Height="98" Width="212" Foreground="White" FontSize="35" FontFamily="Sitka Banner" FontWeight="Bold"/>
+        <Label Content="{Binding Date ,StringFormat='{}{0:dd/MM/yyyy}'}" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Height="122" Width="188" Foreground="Black" FontSize="35" FontFamily="Sitka Banner" FontWeight="Bold" Margin="312,0,0,0"/>
         <!--add to the clock a year-->
-        <Button   Content="Add Year" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" FontSize="24" Margin="210,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="115" Click="BtnAddYear_Click" FontFamily="Sitka Banner" FontWeight="Bold"/>
+        <Button   Content="Add Year" HorizontalAlignment="Left" BorderBrush="Black" Background="{x:Null}" Foreground="Black" FontSize="24" Margin="216,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="48" Width="115" Click="BtnAddYear_Click" FontFamily="Sitka Banner" FontWeight="Bold"/>
         <!--add to the clock a month-->
-        <Button  Content="Add Month" HorizontalAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" FontSize="24" Margin="0,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.057,0.754" Height="48" Width="118" Click="BtnAddMonth_Click" FontFamily="Sitka Banner" FontWeight="Bold"/>
+        <Button  Content="Add Month" HorizontalAlignment="Left" BorderBrush="Black" Background="{x:Null}" Foreground="Black" FontSize="24" Margin="352,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.057,0.754" Height="48" Width="118" Click="BtnAddMonth_Click" FontFamily="Sitka Banner" FontWeight="Bold"/>
         <!-- add to the clock a day-->
-        <Button Content="Add Day" HorizontalAlignment="Left" BorderBrush="{x:Null}"  Background="{x:Null}"  Foreground="White" FontSize="24" Margin="501,138,0,0" VerticalAlignment="Top" Height="48" Width="85" Click="BtnAddDay_Click" FontFamily="Sitka Banner" FontWeight="Bold"/>
+        <Button Content="Add Day" HorizontalAlignment="Left" BorderBrush="Black"  Background="{x:Null}"  Foreground="Black" FontSize="24" Margin="485,98,0,0" VerticalAlignment="Top" Height="48" Width="85" Click="BtnAddDay_Click" FontFamily="Sitka Banner" FontWeight="Bold"/>
         <!--Button to clear all data-->
         <Button Style="{StaticResource myButtonStyle}" Content="Clear&#xD;&#xA;Data&#xD;&#xA;" Margin="640,464,0,0" Click="BtnClear_Click" RenderTransformOrigin="0.655,0.587" />
         <!--Button to set a start date for the project-->
         <Button Style="{StaticResource myButtonStyle}" FontSize="20" Content="Setting a&#xD;&#xA; start date&#xD;&#xA; for the project" Margin="640,10,0,0" Click="BtnStartProjectDate_Click"  />
-        <Button Content="Button" HorizontalAlignment="Left" Margin="45,25,0,0" VerticalAlignment="Top" Height="60" Width="69" Click="Button_Click"/>
+        <Button Content="Gant" Style="{StaticResource myButtonStyle}" Margin="45,25,0,0" Height="60" Width="101" Click="Button_Click"/>
+        <Button Content="Log Out" Style="{StaticResource myButtonStyle}" Margin="336,467,0,0" Click="BtnLogIn_Click"/>
     </Grid>
 </Window>

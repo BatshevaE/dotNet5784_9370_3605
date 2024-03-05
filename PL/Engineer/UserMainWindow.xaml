@@ -7,9 +7,28 @@
         mc:Ignorable="d"
        DataContext="{Binding eng, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
        Title="UserMainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="35" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Button Content="Watch Your Details" HorizontalAlignment="Left" Margin="295,135,0,0" VerticalAlignment="Top" Height="110" Width="128" Click="BtnDetails_Click"/>
-        <Button Content="{Binding Task, Mode=OneTime, Converter={StaticResource ConvertTupleToTextKey}}" Height="50" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="309,317,0,0" Click="BtnAssignOrWatch_Click" />
+        <Grid.Background>
+            <ImageBrush ImageSource="https://img.freepik.com/premium-vector/design-people-business-training-illustration-flat-style_57801-672.jpg" Stretch="Uniform" />
+        </Grid.Background>
+        <Button Content="Watch&#xD;&#xA; Your &#xD;&#xA;Details" Margin="21,36,0,0" Click="BtnDetails_Click"/>
+        <Button Content="{Binding Task, Mode=OneTime, Converter={StaticResource ConvertTupleToTextKey}}" Margin="21,253,0,0" Click="BtnAssignOrWatch_Click" />
+        <Button Content="Log Out" Margin="640,274,0,0" Click="BtnLogIn_Click" />
 
     </Grid>
 </Window>

@@ -6,9 +6,16 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
    	    DataContext="{Binding Clock, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
-        Title="DatePickerWindow" Height="450" Width="800">
+        Title="DatePickerWindow" Height="200" Width="200">
     <Grid>
-        <DatePicker DisplayDateStart="{Binding Date,Mode=OneWay}" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" SelectedDateChanged="DatePicker_Select"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF1CB1D2" Offset="1"/>
+                <GradientStop Color="White" Offset="0"/>
+                <GradientStop Color="#FF94E9E5" Offset="0.518"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <DatePicker DisplayDateStart="{Binding Date,Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"  SelectedDateChanged="DatePicker_Select" BorderBrush="{x:Null}" Background="{x:Null}" Height="64" Width="144"/>
 
     </Grid>
 </Window>

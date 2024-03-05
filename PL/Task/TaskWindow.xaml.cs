@@ -95,6 +95,7 @@ namespace PL.Task
             try
             {
                 s_bl.Task.Delete(CurrentTask.Id);
+                this.Close();  
             }
             catch (Exception ex)
             {

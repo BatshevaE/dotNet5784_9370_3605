@@ -56,6 +56,7 @@ public partial class TaskWindowForStartDate : Window
         var picker = sender as DatePicker;
         DateTime? date = picker!.SelectedDate;
         s_bl.Task.UpdateActuallStartDate(date, CurrentTask.Id);
+        this.Close();
     }
 }
 

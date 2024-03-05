@@ -83,6 +83,9 @@
             <ColumnDefinition Width="357*"/>
             <ColumnDefinition Width="43*"/>
         </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush  ImageSource="https://img.freepik.com/premium-vector/desktop-mobile-illustration-login-page-data-analysis_559664-333.jpg" Stretch="Uniform" />
+        </Grid.Background>
         <!--Id of Task-->
         <Label Content="Id" Grid.Column="0"  />
         <TextBox Grid.Column="1" IsEnabled="False" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Margin="66,0,79,10"  />

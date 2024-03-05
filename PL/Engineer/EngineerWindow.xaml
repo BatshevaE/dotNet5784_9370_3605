@@ -48,9 +48,12 @@
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Window.Resources>
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.Background>
+            <ImageBrush  ImageSource="https://thumbs.dreamstime.com/b/%CE%BD%CE%AD%CE%B1-%CF%83%CF%85%CE%BD%CE%B5%CE%B4%CF%81%CE%AF%CE%B1%CF%83%CE%B7-%CE%B3%CF%85%CE%BD%CE%B1%CE%B9%CE%BA%CF%8E%CE%BD-%CF%83%CF%84%CE%BF%CE%BD-%CF%80%CE%AF%CE%BD%CE%B1%CE%BA%CE%B1-%CE%BA%CE%B1%CE%B9-%CF%83%CF%84%CF%81%CE%AD%CE%B8%CE%B9%CE%BC%CE%BF-%CF%84%CE%B7%CF%82-%CF%80%CF%81%CE%BF%CF%83%CE%BF%CF%87%CE%AE%CF%82-%CF%83%CF%84%CE%B7-119783240.jpg" Stretch="Uniform" />
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -59,28 +62,28 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="400*" />
             <ColumnDefinition Width="357*"/>
             <ColumnDefinition Width="43*"/>
         </Grid.ColumnDefinitions>
         <!--Name of engineer-->
-        <Label Content="Name" Grid.Column="0"  Margin="100,11,100,11"  />
-        <TextBox Grid.Column="1"  Margin="100,11,57,11" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
+        <Label Content="Name" Grid.Column="0"  Margin="200,12,0,0"  />
+        <TextBox Grid.Column="1"  Margin="26,0,131,12" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
         <!--id of engineer-->
-        <Label Content="Id" Grid.Column="0" Grid.Row="1"  Margin="100,12,100,11" />
-        <TextBox  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolKey}}"   Grid.Column="1" Grid.Row="1"  Margin="100,12,57,11" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  />
+        <Label Content="Id" Grid.Column="0" Grid.Row="1"  Margin="200,6,0,6" />
+        <TextBox  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolKey}}"   Grid.Column="1"  Margin="26,61,131,13" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
         <!--email adress of engineer-->
-        <Label Content="Email" Grid.Column="0" Grid.Row="2"  Margin="100,11,100,11" />
-        <TextBox Grid.Column="1" Grid.Row="2"  Margin="100,11,57,11" TextWrapping="Wrap"  Text="{Binding Email, Mode=TwoWay, ValidatesOnExceptions=true}"  />
+        <Label Content="Email" Grid.Column="0" Grid.Row="2"  Margin="200,12,0,0" />
+        <TextBox Grid.Column="1" Grid.Row="2"  Margin="26,5,131,7" TextWrapping="Wrap"  Text="{Binding Email, Mode=TwoWay, ValidatesOnExceptions=true}" RenderTransformOrigin="0.682,0.352"  />
         <!--level of engineer-->
-        <Label Content="Level" Grid.Column="0" Grid.Row="3"  Margin="100,11,100,11" />
-        <ComboBox Grid.Column="1"  Margin="100,11,57,11" Grid.Row="3" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <Label Content="Level" Grid.Column="0" Grid.Row="3"  Margin="200,9,0,3" />
+        <ComboBox Grid.Column="1"  Margin="26,2,131,10" Grid.Row="3" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
         <!--cost for hour of the engineer-->
-        <Label Content="Cost for hour" Grid.Column="0" Grid.Row="4" Margin="100,12,100,11"/>
-        <TextBox Grid.Column="1" Grid.Row="4"  Margin="100,12,57,11" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  />
+        <Label Content="Cost for hour" Grid.Column="0" Grid.Row="4" Margin="200,10,0,2"/>
+        <TextBox Grid.Column="1" Grid.Row="4"  Margin="26,2,131,10" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  />
 
-        <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="4"  Margin="100,58,100,46" Grid.RowSpan="3" />
-        <TextBox Grid.Column="1" Grid.Row="5"  Margin="100,4,57,3" TextWrapping="Wrap"  Text="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTupleToContextInEngKey }}" />
+        <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="5"  Margin="200,3,0,4" />
+        <TextBox Grid.Column="1" Grid.Row="5"  Margin="26,3,131,4" TextWrapping="Wrap"  Text="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTupleToContextInEngKey }}" />
 
         <!--button of update or add,depends if we get an id(update)or not(add)-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625"  Click="BtnAddOrUpdate_Click" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Grid.ColumnSpan="2" Margin="350,0,0,0" />
@@ -90,5 +93,6 @@
         <Button Content="Assign to &#xA;     task" HorizontalAlignment="Center" Height="51" Grid.Row="6" VerticalAlignment="Center" Width="100" Click="BtnAssignToTask_Click" IsEnabled="{Binding Task, Mode=OneTime, Converter={StaticResource ConvertTaskInEngToBoolKey}}" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontWeight="Bold" FontSize="20" FontFamily="Sitka Banner"/>
         <!--button to delete this engineer from the list og engineers-->
         <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="150,0,0,0" Grid.Column="1" Click="BtnDeleteEngineer_Click" />
+
     </Grid>
 </Window>

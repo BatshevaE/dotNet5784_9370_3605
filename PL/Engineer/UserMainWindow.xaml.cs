@@ -53,6 +53,13 @@ namespace PL.Engineer
                 new TaskWindow(eng.Task.Item1).ShowDialog(); 
             }   
         }
+
+        private void BtnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            UserWindow s = new();
+            s.Show();
+        }
     }
 
 

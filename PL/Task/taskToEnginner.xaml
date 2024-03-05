@@ -8,16 +8,14 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="taskToEnginner" Height="450" Width="800">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
-        <Grid x:Name="Mo" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid  HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -30,6 +28,7 @@
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+            <Image Source="https://static.vecteezy.com/system/resources/previews/003/354/916/non_2x/business-online-training-seminar-or-courses-background-illustration-vector.jpg"/>
         </ListView>
     </Grid>
 </Window>

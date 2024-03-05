@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding CurrentUser,RelativeSource={RelativeSource self},Mode=TwoWay}"
-        Title="UserWindow" >
+        Title="UserWindow" Height="700"  >
     <Window.Resources>
         <!--style for all the buttons-->
         <Style  TargetType="Button">
@@ -26,37 +26,47 @@
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="50"/>
-            <Setter Property="Background" Value="{x:Null}"/>
             <Setter Property="BorderBrush" Value="{x:Null}" />
             <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Sitka Banner" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Window.Resources>
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Label Content="welcome to the project" FontSize="40" Margin="0,55,0,0" Height="63" Width="564" HorizontalAlignment="Center" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontFamily="MV Boli" FontWeight="Bold">
-            <Label.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF3509A4" Offset="0"/>
-                    <GradientStop Color="#FF4800FF" Offset="0.275"/>
-                    <GradientStop Color="#FF0DB4ED" Offset="1"/>
-                </LinearGradientBrush>
-            </Label.Foreground>
-        </Label>
-        <Label Content="Doesn't have an account?" Margin="574,325,0,0" Width="216" Height="32" FontSize="20"/>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="700"  RenderTransformOrigin="0.136,0.776">
+        <Grid.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <StackPanel Background="White">
+                        <MediaElement Source="https://static.vecteezy.com/system/resources/previews/002/723/730/original/login-ui-ux-design-concept-and-illustration-website-login-ui-ux-design-concept-landing-page-login-screen-concept-free-vector.jpg" LoadedBehavior="Play" >
+                            <!--<MediaElement Source="https://v.ftcdn.net/02/08/19/24/700_F_208192454_wQkdzbltgMVSPevbjAdGkIcy9Hfu2gto_ST.mp4" LoadedBehavior="Play" >-->
+                        </MediaElement>
+                    </StackPanel>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+        <!--<Image Source="https://static.thenounproject.com/png/4706195-200.png" Width="150" Height="150" RenderTransformOrigin="0.5,0.5" Stretch="Fill" Margin="497,40,143,234"  />-->
+        <Label Content="Doesn't have an account?" Margin="532,586,0,0" Width="216" Height="32" FontSize="20" Background="{x:Null}"/>
         <!--Button to sign up as new engineer-->
-        <Button Content="Click here &#xD;&#xA;to Sign Up" Height="67" Width="150" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click" Margin="596,357,0,0"/>
+        <Button Content="Click here &#xD;&#xA;to Sign Up" Height="67" Width="150" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click" Margin="585,623,0,0"/>
         <!--Button to sign in as manager or existing engineer-->
-        <Button Content="Sign In" Height="67" Width="150" Click="BtnSignInClick" Margin="59,357,0,0"/>
-        <Label Content="User Name" Margin="147,158,0,0"/>
+        <Button Content="Sign In" Height="57" Width="124" Click="BtnSignInClick" Margin="508,276,0,0" Background="BlueViolet" Foreground="White" />
+        <Label Content="User Name" Margin="356,191,0,0" Width="92" RenderTransformOrigin="0.638,0.541" Height="30" Background="White"/>
         <!--text box for the user name-->
-        <TextBox HorizontalAlignment="Left" Margin="400,168,0,0" TextWrapping="Wrap" Text="{Binding Name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="30" Background="{x:Null}"/>
-
-        <Label Content="Password " Margin="147,213,0,0" Height="37"/>
+        <TextBox HorizontalAlignment="Left" Margin="448,191,0,0" TextWrapping="Wrap" Text="{Binding Name,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="261" Height="30" Background="White"/>
+        <Label Content="Password " Margin="356,230,0,0" Height="34" Width="92" Background="White"/>
         <!--text box for the password-->
-        <TextBox HorizontalAlignment="Left" Margin="400,217,0,0" TextWrapping="Wrap" Text="{Binding Password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="240" Height="29" Background="{x:Null}"/>
-        <Button Content="Button" Margin="726,0,0,0" Height="34" Width="64" Click="BtnInitialize_Click"/>
+        <TextBox HorizontalAlignment="Left" Margin="448,234,0,0" TextWrapping="Wrap" Text="{Binding Password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="261" Height="30" Background="White"/>
+
+        <Button Content="Button" Height="34" Width="64" Click="BtnInitialize_Click"/>
+
+        <Label Content="" Margin="374,338,0,0" Width="322" Height="38" RenderTransformOrigin="0.506,-0.199" Background="White"/>
+        <Label Content="" Margin="632,284,0,0" Width="50" Height="32" Background="White"/>
+        <Label Content="" Margin="372,278,0,0" Width="130" Height="44" Background="White"/>
+        <Label Content="" Margin="386,126,0,0" Width="230" Height="38" Background="White"/>
+        <Label Content="" Margin="560,94,0,0" Width="149" Height="27" Background="White"/>
+
+
 
     </Grid>
 </Window>

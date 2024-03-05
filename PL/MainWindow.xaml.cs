@@ -123,5 +123,12 @@ namespace PL
             GuntWindow t= new GuntWindow(); 
             t.ShowDialog();
         }
+
+        private void BtnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            UserWindow s=new UserWindow();
+            s.Show(); 
+        }
     }
 }
