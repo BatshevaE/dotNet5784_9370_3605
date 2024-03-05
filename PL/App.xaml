@@ -12,5 +12,10 @@
         <local:ConvertIdToContentDependency x:Key="ConvertIdToContentDependencyKey"/>
         <local:ConvertTaskInEngToBool x:Key="ConvertTaskInEngToBoolKey"/>
         <local:ConvertTupleToContext x:Key="ConvertTupleToContextKey"/>
+        <local:ConvertStatusToColur x:Key="ConvertStatusToColurKey"/>
+        <local:ConvertTupleToText x:Key="ConvertTupleToTextKey"/>
+        <local:ConvertTupleToContextInEng x:Key="ConvertTupleToContextInEngKey"/>
+
+        
     </Application.Resources>
 </Application>

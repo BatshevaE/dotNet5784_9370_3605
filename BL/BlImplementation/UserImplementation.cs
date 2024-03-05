@@ -11,7 +11,7 @@ internal class UserImplementation:IUser
             throw new BlWrongInput("wrong input");
 
         DO.User doUser = new
-          (item.Password, item.Name, item.IsManager);
+          (item.Password, item.Name, item.IsManager,item.Id);
         try
         {
             int idUser = _dal.User.Create(doUser);
@@ -31,7 +31,8 @@ internal class UserImplementation:IUser
         {
             Password = password,
             Name = doUser.Name,
-            IsManager= doUser.IsManager
+            IsManager= doUser.IsManager,
+            Id=doUser.Id
         };
     }
     public IEnumerable<BO.User> ReadAll(Func<BO.User, bool>? filter = null)
@@ -44,7 +45,9 @@ internal class UserImplementation:IUser
         {
             Password = item.Password,
             Name = item.Name,
-            IsManager = item.IsManager
+            IsManager = item.IsManager,
+            Id = item.Id
+
         };
         if (filter != null) { return BOUserList.Where(filter); }
         else { return BOUserList; }
@@ -55,7 +58,7 @@ internal class UserImplementation:IUser
             throw new BlWrongInput("wrong input");
 
         DO.User doUser = new DO.User
-          (item.Password, item.Name!, item.IsManager);
+          (item.Password, item.Name!, item.IsManager,item.Id);
         try
         {
             _dal.User.Update(doUser);

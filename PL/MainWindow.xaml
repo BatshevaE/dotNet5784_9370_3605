@@ -52,5 +52,6 @@
         <Button Style="{StaticResource myButtonStyle}" Content="Clear&#xD;&#xA;Data&#xD;&#xA;" Margin="640,464,0,0" Click="BtnClear_Click" RenderTransformOrigin="0.655,0.587" />
         <!--Button to set a start date for the project-->
         <Button Style="{StaticResource myButtonStyle}" FontSize="20" Content="Setting a&#xD;&#xA; start date&#xD;&#xA; for the project" Margin="640,10,0,0" Click="BtnStartProjectDate_Click"  />
+        <Button Content="Button" HorizontalAlignment="Left" Margin="45,25,0,0" VerticalAlignment="Top" Height="60" Width="69" Click="Button_Click"/>
     </Grid>
 </Window>

@@ -129,23 +129,24 @@ internal class TaskImplemenation : BlApi.ITask
     {
         IEnumerable<DO.Task?> TaskList = _dal.Task.ReadAll();
         IEnumerable<BO.Task> BOTaskList =
-        from item in TaskList
-        orderby item.Id
+        from doTask in TaskList
+        orderby doTask.Id
         select new BO.Task
         {
-            Id = item.Id,
-            Name = item.Name,
-            Description = item.Descriptoin,
-            Copmlexity = (BO.EngineerLevel)item.Complexity,
-            EngineerTask = calculateEngineerTask(item.Engineerid),
-            CreatedAtDate = item.CreateDate,
-            RequiredEffortTime = item.RiquiredEffortTime,
-            ForecastDate = item.OptionalDeadline,
-            StartDate = item.StartDate,
-            DeadlineDate = item.ActualDeadline,
-            Remarks = item.Note,
-            Status = GetStatus(item),
-            Dependencies = GetAllDependencys(item)
+            Id = doTask.Id,
+            Name = doTask.Name,
+            Description = doTask.Descriptoin,
+            Copmlexity = (BO.EngineerLevel)doTask.Complexity,
+            EngineerTask = calculateEngineerTask(doTask.Engineerid),
+            CreatedAtDate = doTask.CreateDate,
+            RequiredEffortTime = doTask.RiquiredEffortTime,
+            ForecastDate = doTask.OptionalDeadline,
+            StartDate = doTask.StartTaskDate,
+            ScheduledDate = doTask.StartDate,
+            DeadlineDate = doTask.ActualDeadline,
+            Remarks = doTask.Note,
+            Status = GetStatus(doTask),
+            Dependencies = GetAllDependencys(doTask)
         };
         if (filter != null)
         { return BOTaskList.Where(filter); }
@@ -404,17 +405,18 @@ internal class TaskImplemenation : BlApi.ITask
     {
    
         List < TaskInList >? toAssign= ReadAll().Where(item => (BO.EngineerLevel)item!.Copmlexity <= engineer.Level)!.ToList()!;
+
         List<TaskInList> toAssign2=new();
         foreach (TaskInList task in toAssign)
         {
             DO.Task doTTask = _dal.Task.Read(task.Id)!;
-            if (GetAllDependencys(doTTask!)!.Any() == false) { toAssign2.Add(task); }
+            if ((GetAllDependencys(doTTask!)!.Any() == false)&&(doTTask.Engineerid==0)) { toAssign2.Add(task); }
             else
             {
                 List<TaskInList>lst=GetAllDependencys(doTTask!)!;
                 IEnumerable<DO.Task>deps=lst.Select(item=>_dal.Task.Read(item.Id))!;
                 deps = deps.Where(item => GetStatus(item) != Status.Done).ToList();
-                if(deps.Any()==false) { toAssign2.Add(task); }  
+                if((deps.Any()==false)&&(Read(task.Id)!.EngineerTask==null)) { toAssign2.Add(task); }  
             }
         }
         IEnumerable<BO.TaskInList> toReturn = toAssign2.Select(item => item);

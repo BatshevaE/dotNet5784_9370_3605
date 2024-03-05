@@ -117,5 +117,11 @@ namespace PL
 
             new DatePickerWindow().Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GuntWindow t= new GuntWindow(); 
+            t.ShowDialog();
+        }
     }
 }

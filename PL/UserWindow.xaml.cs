@@ -34,10 +34,19 @@ namespace PL
         {
             try
             {
-               CurrentUser = s_bl.User.Read(CurrentUser.Password)!;     
-                MainWindow main=new ();   
-                main.Show();    
-                this.Close();   
+                if (CurrentUser.IsManager)
+                {
+                    CurrentUser = s_bl.User.Read(CurrentUser.Password)!;
+                    MainWindow main = new();
+                    main.Show();
+                    this.Close();
+                }
+                else
+                {
+                    CurrentUser = s_bl.User.Read(CurrentUser.Password)!;
+                    new UserMainWindow(CurrentUser.Id).Show();
+                    this.Close();
+                }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); } ; 
             
@@ -58,6 +67,10 @@ namespace PL
 
         private void BtnInitialize_Click(object sender, RoutedEventArgs e)
         {
+             BlApi.Factory.Get().Engineer.clear();
+                BlApi.Factory.Get().Task.clear();
+                BlApi.Factory.Get().User.clear();
+                BlImplementation.Project.zeroStartProject();
             DalTest.Initialization.Do();
 
         }

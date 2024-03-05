@@ -1,7 +1,11 @@
 ﻿
 using DalApi;
+using System.Data;
 using System.Globalization;
+using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 namespace PL;
 
 /// <summary>
@@ -90,7 +94,7 @@ class ConvertTupleToContext : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if ((Tuple<int?,string>?)value == null)
-            return "No Engineer Assignet Yet";
+            return "No Engineer Assigned Yet";
         return value.ToString()!;
     }
 
@@ -99,6 +103,53 @@ class ConvertTupleToContext : IValueConverter
         throw new NotImplementedException();
     }
 }
+class ConvertStatusToColur : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((BO.Status)value == BO.Status.Schedeled)
+            return new SolidColorBrush(Colors.Aquamarine);
+        else if ((BO.Status)value == BO.Status.InJeopardy)
+            return new SolidColorBrush(Colors.Red);
+        else if ((BO.Status)value == BO.Status.OnTrack)
+            return new SolidColorBrush(Colors.Lavender);
+        else if ((BO.Status)value == BO.Status.Done)
+            return new SolidColorBrush(Colors.RoyalBlue);
+        return new SolidColorBrush(Colors.White);
 
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+class ConvertTupleToText : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+
+        return (Tuple<int,string>?)value == null ? "Select a Task To Assign" : "Watch Details of Your Assigned Task";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+class ConvertTupleToContextInEng : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((Tuple<int, string>?)value == null)
+            return "You Are Not Assigned To Any Task";
+        return value.ToString()!;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 
 
