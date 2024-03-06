@@ -34,16 +34,15 @@ namespace PL
         {
             try
             {
+                CurrentUser = s_bl.User.Read(CurrentUser.Password)!;
                 if (CurrentUser.IsManager)
                 {
-                    CurrentUser = s_bl.User.Read(CurrentUser.Password)!;
                     MainWindow main = new();
                     main.Show();
                     this.Close();
                 }
                 else
                 {
-                    CurrentUser = s_bl.User.Read(CurrentUser.Password)!;
                     new UserMainWindow(CurrentUser.Id).Show();
                     this.Close();
                 }

@@ -45,7 +45,6 @@
                 </VisualBrush.Visual>
             </VisualBrush>
         </Grid.Background>
-        <!--<Image Source="https://static.thenounproject.com/png/4706195-200.png" Width="150" Height="150" RenderTransformOrigin="0.5,0.5" Stretch="Fill" Margin="497,40,143,234"  />-->
         <Label Content="Doesn't have an account?" Margin="532,586,0,0" Width="216" Height="32" FontSize="20" Background="{x:Null}"/>
         <!--Button to sign up as new engineer-->
         <Button Content="Click here &#xD;&#xA;to Sign Up" Height="67" Width="150" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click" Margin="585,623,0,0"/>
@@ -64,7 +63,7 @@
         <Label Content="" Margin="632,284,0,0" Width="50" Height="32" Background="White"/>
         <Label Content="" Margin="372,278,0,0" Width="130" Height="44" Background="White"/>
         <Label Content="" Margin="386,126,0,0" Width="230" Height="38" Background="White"/>
-        <Label Content="" Margin="560,94,0,0" Width="149" Height="27" Background="White"/>
+        <Label Content="Welcome To EasyProject" Margin="386,67,0,0" Width="323" Height="59" Background="White" FontSize="30" Foreground="MediumPurple"/>
 
 
 

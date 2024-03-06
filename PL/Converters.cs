@@ -107,13 +107,13 @@ class ConvertStatusToColur : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((BO.Status)value == BO.Status.Schedeled)
+        if ((string)value == "Schedeled")
             return new SolidColorBrush(Colors.Aquamarine);
-        else if ((BO.Status)value == BO.Status.InJeopardy)
+        else if ((string)value == "InJeopardy")
             return new SolidColorBrush(Colors.Red);
-        else if ((BO.Status)value == BO.Status.OnTrack)
+        else if ((string)value == "OnTrack")
             return new SolidColorBrush(Colors.Lavender);
-        else if ((BO.Status)value == BO.Status.Done)
+        else if ((string)value == "Done")
             return new SolidColorBrush(Colors.RoyalBlue);
         return new SolidColorBrush(Colors.White);
 

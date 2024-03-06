@@ -78,8 +78,11 @@ namespace PL.Engineer
 
             EngineerWindow eng = new(engineer!.Id);
             eng.ShowDialog();
+
             this.Close();
-            
+            new EngineerListWindow().Show();
+
+
         }
     }
 }

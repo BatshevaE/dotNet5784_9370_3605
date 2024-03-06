@@ -20,7 +20,7 @@ internal class UserImplementation:IUser
     {
         if (Read(item.Password) != null)
             throw new DalAlreadyExistException("An user type object with such Password already exists");
-        if((DataSource.Engineers.FirstOrDefault(t=>t.Name==item.Name)==null)&&(item.Password!=209859370)&&(item.Password!=326673605))
+        if((DataSource.Engineers.FirstOrDefault(t=>t.Name==item.Name)==null)&&(item.Password!=111)&&(item.Password!=100))
             throw new DalDoesNotExistException("An user with such Id can't be assigend to the system");
         DataSource.Users.Add(item);
         return item.Password;

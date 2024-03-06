@@ -135,7 +135,7 @@ public static class Initialization
         int i = 0;
         foreach (var _name in tasksNames)//goes over the array of names foreach (var _description in tasksDescription) foreach (var _product in tasksProduct)
                 {                  
-                    double effortTime = s_rand.Next(1, 30);//here we get a random time in days for each task
+                    double effortTime = s_rand.Next(1, 4);//here we get a random time in days for each task
                     EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task
 
             //here we get a random create date  from today until 3 months from today
@@ -246,8 +246,8 @@ public static class Initialization
         User[] newUser = 
             {
 
-           new(209859370,"Esti Walles",true,209859370),
-           new(326673605,"Batsheva Eisenbach",true,326673605)
+           new(111,"Esti Walles",true,209859370),
+           new(100,"Batsheva Eisenbach",true,326673605)
         };
 
         foreach (User user in newUser)

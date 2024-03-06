@@ -34,9 +34,6 @@ namespace PL
             //CurrentTime=DateTime.Now;
 
         }
-
-
-
         public DateTime CurrentTime
         {
             get { return (DateTime)GetValue(CurrentTimeProperty); }
@@ -116,6 +113,20 @@ namespace PL
         {
 
             new DatePickerWindow().Show();
+            try
+            {
+                s_bl.Task.createAutomaticLuz();
+                this.Close();
+                TaskListWindow listWindow = new TaskListWindow();
+                listWindow.ShowDialog();
+                MessageBox.Show("The Start Date of the project and the creation of the schdule were successfully updated", "success", MessageBoxButton.OK,MessageBoxImage.Information);
+
+            }
+            catch (BO.BlNotAtTheRightStageException ch)
+            {
+                MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -124,11 +135,13 @@ namespace PL
             t.ShowDialog();
         }
 
-        private void BtnLogIn_Click(object sender, RoutedEventArgs e)
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
         {
+            new UserWindow().Show();
             this.Close();
-            UserWindow s=new UserWindow();
-            s.Show(); 
+
+
         }
+
     }
 }

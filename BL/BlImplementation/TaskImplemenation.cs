@@ -419,8 +419,9 @@ internal class TaskImplemenation : BlApi.ITask
                 if((deps.Any()==false)&&(Read(task.Id)!.EngineerTask==null)) { toAssign2.Add(task); }  
             }
         }
-        IEnumerable<BO.TaskInList> toReturn = toAssign2.Select(item => item);
-        return toReturn.ToList();
+        return toAssign2.ToList();   
+        //IEnumerable<BO.TaskInList> toReturn = toAssign2.Select(item => item);
+        //return toReturn.ToList();
     }
     public void UpdateActuallStartDate(DateTime? actuallStartDate,int id) 
     {

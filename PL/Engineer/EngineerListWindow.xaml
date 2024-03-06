@@ -34,6 +34,9 @@
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+            <ListView.Background>
+                <ImageBrush ImageSource="https://en.pimg.jp/049/150/935/1/49150935.jpg" Stretch="Uniform" />
+            </ListView.Background>
         </ListView>
         <!--Button to add item to the list of Engineers-->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAdd_Click" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black"/>

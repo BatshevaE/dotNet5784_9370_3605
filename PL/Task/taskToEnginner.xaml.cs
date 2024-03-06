@@ -25,7 +25,9 @@ namespace PL.Task
         public BO.EngineerLevel Level { get; set; } = BO.EngineerLevel.None;
         public taskToEnginner(BO.Engineer eng)
         {
+            
             InitializeComponent();
+            //TaskForEngList.ToList().Clear();
             EngToAssign = s_bl.Engineer.Read(eng.Id)!;
             TaskForEngList = s_bl?.Task.AllTasksToAssign(eng)!;
             //s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => (item.Copmlexity <= Level))!;

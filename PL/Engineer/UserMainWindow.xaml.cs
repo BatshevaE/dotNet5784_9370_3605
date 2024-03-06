@@ -39,7 +39,17 @@ namespace PL.Engineer
 
         private void BtnDetails_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow(eng.Id).ShowDialog();    
+            new EngineerWindow(eng.Id).ShowDialog();
+            try
+            {
+                s_bl.Engineer.Read(eng.Id);
+            }
+            catch
+            {
+                this.Close();
+                new UserWindow().Show();
+            }
+
         }
 
         private void BtnAssignOrWatch_Click(object sender, RoutedEventArgs e)
@@ -56,9 +66,9 @@ namespace PL.Engineer
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
             UserWindow s = new();
             s.Show();
+            this.Close();
         }
     }
 

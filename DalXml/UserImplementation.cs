@@ -21,7 +21,7 @@ public class UserImplementation:IUser
             throw new DalAlreadyExistException("An user type object with such an Password already exists");
         List<Engineer> Engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
         Engineer? eng = Engineers.FirstOrDefault(item1 => (item1.Name == item.Name)&&(item1.Name==item.Name));//stage 2
-        if((eng==null)&&(item.Password!=209859370)&&(item.Password!=326673605))
+        if((eng==null)&&(item.Password!=111)&&(item.Password!=100))
         throw new DalDoesNotExistException("An user with such Name or Password can't be assigend to the system");
         Users.Add(item);
         XMLTools.SaveListToXMLSerializer(Users, s_users_xml);

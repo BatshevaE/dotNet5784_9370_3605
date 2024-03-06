@@ -8,9 +8,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="TaskListWindow"  Height="640" Width="800">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
@@ -35,10 +33,12 @@
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+            <ListView.Background>
+                <ImageBrush ImageSource="https://static.vecteezy.com/ti/vecteur-libre/t1/8516342-travail-vie-equilibre-illustration-concept-vectoriel.jpg" Stretch="None" />
+            </ListView.Background>
         </ListView>
         <!--Button to add item to the list of Engineers-->
-        <Button Content="Add" Grid.Row="2"  Margin="150,0,0,0" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" />
-        <Button Content="  Create&#xA; Schedule" Foreground="Black" Margin="-150,0,0,0" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="20"  FontFamily="Sitka Banner" FontWeight="Bold" Click="BtnSchedule_Click"/>
+        <Button Content="Add" Grid.Row="2"  Margin="0,0,0,0" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" />
 
     </Grid>
 </Window>

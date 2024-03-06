@@ -10,9 +10,8 @@
    
     <Grid>
 
-        <DataGrid ItemsSource="{Binding Entries}"  >
-            <!--AutoGenerateColumns="True">
-            <DataGrid.Columns>
+        <DataGrid ItemsSource="{Binding Entries}" AutoGenerateColumns="True">
+           <!-- <DataGrid.Columns>
                 <DataGridTextColumn Header="Task Id" Binding="{Binding TaskId}"/>
                 <DataGridTextColumn Header="Task Name"  Binding="{Binding TaskName }"/>
                 <DataGridTextColumn Header="Dependecies" Binding="{Binding Dependencies}"/>

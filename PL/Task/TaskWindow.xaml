@@ -27,7 +27,7 @@
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Background" Value="{x:Null}"/>
-            <Setter Property="BorderBrush" Value="SteelBlue" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Sitka Banner" />
@@ -60,7 +60,6 @@
     </Window.Resources>
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -138,13 +137,12 @@
         <TextBox Grid.Column="1" Grid.Row="11"  Margin="72,31,85,0" TextWrapping="Wrap"  Text="{Binding EngineerTask, Mode=TwoWay, Converter={StaticResource ConvertTupleToContextKey }}" Grid.RowSpan="2" />
 
         <!--button of update or add,depends if we get an id(update)or not(add)-->
-        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="525,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />
-        <Label Content="The tasks that the current task depends on" FontSize="11" Grid.Column="0" Grid.Row="12"  Margin="34,28,64,0" Grid.RowSpan="2" />
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="363,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />
 
         <!--button to watch the dependencies of the selected task-->
-        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Margin="72,0,0,0" Grid.Column="1" Click="BtnDependencyClick"  />
+        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Click="BtnDependencyClick"  />
 
-        <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="150,0,0,0" Click="BtnDeleteTask_Click" />
+        <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="31" Width="72"  HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Click="BtnDeleteTask_Click" Grid.Column="1" RenderTransformOrigin="0.213,1.026" />
 
     </Grid>
 </Window>

@@ -81,7 +81,6 @@ namespace PL.Engineer
                     s_bl.Engineer.Update(CurrentEngineer!);
                     MessageBox.Show("successsfull update engineer", "succeedes", MessageBoxButton.OK);
                     this.Close();
-                    new EngineerListWindow().Show();
                 }
             }
             catch (Exception ex) 
@@ -97,6 +96,8 @@ namespace PL.Engineer
             try
             {
                 s_bl.Engineer.Delete(CurrentEngineer.Id);
+                MessageBox.Show($"Engineer with Id:{CurrentEngineer.Id} successfuly deleted", "Deletd", MessageBoxButton.OK);
+                this.Close();
             }
             catch (Exception ex)
             {

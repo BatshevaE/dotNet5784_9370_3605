@@ -71,22 +71,6 @@ namespace PL.Task
            
         }
 
-        private void BtnSchedule_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                s_bl.Task.createAutomaticLuz();
-                this.Close();
-                TaskListWindow listWindow = new TaskListWindow();
-                listWindow.ShowDialog();
-            }
-            catch (BO.BlNotAtTheRightStageException ch)
-            {
-                MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK);
-            }
-        
-    }
-
       
     }
 

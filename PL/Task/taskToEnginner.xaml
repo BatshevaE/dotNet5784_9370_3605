@@ -8,7 +8,6 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="taskToEnginner" Height="450" Width="800">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
@@ -28,7 +27,9 @@
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-            <Image Source="https://static.vecteezy.com/system/resources/previews/003/354/916/non_2x/business-online-training-seminar-or-courses-background-illustration-vector.jpg"/>
+            <ListView.Background>
+                <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/019/050/567/non_2x/man-working-at-the-computer-illustration-in-a-flat-style-vector.jpg" Stretch="Uniform" />
+            </ListView.Background>
         </ListView>
     </Grid>
 </Window>
