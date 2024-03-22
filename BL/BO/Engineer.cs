@@ -25,7 +25,7 @@ public class Engineer
     /// <summary>
     /// a task that the Engineer is now doing,include name and id of the task
     /// </summary>
-    public Tuple<int,string>? Task { get; set; }
+    public List <Tuple<int,string>?>? Task { get; set; }
     public override string ToString() => this.ToStringProperty();
     public Engineer()  { Id = 0; Name = ""; Email = ""; Level = 0; Cost = 0.0; Task = null; }
 

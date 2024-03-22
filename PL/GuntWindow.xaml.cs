@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -90,14 +91,29 @@ public partial class GuntWindow : Window
                 int x = 3;
                 for (DateTime day = min.Value; day <= max!.Value; day = day.AddDays(1), x++)
                 {
-                    if ((day < task.ScheduledDate) || (day > task.ForecastDate))
+                    if (task.StartDate != null)
                     {
-                        string strToPut = "None";
-                        row[x] = strToPut;
+                        if ((day < task.StartDate) || (day > task.DeadlineDate))
+                        {
+                            string strToPut = "None";
+                            row[x] = strToPut;
 
+                        }
+
+                        else
+                            row[x] = task.Status.ToString();
                     }
                     else
-                        row[x] = task.Status.ToString();
+                    {
+                        if ((day < task.ScheduledDate) || (day > task.ForecastDate))
+                        {
+                            string strToPut = "None";
+                            row[x] = strToPut;
+
+                        }
+                        else
+                            row[x] = task.Status.ToString();
+                    }
                 }
                 Entries.Rows.Add(row);
             }

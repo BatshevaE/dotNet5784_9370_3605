@@ -14,19 +14,6 @@
     <StartDate>2024-03-27T00:00:00</StartDate>
   </Task>
   <Task>
-    <Name>Management</Name>
-    <Descriptoin>Oversee project activities, resources, and team coordination.</Descriptoin>
-    <Id>14</Id>
-    <Product>Overview of project activities, resources, and coordination.</Product>
-    <Complexity>AdvancedBeginner</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
-    <RiquiredEffortTime>P1D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <OptionalDeadline>2024-03-28T00:00:00</OptionalDeadline>
-    <StartDate>2024-03-27T00:00:00</StartDate>
-  </Task>
-  <Task>
     <Name>Procurement</Name>
     <Descriptoin>Acquire necessary materials, equipment, and services.</Descriptoin>
     <Id>16</Id>
@@ -66,32 +53,6 @@
     <StartDate>2024-03-27T00:00:00</StartDate>
   </Task>
   <Task>
-    <Name>Analysis</Name>
-    <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
-    <Id>1</Id>
-    <Product>Detailed report assessing project feasibility, risks, and requirements</Product>
-    <Complexity>Advanced</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
-    <RiquiredEffortTime>P2D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <OptionalDeadline>2024-04-01T00:00:00</OptionalDeadline>
-    <StartDate>2024-03-30T00:00:00</StartDate>
-  </Task>
-  <Task>
-    <Name>Design</Name>
-    <Descriptoin>Develop conceptual and detailed plans for project implementation</Descriptoin>
-    <Id>3</Id>
-    <Product>Comprehensive design plans for project implementation.</Product>
-    <Complexity>Intermediate</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
-    <RiquiredEffortTime>P2D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <OptionalDeadline>2024-04-01T00:00:00</OptionalDeadline>
-    <StartDate>2024-03-30T00:00:00</StartDate>
-  </Task>
-  <Task>
     <Name>Prototyping</Name>
     <Descriptoin>Build initial models or prototypes for testing and validation.</Descriptoin>
     <Id>4</Id>
@@ -116,19 +77,6 @@
     <IsMileStone>false</IsMileStone>
     <OptionalDeadline>2024-04-15T00:00:00</OptionalDeadline>
     <StartDate>2024-04-13T00:00:00</StartDate>
-  </Task>
-  <Task>
-    <Name>Simulation</Name>
-    <Descriptoin>Use simulations to model and analyze system behavior</Descriptoin>
-    <Id>6</Id>
-    <Product>Detailed model illustrating system behavior under different conditions.</Product>
-    <Complexity>Advanced</Complexity>
-    <Engineerid xsi:nil="true" />
-    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
-    <RiquiredEffortTime>P2D</RiquiredEffortTime>
-    <IsMileStone>false</IsMileStone>
-    <OptionalDeadline>2024-04-04T00:00:00</OptionalDeadline>
-    <StartDate>2024-04-02T00:00:00</StartDate>
   </Task>
   <Task>
     <Name>Integration</Name>
@@ -469,5 +417,63 @@
     <StartDate>2024-03-27T00:00:00</StartDate>
     <StartTaskDate>2024-03-29T00:00:00</StartTaskDate>
     <ActualDeadline>2024-03-31T00:00:00</ActualDeadline>
+  </Task>
+  <Task>
+    <Name>Analysis</Name>
+    <Descriptoin> Assess project feasibility, risks, and requirements</Descriptoin>
+    <Id>1</Id>
+    <Product />
+    <Complexity>Advanced</Complexity>
+    <Engineerid>228703717</Engineerid>
+    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
+    <RiquiredEffortTime>P2D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+    <OptionalDeadline>2024-04-01T00:00:00</OptionalDeadline>
+    <StartDate>2024-03-30T00:00:00</StartDate>
+    <StartTaskDate>2024-04-02T00:00:00</StartTaskDate>
+    <ActualDeadline>2024-04-04T00:00:00</ActualDeadline>
+  </Task>
+  <Task>
+    <Name>Simulation</Name>
+    <Descriptoin>Use simulations to model and analyze system behavior</Descriptoin>
+    <Id>6</Id>
+    <Product />
+    <Complexity>Advanced</Complexity>
+    <Engineerid>228703717</Engineerid>
+    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
+    <RiquiredEffortTime>P2D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+    <OptionalDeadline>2024-04-04T00:00:00</OptionalDeadline>
+    <StartDate>2024-04-02T00:00:00</StartDate>
+    <StartTaskDate>2024-03-03T00:00:00</StartTaskDate>
+    <ActualDeadline>2024-03-05T00:00:00</ActualDeadline>
+  </Task>
+  <Task>
+    <Name>Design</Name>
+    <Descriptoin>Develop conceptual and detailed plans for project implementation</Descriptoin>
+    <Id>3</Id>
+    <Product />
+    <Complexity>Intermediate</Complexity>
+    <Engineerid>228703717</Engineerid>
+    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
+    <RiquiredEffortTime>P2D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+    <OptionalDeadline>2024-04-01T00:00:00</OptionalDeadline>
+    <StartDate>2024-03-30T00:00:00</StartDate>
+    <StartTaskDate>2024-08-01T00:00:00</StartTaskDate>
+    <ActualDeadline>2024-08-03T00:00:00</ActualDeadline>
+  </Task>
+  <Task>
+    <Name>Management</Name>
+    <Descriptoin>Oversee project activities, resources, and team coordination.</Descriptoin>
+    <Id>14</Id>
+    <Product>Overview of project activities, resources, and coordination.</Product>
+    <Complexity>AdvancedBeginner</Complexity>
+    <Engineerid>350575636</Engineerid>
+    <CreateDate>2024-03-22T00:00:00+02:00</CreateDate>
+    <RiquiredEffortTime>P1D</RiquiredEffortTime>
+    <IsMileStone>false</IsMileStone>
+    <OptionalDeadline>2024-03-28T00:00:00</OptionalDeadline>
+    <StartDate>2024-03-27T00:00:00</StartDate>
   </Task>
 </ArrayOfTask>

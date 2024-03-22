@@ -27,12 +27,21 @@ namespace PL.Task
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.EngineerLevel Level { get; set; } = BO.EngineerLevel.None;
         public BO.Status Status { get; set; } = BO.Status.None;
-        public TaskListWindow()
+        public TaskListWindow(int id=0)
         {
             InitializeComponent();
             //TaskList = s_bl?.Task.ReadAll()!;
-            TaskList = (Level == BO.EngineerLevel.None && Status == BO.Status.None) ?
-            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => (item.Copmlexity == Level)&&(item.Status==Status))!;
+            if (id==0)
+            {
+                TaskList = (Level == BO.EngineerLevel.None && Status == BO.Status.None) ?
+                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => (item.Copmlexity == Level) && (item.Status == Status))!;
+            }
+            else
+            {
+                TaskList=s_bl?.Task.ReadAll2()!.Where(item=>item.EngineerTask!.Item1==id).Select(item=>new TaskInList(){ Id=item.Id, Name=item.Name, Copmlexity= item.Copmlexity, Description=item.Description, Status=item.Status })!;
+
+
+            }
         }
         public IEnumerable<BO.TaskInList> TaskList
         {

@@ -132,18 +132,19 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="id">id of a task</param>
     /// <returns></returns>
-   public Tuple<int,string>? CalculateTaskInEngineer(int id)
-    { 
-     DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(item => item!.Engineerid == id);
-    Tuple<int, string>? EngTask;
-        if (doTask != null)
+   public List<Tuple<int,string>?>? CalculateTaskInEngineer(int id)
+    {
+        IEnumerable<DO.Task>? doTask = _dal.Task.ReadAll().Where(item => item!.Engineerid == id)!.ToList()!;
+        List<Tuple<int, string>?>? EngTask;
+        if (doTask.Count()==0)
         {
+            EngTask = null;
 
-            EngTask = new Tuple<int, string>(doTask.Id, doTask.Name);
         }
         else
         {
-             EngTask = null;
+            EngTask = doTask.Select(item => new Tuple<int, string>(item.Id, item.Name)).ToList()!;
+
         }
         return EngTask;
     }

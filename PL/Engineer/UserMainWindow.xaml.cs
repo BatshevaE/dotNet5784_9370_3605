@@ -60,8 +60,9 @@ namespace PL.Engineer
                 this.Close();
             }
             else 
-            { 
-                new TaskWindow(eng.Task.Item1).ShowDialog();
+            {
+                new TaskListWindow(eng.Id).Show();
+                //new TaskWindow(eng.Task.Item1).ShowDialog();
                 this.Close();
             }
         }

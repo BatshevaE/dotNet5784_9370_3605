@@ -8,7 +8,7 @@ public interface IEngineer
     public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null);
     public void Update(BO.Engineer item);
     public void Delete(int id);
-    public Tuple<int, string>? CalculateTaskInEngineer(int id);
+    public List<Tuple<int, string>?>? CalculateTaskInEngineer(int id);
     public void clear();
     public IEnumerable<BO.Engineer>? EngineersAtRequestedLevel(BO.EngineerLevel level);
 

@@ -266,8 +266,11 @@ internal class TaskImplemenation : BlApi.ITask
               from DO.Dependency item in _dal.Dependency.ReadAll()
               where item.DependentTask == idTask//the task dependent on other task
               select _dal.Task.Read(item.DependentOnTask);
-            taskDependencys.Where(item => (item.StartDate + item.RiquiredEffortTime)! < DateTime.Today);//the task's that this task dependent on finish day, is before today
-            if (taskDependencys.Any()) throw new BlCanNotAssignRequestedEngineer("The Task dependent on other tasks that didnt start yet,can't assign the engineer to the requested task");
+            if (taskDependencys != null)
+            {
+                taskDependencys!.Where(item => (item.StartDate + item.RiquiredEffortTime)! > _bl.Clock).ToList();//the task's that this task dependent on finish day, is before today
+                if (taskDependencys==null) throw new BlCanNotAssignRequestedEngineer("The Task dependent on other tasks that wasn't done yet,can't assign the engineer to the requested task");
+            }
             DO.Task taskToUpdate = new(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);
             try
             {
@@ -290,11 +293,11 @@ internal class TaskImplemenation : BlApi.ITask
     {
         if (task.StartDate == null)
             return BO.Status.Unschedeled;
-        else if ((task.StartDate != null) && (task.StartDate > _bl.Clock) && (task.StartTaskDate == null))
+        else if ((task.StartDate != null) && (task.StartDate >= _bl.Clock) && ((task.StartTaskDate == null)||(task.StartTaskDate >=_bl.Clock)))
             return BO.Status.Schedeled;
-        else if ((task.StartDate < _bl.Clock) && (task.StartTaskDate == null))
+        else if ((task.StartDate <= _bl.Clock) && (task.StartTaskDate == null))
             return BO.Status.InJeopardy;
-        else if ((task.StartTaskDate !=null)&&(task.StartTaskDate<_bl.Clock) && (task.StartTaskDate + task.RiquiredEffortTime > _bl.Clock))
+        else if ((task.StartTaskDate !=null)&&(task.StartTaskDate<=_bl.Clock) && (task.StartTaskDate + task.RiquiredEffortTime >= _bl.Clock))
             return BO.Status.OnTrack;
         else //if (task.StartTaskDate + task.RiquiredEffortTime < DateTime.Today)
             return BO.Status.Done;
