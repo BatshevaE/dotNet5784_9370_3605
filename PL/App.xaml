@@ -15,6 +15,8 @@
         <local:ConvertStatusToColur x:Key="ConvertStatusToColurKey"/>
         <local:ConvertTupleToText x:Key="ConvertTupleToTextKey"/>
         <local:ConvertTupleToContextInEng x:Key="ConvertTupleToContextInEngKey"/>
+        <local:ConvertWordToColur x:Key="ConvertWordToColurKey"/>
+        <local:ConvertDateToConext x:Key="ConvertDateToConextKey"/>
 
         
     </Application.Resources>

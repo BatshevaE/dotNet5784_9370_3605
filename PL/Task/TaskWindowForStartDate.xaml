@@ -8,6 +8,7 @@
         Title="TaskWindowForStartDate" Height="450" Width="800"
         DataContext="{Binding CurrentTask,RelativeSource={RelativeSource Mode=Self},Mode=TwoWay}" >
         <Window.Resources>
+            
             <Style TargetType="Label">
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -59,7 +60,10 @@
             </Style>
         </Window.Resources>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/008/608/207/non_2x/motion-graphic-flat-style-illustration-design-free-vector.jpg" Stretch="Uniform"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -133,7 +137,8 @@
 
             <!--button of update or add,depends if we get an id(update)or not(add)-->
             <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="525,0,0,0" Grid.ColumnSpan="2" />
+            <Button Content="Exit" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="12" VerticalAlignment="Top"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Grid.Column="1" Margin="266,30,0,0" Grid.RowSpan="2" Click="Button_Click" />
 
-           
-        </Grid>
+
+    </Grid>
     </Window>

@@ -26,18 +26,17 @@ class ConvertIdToContent : IValueConverter
 }
 class ConvertTaskInEngToBool: IValueConverter
 {
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((Tuple<int, string>)value == null)
+        var p = value as Tuple<int, string>;
+        if (p == null)
+            return true;
+        BO.Task t = s_bl.Task.Read(p!.Item1)!;
+        if ((Tuple<int, string>)value == null||t.Status==BO.Status.Done)
            return true;
         return false;
-        //IEnumerable<DO.Task> taskList =
-        //  from DO.Task item in _dal.Task.ReadAll()
-        //  where item.Engineerid == idEngineer//the engineer is already assigned to another task
-        //  select item;
-        //if (taskList.Any())
-        //    return false;
-        //return true;
+        
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -124,6 +123,29 @@ class ConvertStatusToColur : IValueConverter
         throw new NotImplementedException();
     }
 }
+class ConvertWordToColur : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((string)value == "Schedeled")
+            return new SolidColorBrush(Colors.Aquamarine);
+        else if ((string)value == "InJeopardy")
+            return new SolidColorBrush(Colors.Red);
+        else if ((string)value == "OnTrack")
+            return new SolidColorBrush(Colors.Lavender);
+        else if ((string)value == "Done")
+            return new SolidColorBrush(Colors.RoyalBlue);
+        else if ((string)value == "None")
+            return new SolidColorBrush(Colors.White);
+        return new SolidColorBrush(Colors.Black);
+
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 class ConvertTupleToText : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -144,6 +166,21 @@ class ConvertTupleToContextInEng : IValueConverter
         if ((Tuple<int, string>?)value == null)
             return "You Are Not Assigned To Any Task";
         return value.ToString()!;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+class ConvertDateToConext : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((DateTime?)value == null)
+            return $@"Select Project 
+Start Date";
+        return "Create Schedule";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

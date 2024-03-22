@@ -55,9 +55,7 @@ namespace PL
         {
             try
             {
-                s_bl.User.Create(CurrentUser);
-                MainWindow main = new ();
-                main.Show();
+                new newUser(CurrentUser.Password).Show();
                 this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); };

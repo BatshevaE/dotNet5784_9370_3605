@@ -45,13 +45,13 @@ public partial class GuntWindow : Window
         public SelectTaskToGunt()
         {
             List<BO.Task> tasks = s_bl.Task.ReadAll2().ToList();
-       
+
             Entries = new DataTable()
             {
                 Columns = {
                 new DataColumn("Task Id", typeof(string)),
                 new DataColumn("Task Name", typeof(string)),
-                new DataColumn("Dependencies", typeof(string)) 
+                new DataColumn("Dependencies", typeof(string))
             }
             };
             DateTime? min = BlImplementation.Project.getStartProject();
@@ -61,38 +61,24 @@ public partial class GuntWindow : Window
             {
                 if (tasks[i].ScheduledDate < min)
                     min = tasks[i].ScheduledDate;
-                if (tasks[i].ForecastDate>max)
-                    max= tasks[i].ForecastDate; 
+                if (tasks[i].ForecastDate > max)
+                    max = tasks[i].ForecastDate;
             }
-            for (DateTime d=min!.Value;d<=max; d=d.AddDays(1))
+            for (DateTime d = min!.Value; d <= max; d = d.AddDays(1))
             {
-                string str =$"{d.Day}/{d.Month}/{d.Year}";
-                DataColumn ro=new DataColumn(str, typeof(string));
+                string str = $"{d.Day}-{d.Month}-{d.Year}";
+                DataColumn ro = new DataColumn(str, typeof(string));
                 //Entries.Columns.Add(str, typeof(string));
                 Entries.Columns.Add(ro);
-                
+
             }
-            //for (int i = 0; i < tasks.Count(); i++)
-            //{
-            //    BO.Task task = tasks[i];
-            //    List<BO.TaskInList> d = task.Dependencies!;
-            //    string str = "(";
-            //    for (int j = 0; j < d.Count(); j++)
-            //    {
-            //        str += $"{d[j].Id},";
-            //    }
-            //    str.Remove(str.Length);
-            //    str += ")";
-            //    Entries.Rows.Add(task.Id, task.Name, str);
-            //}
-            
             for (int i = 0; i < tasks.Count(); i++)
             {
 
                 BO.Task task = tasks[i];
                 DataRow row = Entries.NewRow();
-                row[0]=task.Id;
-                row[1]=task.Name;
+                row[0] = task.Id;
+                row[1] = task.Name;
                 List<BO.TaskInList> d = task.Dependencies!;
                 string str = "(";
                 for (int j = 0; j < d.Count(); j++)
@@ -102,18 +88,20 @@ public partial class GuntWindow : Window
                 str += ")";
                 row[2] = str;
                 int x = 3;
-                for (DateTime day = min.Value;  day<=max!.Value;day=day.AddDays(1),x++)
+                for (DateTime day = min.Value; day <= max!.Value; day = day.AddDays(1), x++)
                 {
-                    if((day < task.ScheduledDate)||(day>task.ForecastDate))
+                    if ((day < task.ScheduledDate) || (day > task.ForecastDate))
                     {
                         string strToPut = "None";
-                        row[x] =strToPut;
+                        row[x] = strToPut;
+
                     }
                     else
-                        row[x]=task.Status;
+                        row[x] = task.Status;
                 }
                 Entries.Rows.Add(row);
             }
+          
         }
     }
 

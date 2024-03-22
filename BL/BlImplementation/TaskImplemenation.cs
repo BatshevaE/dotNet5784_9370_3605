@@ -251,11 +251,17 @@ internal class TaskImplemenation : BlApi.ITask
         if ((task != null) && (engineer != null))
         {
             if (task.Complexity > engineer.Complexity) throw new BlCanNotAssignRequestedEngineer("the level of the engineer is too low in order to de to requested task");
+           
             IEnumerable<DO.Task> taskList =
             from DO.Task item in _dal.Task.ReadAll()
             where item.Engineerid == idEngineer//the engineer is already assigned to another task
             select item;
-            if (taskList.Any()) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn is already assigned to other task");
+            
+            List<DO.Task> lst = (from DO.Task item in taskList//calculate which tasks from the tasks of the engineer are done
+                                 where GetStatus(item) == BO.Status.Done
+                                 select item).ToList();
+
+            if (taskList.Any() && lst.Count()!=taskList.Count()) throw new BlCanNotAssignRequestedEngineer("the engineer you want to assingn is already assigned to other task");//if the engineer is already assign to tasks that didnt finish yet
             IEnumerable<DO.Task> taskDependencys =
               from DO.Dependency item in _dal.Dependency.ReadAll()
               where item.DependentTask == idTask//the task dependent on other task
@@ -364,7 +370,8 @@ internal class TaskImplemenation : BlApi.ITask
 
                if (endDate.Count() == GetAllDependencys(task)!.Count())//the collection is empty-all dependencies have starsdate
                {
-                    Tuple<int, DateTime?>? toPush = new Tuple<int, DateTime?>(task.Id, endDate.Max());
+                    DateTime? theDate = endDate.Max()!.Value.AddDays(1);
+                    Tuple<int, DateTime?>? toPush = new Tuple<int, DateTime?>(task.Id, theDate);
                     toUpdate.Insert(toUpdate.Count(), toPush);
                     lst.Add(task.Id);
                }
@@ -378,6 +385,12 @@ internal class TaskImplemenation : BlApi.ITask
         { Project.CreateEndDate(endProject.Max()); }
 
    }
+    /// <summary>
+    /// add a dependency between to tasks
+    /// </summary>
+    /// <param name="dependency">the task that dependenet</param>
+    /// <param name="id">the task that another task dependent on</param>
+    /// <exception cref="BO.BlAlreadyExistException"></exception>
     public void AddDependency(int dependency,int id)
     {
         BO.Task task = Read(id)!;
@@ -389,46 +402,73 @@ internal class TaskImplemenation : BlApi.ITask
             _dal.Dependency.Create(newDependentDo);
         }
     }
+    /// <summary>
+    /// delete a dependency between to tasks
+    /// </summary>
+    /// <param name="dependency">the task that dependenet</param>
+    /// <param name="id">the task that another task dependent on</param>
     public void deleteDependency(int dependency, int id)
     {
         BO.Task task = Read(id)!;
        DO.Dependency d=_dal.Dependency.ReadAll().FirstOrDefault(item=>(item!.DependentOnTask==id)&&(item.DependentTask==dependency))!;  
         _dal.Dependency.Delete(d.Id);
     }
+    /// <summary>
+    /// check if there are tasks that dependent on this task
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="lst"></param>
+    /// <returns></returns>
     public bool GetAllDependentOnTasks(int id, List<int> lst)
     {
-       List<DO.Dependency> t= _dal.Dependency.ReadAll().Where(item=>(item!.DependentTask==id)).ToList()!;
-        List<DO.Dependency> t2 = t.Where(item => lst.Contains(item.DependentOnTask)).ToList()!; 
+       List<DO.Dependency> t= _dal.Dependency.ReadAll().Where(item=>(item!.DependentTask==id)).ToList()!;//all the dependecies where id is dependent on other tasks
+        List<DO.Dependency> t2 = t.Where(item => lst.Contains(item.DependentOnTask)).ToList()!; //all the tasks that id dependent on
        return t.Count==t2.Count;
      }
+    /// <summary>
+    /// return all the tasks tha one engineer can do
+    /// </summary>
+    /// <param name="engineer"></param>
+    /// <returns></returns>
     public IEnumerable<BO.TaskInList> AllTasksToAssign(BO.Engineer engineer) 
     {
    
-        List < TaskInList >? toAssign= ReadAll().Where(item => (BO.EngineerLevel)item!.Copmlexity <= engineer.Level)!.ToList()!;
+        List < TaskInList >? toAssign= ReadAll().Where(item => (BO.EngineerLevel)item!.Copmlexity <= engineer.Level)!.ToList()!;//all the tasks that their complexity fit the engineer's
 
         List<TaskInList> toAssign2=new();
         foreach (TaskInList task in toAssign)
         {
             DO.Task doTTask = _dal.Task.Read(task.Id)!;
-            if ((GetAllDependencys(doTTask!)!.Any() == false)&&(doTTask.Engineerid==0)) { toAssign2.Add(task); }
-            else
+            if ((GetAllDependencys(doTTask!)!.Any() == false)&&(doTTask.Engineerid==0)) { toAssign2.Add(task); }//if the task is not dependent on others and has not an engineer yet
+            else//if the task is dependent on others
             {
                 List<TaskInList>lst=GetAllDependencys(doTTask!)!;
                 IEnumerable<DO.Task>deps=lst.Select(item=>_dal.Task.Read(item.Id))!;
                 deps = deps.Where(item => GetStatus(item) != Status.Done).ToList();
-                if((deps.Any()==false)&&(Read(task.Id)!.EngineerTask==null)) { toAssign2.Add(task); }  
+                if((deps.Any()==false)&&(Read(task.Id)!.EngineerTask==null)) { toAssign2.Add(task); }  //if all the tasks that the task is dependent on are finished and she has no engineer yet-the engineer can assign to this task
             }
         }
         return toAssign2.ToList();   
         //IEnumerable<BO.TaskInList> toReturn = toAssign2.Select(item => item);
         //return toReturn.ToList();
     }
+    /// <summary>
+    /// update the date that the engineer started the task
+    /// </summary>
+    /// <param name="actuallStartDate"></param>
+    /// <param name="id"></param>
     public void UpdateActuallStartDate(DateTime? actuallStartDate,int id) 
     {
-        BO.Task task = Read(id)!;
-        DO.Task doTask = new(task.Name, task.Description, task.Id, "", (DO.EngineerLevel)task.Copmlexity,task.EngineerTask!.Item1, task.CreatedAtDate, task.RequiredEffortTime, false, task.ForecastDate, task.ScheduledDate, actuallStartDate, actuallStartDate + task.RequiredEffortTime, task.Remarks);
-        _dal.Task.Update(doTask);
-        //to put try and catch!!
+        try
+        {
+            BO.Task task = Read(id)!;
+            DO.Task doTask = new(task.Name, task.Description, task.Id, "", (DO.EngineerLevel)task.Copmlexity, task.EngineerTask!.Item1, task.CreatedAtDate, task.RequiredEffortTime, false, task.ForecastDate, task.ScheduledDate, actuallStartDate, actuallStartDate + task.RequiredEffortTime, task.Remarks);
+            _dal.Task.Update(doTask);
+        }
+        catch (DO.DalAlreadyExistException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
+        }
     }
 }
 

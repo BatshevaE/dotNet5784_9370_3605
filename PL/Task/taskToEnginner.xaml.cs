@@ -61,8 +61,11 @@ namespace PL.Task
             {
                 s_bl.Task.updateEngineerToTask(EngToAssign.Id, task!.Id);
                 MessageBoxResult result=MessageBox.Show($"You Assigned To Task With Id: {task.Id}. Do You Want To Choose Actual Start Date? ", "Success", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes) { new TaskWindowForStartDate(task.Id).Show(); this.Close(); }
-                else { this.Close(); }
+                if (result == MessageBoxResult.Yes) { new TaskWindowForStartDate(task.Id).ShowDialog(); this.Close(); }
+                else 
+                {
+                    this.Close();
+                }
             }
             catch (Exception ch)
             {

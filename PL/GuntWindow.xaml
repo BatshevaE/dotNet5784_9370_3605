@@ -7,16 +7,26 @@
         mc:Ignorable="d"
         DataContext="{Binding MyProperty,RelativeSource={RelativeSource Mode=Self},Mode=TwoWay}" 
         Title="GuntWindow" Height="450" Width="800">
-   
+    <Window.Resources>
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="{Binding Converter}"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-
-        <DataGrid ItemsSource="{Binding Entries}" AutoGenerateColumns="True">
-           <!-- <DataGrid.Columns>
+        <DataGrid ItemsSource="{Binding Entries}" AutoGenerateColumns="True" >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content.Text, Converter={StaticResource ConvertWordToColurKey}}"/>
+                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content.Text, Converter={StaticResource ConvertStatusToColurKey}}"/>
+                </Style>
+            </DataGrid.CellStyle>
+            <!-- <DataGrid.Columns>
                 <DataGridTextColumn Header="Task Id" Binding="{Binding TaskId}"/>
                 <DataGridTextColumn Header="Task Name"  Binding="{Binding TaskName }"/>
                 <DataGridTextColumn Header="Dependecies" Binding="{Binding Dependencies}"/>
                 
             </DataGrid.Columns>-->
+           
         </DataGrid>
     </Grid>
 </Window>

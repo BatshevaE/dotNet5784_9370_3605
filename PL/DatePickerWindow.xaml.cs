@@ -52,16 +52,16 @@ namespace PL
 
 
 
-        private void DatePicker_Select(object sender,SelectionChangedEventArgs e)
+        private void Date_Select(object sender,SelectionChangedEventArgs e)
         {
-            var picker=sender as DatePicker;
+            var picker=sender as Calendar;
             DateTime? date= picker!.SelectedDate;
             if ((Id==0)&&(date!=null))
             {
                 try
                 {
                     BlImplementation.Project.CreateSchedele(date);
-                    MessageBox.Show("The project start date has been successfully updated", "start project", MessageBoxButton.OK);
+                   MessageBox.Show("The project start date has been successfully updated", "start project", MessageBoxButton.OK);
                     this.Close();
                 }
                 catch (Exception ex)

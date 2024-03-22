@@ -79,10 +79,15 @@ namespace PL.Engineer
             EngineerWindow eng = new(engineer!.Id);
             eng.ShowDialog();
 
-            this.Close();
             new EngineerListWindow().Show();
+            this.Close();
 
 
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -46,8 +46,8 @@ namespace PL.Engineer
             }
             catch
             {
-                this.Close();
                 new UserWindow().Show();
+                this.Close();
             }
 
         }
@@ -57,11 +57,13 @@ namespace PL.Engineer
             if(eng.Task==null)
             { 
                 new taskToEnginner(eng).ShowDialog();
+                this.Close();
             }
             else 
             { 
-                new TaskWindow(eng.Task.Item1).ShowDialog(); 
-            }   
+                new TaskWindow(eng.Task.Item1).ShowDialog();
+                this.Close();
+            }
         }
 
         private void BtnLogIn_Click(object sender, RoutedEventArgs e)

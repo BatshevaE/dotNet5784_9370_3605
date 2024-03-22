@@ -140,9 +140,10 @@
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="363,0,0,0" Click="BtnAddOrUpdateTask_Click" Grid.ColumnSpan="2" />
 
         <!--button to watch the dependencies of the selected task-->
-        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Click="BtnDependencyClick"  />
+        <Button Content="watch Dependencies" Height="30" Width="200" HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Click="BtnDependencyClick"  />
 
-        <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="31" Width="72"  HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Click="BtnDeleteTask_Click" Grid.Column="1" RenderTransformOrigin="0.213,1.026" />
+        <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="31" Width="72"  HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Click="BtnDeleteTask_Click" Grid.Column="1"  />
+        <Button Content="Exit" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner"  Grid.Column="1" Click="Button_Click" Margin="275,0,0,0" />
 
     </Grid>
 </Window>

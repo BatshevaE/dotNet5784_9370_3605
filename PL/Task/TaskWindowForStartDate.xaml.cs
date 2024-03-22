@@ -58,6 +58,21 @@ public partial class TaskWindowForStartDate : Window
         s_bl.Task.UpdateActuallStartDate(date, CurrentTask.Id);
         this.Close();
     }
+
+    private void BtnDeleteTask_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow s = new MainWindow();
+        s.ShowDialog();
+        this.Close();
+
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow s = new MainWindow();
+        s.ShowDialog();
+        this.Close();
+    }
 }
 
 

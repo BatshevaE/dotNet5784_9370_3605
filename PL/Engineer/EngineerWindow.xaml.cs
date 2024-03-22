@@ -72,8 +72,8 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Create(CurrentEngineer!);
                     MessageBox.Show("successsfull create engineer", "succeeded", MessageBoxButton.OK);
+                    new EngineerListWindow().ShowDialog();
                     this.Close();
-                    new EngineerListWindow().Show();
 
                 }
                 else//there is  an engineer with such an id-we are on update mode
@@ -113,7 +113,7 @@ namespace PL.Engineer
             //{
             //    PL.Task.taskToEnginner t = new(CurrentEngineer);
             //    t.Show();
-            new taskToEnginner(CurrentEngineer).Show();
+            new taskToEnginner(CurrentEngineer).ShowDialog();
              this.Close();
 
             }
@@ -122,6 +122,12 @@ namespace PL.Engineer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+            this.Close();
         }
     }
 }

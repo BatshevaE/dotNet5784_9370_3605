@@ -35,8 +35,6 @@ namespace PL.Task
                 try
                 {
                     CurrentDependency = CurrentTaskDependency.Dependencies!.FirstOrDefault(item => item.Id == id)!;
-                    
-
 
                 }
                 catch (BO.BlDoesNotExistException ch) { MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK); }
@@ -70,29 +68,30 @@ namespace PL.Task
 
                     s_bl.Task.AddDependency(CurrentTaskDependency.Id,CurrentDependency.Id);
                     MessageBox.Show("successsfull create dependency", "succeeded", MessageBoxButton.OK);
-                    this.Close();
                     new TaskListWindow().Show();
+                    this.Close();
 
                 }
                 else//there is  an engineer with such an id-we are on update mode
                 {
                     s_bl.Task.deleteDependency(CurrentTaskDependency.Id,CurrentDependency.Id);
                     MessageBox.Show("successsfull delete dependency", "succeedes", MessageBoxButton.OK);
-                    this.Close();
                     new TaskListWindow().Show();
+                    this.Close();
 
-                    
+
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Close();
+               MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+               this. Close();
             }
+        }
 
-
-
-          
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

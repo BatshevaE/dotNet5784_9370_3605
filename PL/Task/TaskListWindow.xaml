@@ -39,6 +39,7 @@
         </ListView>
         <!--Button to add item to the list of Engineers-->
         <Button Content="Add" Grid.Row="2"  Margin="0,0,0,0" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" />
+        <Button Content="Exit" Grid.Row="2" Margin="600,0,0,0" HorizontalAlignment="Center" Height="50" Width="100"  Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black"  Click="BtnExit_Click"/>
 
     </Grid>
 </Window>

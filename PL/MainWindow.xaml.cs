@@ -1,6 +1,7 @@
 ﻿using DalApi;
 using PL.Engineer;
 using PL.Task;
+using System;
 using System.Printing.IndexedProperties;
 using System.Text;
 using System.Windows;
@@ -30,21 +31,32 @@ namespace PL
             // us.ShowDialog();
             // this.Close();
             InitializeComponent();
-            CurrentTime = s_bl.Clock.ToLocalTime();
+            Date1 = s_bl.Clock.ToLocalTime();
+            DateTime? date2 = BlImplementation.Project.getStartProject();
+            CurrentTime = new Tuple<DateTime, DateTime?>(Date1, date2);
+            
             //CurrentTime=DateTime.Now;
 
         }
-        public DateTime CurrentTime
+        public Tuple<DateTime,DateTime?> CurrentTime
         {
-            get { return (DateTime)GetValue(CurrentTimeProperty); }
+            get { return (Tuple<DateTime, DateTime?>)GetValue(CurrentTimeProperty); }
             set { SetValue(CurrentTimeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for CurrentTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentTimeProperty =
-            DependencyProperty.Register("CurrentTime", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("CurrentTime", typeof(Tuple<DateTime, DateTime?>), typeof(MainWindow), new PropertyMetadata(null));
 
+        public DateTime Date1
+        {
+            get { return (DateTime)GetValue(StartProjectProperty); }
+            set { SetValue(StartProjectProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for CurrentTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StartProjectProperty =
+            DependencyProperty.Register("Date1", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
 
 
         /// <summary>
@@ -72,6 +84,8 @@ namespace PL
                 BlImplementation.Project.zeroStartProject();
                 DalTest.Initialization.Do();
             }
+            new MainWindow().Show();
+            this.Close();
 
         }
 
@@ -83,17 +97,22 @@ namespace PL
 
         private void BtnAddYear_Click(object sender, RoutedEventArgs e)
         {
-            CurrentTime = s_bl.AddYear();
+            Date1 = s_bl.AddYear();
+            CurrentTime=new Tuple<DateTime,DateTime?>(Date1, CurrentTime.Item2);
         }
 
         private void BtnAddMonth_Click(object sender, RoutedEventArgs e)
         {
-            CurrentTime = s_bl.AddMonth();
+            Date1 = s_bl.AddMonth();
+            CurrentTime = new Tuple<DateTime, DateTime?>(Date1, CurrentTime.Item2);
+
         }
 
         private void BtnAddDay_Click(object sender, RoutedEventArgs e)
         {
-            CurrentTime = s_bl.AddDay();
+            Date1 = s_bl.AddDay();
+            CurrentTime = new Tuple<DateTime, DateTime?>(Date1, CurrentTime.Item2);
+
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
@@ -111,22 +130,30 @@ namespace PL
 
         private void BtnStartProjectDate_Click(object sender, RoutedEventArgs e)
         {
+            var btn = sender as Button;
 
-            new DatePickerWindow().Show();
-            try
+            if (BlImplementation.Project.getStartProject() == null)
             {
-                s_bl.Task.createAutomaticLuz();
+                new DatePickerWindow().ShowDialog();
+                new MainWindow().Show();
                 this.Close();
-                TaskListWindow listWindow = new TaskListWindow();
-                listWindow.ShowDialog();
-                MessageBox.Show("The Start Date of the project and the creation of the schdule were successfully updated", "success", MessageBoxButton.OK,MessageBoxImage.Information);
-
             }
-            catch (BO.BlNotAtTheRightStageException ch)
+            else
+            if (BlImplementation.Project.getStage() == BO.Stage.MiddleStage)
             {
-                MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                try
+                {
+                    s_bl.Task.createAutomaticLuz();
+                    MessageBox.Show("The  creation of the schdule were successfully updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    btn!.IsEnabled = false;
+                }
+                catch (BO.BlNotAtTheRightStageException ch)
+                {
+                    MessageBox.Show(ch.Message, "failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+             
             }
-
+               
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

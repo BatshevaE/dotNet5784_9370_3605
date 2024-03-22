@@ -9,6 +9,9 @@
         DataContext="{Binding CurrentDependency, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.Background>
+            <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/006/470/818/non_2x/isometric-style-illustration-of-business-planning-schedule-with-characters-and-date-free-vector.jpg" Stretch="Uniform"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -40,7 +43,9 @@
         <!--button of update or add,depends if we get an id(update)or not(add)-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToContentDependencyKey}}" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625"  Click="BtnAddDeleteDependency_Click" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Grid.ColumnSpan="2" Margin="350,0,0,0" />
         <!--in the line above we binding the name to a class that return wheter the button will be name add or update,depends on the id-->
-    </Grid> 
+        <Button Content="Exit" Height="50" Width="100" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="247,0,0,0" Grid.Column="1" Click="BtnExit_Click" />
+
+    </Grid>
 </Window>
 
 

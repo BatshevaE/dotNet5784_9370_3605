@@ -8,9 +8,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="DependenciesListWindow" Height="450" Width="800">
     <Grid>
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
@@ -31,6 +29,9 @@
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+            <ListView.Background>
+                <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/006/552/114/non_2x/isometric-style-illustration-of-login-to-website-free-vector.jpg" Stretch="Uniform" />
+            </ListView.Background>
         </ListView>
         <!--Button to add item to the list of dependencies-->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddDependency_Click"/>

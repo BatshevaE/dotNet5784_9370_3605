@@ -9,9 +9,7 @@
          DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--Extrnal Grid-->
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
@@ -40,5 +38,7 @@
         </ListView>
         <!--Button to add item to the list of Engineers-->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAdd_Click" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black"/>
+        <Button Content="Exit" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"  Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Margin="600,0,0,0"  Click="btnExit_Click"/>
+
     </Grid>
 </Window>
