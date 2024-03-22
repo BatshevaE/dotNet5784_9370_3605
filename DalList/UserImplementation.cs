@@ -20,8 +20,8 @@ internal class UserImplementation:IUser
     {
         if (Read(item.Password) != null)
             throw new DalAlreadyExistException("An user type object with such Password already exists");
-        if((DataSource.Engineers.FirstOrDefault(t=>t.Name==item.Name)==null)&&(item.Password!=111)&&(item.Password!=100))
-            throw new DalDoesNotExistException("An user with such Id can't be assigend to the system");
+        if((DataSource.Engineers.FirstOrDefault(t=>(t.Name==item.Name)||( t.Id == item.Id)) ==null)&&(item.Password!=111)&&(item.Password!=100))
+            throw new DalDoesNotExistException("Such User can't be assigend to the system");
         DataSource.Users.Add(item);
         return item.Password;
     }
@@ -48,7 +48,8 @@ internal class UserImplementation:IUser
     ///Otherwise, the method will return null.</returns>
     public User? Read(int password)
     {
-        return DataSource.Users.FirstOrDefault(item => item.Password == password);//stage 2
+        return DataSource.Users.FirstOrDefault(item =>  (item.Password == password));//stage 2
+        ;//stage 2
     }
     /// <summary>
     /// Return a copy of the list of references to all objects of users.

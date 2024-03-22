@@ -22,14 +22,14 @@ internal class UserImplementation:IUser
             throw new BO.BlAlreadyExistException($"User doesn't exist or Engineer with Password={item.Password} already exists ", ex);
         }
     }
-    public BO.User? Read(int password)
+    public BO.User? Read(User user1)
     {
-        DO.User? doUser = _dal.User.Read(password);
-        if (doUser == null)
-            throw new BO.BlDoesNotExistException($"User with Password={password} does Not exist");
+        DO.User? doUser = _dal.User.Read(user1.Password);
+        if ((doUser == null)||(user1.Password!=doUser.Password)||(user1.Name!=doUser.Name)) 
+            return null;//such user doesn't exist
         return new BO.User()
         {
-            Password = password,
+            Password = doUser.Password,
             Name = doUser.Name,
             IsManager= doUser.IsManager,
             Id=doUser.Id

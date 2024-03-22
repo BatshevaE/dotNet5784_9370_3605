@@ -51,7 +51,7 @@ public class UserImplementation:IUser
     public User? Read(int password)
     {
         List<User> Users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
-        User? user = Users.FirstOrDefault(item => item.Password == password);//stage 2
+        User? user = Users.FirstOrDefault(item => (item.Password==password));//stage 2
         XMLTools.SaveListToXMLSerializer(Users, s_users_xml);
         return user;
     }

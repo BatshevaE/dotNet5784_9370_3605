@@ -34,8 +34,12 @@ namespace PL
         {
             try
             {
-                CurrentUser = s_bl.User.Read(CurrentUser.Password)!;
-                if (CurrentUser.IsManager)
+                CurrentUser = s_bl.User.Read(CurrentUser)!;
+                if(CurrentUser == null) { MessageBox.Show("such user doen't exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error); UserWindow s = new();s.Show();
+                    this.Close();
+                    return;
+                }
+                if (CurrentUser!.IsManager)
                 {
                     MainWindow main = new();
                     main.Show();

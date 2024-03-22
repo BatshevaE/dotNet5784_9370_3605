@@ -53,14 +53,25 @@ namespace PL.Engineer
         {
             try
             {
+                if (s_bl.User.Read(CurrentUser) != null) 
+                {
+                    MessageBox.Show("such user alresy assigned", "already assigned", MessageBoxButton.OK);
+                    UserWindow s = new();
+                    s.Show();
+                    this.Close();
+                }
+  
                 s_bl.User.Create(CurrentUser!);
                 MessageBox.Show("successsfull create user", "succeeded", MessageBoxButton.OK);
                 new MainWindow().ShowDialog();
                 this.Close();
             }
-            catch
+            catch 
             {
-                MessageBox.Show("you canot add youtself to the system,please talk to the manager","",MessageBoxButton.OK);
+                MessageBox.Show("such engineer does't exist in the system, in order to sign up you need to be siggned as member in the company","",MessageBoxButton.OK);
+                UserWindow s = new();
+                s.Show();
+                this.Close();
 
             }
         }

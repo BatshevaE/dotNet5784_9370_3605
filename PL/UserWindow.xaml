@@ -38,7 +38,7 @@
             <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/002/723/730/original/login-ui-ux-design-concept-and-illustration-website-login-ui-ux-design-concept-landing-page-login-screen-concept-free-vector.jpg" >
             </ImageBrush>
         </Grid.Background>
-        <Label Content="Doesn't have an account?" Margin="532,586,0,0" Width="216" Height="32" FontSize="20" Background="{x:Null}"/>
+        <Label Content="New Engineer and&#xD;&#xA; Doesn't have an account?" Margin="501,540,0,0" Width="247" Height="78" FontSize="20" Background="{x:Null}"/>
         <!--Button to sign up as new engineer-->
         <Button Content="Click here &#xD;&#xA;to Sign Up" Height="67" Width="150" RenderTransformOrigin="0.5,0.5" Click="BtnSignUp_Click" Margin="585,623,0,0"/>
         <!--Button to sign in as manager or existing engineer-->
