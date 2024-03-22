@@ -54,8 +54,8 @@ public partial class GuntWindow : Window
                 new DataColumn("Dependencies", typeof(string))
             }
             };
-            DateTime? min = BlImplementation.Project.getStartProject();
-            DateTime? max = BlImplementation.Project.getStartProject();
+            DateTime? min = BlImplementation.Project.GetStartProject();
+            DateTime? max = BlImplementation.Project.GetStartProject();
 
             for (int i = 0; i < tasks.Count(); i++)
             {
@@ -67,7 +67,7 @@ public partial class GuntWindow : Window
             for (DateTime d = min!.Value; d <= max; d = d.AddDays(1))
             {
                 string str = $"{d.Day}-{d.Month}-{d.Year}";
-                DataColumn ro = new DataColumn(str, typeof(string));
+                DataColumn ro = new(str, typeof(string));
                 //Entries.Columns.Add(str, typeof(string));
                 Entries.Columns.Add(ro);
 
@@ -97,7 +97,7 @@ public partial class GuntWindow : Window
 
                     }
                     else
-                        row[x] = task.Status;
+                        row[x] = task.Status.ToString();
                 }
                 Entries.Rows.Add(row);
             }

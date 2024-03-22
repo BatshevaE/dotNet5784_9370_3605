@@ -189,7 +189,7 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BO.BlTooEarlyDate"></exception>
     public bool UpdateStartDate(int id, DateTime? startDate)
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Id == id);
         if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
@@ -244,7 +244,7 @@ internal class TaskImplemenation : BlApi.ITask
     {
         if (_dal.Task.Read(idTask) == null) throw new BO.BlDoesNotExistException($"Task with ID={idTask} does Not exist");
         if (_dal.Engineer.Read(idEngineer) == null) throw new BO.BlDoesNotExistException($"Engineer with ID={idEngineer} does Not exist");
-        if (BlImplementation.Project.getStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
+        if (BlImplementation.Project.GetStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
         //only in stage of doing we can assign engineer to a task
         DO.Engineer? engineer = _dal.Engineer.Read(idEngineer);
         DO.Task? task = _dal.Task.Read(idTask);
@@ -268,7 +268,7 @@ internal class TaskImplemenation : BlApi.ITask
               select _dal.Task.Read(item.DependentOnTask);
             taskDependencys.Where(item => (item.StartDate + item.RiquiredEffortTime)! < DateTime.Today);//the task's that this task dependent on finish day, is before today
             if (taskDependencys.Any()) throw new BlCanNotAssignRequestedEngineer("The Task dependent on other tasks that didnt start yet,can't assign the engineer to the requested task");
-            DO.Task taskToUpdate = new DO.Task(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);
+            DO.Task taskToUpdate = new(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);
             try
             {
                 _dal.Task.Update(taskToUpdate);
@@ -344,7 +344,7 @@ internal class TaskImplemenation : BlApi.ITask
     }
     public void createAutomaticLuz()
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         IEnumerable<DO.Task> tasks = from DO.Task item in _dal.Task.ReadAll()//a collection of all tasks that are not dependent on other tasks
                               where GetAllDependencys(item)!.Any() == false
                               select item;
@@ -352,7 +352,7 @@ internal class TaskImplemenation : BlApi.ITask
         List<Tuple<int, DateTime?>>? toUpdate;//a list that we will send to update start date
         toUpdate = (from DO.Task task in _dal.Task.ReadAll()//all the tasks without start date-update with the start date of the project
                     where GetAllDependencys(task)!.Any() == false
-                    select new Tuple<int, DateTime?>(task.Id, Project.getStartProject())).ToList();
+                    select new Tuple<int, DateTime?>(task.Id, Project.GetStartProject())).ToList();
        
         foreach(var item in toUpdate) { lst.Add(item.Item1); };//put every item in toUpdate in the list of id
         while (_dal.Task.ReadAll().Count()> toUpdate.ToList().Count())//while not all the tasks in the list "toUpdate"

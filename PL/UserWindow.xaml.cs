@@ -35,11 +35,7 @@ namespace PL
             try
             {
                 CurrentUser = s_bl.User.Read(CurrentUser)!;
-                if(CurrentUser == null) { MessageBox.Show("such user doen't exist", "Error", MessageBoxButton.OK, MessageBoxImage.Error); UserWindow s = new();s.Show();
-                    this.Close();
-                    return;
-                }
-                if (CurrentUser!.IsManager)
+                if (CurrentUser.IsManager)
                 {
                     MainWindow main = new();
                     main.Show();
@@ -71,7 +67,7 @@ namespace PL
              BlApi.Factory.Get().Engineer.clear();
                 BlApi.Factory.Get().Task.clear();
                 BlApi.Factory.Get().User.clear();
-                BlImplementation.Project.zeroStartProject();
+                BlImplementation.Project.ZeroStartProject();
             DalTest.Initialization.Do();
 
         }

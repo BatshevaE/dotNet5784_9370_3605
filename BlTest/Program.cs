@@ -43,7 +43,7 @@ internal class Program
             s_bl.Task.clear();
             s_bl.Engineer.clear();
             s_bl.User.clear(); 
-            BlImplementation.Project.zeroStartProject();
+            BlImplementation.Project.ZeroStartProject();
             DalTest.Initialization.Do();
             
         }
@@ -217,7 +217,7 @@ Read all engineer in certain level:6");
     /// <exception cref="FormatException"></exception>
     static void CreateStartDate()
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the date to start the project");
         if (!DateTime.TryParse(Console.ReadLine(), out DateTime startDate))
             throw new FormatException("Wrong input");
@@ -236,7 +236,7 @@ Read all engineer in certain level:6");
     /// <exception cref="FormatException"></exception>
     static void createTask()
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the following details about the task:
     Name:");
         string taskName = Console.ReadLine()!;
@@ -303,7 +303,7 @@ Read all engineer in certain level:6");
     /// <exception cref="FormatException"></exception>
         static void deleteTask()
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the id of the task you would like to delete from the list:");
         if (!int.TryParse(Console.ReadLine(), out int id))
             throw new FormatException("Wrong input");
@@ -345,7 +345,7 @@ Read all engineer in certain level:6");
    /// <exception cref="FormatException"></exception>
     static void updateStartDate()
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         //foreach (var item in s_bl!.Task.ReadAll())
         //{
         Console.WriteLine($@"Please enter the id of the task");
@@ -365,7 +365,7 @@ Read all engineer in certain level:6");
     /// <exception cref="FormatException"></exception>
     static void assignEngineerToTask()
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
+        if (BlImplementation.Project.GetStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
         Console.WriteLine($@"Please enter the id of the task:");
         if (!int.TryParse(Console.ReadLine(), out int taskId))
             throw new FormatException("Wrong input");
@@ -448,7 +448,7 @@ Read all engineer in certain level:6");
     /// <exception cref="DalDoesNotExistException"></exception>
     static void deleteEngineer()
     {
-        if (BlImplementation.Project.getStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the id of the engineer you would like to delete from the list:");
         if (!int.TryParse(Console.ReadLine(), out int id))
             throw new FormatException("Wrong input");
@@ -476,7 +476,7 @@ Read all engineer in certain level:6");
         Console.WriteLine($@"An Email address:");
         string engineerEmail = Console.ReadLine()!;
         Tuple<int, string>? task1=null;
-        if (BlImplementation.Project.getStage() == BO.Stage.Doing)//if the stage is planing the manager can assign  a task for the engineer
+        if (BlImplementation.Project.GetStage() == BO.Stage.Doing)//if the stage is planing the manager can assign  a task for the engineer
         {
             Console.WriteLine($@"Do you want to assign a task for the engineer {engineerName}? (Y/N)");
             string ans = Console.ReadLine()!;
@@ -505,7 +505,7 @@ Read all engineer in certain level:6");
     {
         BO.Engineer? eng = s_bl.Engineer.Read(id);
 
-        if (BlImplementation.Project.getStage() == BO.Stage.Doing)//only in stage of doing we can assign a task for the engineer
+        if (BlImplementation.Project.GetStage() == BO.Stage.Doing)//only in stage of doing we can assign a task for the engineer
         {
             Console.WriteLine($@"Id of a task:");
             if (!int.TryParse(Console.ReadLine(), out int taskId))
@@ -548,7 +548,7 @@ Id:");
             Console.WriteLine($@"Remarks about the task:");
             string? Remarks = Console.ReadLine();
         List<BO.TaskInList>? dependencies = taskToUpdate.Dependencies;
-        if (BlImplementation.Project.getStage() == BO.Stage.MiddleStage) //throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() == BO.Stage.MiddleStage) //throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         {
             //only in the stage planing we can change the effort time and start date of a task
             Console.WriteLine($@"The start Date of the task:");
@@ -557,7 +557,7 @@ Id:");
                 throw new FormatException("Wrong input");
             startDate = date;
         }
-        if (BlImplementation.Project.getStage() == BO.Stage.Planning) //throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (BlImplementation.Project.GetStage() == BO.Stage.Planning) //throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         { 
         Console.WriteLine($@"The engineer's riquired effort time for the task:");
             if (!TimeSpan.TryParse(Console.ReadLine(), out riquiredEffortTime))

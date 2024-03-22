@@ -31,8 +31,8 @@ namespace PL
             // us.ShowDialog();
             // this.Close();
             InitializeComponent();
-            Date1 = s_bl.Clock.ToLocalTime();
-            DateTime? date2 = BlImplementation.Project.getStartProject();
+            Date1 = s_bl.Clock;//.ToLocalTime();
+            DateTime? date2 = BlImplementation.Project.GetStartProject();
             CurrentTime = new Tuple<DateTime, DateTime?>(Date1, date2);
             
             //CurrentTime=DateTime.Now;
@@ -81,7 +81,8 @@ namespace PL
                 BlApi.Factory.Get().Engineer.clear();
                 BlApi.Factory.Get().Task.clear();
                 BlApi.Factory.Get().User.clear();
-                BlImplementation.Project.zeroStartProject();
+                BlImplementation.Project.ZeroStartProject();
+                BlApi.Factory.Get().InitializeClock();
                 DalTest.Initialization.Do();
             }
             new MainWindow().Show();
@@ -124,7 +125,7 @@ namespace PL
                 BlApi.Factory.Get().Engineer.clear();
                 BlApi.Factory.Get().Task.clear();
                 BlApi.Factory.Get().User.clear();
-                BlImplementation.Project.zeroStartProject();
+                BlImplementation.Project.ZeroStartProject();
             }
         }
 
@@ -132,14 +133,14 @@ namespace PL
         {
             var btn = sender as Button;
 
-            if (BlImplementation.Project.getStartProject() == null)
+            if (BlImplementation.Project.GetStartProject() == null)
             {
                 new DatePickerWindow().ShowDialog();
                 new MainWindow().Show();
                 this.Close();
             }
             else
-            if (BlImplementation.Project.getStage() == BO.Stage.MiddleStage)
+            if (BlImplementation.Project.GetStage() == BO.Stage.MiddleStage)
             {
                 try
                 {

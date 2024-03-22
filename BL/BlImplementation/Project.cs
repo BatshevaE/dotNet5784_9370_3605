@@ -9,9 +9,9 @@ namespace BlImplementation;
 public class Project 
 {
     private static  DalApi.IDal _dal = DalApi.Factory.Get;
-    public static BO.Stage getStage()
+    public static BO.Stage GetStage()
     {
-      if(Project.getStartProject()==null)
+      if(Project.GetStartProject()==null)
             return BO.Stage.Planning;
         else
         {
@@ -34,11 +34,11 @@ public class Project
     }
     public static void CreateEndDate(DateTime? endDate)
     { _dal.EndProject = endDate; }
-    public static void zeroStartProject()
+    public static void ZeroStartProject()
     {
         _dal.StartProject = null;
     }
-    public static DateTime? getStartProject()
+    public static DateTime? GetStartProject()
     {
          return _dal.StartProject;
     }
