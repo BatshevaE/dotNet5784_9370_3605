@@ -65,57 +65,63 @@ public partial class GuntWindow : Window
                 if (tasks[i].ForecastDate > max)
                     max = tasks[i].ForecastDate;
             }
-            for (DateTime d = min!.Value; d <= max; d = d.AddDays(1))
+            if (min == null || max == null)
+                MessageBox.Show("There is No Start Date for the project,can't open gant", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
             {
-                string str = $"{d.Day}-{d.Month}-{d.Year}";
-                DataColumn ro = new(str, typeof(string));
-                //Entries.Columns.Add(str, typeof(string));
-                Entries.Columns.Add(ro);
-
-            }
-            for (int i = 0; i < tasks.Count(); i++)
-            {
-
-                BO.Task task = tasks[i];
-                DataRow row = Entries.NewRow();
-                row[0] = task.Id;
-                row[1] = task.Name;
-                List<BO.TaskInList> d = task.Dependencies!;
-                string str = "(";
-                for (int j = 0; j < d.Count(); j++)
+                for (DateTime d = min!.Value; d <= max; d = d.AddDays(1))
                 {
-                    str += $"{d[j].Id},";
+                    string str = $"{d.Day}-{d.Month}-{d.Year}";
+                    DataColumn ro = new(str, typeof(string));
+                    //Entries.Columns.Add(str, typeof(string));
+                    Entries.Columns.Add(ro);
+
                 }
-                str += ")";
-                row[2] = str;
-                int x = 3;
-                for (DateTime day = min.Value; day <= max!.Value; day = day.AddDays(1), x++)
+
+                for (int i = 0; i < tasks.Count(); i++)
                 {
-                    if (task.StartDate != null)
+
+                    BO.Task task = tasks[i];
+                    DataRow row = Entries.NewRow();
+                    row[0] = task.Id;
+                    row[1] = task.Name;
+                    List<BO.TaskInList> d = task.Dependencies!;
+                    string str = "(";
+                    for (int j = 0; j < d.Count(); j++)
                     {
-                        if ((day < task.StartDate) || (day > task.DeadlineDate))
-                        {
-                            string strToPut = "None";
-                            row[x] = strToPut;
-
-                        }
-
-                        else
-                            row[x] = task.Status.ToString();
+                        str += $"{d[j].Id},";
                     }
-                    else
+                    str += ")";
+                    row[2] = str;
+                    int x = 3;
+                    for (DateTime day = min.Value; day <= max!.Value; day = day.AddDays(1), x++)
                     {
-                        if ((day < task.ScheduledDate) || (day > task.ForecastDate))
+                        if (task.StartDate != null)
                         {
-                            string strToPut = "None";
-                            row[x] = strToPut;
+                            if ((day < task.StartDate) || (day > task.DeadlineDate))
+                            {
+                                string strToPut = "None";
+                                row[x] = strToPut;
 
+                            }
+
+                            else
+                                row[x] = task.Status.ToString();
                         }
                         else
-                            row[x] = task.Status.ToString();
+                        {
+                            if ((day < task.ScheduledDate) || (day > task.ForecastDate))
+                            {
+                                string strToPut = "None";
+                                row[x] = strToPut;
+
+                            }
+                            else
+                                row[x] = task.Status.ToString();
+                        }
                     }
+                    Entries.Rows.Add(row);
                 }
-                Entries.Rows.Add(row);
             }
           
         }

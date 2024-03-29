@@ -55,8 +55,13 @@ public partial class TaskWindowForStartDate : Window
     {
         var picker = sender as Calendar;
         DateTime? date = picker!.SelectedDate;
-        s_bl.Task.UpdateActuallStartDate(date, CurrentTask.Id);
-        this.Close();
+        try
+        {
+            s_bl.Task.UpdateActuallStartDate(date, CurrentTask.Id);
+            this.Close();
+        }
+        catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); };
+        
     }
 
     private void BtnDeleteTask_Click(object sender, RoutedEventArgs e)

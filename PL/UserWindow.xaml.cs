@@ -3,6 +3,7 @@ using PL.Task;
 using System.Printing.IndexedProperties;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PL
 {
@@ -34,18 +35,23 @@ namespace PL
         {
             try
             {
-                CurrentUser = s_bl.User.Read(CurrentUser)!;
-                if (CurrentUser.IsManager)
+                if (CurrentUser != null)
+                    CurrentUser = s_bl.User.Read(CurrentUser!)!;
+                if (CurrentUser != null)
                 {
-                    MainWindow main = new();
-                    main.Show();
-                    this.Close();
-                }
-                else
-                {
-                    new UserMainWindow(CurrentUser.Id).Show();
-                    this.Close();
-                }
+                    if (CurrentUser.IsManager)
+                    {
+                        MainWindow main = new();
+                        main.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        new UserMainWindow(CurrentUser.Id).Show();
+                        this.Close();
+                    }
+               }
+               
             }
             catch(Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error); } ; 
             

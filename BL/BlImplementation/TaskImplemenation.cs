@@ -397,6 +397,10 @@ internal class TaskImplemenation : BlApi.ITask
     public void AddDependency(int dependency,int id)
     {
         BO.Task task = Read(id)!;
+        BO.Task DepTask = Read(dependency)!;
+        if (DepTask.Status==BO.Status.OnTrack|| DepTask.Status == BO.Status.Done) 
+            throw new Exception("The Task is already Done,Cant create the dependency");
+        else
         if (task.Dependencies!.FirstOrDefault(item => item.Id == dependency) != null)
             throw new BO.BlAlreadyExistException("Such dependency is already exists");
         else
@@ -470,7 +474,7 @@ internal class TaskImplemenation : BlApi.ITask
             //toUpdate.Add(from BO.TaskInList item in task.Dependencies!
             //             where id == id
             //             select new Tuple<int, DateTime?>(item.Id, (actuallStartDate + task.RequiredEffortTime));
-            if (DateToStart(id).Value < actuallStartDate!.Value) throw new BO.BlTooEarlyDate($"Task with id:{id} can't start at:{actuallStartDate}, please choose another date not earlier than:{DateToStart(id)}");
+            if (DateToStart(id).Value > actuallStartDate!.Value) throw new BO.BlTooEarlyDate($"Task with id:{id} can't start at:{actuallStartDate}, please choose another date not earlier than:{DateToStart(id)}");
             _dal.Task.Update(doTask);
         }
         catch (DO.DalAlreadyExistException ex)
