@@ -466,12 +466,26 @@ internal class TaskImplemenation : BlApi.ITask
         {
             BO.Task task = Read(id)!;
             DO.Task doTask = new(task.Name, task.Description, task.Id, "", (DO.EngineerLevel)task.Copmlexity, task.EngineerTask!.Item1, task.CreatedAtDate, task.RequiredEffortTime, false, task.ForecastDate, task.ScheduledDate, actuallStartDate, actuallStartDate + task.RequiredEffortTime, task.Remarks);
+            //List<Tuple<int, DateTime?>>? toUpdate;
+            //toUpdate.Add(from BO.TaskInList item in task.Dependencies!
+            //             where id == id
+            //             select new Tuple<int, DateTime?>(item.Id, (actuallStartDate + task.RequiredEffortTime));
+            if (DateToStart(id).Value < actuallStartDate!.Value) throw new BO.BlTooEarlyDate($"Task with id:{id} can't start at:{actuallStartDate}, please choose another date not earlier than:{DateToStart(id)}");
             _dal.Task.Update(doTask);
         }
         catch (DO.DalAlreadyExistException ex)
         {
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
         }
+    }
+    public DateTime? DateToStart(int id)
+    {
+        List<TaskInList> deps=GetAllDependencys(_dal.Task.Read(id)!)!;
+        if (deps.Count == 0) return _dal.Task.Read(id)!.StartDate;
+        List<DateTime?> date=(from dt in deps
+                             select Read(dt.Id)!.DeadlineDate).ToList();
+        return date.Max()!.Value.AddDays(1);
+        
     }
 }
 

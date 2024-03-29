@@ -7,138 +7,112 @@
         mc:Ignorable="d"
         Title="TaskWindowForStartDate" Height="450" Width="800"
         DataContext="{Binding CurrentTask,RelativeSource={RelativeSource Mode=Self},Mode=TwoWay}" >
-        <Window.Resources>
-            
-            <Style TargetType="Label">
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="Width" Value="200"/>
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="Background" Value="{x:Null}"/>
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="FontFamily" Value="Sitka Banner" />
-                <Setter Property="FontWeight" Value="Bold" />
-            </Style>
-            <!--style for all TextBoxs in this window-->
-            <Style TargetType="TextBox">
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="Width" Value="200"/>
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="Background" Value="{x:Null}"/>
-                <Setter Property="BorderBrush" Value="SteelBlue" />
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="FontFamily" Value="Sitka Banner" />
-                <Setter Property="FontWeight" Value="Bold" />
-            </Style>
-            <Style TargetType="ComboBox">
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="Width" Value="200"/>
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="Background" Value="{x:Null}"/>
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="FontFamily" Value="Sitka Banner" />
-                <Setter Property="FontWeight" Value="Bold" />
-            </Style>
-            <Style TargetType="DatePicker">
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-                <Setter Property="Width" Value="200"/>
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="Background" Value="{x:Null}"/>
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="FontFamily" Value="Sitka Banner" />
-                <Setter Property="FontWeight" Value="Bold" />
-            </Style>
-        </Window.Resources>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Window.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <!--style for all TextBoxs in this window-->
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="SteelBlue" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Sitka Banner" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.Background>
             <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/008/608/207/non_2x/motion-graphic-flat-style-illustration-design-free-vector.jpg" Stretch="Uniform"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400*"/>
-                <ColumnDefinition Width="357*"/>
-                <ColumnDefinition Width="43*"/>
-            </Grid.ColumnDefinitions>
-            <!--Id of Task-->
-            <Label Content="Id" Grid.Column="0"  />
-            <TextBox Grid.Column="1" IsEnabled="False" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Margin="66,0,79,10"  />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="357*"/>
+            <ColumnDefinition Width="43*"/>
+        </Grid.ColumnDefinitions>
+        <!--Id of Task-->
+        <Label Content="Id" Grid.Column="0" Margin="100,3,100,3"  />
+        <TextBox Grid.Column="1" IsEnabled="False" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"   />
 
-            <!--Name of Task-->
-            <Label Content="Name" Grid.Column="0"  Margin="100,31,100,0" Grid.RowSpan="2"  />
-        <TextBox Grid.Column="1"  IsEnabled="False" Margin="72,30,85,2" TextWrapping="Wrap"  Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"/>
+        <!--Name of Task-->
+        <Label Content="Name" Grid.Column="0"  Margin="100,7,100,6" Grid.Row="1"  />
+        <TextBox Grid.Column="1"  IsEnabled="False" Margin="78,6,79,7" TextWrapping="Wrap"  Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1"/>
 
-            <!--Description  of Task-->
-            <Label Content="Description" Grid.Column="0" Grid.Row="1"  Margin="100,31,100,1" Grid.RowSpan="2" />
-        <TextBox Grid.Row="2"  IsEnabled="False" Margin="72,1,85,0" TextWrapping="Wrap"  Text="{Binding Description, Mode=TwoWay, ValidatesOnExceptions=true}" Grid.Column="1"  />
 
-            <!--Complexity of Task-->
-            <Label Content="Complexity" Grid.Column="0" Grid.Row="2"  Margin="100,30,100,2" Grid.RowSpan="2" />
-        <ComboBox Grid.Column="1" IsEnabled="False" Margin="72,30,85,0" Grid.Row="2" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectedValue="{Binding Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.RowSpan="2"/>
 
-            <!-- Create date of the task-->
-            <Label Content="Created Date" Grid.Column="0" Grid.Row="4" Margin="100,1,100,0"/>
-        <Label Grid.Column="1" IsEnabled="False" Grid.Row="3"  Margin="72,31,85,2"  Content="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5"  />
-            <!-- Planned date of the task-->
-            <Label Content="Planned Date" Grid.Column="0" Grid.Row="5" Margin="100,1,100,0"/>
-        <Label Grid.Column="1" IsEnabled="False" Grid.Row="4"  Margin="72,31,85,1"  Content="{Binding ScheduledDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
+        <!--Complexity of Task-->
+        <Label Content="Complexity" Grid.Column="0" Grid.Row="2"  Margin="100,5,100,5" />
+        <ComboBox Grid.Column="1" IsEnabled="False" Margin="78,7,79,3" Grid.Row="2" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectedValue="{Binding Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
-            <!--  Calculated planned complition  date of the task-->
-            <Label Content="Complition Planned Date" Grid.Column="0" Grid.Row="5" Margin="100,31,100,1" Grid.RowSpan="2"/>
-        <Label Grid.Column="1" IsEnabled="False" Grid.Row="5"  Margin="72,30,85,2" Content="{Binding ForecastDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
-            <!--Actual start date-->
-            <Label Content="Actual Start Date" Grid.Column="0" Grid.Row="7" Margin="100,1,100,0"/>
-        <DatePicker Grid.Column="1" Grid.Row="6"  Margin="72,31,85,1" Grid.RowSpan="2" SelectedDateChanged="updateStartTaskDate_Btn" />
+        <!--Actual start date-->
+        <Label Content="Actual Start Date" Grid.Column="0" Grid.Row="3" Margin="100,12,100,13"/>
+        <Calendar Grid.Column="1" Grid.Row="3"  Margin="72,8,79,31" DisplayDateStart="{Binding Date,Mode=OneWay}" SelectedDatesChanged="updateStartTaskDate_Btn" Grid.RowSpan="4" />
 
-            <!-- Actuall complition date of the task-->
-            <Label Content="Actual Complition Date" Grid.Column="0" Grid.Row="7" Margin="100,31,100,1" Grid.RowSpan="2"/>
-        <TextBox Grid.Column="1" Grid.Row="7"  IsEnabled="False" Margin="72,31,85,1" Text="{Binding CompleteDate, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
-            <!-- Status of the task-->
-            <Label Content="Status" Grid.Column="0" Grid.Row="8" Margin="100,31,100,1" Grid.RowSpan="2"/>
-            <ComboBox  Margin="72,29,85,3"  IsEnabled="False" Grid.Row="8" ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" SelectedValue="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.RowSpan="2" Grid.Column="1"/>
+        <!--Riquired effort time  of Task-->
+        <Label Content="Required Effort Time" Grid.Column="0" Grid.Row="5"  Margin="100,2,100,30" Grid.RowSpan="2" />
+        <TextBox Grid.Column="1" Grid.Row="5"  IsEnabled="False" Margin="78,8,79,36" TextWrapping="Wrap"  Text="{Binding RequiredEffortTime, Mode=TwoWay, ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
-            <!--Riquired effort time  of Task-->
-            <Label Content="Required Effort Time" Grid.Column="0" Grid.Row="9"  Margin="100,30,100,2" Grid.RowSpan="2" />
-        <TextBox Grid.Column="1" Grid.Row="9"  IsEnabled="False" Margin="72,30,85,2" TextWrapping="Wrap"  Text="{Binding RequiredEffortTime, Mode=TwoWay, ValidatesOnExceptions=true}" Grid.RowSpan="2"  />
 
-            <!--Remarks  of Task-->
-            <Label Content="Remarks" Grid.Column="0" Grid.Row="10"  Margin="100,31,100,1" Grid.RowSpan="2" />
-        <TextBox Grid.Column="1" Grid.Row="10"  IsEnabled="False" Margin="72,31,85,0" TextWrapping="Wrap"  Text="{Binding Remarks, Mode=TwoWay, ValidatesOnExceptions=true}" Grid.RowSpan="2" />
 
-            <!--Enginner in Task  of Task-->
-            <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="11"  Margin="100,31,100,1" Grid.RowSpan="2" />
-        <TextBox Grid.Column="1" Grid.Row="11" IsEnabled="False" Margin="72,31,85,0" TextWrapping="Wrap"  Text="{Binding EngineerTask, Mode=TwoWay, Converter={StaticResource ConvertTupleToContextKey }}" Grid.RowSpan="2" />
+        <!--Enginner in Task  of Task-->
+        <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="4"  Margin="100,3,100,3" />
+        <TextBox Grid.Column="1" Grid.Row="4" IsEnabled="False" Margin="72,3,85,3" TextWrapping="Wrap"  Text="{Binding EngineerTask, Mode=TwoWay, Converter={StaticResource ConvertTupleToContextKey }}"  />
 
-            <!--button of update or add,depends if we get an id(update)or not(add)-->
-            <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="14" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="525,0,0,0" Grid.ColumnSpan="2" />
-            <Button Content="Exit" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="12" VerticalAlignment="Top"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Grid.Column="1" Margin="266,30,0,0" Grid.RowSpan="2" Click="Button_Click" />
+        <!--button of update or add,depends if we get an id(update)or not(add)-->
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Height="31" Width="72" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="363,0,0,0" Grid.ColumnSpan="2" />
+        <Button Content="Exit" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Grid.Column="1" Margin="264,0,0,0" Click="Button_Click" />
 
 
     </Grid>
-    </Window>
+</Window>

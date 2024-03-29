@@ -165,7 +165,11 @@ class ConvertTupleToContextInEng : IValueConverter
     {
         if ((IEnumerable<Tuple<int, string>?>?)value == null)
             return "You Are Not Assigned To Any Task";
-        return value.ToString()!;
+        String str="";
+        foreach (var item in (IEnumerable<Tuple<int, string>?>?)value!)
+        { str+=$"{item!.ToString()}"; }
+        return str;
+       // return value.ToString()!;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

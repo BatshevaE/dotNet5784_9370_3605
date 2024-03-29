@@ -53,7 +53,7 @@ public partial class TaskWindowForStartDate : Window
         DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindowForStartDate), new PropertyMetadata(null));
     private void updateStartTaskDate_Btn(object sender, SelectionChangedEventArgs e)
     {
-        var picker = sender as DatePicker;
+        var picker = sender as Calendar;
         DateTime? date = picker!.SelectedDate;
         s_bl.Task.UpdateActuallStartDate(date, CurrentTask.Id);
         this.Close();

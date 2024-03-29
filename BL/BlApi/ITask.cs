@@ -18,5 +18,5 @@ public interface ITask
     public bool GetAllDependentOnTasks(int id, List<int> lst);
     public IEnumerable<BO.TaskInList> AllTasksToAssign(BO.Engineer engineer);
     public void UpdateActuallStartDate(DateTime? actuallStartDate, int id);
-
+    public DateTime? DateToStart(int id);
 }
