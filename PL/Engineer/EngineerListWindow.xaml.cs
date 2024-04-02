@@ -22,7 +22,7 @@ namespace PL.Engineer
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         /// <summary>
-        /// ctor
+        /// ctor that build the list of engineers 
         /// </summary>
         public EngineerListWindow()
         {
@@ -32,7 +32,7 @@ namespace PL.Engineer
 
         }
         /// <summary>
-        /// dependency property
+        /// dependency property-engineers list
         /// </summary>
         public IEnumerable<BO.Engineer> EngineerList
         {
@@ -70,6 +70,7 @@ namespace PL.Engineer
             EngineerWindow eng = new();
             eng.ShowDialog();
             this.Close();
+            new EngineerListWindow().Show();
         }
         /// the update -here we double click on the engineer we want to update,and we send the id (of the engineer we just click) to the window of the single engineer 
         private void DoubleClicItem(object sender, MouseButtonEventArgs e)
@@ -78,14 +79,17 @@ namespace PL.Engineer
 
             EngineerWindow eng = new(engineer!.Id);
             eng.ShowDialog();
-
-            new EngineerListWindow().Show();
             this.Close();
+            new EngineerListWindow().Show();
 
 
         }
-
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// A button to return to the main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

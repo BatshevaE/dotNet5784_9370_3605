@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-       DataContext="{Binding eng, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
+       DataContext="{Binding Eng, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
        Title="UserMainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
@@ -22,13 +22,15 @@
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.Background>
             <ImageBrush ImageSource="https://img.freepik.com/premium-vector/design-people-business-training-illustration-flat-style_57801-672.jpg" Stretch="Uniform" />
         </Grid.Background>
+        <!--button to watch the details of the user-->
         <Button Content="Watch&#xD;&#xA; Your &#xD;&#xA;Details" Margin="21,36,0,0" Click="BtnDetails_Click"/>
-        <Button Content="{Binding Task, Mode=OneTime, Converter={StaticResource ConvertTupleToTextKey}}" Margin="21,253,0,0" Click="BtnAssignOrWatch_Click" />
-        <Button Content="Log Out" Margin="640,274,0,0" Click="BtnLogIn_Click" />
-
+        <!--button assign/watch your tasks-->
+        <Button Content="{Binding Task, Mode=OneTime, Converter={StaticResource ConvertTupleToTextKey}}" Margin="21,253,0,0" Click="BtnAssignOrWatch_Click" FontSize="15" />
+        <!--button to enter the systen as another user-->
+        <Button Content="Log Out" Margin="640,274,0,0" Click="BtnLogOut_Click" />
     </Grid>
 </Window>

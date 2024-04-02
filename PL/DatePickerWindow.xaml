@@ -8,9 +8,7 @@
    	    DataContext="{Binding Clock, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
         Title="DatePickerWindow" Height="200" Width="200">
     <Grid >
+          <!--<choosing a date to start the project-->
         <Calendar DisplayDateStart="{Binding Date,Mode=OneWay}" SelectedDatesChanged="Date_Select" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="White" Height="213" Width="180" Margin="0,10,0,0" Foreground="Aqua"/>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/008/608/207/non_2x/motion-graphic-flat-style-illustration-design-free-vector.jpg" Stretch="Uniform"/>
-        </Grid.Background>-->
     </Grid>
 </Window>

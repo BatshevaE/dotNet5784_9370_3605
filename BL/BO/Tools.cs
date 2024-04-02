@@ -12,10 +12,10 @@ internal static class Tools
     public static string ToStringProperty<T>(this T obj)
     {
         var properties = typeof(T).GetProperties();
-        string result = $"{typeof(T).Name} properties:\n";
+        string result = $"{typeof(T).Name} properties:\n";//final string
         foreach (var item in properties)
         {
-            if (item.PropertyType.IsGenericType && item.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+            if (item.PropertyType.IsGenericType && item.PropertyType.GetGenericTypeDefinition() == typeof(List<>))//if the item is a list
             {
                 if (item.GetValue(obj, null) != null)
                 {
@@ -24,6 +24,7 @@ internal static class Tools
                     {
                         if (val.Any())
                         {
+                            //add the name of the ienumerable and all its items
                             result += $"{item.Name} ";
                             foreach (var item1 in val)
                             {
@@ -38,9 +39,9 @@ internal static class Tools
                     }
                 }
             }
-            else
+            else//if the item is not list
            if (item.GetValue(obj, null) != null)
-                result += $"{item.Name}:{item.GetValue(obj)}\n";
+                result += $"{item.Name}:{item.GetValue(obj)}\n";//put the item name and value
         }
         return result;
     }

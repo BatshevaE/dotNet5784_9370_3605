@@ -1,5 +1,5 @@
 ﻿using DalApi;
-
+//intarface that contains all definitions of the functions of BL 
 namespace BlApi;
 public interface IBl
 {

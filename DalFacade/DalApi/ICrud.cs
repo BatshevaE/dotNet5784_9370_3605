@@ -42,7 +42,7 @@ public interface ICrud<T> where T : class
     /// <summary>
     /// function to delete initial data
     /// </summary>
-    void clear();//stage 3
+    void Clear();//stage 3
     
 
 }

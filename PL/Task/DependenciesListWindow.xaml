@@ -20,10 +20,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
+            <!--List of dependencys-->
             <Label Content="List of Dependencies" HorizontalAlignment="Left"  FontWeight="Bold" Grid.Column="0" FontSize="20" Foreground="Black" Grid.ColumnSpan="2" Margin="265,-10,0,0"/>
         </Grid>
-        <ListView x:Name="m" Margin="5" Grid.Row="1"  ItemsSource="{Binding Dependencies}" BorderBrush="{x:Null}" Foreground="Black" MouseDoubleClick="UpdateDependency_DoubleClick"   >
+        <ListView x:Name="m" Margin="5" Grid.Row="1"  ItemsSource="{Binding Dependencies}" BorderBrush="{x:Null}" Foreground="Black" MouseDoubleClick="DetailsDependency_DoubleClick"   >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

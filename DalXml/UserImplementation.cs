@@ -110,7 +110,7 @@ public class UserImplementation:IUser
     /// <summary>
     /// deletes all the Engineers from the xml file
     /// </summary>
-    public void clear()
+    public void Clear()
     {
         List<User> Users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
         Users.Clear();

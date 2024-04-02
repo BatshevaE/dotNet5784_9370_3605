@@ -8,6 +8,7 @@
         Title="TaskWindow" Height="450" Width="800"
         DataContext="{Binding CurrentTask,RelativeSource={RelativeSource Mode=Self},Mode=TwoWay}" >
     <Window.Resources>
+        <!--style for all Label in this window-->
         <Style TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -33,6 +34,7 @@
             <Setter Property="FontFamily" Value="Sitka Banner" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
+        <!--style for all ComboBox in this window-->
         <Style TargetType="ComboBox">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -45,6 +47,7 @@
             <Setter Property="FontFamily" Value="Sitka Banner" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
+        <!--style for all DatePicker in this window-->
         <Style TargetType="DatePicker">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -74,8 +77,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400*"/>
@@ -141,9 +142,10 @@
 
         <!--button to watch the dependencies of the selected task-->
         <Button Content="watch Dependencies" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}"  Height="30" Width="200" HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="16" FontFamily="Sitka Banner" Click="BtnDependencyClick"  />
-
+        <!--button to delete the task-->
         <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="31" Width="72"  HorizontalAlignment="Center" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Click="BtnDeleteTask_Click" Grid.Column="1"  />
-        <Button Content="Exit" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner"  Grid.Column="1" Click="Button_Click" Margin="275,0,0,0" />
+        <!--button to return to the main window-->
+        <Button Content="Exit" Height="31" Width="72"  HorizontalAlignment="Left" Grid.Row="13" VerticalAlignment="Center"  FontWeight="Bold" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner"  Grid.Column="1" Click="BtnExit_Click" Margin="275,0,0,0" />
 
     </Grid>
 </Window>

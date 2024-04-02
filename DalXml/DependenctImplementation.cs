@@ -124,7 +124,7 @@ internal class DependencyImplementation : IDependency
         };
 
     }
-   public void clear()
+   public void Clear()
     {
         dependencyRoot= XMLTools.LoadListFromXMLElement(s_dependencys_xml);
         dependencyRoot.RemoveAll();

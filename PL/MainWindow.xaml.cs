@@ -27,17 +27,16 @@ namespace PL
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public MainWindow()
         {
-            //  UserWindow us=new();
-            // us.ShowDialog();
-            // this.Close();
+          
             InitializeComponent();
-            Date1 = s_bl.Clock;//.ToLocalTime();
+            Date1 = s_bl.Clock.Date;//.ToLocalTime();
             DateTime? date2 = BlImplementation.Project.GetStartProject();
             CurrentTime = new Tuple<DateTime, DateTime?>(Date1, date2);
-            
-            //CurrentTime=DateTime.Now;
 
         }
+        /// <summary>
+        /// dependency property of tuple of the current time and the project start date
+        /// </summary>
         public Tuple<DateTime,DateTime?> CurrentTime
         {
             get { return (Tuple<DateTime, DateTime?>)GetValue(CurrentTimeProperty); }
@@ -47,7 +46,9 @@ namespace PL
         // Using a DependencyProperty as the backing store for CurrentTime.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentTimeProperty =
             DependencyProperty.Register("CurrentTime", typeof(Tuple<DateTime, DateTime?>), typeof(MainWindow), new PropertyMetadata(null));
-
+        /// <summary>
+        /// dependency property to the clock
+        /// </summary>
         public DateTime Date1
         {
             get { return (DateTime)GetValue(StartProjectProperty); }
@@ -78,9 +79,9 @@ namespace PL
             MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to initialize the data?", "Initialize Data", MessageBoxButton.YesNo);
             if (mbResult == MessageBoxResult.Yes)
             {
-                BlApi.Factory.Get().Engineer.clear();
-                BlApi.Factory.Get().Task.clear();
-                BlApi.Factory.Get().User.clear();
+                BlApi.Factory.Get().Engineer.Clear();
+                BlApi.Factory.Get().Task.Clear();
+                BlApi.Factory.Get().User.Clear();
                 BlImplementation.Project.ZeroStartProject();
                 BlApi.Factory.Get().InitializeClock();
                 DalTest.Initialization.Do();
@@ -89,7 +90,11 @@ namespace PL
             this.Close();
 
         }
-
+        /// <summary>
+        /// open the list of all tasks
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnTaskClick(object sender, RoutedEventArgs e)
         {
             TaskListWindow task = new();
@@ -115,36 +120,49 @@ namespace PL
             CurrentTime = new Tuple<DateTime, DateTime?>(Date1, CurrentTime.Item2);
 
         }
-
+        /// <summary>
+        /// clear all data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
 
             MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to delete all data?", "Clear Data", MessageBoxButton.YesNo);
             if (mbResult == MessageBoxResult.Yes)
             {
-                BlApi.Factory.Get().Engineer.clear();
-                BlApi.Factory.Get().Task.clear();
-                BlApi.Factory.Get().User.clear();
+                BlApi.Factory.Get().Engineer.Clear();
+                BlApi.Factory.Get().Task.Clear();
+                BlApi.Factory.Get().User.Clear();
                 BlImplementation.Project.ZeroStartProject();
             }
         }
-
+        /// <summary>
+        /// chose a date to start the project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnStartProjectDate_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
 
-            if (BlImplementation.Project.GetStartProject() == null)
+            if (BlImplementation.Project.GetStartProject() == null)//if there is no start project
             {
-                new DatePickerWindow().ShowDialog();
-                new MainWindow().Show();
-                this.Close();
+               MessageBoxResult msg= MessageBox.Show(@"After choosing a date to start the project you will not be able to add/update/delete tasks.
+Are you sure you want to choose a start date for the project?","sart date",MessageBoxButton.YesNo);
+                if (msg ==MessageBoxResult.Yes)
+                {
+                    new DatePickerWindow().ShowDialog();
+                    new MainWindow().Show();
+                    this.Close();
+                }
             }
-            else
+            else//if there is-crate automatic schedule only if we are in middle stage
             if (BlImplementation.Project.GetStage() == BO.Stage.MiddleStage)
             {
                 try
                 {
-                    s_bl.Task.createAutomaticLuz();
+                    s_bl.Task.CreateAutomaticSchedule();
                     MessageBox.Show("The  creation of the schdule were successfully updated", "success", MessageBoxButton.OK, MessageBoxImage.Information);
                     btn!.IsEnabled = false;
                 }
@@ -157,7 +175,7 @@ namespace PL
                
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnGunt_Click(object sender, RoutedEventArgs e)
         {
             GuntWindow t= new GuntWindow(); 
             t.ShowDialog();

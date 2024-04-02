@@ -14,6 +14,9 @@ internal class EngineerLevelCollection : IEnumerable
 
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
+/// <summary>
+/// enum of task's status
+/// </summary>
 internal class TaskStatusCollection : IEnumerable
 {
     static readonly IEnumerable<BO.Status> s_enums =
@@ -21,6 +24,9 @@ internal class TaskStatusCollection : IEnumerable
 
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
+/// <summary>
+/// enum of the projec's stage
+/// </summary>
 internal class StageCollection : IEnumerable
 {
     static readonly IEnumerable<BO.Stage> s_enums =

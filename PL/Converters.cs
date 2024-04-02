@@ -9,7 +9,7 @@ using System.Windows.Media;
 namespace PL;
 
 /// <summary>
-/// covert the id to the content of the button.if you send an id,the button will be called "Update".if tou dont send an id,the button will be called "Add"
+/// convert the id to the content of the button.if you send an id,the button will be called "Update".if tou dont send an id,the button will be called "Add"
 /// </summary>
 class ConvertIdToContent : IValueConverter
 {
@@ -24,6 +24,9 @@ class ConvertIdToContent : IValueConverter
     }
     
 }
+/// <summary>
+/// check if the engineer has a task that he didn't finish yet-returns false
+/// </summary>
 class ConvertTaskInEngToBool: IValueConverter
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -45,6 +48,9 @@ class ConvertTaskInEngToBool: IValueConverter
     }
 
 }
+/// <summary>
+/// check id of dependent on task to know if we in add(0) or delete
+/// </summary>
 class ConvertIdToContentDependency : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -74,6 +80,9 @@ class ConvertIdToBool : IValueConverter
         throw new NotImplementedException();
     }
 }
+/// <summary>
+/// if the id in not 0 returns true
+/// </summary>
     class ConvertIdToBoolOposite : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -88,6 +97,9 @@ class ConvertIdToBool : IValueConverter
             throw new NotImplementedException();
         }
     }
+/// <summary>
+/// we get tuple that in task- if it's null there is no engineer that assigned to the task
+/// </summary>
 class ConvertTupleToContext : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -102,18 +114,21 @@ class ConvertTupleToContext : IValueConverter
         throw new NotImplementedException();
     }
 }
+/// <summary>
+/// conver the status of tasks to colors
+/// </summary>
 class ConvertStatusToColur : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if ((string)value == "Schedeled")
-            return new SolidColorBrush(Colors.Aquamarine);
+            return new SolidColorBrush(Colors.Orange);
         else if ((string)value == "InJeopardy")
             return new SolidColorBrush(Colors.Red);
         else if ((string)value == "OnTrack")
-            return new SolidColorBrush(Colors.Lavender);
+            return new SolidColorBrush(Colors.Fuchsia);
         else if ((string)value == "Done")
-            return new SolidColorBrush(Colors.RoyalBlue);
+            return new SolidColorBrush(Colors.Pink);
         return new SolidColorBrush(Colors.White);
 
     }
@@ -123,18 +138,21 @@ class ConvertStatusToColur : IValueConverter
         throw new NotImplementedException();
     }
 }
+/// <summary>
+/// convert the words that written in the gunt that we dont want to be seen too be at the same color of the background
+/// </summary>
 class ConvertWordToColur : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if ((string)value == "Schedeled")
-            return new SolidColorBrush(Colors.Aquamarine);
+            return new SolidColorBrush(Colors.Orange);
         else if ((string)value == "InJeopardy")
             return new SolidColorBrush(Colors.Red);
         else if ((string)value == "OnTrack")
-            return new SolidColorBrush(Colors.Lavender);
+            return new SolidColorBrush(Colors.Fuchsia);
         else if ((string)value == "Done")
-            return new SolidColorBrush(Colors.RoyalBlue);
+            return new SolidColorBrush(Colors.Pink);
         else if ((string)value == "None")
             return new SolidColorBrush(Colors.White);
         return new SolidColorBrush(Colors.Black);
@@ -146,12 +164,16 @@ class ConvertWordToColur : IValueConverter
         throw new NotImplementedException();
     }
 }
+/// <summary>
+/// if the engineer has a tasks to do the name of the button is watch your tasks
+/// </summary>
 class ConvertTupleToText : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
 
-        return (Tuple<int,string>?)value == null ? "Select a Task To Assign" : "Watch Details of Your Assigned Task";
+        return (IEnumerable<Tuple<int, string>?>?)value == null ? "Select a Task To Assign" : $@"Watch Details
+Your Assigned Task";
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -159,6 +181,9 @@ class ConvertTupleToText : IValueConverter
         throw new NotImplementedException();
     }
 }
+/// <summary>
+/// the label in engineer window to see his tasks/don't have any
+/// </summary>
 class ConvertTupleToContextInEng : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -176,7 +201,9 @@ class ConvertTupleToContextInEng : IValueConverter
     {
         throw new NotImplementedException();
     }
-}
+}/// <summary>
+/// if we have a date "create schedule"
+/// </summary>
 class ConvertDateToConext : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -16,11 +16,6 @@ internal static class Config
         get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextDependentTaskId");
         set => XMLTools.SetNextId(s_data_config_xml, "NextDependentTaskId", value);
     }
-    //internal static int startWorkProject
-    //{
-    //    get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "startWorkProject");
-    //    set => XMLTools.SetstartWorkProject(s_data_config_xml, "startWorkProject", val);
-    //}
 
 }
 

@@ -19,6 +19,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <!--list of tasks tou can asiign to-->
             <Label Content="List of tasks you can assign for" HorizontalAlignment="Center"  FontWeight="Bold" Grid.Column="0" FontSize="18" Foreground="Black" Width="109"/>
             </Grid>
         <ListView Margin="5" Grid.Row="1"  BorderBrush="{x:Null}" MouseDoubleClick="DoubleClicTask" Foreground="Black" ItemsSource="{Binding TaskForEngList}">

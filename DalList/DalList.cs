@@ -1,6 +1,9 @@
 ﻿
 namespace Dal;
 using DalApi;
+/// <summary>
+/// implimination of IDAL in data source from type list
+/// </summary>
 sealed internal class DalList : IDal
 {
     public static IDal Instance { get; } = new DalList();

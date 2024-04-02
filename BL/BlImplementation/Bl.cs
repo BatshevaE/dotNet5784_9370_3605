@@ -1,7 +1,9 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using Dal;
-
+/// <summary>
+/// BL implements the methods of IBL by calling the object's implimination
+/// </summary>
 internal class Bl : IBl
 {
     public IUser User => new UserImplementation();

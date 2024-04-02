@@ -21,7 +21,10 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
+        /// <summary>
+        /// ctor that gets id of task to know if we are on add/update mode
+        /// </summary>
+        /// <param name="id"></param>
         public TaskWindow(int id=0)
         {
             InitializeComponent();
@@ -41,7 +44,9 @@ namespace PL.Task
 
         }
 
-
+        /// <summary>
+        /// dependency property of the current task
+        /// </summary>
         public BO.Task CurrentTask
         {
             get { return (BO.Task)GetValue(CurrentTaskProperty); }
@@ -52,16 +57,23 @@ namespace PL.Task
         public static readonly DependencyProperty CurrentTaskProperty =
             DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// watsh the dependencies of the current task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void BtnDependencyClick(object sender, RoutedEventArgs e)
         {
             DependenciesListWindow dependency = new(CurrentTask.Id);
             dependency.Show();
-            //dependency.ShowDialog();
             this.Close();
         }
-
+        /// <summary>
+        /// add or update the task,depends on the id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddOrUpdateTask_Click(object sender, RoutedEventArgs e)
         {
 
@@ -89,13 +101,19 @@ namespace PL.Task
                 Close();
             }
         }
-
+        /// <summary>
+        /// delete the task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDeleteTask_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 s_bl.Task.Delete(CurrentTask.Id);
-                this.Close();  
+                this.Close();
+                new TaskListWindow().Show();
+
             }
             catch (Exception ex)
             {
@@ -103,8 +121,12 @@ namespace PL.Task
                 Close();
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// button to return to the main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

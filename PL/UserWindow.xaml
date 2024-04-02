@@ -49,9 +49,9 @@
         <Label Content="Password " Margin="356,230,0,0" Height="34" Width="92" Background="White"/>
         <!--text box for the password-->
         <TextBox HorizontalAlignment="Left" Margin="448,234,0,0" TextWrapping="Wrap" Text="{Binding Password,Mode=TwoWay,NotifyOnValidationError=True,ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="261" Height="30" Background="White"/>
-
-        <Button Content="Button" Height="34" Width="64" Click="BtnInitialize_Click"/>
-
+        <!--button that initialize the data if we did clear and now we dont have data-->
+        <Button Content="Button" Height="34" Width="64" Click="BtnInitialize_Click" Foreground="{x:Null}"/>
+         <!---lacels for beauty-->
         <Label Content="" Margin="374,338,0,0" Width="322" Height="38" RenderTransformOrigin="0.506,-0.199" Background="White"/>
         <Label Content="" Margin="632,284,0,0" Width="50" Height="32" Background="White"/>
         <Label Content="" Margin="372,278,0,0" Width="130" Height="44" Background="White"/>

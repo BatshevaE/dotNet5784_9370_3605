@@ -23,15 +23,14 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlAlreadyExistException"></exception>
     public int Create(BO.Engineer item)
     {
-        if ((item.Id <= 0) || (item.Name == "") ||  (item.Cost <= 0) )
-            throw new BlWrongInput("wrong input");
+        if ((item.Id <= 0) || (item.Name == "") ||  (item.Cost <= 0) )//check that the input is logically correct
+            throw new BlWrongInput("wrong input");//throws exception
 
-        DO.Engineer doEngineer = new DO.Engineer
-          (item.Id, item.Name, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
+        DO.Engineer doEngineer = new (item.Id, item.Name, item.Email, (DO.EngineerLevel)item.Level, item.Cost);//creates a DO engineer with the item's details
         try
         {
-            int idEngineer = _dal.Engineer.Create(doEngineer);
-            return idEngineer;
+            int idEngineer = _dal.Engineer.Create(doEngineer);//calls the lower layer to create the engineer to the data source
+            return idEngineer;//returns the id of the new engineer
         }
         catch (DO.DalAlreadyExistException ex)
         {
@@ -47,12 +46,12 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlDoesNotExistException"></exception>
     public void Delete(int id)
     {
-        DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Engineerid == id);
+        DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Engineerid == id);//search if the engineer doesn't assigned to any task
         if (doTask != null)//if there is an engineer that assign to a task
             throw new BO.BlCanNotDelete($"Cannot delete Engineer with ID={id}");
         try
         {
-            _dal.Engineer.Delete(id);
+            _dal.Engineer.Delete(id);//calls the lower layer to delete the engineer from the data sourcr
         }
         catch (DO.DalAlreadyExistException ex)
         {
@@ -61,7 +60,7 @@ internal class EngineerImplementation : IEngineer
 
     }
     /// <summary>
-    /// Returning a reference to a single object of Engineer with a certain ID.
+    /// Returns a reference to a single object of Engineer with a certain ID.
     /// </summary>
     /// <param name="id">ID number of an engineer.</param>
     /// <returns>If there is an object in the database with the received identification number, the method will return a reference to the existing engineer.
@@ -69,10 +68,10 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlDoesNotExistException"></exception>
     public BO.Engineer? Read(int id)
     {
-        DO.Engineer? doEngineer = _dal.Engineer.Read(id);
-        if (doEngineer == null)
-            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
-        return new BO.Engineer()
+        DO.Engineer? doEngineer = _dal.Engineer.Read(id);//reads fron the lower layer the requested engineer
+        return doEngineer == null
+          ? throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")
+            : new BO.Engineer()
         {
             Id = id,
             Name = doEngineer.Name,
@@ -88,7 +87,7 @@ internal class EngineerImplementation : IEngineer
     /// <returns>The method returns a new list that is a copy of the existing list of all objects of engineer.</returns>
     public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
-        IEnumerable<DO.Engineer?> EngineerList = _dal.Engineer.ReadAll();
+        IEnumerable<DO.Engineer?> EngineerList = _dal.Engineer.ReadAll();//a collection of all engineers frim the lower layer
             IEnumerable<BO.Engineer> BOEngineerList =
             from item in EngineerList
             orderby item.Id
@@ -100,8 +99,8 @@ internal class EngineerImplementation : IEngineer
                 Level = (BO.EngineerLevel)item.Complexity,
                 Cost = item.CostForHour,
                 Task = CalculateTaskInEngineer(item.Id)
-            };
-        if (filter != null){ return BOEngineerList.Where(filter); }
+            };//order the engineers by their id
+        if (filter != null){ return BOEngineerList.Where(filter); }//returns the engineers that under the condition
         else { return BOEngineerList; }
     }
     /// <summary>
@@ -112,14 +111,13 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlAlreadyExistException"></exception>
     public void Update(BO.Engineer item)
     {
-        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0)|| (item.Name == null))
+        if ((item.Id <= 0) || (item.Name == "") || (item.Email == null) || (item.Cost <= 0)|| (item.Name == null))//check if the input is logically right
             throw new BlWrongInput("wrong input");
 
-        DO.Engineer doEngineer = new DO.Engineer
-          (item.Id, item.Name!, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
+        DO.Engineer doEngineer = new (item.Id, item.Name!, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
         try
         {
-             _dal.Engineer.Update(doEngineer);
+             _dal.Engineer.Update(doEngineer);//try to update the engineer in the data source via the lower layer
             
         }
         catch (DO.DalAlreadyExistException ex)
@@ -128,22 +126,22 @@ internal class EngineerImplementation : IEngineer
         }
     }
     /// <summary>
-    /// return the task that assign to the engineer
+    /// returns the task that assign to the engineer
     /// </summary>
     /// <param name="id">id of a task</param>
     /// <returns></returns>
    public List<Tuple<int,string>?>? CalculateTaskInEngineer(int id)
     {
-        IEnumerable<DO.Task>? doTask = _dal.Task.ReadAll().Where(item => item!.Engineerid == id)!.ToList()!;
+        IEnumerable<DO.Task>? doTask = _dal.Task.ReadAll().Where(item => item!.Engineerid == id)!.ToList()!;//a list of all tasks that the engineer is assigned to
         List<Tuple<int, string>?>? EngTask;
-        if (doTask.Count()==0)
+        if ((doTask==null)||(doTask!.Count()==0))//if the list is empty
         {
-            EngTask = null;
+            EngTask = null;//the engineer doesn't assign to any task
 
         }
         else
         {
-            EngTask = doTask.Select(item => new Tuple<int, string>(item.Id, item.Name)).ToList()!;
+            EngTask = doTask.Select(item => new Tuple<int, string>(item.Id, item.Name)).ToList()!;//a list of id+name of tasks that the enginner assigned to
 
         }
         return EngTask;
@@ -151,9 +149,9 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// clear the data source
     /// </summary>
-    public void clear()
+    public void Clear()
     {
-       _dal.Engineer.clear();
+       _dal.Engineer.Clear();//calls the lower layer to dekete all data about the engineers from the data source
     }
     /// <summary>
     /// return a collection of engineers in certain level
@@ -164,9 +162,9 @@ internal class EngineerImplementation : IEngineer
     {
         IEnumerable<IGrouping <BO.EngineerLevel, BO.Engineer>> engineers = from item in ReadAll()
                                              group item by item.Level into gs
-                                             select gs;
+                                             select gs;//a collection of groups of engineers by their levels
 
-        return engineers.FirstOrDefault(item=>item.Key == level);  
+        return engineers.FirstOrDefault(item=>item.Key == level);  //returns the requested group 
     }
 
 }

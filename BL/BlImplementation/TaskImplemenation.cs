@@ -3,11 +3,6 @@ using BO;
 using DalApi;
 using DO;
 using System.Collections.Generic;
-
-
-
-//using DalApi;
-//using DO;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +13,9 @@ namespace BlImplementation;
 
 internal class TaskImplemenation : BlApi.ITask
 {
+    /// <summary>
+    /// the data source from the dal
+    /// </summary>
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private readonly IBl _bl;
     internal TaskImplemenation(IBl bl) => _bl = bl;
@@ -30,15 +28,15 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BO.BlAlreadyExistException"></exception>
     public int Create(BO.Task item)
     {
-        if (item.Id < 0 || item.Name == "")
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");//we can craete tasks only in the Planing Stage
+        if (item.Id < 0 || item.Name == "")//check that the input is logically correct
             throw new BlWrongInput("wrong input");
-        DO.Task doTask = new DO.Task
-              (item.Name, item.Description, item.Id, " ", (DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1, item.CreatedAtDate, item.RequiredEffortTime, false, item.DeadlineDate, item.ScheduledDate, item.StartDate, item.CompleteDate, item.Remarks);
+        DO.Task doTask = new (item.Name, item.Description, item.Id, " ", (DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1, item.CreatedAtDate, item.RequiredEffortTime, false, item.DeadlineDate, item.ScheduledDate, item.StartDate, item.CompleteDate, item.Remarks);
         try
         {
-            int idTask = _dal.Task.Create(doTask);
-            if(item.Dependencies!=null)
-               item.Dependencies!.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id))).ToList();
+            int idTask = _dal.Task.Create(doTask);//setd it to the lower layer to create the new task in the data source
+            if(item.Dependencies!=null)//if the task dependns on other tasks
+               item.Dependencies!.Select(dependency => _dal.Dependency.Create(new DO.Dependency(0, idTask, dependency.Id))).ToList();//create new dependencies in the dependency data source
             return idTask;
         }
         catch (DO.DalAlreadyExistException ex)
@@ -54,18 +52,19 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BlCanNotDelete"></exception>
     public void Delete(int id)
     {
-        DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Id == id);
-        if (doTask == null)
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");//we can delete tasks only in the Planing Stage
+        DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Id == id);//read the task to delete from the lower layer
+        if (doTask == null)//if the task doesnt exist
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-        IEnumerable<DO.Dependency>? dependentList = _dal.Dependency.ReadAll()!;
-        IEnumerable<DO.Dependency>? taskDependent = from dependent in dependentList//a collection of all the dependecies with the tasks that depencence on this task
+        IEnumerable<DO.Dependency>? dependentList = _dal.Dependency.ReadAll()!;//collection of all the  dependencies
+        IEnumerable<DO.Dependency>? taskDependent = (from dependent in dependentList//a collection of all the dependecies with the tasks that depencent on this task
                                                     where dependent.DependentOnTask == id
-                                                    select dependent;
-        if (taskDependent.Any())//the collection is not null-there are tasks the dependence on this task
+                                                    select dependent).ToList();
+        if ((taskDependent.Any())&&(taskDependent.Count()!=0))//the collection is not null-there are tasks the dependence on this task
             throw new BlCanNotDelete($"Task with ID {id} can't be deleted");
         try
         {
-             dependentList.Where(dependency => dependency.DependentTask == doTask.Id).Select(dependency => _dal.Dependency.Delete(dependency.Id)).ToList();
+             dependentList.Where(dependency => dependency.DependentTask == doTask.Id).Select(dependency => _dal.Dependency.Delete(dependency.Id)).ToList();//delete via the loxer layer from the data source
             _dal.Task.Delete(id);
         }
         catch (DO.DalAlreadyExistException ex)
@@ -81,7 +80,7 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BO.BlDoesNotExistException"></exception>
     public BO.Task? Read(int id)
     {
-        DO.Task? doTask = _dal.Task.Read(id);
+        DO.Task? doTask = _dal.Task.Read(id);//read the task from the lower layer
         if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
         return new BO.Task()
@@ -90,7 +89,7 @@ internal class TaskImplemenation : BlApi.ITask
             Name = doTask.Name,
             Description = doTask.Descriptoin,
             Copmlexity = (BO.EngineerLevel)doTask.Complexity,
-            EngineerTask = calculateEngineerTask(doTask.Engineerid),
+            EngineerTask = CalculateEngineerTask(doTask.Engineerid),
             CreatedAtDate = doTask.CreateDate,
             RequiredEffortTime = doTask.RiquiredEffortTime,
             ForecastDate = doTask.OptionalDeadline,
@@ -100,20 +99,20 @@ internal class TaskImplemenation : BlApi.ITask
             Remarks = doTask.Note,
             Status = GetStatus(doTask),
             Dependencies = GetAllDependencys(doTask)
-        };
+        };//returns a BO.Task of this task
 
     }
     /// <summary>
-    /// The function needs to return a copy of the list with all the tasks
+    /// The function needs to return a copy of the list with all the tasks of type BO.TaskInList
     /// </summary>
     /// <returns>Returns the list of tasks</returns>
     public IEnumerable<BO.TaskInList> ReadAll(Func<BO.TaskInList, bool>? filter = null)
     {
-        IEnumerable<DO.Task?> TaskList = _dal.Task.ReadAll();
+        IEnumerable<DO.Task?> TaskList = _dal.Task.ReadAll();//a collection of all the tasks
         IEnumerable<BO.TaskInList> BOTaskList =
         from item in TaskList
         orderby item.Id
-        select new BO.TaskInList
+        select new BO.TaskInList//a collection of all tasks order by the id,from type TaskInList
         {
             Id = item.Id,
             Name = item.Name,
@@ -122,12 +121,17 @@ internal class TaskImplemenation : BlApi.ITask
             Copmlexity = (BO.EngineerLevel) item.Complexity
         };
         if (filter != null)
-        { return BOTaskList.Where(filter); }
+        { return BOTaskList.Where(filter); }//return all tasks under the condition
         else { return BOTaskList; }
     }
-    public IEnumerable<BO.Task> ReadAll2(Func<BO.Task, bool>? filter = null)
+    /// <summary>
+    ///The function needs to return a copy of the list with all the tasks of type BO.Task 
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    public IEnumerable<BO.Task> ReadAllBOTask(Func<BO.Task, bool>? filter = null)
     {
-        IEnumerable<DO.Task?> TaskList = _dal.Task.ReadAll();
+        IEnumerable<DO.Task?> TaskList = _dal.Task.ReadAll();// a collection of all the tasks
         IEnumerable<BO.Task> BOTaskList =
         from doTask in TaskList
         orderby doTask.Id
@@ -137,7 +141,7 @@ internal class TaskImplemenation : BlApi.ITask
             Name = doTask.Name,
             Description = doTask.Descriptoin,
             Copmlexity = (BO.EngineerLevel)doTask.Complexity,
-            EngineerTask = calculateEngineerTask(doTask.Engineerid),
+            EngineerTask = CalculateEngineerTask(doTask.Engineerid),
             CreatedAtDate = doTask.CreateDate,
             RequiredEffortTime = doTask.RiquiredEffortTime,
             ForecastDate = doTask.OptionalDeadline,
@@ -147,9 +151,9 @@ internal class TaskImplemenation : BlApi.ITask
             Remarks = doTask.Note,
             Status = GetStatus(doTask),
             Dependencies = GetAllDependencys(doTask)
-        };
+        };//a collection of all tasks order by the id,from type TaskInList
         if (filter != null)
-        { return BOTaskList.Where(filter); }
+        { return BOTaskList.Where(filter); }//return all tasks under the condition
         else { return BOTaskList; }
     }
     /// <summary>
@@ -160,16 +164,16 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BO.BlDoesNotExistException"></exception>
     public void Update(BO.Task item)
     {
-        if (item.Id < 0 || item.Name == "")
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");//we can update tasks only in the Planing Stage
+        if (item.Id < 0 || item.Name == "")//check if the input is logicaly correct
             throw new BlWrongInput("wrong input");
-        if ((_dal.Task.Read(item.Id)!.StartDate != null) && (_dal.Task.Read(item.Id)!.StartDate != item.StartDate))
+        if ((_dal.Task.Read(item.Id)!.StartDate != null) && (_dal.Task.Read(item.Id)!.StartDate != item.StartDate))//if the task  have optional start date and the user want to update it,
         {
-            try { UpdateStartDate(item.Id, item.StartDate); }
+            try { UpdateStartDate(item.Id, item.StartDate); }//calls the UpdateStartDate function to update the start date
             catch (BO.BlcanotUpdateStartdate ex)
             { throw new BO.BlcanotUpdateStartdate($"Can not update the date", ex); };
         }
-        DO.Task doTask = new DO.Task
-              (item.Name, item.Description, item.Id, " ", (DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1, item.CreatedAtDate, item.RequiredEffortTime, false, item.DeadlineDate, item.ScheduledDate, item.StartDate, item.CompleteDate, item.Remarks);
+        DO.Task doTask = new (item.Name, item.Description, item.Id, " ", (DO.EngineerLevel)item.Copmlexity, item.EngineerTask?.Item1, item.CreatedAtDate, item.RequiredEffortTime, false, item.DeadlineDate, item.ScheduledDate, item.StartDate, item.CompleteDate, item.Remarks);
         try
         {
             _dal.Task.Update(doTask);
@@ -180,7 +184,7 @@ internal class TaskImplemenation : BlApi.ITask
         }
     }
     /// <summary>
-    /// update the start date
+    /// update the optional start date(we dont really use this function becuase we prefer the automatic schedulee
     /// </summary>
     /// <param name="id">id of a task</param>
     /// <param name="startDate">the date we want to put</param>
@@ -189,26 +193,26 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BO.BlTooEarlyDate"></exception>
     public bool UpdateStartDate(int id, DateTime? startDate)
     {
-        if (BlImplementation.Project.GetStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
-        DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Id == id);
+        if (BlImplementation.Project.GetStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");//we can update the optional start date only in the middle stage
+        DO.Task? doTask = _dal.Task.ReadAll().FirstOrDefault(temp => temp!.Id == id);//the required task
         if (doTask == null)
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
         IEnumerable<DO.Dependency>? dependentList = _dal.Dependency.ReadAll()!.Where(item => item!.DependentTask! == id)!;//a collection of all the dependencies with this task
         IEnumerable<DateTime?>? taskDependent = from dependent in dependentList
                                                 let item = _dal.Task.Read(dependent.DependentOnTask)
                                                 where (item != null) && (item.StartDate == null)
-                                                select item.StartDate;
+                                                select item.StartDate;//collection of dates of tasks which are null that the current task dependents on
+        //the collection is a counter to check if the task dependents on tasks that don't have an optional start date
         if (taskDependent.Any())//there ia a task that this task dependent on that didnt start yet
             throw new BO.BlcanotUpdateStartdate($"Can not update the date becuse task with {id} dependent on other task that didnt start yet ");
         taskDependent = from dependent in dependentList
                         let item = _dal.Task.Read(dependent.DependentOnTask)
                         where (item != null) && (item.StartDate + item.RiquiredEffortTime > startDate) && (item.StartDate >= item.CreateDate)
-                        select item.StartDate;
-        if (taskDependent.Any())//there ia a task that this task dependent on that finish after the new start date
+                        select item.StartDate;//a collection of all tasks that the current task dependents on and they finish after the requested optional start date
+        if (taskDependent.Any())//there is a task that this task dependent on that finish after the new start date
             throw new BO.BlTooEarlyDate($"The date {startDate} is too early");
 
-        DO.Task updateTask = new DO.Task
-         (doTask.Name, doTask.Descriptoin, doTask.Id, doTask.Product, doTask.Complexity, doTask.Engineerid, doTask.CreateDate, doTask.RiquiredEffortTime, false, startDate+doTask.RiquiredEffortTime, startDate, doTask.StartTaskDate, doTask.ActualDeadline, doTask.Note);
+        DO.Task updateTask = new (doTask.Name, doTask.Descriptoin, doTask.Id, doTask.Product, doTask.Complexity, doTask.Engineerid, doTask.CreateDate, doTask.RiquiredEffortTime, false, startDate+doTask.RiquiredEffortTime, startDate, doTask.StartTaskDate, doTask.ActualDeadline, doTask.Note);
         try
         {
             _dal.Task.Update(updateTask);
@@ -224,12 +228,12 @@ internal class TaskImplemenation : BlApi.ITask
     /// </summary>
     /// <param name="id">id of the engineer</param>
     /// <returns></returns>
-    public Tuple<int?, string>? calculateEngineerTask(int? id)
+    public Tuple<int?, string>? CalculateEngineerTask(int? id)
     {
+        //helper function 
         if (id == null) return null;
-        DO.Engineer engineerName = _dal.Engineer.ReadAll().FirstOrDefault(item => item!.Id == id)!;
+        DO.Engineer engineerName = _dal.Engineer.ReadAll().FirstOrDefault(item => item!.Id == id)!;//reads the engineer with id from the lower layer
         string name = engineerName.Name;
-
         return new Tuple<int?, string>(id, name);
     }
     /// <summary>
@@ -240,7 +244,7 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BlNotAtTheRightStageException"></exception>
     /// <exception cref="BlCanNotAssignRequestedEngineer"></exception>
     /// <exception cref="BO.BlDoesNotExistException"></exception>
-    public void updateEngineerToTask(int idEngineer, int idTask)
+    public void UpdateEngineerToTask(int idEngineer, int idTask)
     {
         if (_dal.Task.Read(idTask) == null) throw new BO.BlDoesNotExistException($"Task with ID={idTask} does Not exist");
         if (_dal.Engineer.Read(idEngineer) == null) throw new BO.BlDoesNotExistException($"Engineer with ID={idEngineer} does Not exist");
@@ -271,7 +275,7 @@ internal class TaskImplemenation : BlApi.ITask
                 taskDependencys!.Where(item => (item.StartDate + item.RiquiredEffortTime)! > _bl.Clock).ToList();//the task's that this task dependent on finish day, is before today
                 if (taskDependencys==null) throw new BlCanNotAssignRequestedEngineer("The Task dependent on other tasks that wasn't done yet,can't assign the engineer to the requested task");
             }
-            DO.Task taskToUpdate = new(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);
+            DO.Task taskToUpdate = new(task.Name, task.Descriptoin, task.Id, task.Product, task.Complexity, idEngineer, task.CreateDate, task.RiquiredEffortTime, false, task.OptionalDeadline, task.StartDate, task.StartTaskDate, task.ActualDeadline, task.Note);//assign the engineer to the task
             try
             {
                 _dal.Task.Update(taskToUpdate);
@@ -293,12 +297,12 @@ internal class TaskImplemenation : BlApi.ITask
     {
         if (task.StartDate == null)
             return BO.Status.Unschedeled;
-        else if ((task.StartDate != null) && (task.StartDate >= _bl.Clock) && ((task.StartTaskDate == null)||(task.StartTaskDate >=_bl.Clock)))
-            return BO.Status.Schedeled;
+        else if (((task.StartDate != null) && (task.StartDate >= _bl.Clock) && (task.StartTaskDate == null))||(task.StartTaskDate >_bl.Clock))
+            return BO.Status.Schedeled;//the optional start date is in the future and the actual start date doesn't exsit or in the future too
         else if ((task.StartDate <= _bl.Clock) && (task.StartTaskDate == null))
-            return BO.Status.InJeopardy;
+            return BO.Status.InJeopardy;//the optional start date is in the past and thet is no actual start date yet
         else if ((task.StartTaskDate !=null)&&(task.StartTaskDate<=_bl.Clock) && (task.StartTaskDate + task.RiquiredEffortTime >= _bl.Clock))
-            return BO.Status.OnTrack;
+            return BO.Status.OnTrack;//if the actual start date in the past and the actual deadline date is in the future
         else //if (task.StartTaskDate + task.RiquiredEffortTime < DateTime.Today)
             return BO.Status.Done;
     }
@@ -312,18 +316,18 @@ internal class TaskImplemenation : BlApi.ITask
         IEnumerable<DO.Task> taskDependencys =
              from DO.Dependency item in _dal.Dependency.ReadAll()
              where item.DependentTask == task.Id
-             select _dal.Task.Read(item.DependentOnTask);
+             select _dal.Task.Read(item.DependentOnTask);//a collection of all tasks that the current task dependents on
         List<TaskInList>? dependencys1 = (taskDependencys.Select(taskDependency => new TaskInList
         {
             Id = taskDependency.Id,
             Description = taskDependency.Descriptoin,
             Name = taskDependency.Name,
             Status = GetStatus(taskDependency)
-        })).ToList();
+        })).ToList();//change from task to TaskInList
         return dependencys1;
     }
     /// <summary>
-    /// return the id of the dependency
+    /// returns the id of the dependency
     /// </summary>
     /// <param name="idDependency">the dependent task</param>
     /// <param name="idDependentOn">the task </param>
@@ -339,18 +343,19 @@ internal class TaskImplemenation : BlApi.ITask
     /// <summary>
     /// clear the data source
     /// </summary>
-    public void clear()
+    public void Clear()
     {
-        _dal.Dependency.clear();
-        _dal.Task.clear();
+        _dal.Dependency.Clear();
+        _dal.Task.Clear();
 
     }
-    public void createAutomaticLuz()
+    /// <summary>
+    /// create automatically an optional start date to all the tasks
+    /// </summary>
+    /// <exception cref="BlNotAtTheRightStageException"></exception>
+    public void CreateAutomaticSchedule()
     {
         if (BlImplementation.Project.GetStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
-        IEnumerable<DO.Task> tasks = from DO.Task item in _dal.Task.ReadAll()//a collection of all tasks that are not dependent on other tasks
-                              where GetAllDependencys(item)!.Any() == false
-                              select item;
         List<int> lst = new List<int>();//a list of id of tasks in specific order
         List<Tuple<int, DateTime?>>? toUpdate;//a list that we will send to update start date
         toUpdate = (from DO.Task task in _dal.Task.ReadAll()//all the tasks without start date-update with the start date of the project
@@ -366,7 +371,7 @@ internal class TaskImplemenation : BlApi.ITask
                                          select item1).ToList();
            foreach (DO.Task task in tasks1)
            {
-                IEnumerable<DateTime?> endDate = (from BO.TaskInList dependency in GetAllDependencys(task)!//creat a collection from the tasks that dependent on a certain task
+                IEnumerable<DateTime?> endDate = (from BO.TaskInList dependency in GetAllDependencys(task)!//create a collection from the tasks that dependent on a certain task
                                                let doDep = _dal.Task.Read(dependency.Id)!
                                                where lst.Contains(dependency.Id)//if the dependency is in lst
                                                select (DateTime?)(toUpdate.FirstOrDefault((item=>item.Item1== dependency.Id))!.Item2 + doDep.RiquiredEffortTime)).ToList();//put in the list the end date of the dependent of task 
@@ -396,12 +401,14 @@ internal class TaskImplemenation : BlApi.ITask
     /// <exception cref="BO.BlAlreadyExistException"></exception>
     public void AddDependency(int dependency,int id)
     {
-        BO.Task task = Read(id)!;
-        BO.Task DepTask = Read(dependency)!;
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+        if (dependency == id) throw new BlCantAddDependency("Task can't be dependent on itself");
+        BO.Task task = Read(id)!;//dependent on
+        BO.Task DepTask = Read(dependency)!;//the dependent task
         if (DepTask.Status==BO.Status.OnTrack|| DepTask.Status == BO.Status.Done) 
             throw new Exception("The Task is already Done,Cant create the dependency");
         else
-        if (task.Dependencies!.FirstOrDefault(item => item.Id == dependency) != null)
+        if (DepTask.Dependencies!.FirstOrDefault(item => item.Id == id) != null)
             throw new BO.BlAlreadyExistException("Such dependency is already exists");
         else
         {
@@ -414,26 +421,16 @@ internal class TaskImplemenation : BlApi.ITask
     /// </summary>
     /// <param name="dependency">the task that dependenet</param>
     /// <param name="id">the task that another task dependent on</param>
-    public void deleteDependency(int dependency, int id)
+    public void DeleteDependency(int dependency, int id)
     {
+        if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
+
         BO.Task task = Read(id)!;
        DO.Dependency d=_dal.Dependency.ReadAll().FirstOrDefault(item=>(item!.DependentOnTask==id)&&(item.DependentTask==dependency))!;  
         _dal.Dependency.Delete(d.Id);
     }
     /// <summary>
-    /// check if there are tasks that dependent on this task
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="lst"></param>
-    /// <returns></returns>
-    public bool GetAllDependentOnTasks(int id, List<int> lst)
-    {
-       List<DO.Dependency> t= _dal.Dependency.ReadAll().Where(item=>(item!.DependentTask==id)).ToList()!;//all the dependecies where id is dependent on other tasks
-        List<DO.Dependency> t2 = t.Where(item => lst.Contains(item.DependentOnTask)).ToList()!; //all the tasks that id dependent on
-       return t.Count==t2.Count;
-     }
-    /// <summary>
-    /// return all the tasks tha one engineer can do
+    /// return all the tasks that one engineer can do
     /// </summary>
     /// <param name="engineer"></param>
     /// <returns></returns>
@@ -456,25 +453,19 @@ internal class TaskImplemenation : BlApi.ITask
             }
         }
         return toAssign2.ToList();   
-        //IEnumerable<BO.TaskInList> toReturn = toAssign2.Select(item => item);
-        //return toReturn.ToList();
     }
     /// <summary>
-    /// update the date that the engineer started the task
+    /// updates the date that the engineer started the task
     /// </summary>
-    /// <param name="actuallStartDate"></param>
-    /// <param name="id"></param>
+    /// <param name="actuallStartDate">th date that the enginner chose to start the task</param>
+    /// <param name="id">the id of the task that the engineer want to start</param>
     public void UpdateActuallStartDate(DateTime? actuallStartDate,int id) 
     {
         try
         {
             BO.Task task = Read(id)!;
             DO.Task doTask = new(task.Name, task.Description, task.Id, "", (DO.EngineerLevel)task.Copmlexity, task.EngineerTask!.Item1, task.CreatedAtDate, task.RequiredEffortTime, false, task.ForecastDate, task.ScheduledDate, actuallStartDate, actuallStartDate + task.RequiredEffortTime, task.Remarks);
-            //List<Tuple<int, DateTime?>>? toUpdate;
-            //toUpdate.Add(from BO.TaskInList item in task.Dependencies!
-            //             where id == id
-            //             select new Tuple<int, DateTime?>(item.Id, (actuallStartDate + task.RequiredEffortTime));
-            if (DateToStart(id).Value > actuallStartDate!.Value) throw new BO.BlTooEarlyDate($"Task with id:{id} can't start at:{actuallStartDate}, please choose another date not earlier than:{DateToStart(id)}");
+            if (DateToStart(id)!.Value > actuallStartDate!.Value) throw new BO.BlTooEarlyDate($"Task with id:{id} can't start at:{actuallStartDate}, please choose another date not earlier than:{DateToStart(id)}");//if the minimal date to start date is after the requested date
             _dal.Task.Update(doTask);
         }
         catch (DO.DalAlreadyExistException ex)
@@ -482,15 +473,26 @@ internal class TaskImplemenation : BlApi.ITask
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", ex);
         }
     }
+    /// <summary>
+    /// returns the minimal date that a task can be start according to the actual deadLine date of the tasks that it depends on
+    /// </summary>
+    /// <param name="id">id of the task that the engineer want to start</param>
+    /// <returns></returns>
     public DateTime? DateToStart(int id)
     {
-        List<TaskInList> deps=GetAllDependencys(_dal.Task.Read(id)!)!;
-        if (deps.Count == 0) return _dal.Task.Read(id)!.StartDate;
+        List<TaskInList> deps=GetAllDependencys(_dal.Task.Read(id)!)!;//all the tasks that task dependents on
+        if (deps.Count == 0) {
+            if(_dal.Task.Read(id)!.StartDate< _bl.Clock) { return _bl.Clock; }
+            return _dal.Task.Read(id)!.StartDate;
+        }
+        //else
         List<DateTime?> date=(from dt in deps
                              select Read(dt.Id)!.DeadlineDate).ToList();
+        date.Add(_bl.Clock);
         return date.Max()!.Value.AddDays(1);
         
     }
+   
 }
 
 

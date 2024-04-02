@@ -25,9 +25,9 @@ namespace PL.Engineer
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         /// <summary>
-        /// ctor
+        /// ctor gets an id of engineer if we update an existing engineer and will be 0 if we want to create a new engineer
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">id of engineer/0</param>
         public EngineerWindow(int id=0)
         {
             InitializeComponent();
@@ -48,7 +48,7 @@ namespace PL.Engineer
         }
 
         /// <summary>
-        /// dependency property
+        /// dependency property to the currrent engineer
         /// </summary>
         public BO.Engineer CurrentEngineer
         {
@@ -72,15 +72,15 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Create(CurrentEngineer!);
                     MessageBox.Show("successsfull create engineer", "succeeded", MessageBoxButton.OK);
-                    new EngineerListWindow().ShowDialog();
                     this.Close();
-
+                   
                 }
                 else//there is  an engineer with such an id-we are on update mode
                 {
                     s_bl.Engineer.Update(CurrentEngineer!);
                     MessageBox.Show("successsfull update engineer", "succeedes", MessageBoxButton.OK);
                     this.Close();
+
                 }
             }
             catch (Exception ex) 
@@ -90,7 +90,11 @@ namespace PL.Engineer
             }
 
         }
-
+        /// <summary>
+        /// a button to delete an existing enginner
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>     
         private void BtnDeleteEngineer_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -105,17 +109,17 @@ namespace PL.Engineer
                 Close();
             }
         }
-
+        /// <summary>
+        /// a button to a window with a list of all the task that the engineer can do
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAssignToTask_Click(object sender, RoutedEventArgs e)
         {
             try 
             { 
-            //{
-            //    PL.Task.taskToEnginner t = new(CurrentEngineer);
-            //    t.Show();
             new taskToEnginner(CurrentEngineer).ShowDialog();
              this.Close();
-
             }
             catch (Exception ex)
             {
@@ -123,10 +127,13 @@ namespace PL.Engineer
                 Close();
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           
+        /// <summary>
+        /// a button to return to the main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {          
             this.Close();
         }
     }

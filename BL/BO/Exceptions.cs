@@ -106,4 +106,15 @@ public class BlCanNotAssignRequestedEngineer : Exception
     public BlCanNotAssignRequestedEngineer(string message, Exception innerException)
                 : base(message, innerException) { }
 }
+/// <summary>
+/// CanNotadd dependency
+/// </summary>
+[Serializable]
+
+public class BlCantAddDependency: Exception
+{
+    public BlCantAddDependency(string? message) : base(message) { }
+    public BlCantAddDependency(string message, Exception innerException)
+                : base(message, innerException) { }
+}
 

@@ -25,16 +25,16 @@ public static class Initialization
         //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        createTasks();
-        createDependencys();
-        createEngineers();
-        createUsers();
+        CreateTasks();
+        CreateDependencys();
+        CreateEngineers();
+        CreateUsers();
 
     }
     /// <summary>
     /// a method to initialize the list of tasks
     /// </summary>
-    private static void createTasks()
+    private static void CreateTasks()
     {
         //an array of names
         string[] tasksNames =
@@ -139,7 +139,7 @@ public static class Initialization
                     EngineerLevel complex = (EngineerLevel)s_rand.Next((int)EngineerLevel.Beginner, (int)EngineerLevel.Expert);//here we get a random complex for each task
 
             //here we get a random create date  from today until 3 months from today
-              DateTime startDateRange = new (2024, 4, 1);
+              DateTime startDateRange = new (2026, 4, 1);
                Random gen = new ();
               int rangeStart = (startDateRange - DateTime.Today).Days;
              DateTime createDate = startDateRange.AddDays(gen.Next(rangeStart));
@@ -153,7 +153,7 @@ public static class Initialization
     /// <summary>
     /// a method to initialize the list of Engineers
     /// </summary>
-    private static void createEngineers()
+    private static void CreateEngineers()
     {
         //array of names of engineers
         string[] engineerNames =
@@ -188,7 +188,7 @@ public static class Initialization
     /// <summary>
     /// a method to initialize the list of Dependencys
     /// </summary>
-    private static void createDependencys()
+    private static void CreateDependencys()
 
     {
         Dependency[] newDependency = {
@@ -240,7 +240,7 @@ public static class Initialization
     }
 
 
-    private static void createUsers()
+    private static void CreateUsers()
 
     {
         User[] newUser = 

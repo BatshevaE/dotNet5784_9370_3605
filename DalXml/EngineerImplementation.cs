@@ -113,7 +113,7 @@ internal class EngineerImplementation:IEngineer
     /// <summary>
     /// deletes all the Engineers from the xml file
     /// </summary>
-    public void clear()
+    public void Clear()
     {
         List<Engineer> Engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
         Engineers.Clear();

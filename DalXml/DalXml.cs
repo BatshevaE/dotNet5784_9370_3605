@@ -27,7 +27,7 @@ sealed  internal class DalXml : IDal
             XElement root = XMLTools.LoadListFromXMLElement("data-config");
             if (root.Element("StartProject") == null)
             {
-                XElement start = new XElement("StartProject", value);
+                XElement start = new("StartProject", value);
                 root.Add(start);
             }
             else
@@ -48,7 +48,7 @@ sealed  internal class DalXml : IDal
             XElement root = XMLTools.LoadListFromXMLElement("data-config");
             if (root.Element("EndProject") == null)
             {
-                XElement end = new XElement("EndProject", value);
+                XElement end = new("EndProject", value);
                 root.Add(end);
             }
             else

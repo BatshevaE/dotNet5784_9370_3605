@@ -72,10 +72,10 @@ namespace DalTest
                             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
                             if (ans == "Y") //stage 3
                             {
-                                s_dal.Engineer.clear();
-                                s_dal.Task.clear();
-                                s_dal.Dependency.clear();
-                                s_dal.User.clear();
+                                s_dal.Engineer.Clear();
+                                s_dal.Task.Clear();
+                                s_dal.Dependency.Clear();
+                                s_dal.User.Clear();
                                 // Initialization.Do(s_dal); //stage 2
                                 Initialization.Do(); //stage 4
 
@@ -136,19 +136,19 @@ Delete:5
                         case SubMenue.Exit:
                             return;
                         case SubMenue.Creat:
-                            creatTask();
+                            CreatTask();
                             break;
                         case SubMenue.Read:
-                            readTask();
+                            ReadTask();
                             break;
                         case SubMenue.ReadAll:
-                            readListTasks();
+                            ReadListTasks();
                             break;
                         case SubMenue.Update:
-                            updateTask();
+                            UpdateTask();
                             break;
                         case SubMenue.Delete:
-                            deleteTask();
+                            DeleteTask();
                             break;
                         default:
                             return;
@@ -183,19 +183,19 @@ Delete:5");
                         case SubMenue.Exit:
                             return;
                         case SubMenue.Creat:
-                            createEngineer();
+                            CreateEngineer();
                             break;
                         case SubMenue.Read:
-                            readEngineer();
+                            ReadEngineer();
                             break;
                         case SubMenue.ReadAll:
-                            readAllEngineers();
+                            ReadAllEngineers();
                             break;
                         case SubMenue.Update:
-                            updateEngineer();
+                            UpdateEngineer();
                             break;
                         case SubMenue.Delete:
-                            deleteEngineer();
+                            DeleteEngineer();
                             break;
                         default:
                             return;
@@ -229,19 +229,19 @@ Delete:5");
                         case SubMenue.Exit:
                             return;
                         case SubMenue.Creat:
-                            createDependency();
+                            CreateDependency();
                             break;
                         case SubMenue.Read:
-                            readDependency();
+                            ReadDependency();
                             break;
                         case SubMenue.ReadAll:
-                            readAllDependencies();
+                            ReadAllDependencies();
                             break;
                         case SubMenue.Update:
-                            updateDependency();
+                            UpdateDependency();
                             break;
                         case SubMenue.Delete:
-                            deleteDependency();
+                            DeleteDependency();
                             break;
                         default:
                             return;
@@ -255,7 +255,7 @@ Delete:5");
         /// <summary>
         /// get all the details of a task, craete a new task and add it to the list of tasks
         /// </summary>
-        static void creatTask()
+        static void CreatTask()
         {
             Console.WriteLine($@"Please enter the following details about the task:
  Name:");
@@ -289,7 +289,7 @@ Delete:5");
         /// <summary>
         /// get all the details of a task, check if the new task in the list and if is - change the details
         /// </summary>
-        static void updateTask()
+        static void UpdateTask()
         {
             Console.WriteLine($@"Please enter the following details about the task:
  Name:");
@@ -327,7 +327,7 @@ Delete:5");
         /// <summary>
         /// get id of task and delete the task with this id from the list
         /// </summary>
-        static void deleteTask()
+        static void DeleteTask()
         {
             Console.WriteLine($@"Please enter the id of the task you would like to delete from the list:");
             if (!int.TryParse(Console.ReadLine(), out int id))
@@ -338,7 +338,7 @@ Delete:5");
         /// <summary>
         /// gets a id of a task and print the task's details
         /// </summary>
-        static void readTask()
+        static void ReadTask()
         {
             Console.WriteLine($@"Please enter the task's id that you would like to read:");
             if (!int.TryParse(Console.ReadLine(), out int id))
@@ -371,7 +371,7 @@ The task's actual dead line is:{taskToRead.ActualDeadline}.
         /// <summary>
         /// prints all the tasks in the list
         /// </summary>
-        static void readListTasks()
+        static void ReadListTasks()
         {
             // List<DO.Task> listTasks = s_dalTask!.ReadAll();stage 1
             IEnumerable<DO.Task?> listTasks = s_dal!.Task!.ReadAll();//stage 2
@@ -402,7 +402,7 @@ The task's actual dead line is:{task?.ActualDeadline}.
         /// <summary>
         /// gets all the details of an engineer, craetes a new task and adds it to the list of engineer
         /// </summary>
-        static void createEngineer()
+        static void CreateEngineer()
         {
             Console.WriteLine($@"Please enter the following details about the engineer:
 Name:");
@@ -427,7 +427,7 @@ Name:");
         /// <summary>
         /// gets a id of an engineer and print the task's details
         /// </summary>
-        static void readEngineer()
+        static void ReadEngineer()
         {
 
             Console.WriteLine($@"Please enter the id of the engineer you would like to read:");
@@ -451,7 +451,7 @@ The engineer's complexity is:{engineerToRead.Complexity}.
         /// <summary>
         ///print all the engineers in the list
         /// </summary>
-        static void readAllEngineers()
+        static void ReadAllEngineers()
         {
 
             //List<Engineer> engineers = s_dalEngineer!.ReadAll();stage 1
@@ -470,7 +470,7 @@ The engineer's complexity is:{engineer?.Complexity}.
         ///get all the details of an engineer, check if the new engineer in the list and if yes-change the details
         /// </summary>
         /// <exception cref="FormatException">Wrong input</exception>
-        static void updateEngineer()
+        static void UpdateEngineer()
         {
             Console.WriteLine($@"Please enter the following details about the engineer you would like to update:
 Name:");
@@ -494,7 +494,7 @@ Name:");
         ///get id of engineer and delete the engineer with this id from the list 
         /// </summary>
         /// <exception cref="FormatException">Wrong input</exception>
-        static void deleteEngineer()
+        static void DeleteEngineer()
         {
             Console.WriteLine($@"Please enter the id of the engineer you would like to delete from the list:");
             if (!int.TryParse(Console.ReadLine(), out int id))
@@ -507,7 +507,7 @@ Name:");
         ///get all the details of a dependency, craet a new task and add it to the list of taskdependencys 
         /// </summary>
         /// <exception cref="FormatException">Wrong input</exception>
-        static void createDependency()
+        static void CreateDependency()
         {
             Console.WriteLine(@$"Please enter the following details about the task you would like to create:
 The dependent task");
@@ -523,7 +523,7 @@ The dependent task");
         ///gets a id of a dependency and print the task's details
         /// </summary>
         /// <exception cref="DalWrongInputException">Wrong input</exception>
-        static void readDependency()
+        static void ReadDependency()
         {
             Console.WriteLine($@"Please enter the id of the dependency you would like to read");
             if (!int.TryParse(Console.ReadLine(), out int dependencyId))
@@ -539,7 +539,7 @@ The task depends on task number:{dependencyToRead.DependentOnTask}.");
         /// <summary>
         ///print all the dependencys in the list
         /// </summary>
-        static void readAllDependencies()
+        static void ReadAllDependencies()
         {
             IEnumerable<Dependency?> dependencies = s_dal!.Dependency.ReadAll();
 
@@ -556,7 +556,7 @@ The task depends on task number:{dependency?.DependentOnTask}.
         ///get all the details of a dependency, check if the new dependency in the list and if yes-change the details
         /// </summary>
         /// <exception cref="FormatException">Wrong input</exception>
-        static void updateDependency()
+        static void UpdateDependency()
         {
             Console.WriteLine(@$"Please enter the following details about the task you would like to update:
 The dependent's id:");
@@ -575,7 +575,7 @@ The dependent's id:");
         /// deletes the requested dependency
         /// </summary>
         /// <exception cref="FormatException">Wrong input</exception>
-        static void deleteDependency()
+        static void DeleteDependency()
         {
             Console.WriteLine($@"Please enter the id of the dependency you would like to delete:");
             if (!int.TryParse(Console.ReadLine(), out int dependencyId))

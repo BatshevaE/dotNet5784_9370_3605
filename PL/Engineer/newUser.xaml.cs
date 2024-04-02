@@ -18,17 +18,16 @@ namespace PL.Engineer
     /// <summary>
     /// Interaction logic for newUser.xaml
     /// </summary>
-    public partial class newUser : Window
+    public partial class NewUserWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
-        public newUser(int pasword)
+        /// <summary>
+        /// ctor 
+        /// </summary>
+        public NewUserWindow()
         {
             InitializeComponent();
-            //
             CurrentUser = new();
-            pas= pasword;
-            //CurrentUser.Password = pasword;
         }
         public BO.User CurrentUser
         {
@@ -38,22 +37,18 @@ namespace PL.Engineer
 
         // Using a DependencyProperty as the backing store for EngineerList.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty UserProperty =
-            DependencyProperty.Register("CurrentUser", typeof(BO.User), typeof(newUser), new PropertyMetadata(null));
-        public int pas
-        {
-            get { return (int)GetValue(UseProperty); }
-            set { SetValue(UseProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for EngineerList.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty UseProperty =
-            DependencyProperty.Register("pas", typeof(int), typeof(newUser), new PropertyMetadata(null));
-
-        private void BtnAddOrUpdate_Click(object sender, RoutedEventArgs e)
+            DependencyProperty.Register("CurrentUser", typeof(BO.User), typeof(NewUserWindow), new PropertyMetadata(null));
+        
+        /// <summary>
+        /// button to add user to the system
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (s_bl.User.Read(CurrentUser) != null) 
+                if (s_bl.User.Read(CurrentUser) != null) //check that the user doesn't exist
                 {
                     MessageBox.Show("such user alresy assigned", "already assigned", MessageBoxButton.OK);
                     UserWindow s = new();
@@ -63,7 +58,7 @@ namespace PL.Engineer
   
                 s_bl.User.Create(CurrentUser!);
                 MessageBox.Show("successsfull create user", "succeeded", MessageBoxButton.OK);
-                new MainWindow().ShowDialog();
+                new UserWindow().ShowDialog();
                 this.Close();
             }
             catch 

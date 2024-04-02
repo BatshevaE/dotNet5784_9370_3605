@@ -22,6 +22,10 @@ namespace PL.Task
     public partial class DependenciesListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        /// <summary>
+        /// ctor,get id of task that the user want to watch it's dependecies(which tasks the currrent task dependent on)
+        /// </summary>
+        /// <param name="id"></param>
         public DependenciesListWindow(int id)
         {
             InitializeComponent();
@@ -30,11 +34,11 @@ namespace PL.Task
                Dependencies = s_bl.Task.Read(id)!.Dependencies!;
             else
                 MessageBox.Show("The task doesn't have dependencies,you can add.", "", MessageBoxButton.OK);
-
-
         }
 
-
+        /// <summary>
+        /// dependency property of the dependecies
+        /// </summary>
         public IEnumerable<TaskInList> Dependencies
         {
             get { return (IEnumerable<TaskInList>)GetValue(dependenciesProperty); }
@@ -44,6 +48,9 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty dependenciesProperty =
             DependencyProperty.Register("Dependencies", typeof(IEnumerable<TaskInList>), typeof(DependenciesListWindow), new PropertyMetadata(null));
+        /// <summary>
+        /// dependency property of the current(dependent) task
+        /// </summary>
         public BO.Task CurrentTaskDependency1
         {
             get { return (BO.Task)GetValue(CurrentTaskProperty); }
@@ -53,21 +60,29 @@ namespace PL.Task
         // Using a DependencyProperty as the backing store for CurrentTask.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentTaskProperty =
             DependencyProperty.Register("CurrentTaskDependency1", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+        /// <summary>
+        /// add a task that the current task dependent on
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddDependency_Click(object sender, RoutedEventArgs e)
         {
             DependencyWindow dependency = new(CurrentTaskDependency1.Id,0);
             dependency.ShowDialog();
             this.Close();
         }
-
-        private void UpdateDependency_DoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// show the dependency details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DetailsDependency_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.TaskInList? dependency = (sender as ListView)?.SelectedItem as BO.TaskInList;
             DependencyWindow newDependency = new(CurrentTaskDependency1.Id,dependency!.Id);
             newDependency.ShowDialog();
             this.Close();
-            /*.Task? t = s_bl.Task.ReadAll2().FirstOrDefault(m => m.Id == dependency!.Id);
-            new DependenciesListWindow(t!.Id).Show();*/
+   
         }
     }
 

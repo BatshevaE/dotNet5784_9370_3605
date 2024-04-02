@@ -38,7 +38,8 @@
         </ListView>
         <!--Button to add item to the list of Engineers-->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAdd_Click" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black"/>
-        <Button Content="Exit" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"  Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Margin="600,0,0,0"  Click="btnExit_Click"/>
+        <!--Button to return to the main window-->
+        <Button Content="Exit" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"  Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Margin="600,0,0,0"  Click="BtnExit_Click"/>
 
     </Grid>
 </Window>

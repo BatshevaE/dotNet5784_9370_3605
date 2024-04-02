@@ -22,9 +22,9 @@
             </Grid.ColumnDefinitions>
             
             <Label Content="List of tasks" HorizontalAlignment="Center"  FontWeight="Bold" Grid.Column="0" FontSize="18" Foreground="Black" Width="109"/>
-            <!---combo box for the level of the engineer,it will sor the list acordding to the level-->
+            <!---combo box for the level of the task,it will sort the list acordding to the level-->
             <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource EngineerLevelCollectionKey}}" SelectedValue="{Binding Path=Level,Mode=TwoWay}" SelectionChanged="CbComplexity_SelectionChanged" Margin="0,0,200,0"/>
-            <!---combo box for the status of the task,it will sor the list acordding to the status-->
+            <!---combo box for the status of the task,it will sort the list acordding to the status-->
             <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource TaskStatusCollectionKey}}" SelectedValue="{Binding Status, Mode=TwoWay}"  Margin="200,0,0,0" SelectionChanged="CbStatusSelectionChanged"/>
         </Grid>
         <ListView Margin="5" Grid.Row="1" MouseDoubleClick="DoubleClicTask" BorderBrush="{x:Null}" Foreground="Black" ItemsSource="{Binding TaskList}">
@@ -37,8 +37,9 @@
                 <ImageBrush ImageSource="https://static.vecteezy.com/ti/vecteur-libre/t1/8516342-travail-vie-equilibre-illustration-concept-vectoriel.jpg" Stretch="None" />
             </ListView.Background>
         </ListView>
-        <!--Button to add item to the list of Engineers-->
-        <Button Content="Add" Grid.Row="2"  Margin="0,0,0,0" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" />
+        <!--Button to add item to the list of tasks-->
+        <Button Content="Add" IsEnabled="{Binding id1}" Grid.Row="2"  Margin="0,0,0,0" HorizontalAlignment="Center" Height="50" Width="100" Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black" Click="BtnAddTask_Click" />
+        <!--Button to return to the main window-->
         <Button Content="Exit" Grid.Row="2" Margin="600,0,0,0" HorizontalAlignment="Center" Height="50" Width="100"  Background="{x:Null}" FontSize="39"  FontFamily="Sitka Banner" FontWeight="Bold" Foreground="Black"  Click="BtnExit_Click"/>
 
     </Grid>

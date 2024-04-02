@@ -118,7 +118,7 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// deletes all the tasks from the xml file
     /// </summary>
-   public void clear()
+   public void Clear()
     {
         List<Task> Tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
         Tasks.Clear();

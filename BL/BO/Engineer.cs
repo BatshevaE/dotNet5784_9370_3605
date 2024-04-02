@@ -27,6 +27,9 @@ public class Engineer
     /// </summary>
     public List <Tuple<int,string>?>? Task { get; set; }
     public override string ToString() => this.ToStringProperty();
+    /// <summary>
+    /// empty ctor
+    /// </summary>
     public Engineer()  { Id = 0; Name = ""; Email = ""; Level = 0; Cost = 0.0; Task = null; }
 
 

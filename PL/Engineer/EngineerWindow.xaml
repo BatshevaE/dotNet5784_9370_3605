@@ -81,7 +81,7 @@
         <!--cost for hour of the engineer-->
         <Label Content="Cost for hour" Grid.Column="0" Grid.Row="4" Margin="200,10,0,2"/>
         <TextBox Grid.Column="1" Grid.Row="4"  Margin="26,2,131,10" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  />
-
+        <!--the tasks that the engineer is assigned to-->
         <Label Content="Engineer of Task" Grid.Column="0" Grid.Row="5"  Margin="200,3,0,4" />
         <TextBox Grid.Column="1" Grid.Row="5"  Margin="26,3,131,4" TextWrapping="Wrap"  Text="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTupleToContextInEngKey }}" />
 
@@ -91,9 +91,10 @@
 
         <!--button to assign this engineer to a task that he can do-->
         <Button Content="Assign to &#xA;     task" HorizontalAlignment="Left" Height="51" Grid.Row="6" VerticalAlignment="Center" Width="100" Click="BtnAssignToTask_Click" IsEnabled="{Binding Task, Mode=OneTime, Converter={StaticResource ConvertTaskInEngToBoolKey}}" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontWeight="Bold" FontSize="20" FontFamily="Sitka Banner" Margin="69,0,0,0"/>
-        <!--button to delete this engineer from the list og engineers-->
+        <!--button to delete this engineer from the list of engineers-->
         <Button Content="Delete"  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToBoolOpositeKey}}" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"  FontWeight="Bold" RenderTransformOrigin="1.198,0.625" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="55,0,0,0" Grid.Column="1" Click="BtnDeleteEngineer_Click" />
-        <Button Content="Exit" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="178,0,0,0" Grid.Column="1" Click="Button_Click"  />
+        <!--button to return to the main window-->
+        <Button Content="Exit" Height="50" Width="100" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Center"  FontWeight="Bold"  Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontSize="20" FontFamily="Sitka Banner" Margin="178,0,0,0" Grid.Column="1" Click="BtnExit_Click"  />
 
     </Grid>
 </Window>

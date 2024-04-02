@@ -40,9 +40,9 @@ internal class Program
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
         if (ans == "Y")
         {
-            s_bl.Task.clear();
-            s_bl.Engineer.clear();
-            s_bl.User.clear(); 
+            s_bl.Task.Clear();
+            s_bl.Engineer.Clear();
+            s_bl.User.Clear(); 
             BlImplementation.Project.ZeroStartProject();
             DalTest.Initialization.Do();
             
@@ -127,25 +127,25 @@ Create automatic luz:8
                     case SubMenueTask.Exit:
                         return;
                     case SubMenueTask.Creat:
-                        createTask();
+                        CreateTask();
                         break;
                     case SubMenueTask.Read:
-                        readTask();
+                        ReadTask();
                         break;
                     case SubMenueTask.ReadAll:
-                        readListTasks();
+                        ReadListTasks();
                         break;
                     case SubMenueTask.Update:
-                        updateTask();
+                        UpdateTask();
                         break;
                     case SubMenueTask.Delete:
-                        deleteTask();
+                        DeleteTask();
                         break;
                     case SubMenueTask.UpdateStartDate:
-                        updateStartDate();
+                        UpdateStartDate();
                         break;
                     case SubMenueTask.AssignEngineerToTask:
-                        assignEngineerToTask();
+                        AssignEngineerToTask();
                         break;
                     case SubMenueTask.AutomaticCreateSchedele:
                        AutomaticCreateSchedele();
@@ -185,19 +185,19 @@ Read all engineer in certain level:6");
                     case SubMenueEng.Exit:
                         return;
                     case SubMenueEng.Creat:
-                        createEngineer();
+                        CreateEngineer();
                         break;
                     case SubMenueEng.Read:
-                        readEngineer();
+                        ReadEngineer();
                         break;
                     case SubMenueEng.ReadAll:
-                        readAllEngineers();
+                        ReadAllEngineers();
                         break;
                     case SubMenueEng.Update:
-                        updateEngineer();
+                        UpdateEngineer();
                         break;
                     case SubMenueEng.Delete:
-                        deleteEngineer();
+                        DeleteEngineer();
                         break;
                     case SubMenueEng.EngineersAtRequestedLevel:
                         EngineersAtRequestedLevel();
@@ -234,7 +234,7 @@ Read all engineer in certain level:6");
     /// </summary>
     /// <exception cref="BlNotAtTheRightStageException"></exception>
     /// <exception cref="FormatException"></exception>
-    static void createTask()
+    static void CreateTask()
     {
         if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the following details about the task:
@@ -301,7 +301,7 @@ Read all engineer in certain level:6");
     /// </summary>
     /// <exception cref="BlNotAtTheRightStageException"></exception>
     /// <exception cref="FormatException"></exception>
-        static void deleteTask()
+        static void DeleteTask()
     {
         if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the id of the task you would like to delete from the list:");
@@ -313,7 +313,7 @@ Read all engineer in certain level:6");
     /// read a task from the data source
     /// </summary>
     /// <exception cref="FormatException"></exception>
-    static void readTask()
+    static void ReadTask()
     {
         Console.WriteLine($@"Please enter the task's id that you would like to read:");
         if (!int.TryParse(Console.ReadLine(), out int id))
@@ -328,7 +328,7 @@ Read all engineer in certain level:6");
     /// <summary>
     /// read all the tasks from the data source
     /// </summary>
-    static void readListTasks()
+    static void ReadListTasks()
     {
         IEnumerable<BO.TaskInList?> listTasks = s_bl!.Task!.ReadAll();
 
@@ -343,7 +343,7 @@ Read all engineer in certain level:6");
    /// </summary>
    /// <exception cref="BlNotAtTheRightStageException"></exception>
    /// <exception cref="FormatException"></exception>
-    static void updateStartDate()
+    static void UpdateStartDate()
     {
         if (BlImplementation.Project.GetStage() != BO.Stage.MiddleStage) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         //foreach (var item in s_bl!.Task.ReadAll())
@@ -363,7 +363,7 @@ Read all engineer in certain level:6");
     /// assign Engineer To the Task
     /// </summary>
     /// <exception cref="FormatException"></exception>
-    static void assignEngineerToTask()
+    static void AssignEngineerToTask()
     {
         if (BlImplementation.Project.GetStage() != BO.Stage.Doing) throw new BlNotAtTheRightStageException("can't assign engineer to the task at the current stage of the project");
         Console.WriteLine($@"Please enter the id of the task:");
@@ -372,14 +372,14 @@ Read all engineer in certain level:6");
         Console.WriteLine($@"Please enter  the engineer's id you want to assign for the task:");
         if (!int.TryParse(Console.ReadLine(), out int enginnerId))
             throw new FormatException("Wrong input");
-        s_bl!.Task!.updateEngineerToTask(enginnerId,taskId);
+        s_bl!.Task!.UpdateEngineerToTask(enginnerId,taskId);
 
     }
     /// <summary>
     /// add an engineer to the data source
     /// </summary>
     /// <exception cref="FormatException"></exception>
-    static void createEngineer()
+    static void CreateEngineer()
     {
         
         Console.WriteLine($@"Please enter the following details about the engineer:
@@ -413,7 +413,7 @@ Read all engineer in certain level:6");
     /// </summary>
     /// <exception cref="FormatException"></exception>
     /// <exception cref="DalDoesNotExistException"></exception> 
-    static void readEngineer()
+    static void ReadEngineer()
     {
 
         Console.WriteLine($@"Please enter the id of the engineer you would like to read:");
@@ -432,7 +432,7 @@ Read all engineer in certain level:6");
     /// <summary>
     ///  read all the engineers from the data source
     /// </summary>
-    static void readAllEngineers()
+    static void ReadAllEngineers()
     {
         IEnumerable<BO.Engineer?> engineers = s_bl!.Engineer.ReadAll();//stage 2            
         foreach (BO.Engineer? engineerToRead in engineers)//a loop that goes over the list of engineers
@@ -446,7 +446,7 @@ Read all engineer in certain level:6");
     /// </summary>
     /// <exception cref="FormatException"></exception>
     /// <exception cref="DalDoesNotExistException"></exception>
-    static void deleteEngineer()
+    static void DeleteEngineer()
     {
         if (BlImplementation.Project.GetStage() != BO.Stage.Planning) throw new BlNotAtTheRightStageException("you are not at the right stage of the project for the requested action");
         Console.WriteLine($@"Please enter the id of the engineer you would like to delete from the list:");
@@ -459,7 +459,7 @@ Read all engineer in certain level:6");
     /// update an engineer from the data source
     /// </summary>
     /// <exception cref="FormatException"></exception>
-    static void updateEngineer()
+    static void UpdateEngineer()
     {
         Console.WriteLine($@"Please enter the following details about the engineer:
     Name:");
@@ -475,13 +475,17 @@ Read all engineer in certain level:6");
             throw new FormatException("Wrong input");
         Console.WriteLine($@"An Email address:");
         string engineerEmail = Console.ReadLine()!;
-        Tuple<int, string>? task1=null;
+        List<Tuple<int, string>?>? task1=null;
         if (BlImplementation.Project.GetStage() == BO.Stage.Doing)//if the stage is planing the manager can assign  a task for the engineer
         {
             Console.WriteLine($@"Do you want to assign a task for the engineer {engineerName}? (Y/N)");
             string ans = Console.ReadLine()!;
             if (ans=="Y")
-                task1=updateTaskToEngineer(engineerId);
+            {
+                if (task1 == null) { task1 = new(); }
+                task1 = UpdateTaskToEngineer(engineerId);
+
+            }
         }
         BO.Engineer engineer = new BO.Engineer
         {
@@ -501,7 +505,7 @@ Read all engineer in certain level:6");
     /// <returns></returns>
     /// <exception cref="FormatException"></exception>
     /// <exception cref="BlCanNotAssignRequestedEngineer"></exception>
-    static Tuple<int, string>? updateTaskToEngineer(int id)
+    static List<Tuple<int, string>?>? UpdateTaskToEngineer(int id)
     {
         BO.Engineer? eng = s_bl.Engineer.Read(id);
 
@@ -528,7 +532,7 @@ Read all engineer in certain level:6");
     /// </summary>
     /// <exception cref="FormatException"></exception>
     /// <exception cref="BlNotAtTheRightStageException"></exception>
-    static void updateTask()
+    static void UpdateTask()
     {
         
             Console.WriteLine($@"Please enter the following details about the task you want to update:
@@ -602,7 +606,7 @@ Id:");
     /// </summary>
      static void AutomaticCreateSchedele()
     {
-        s_bl.Task.createAutomaticLuz();
+        s_bl.Task.CreateAutomaticSchedule();
     }
 
 }

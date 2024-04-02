@@ -23,7 +23,10 @@ namespace PL.Task;
 public partial class TaskWindowForStartDate : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
+    /// <summary>
+    /// ctor gets id of the task we want to chose start date for
+    /// </summary>
+    /// <param name="id"></param>
     public TaskWindowForStartDate(int id = 0)
     {
         InitializeComponent();
@@ -42,6 +45,9 @@ public partial class TaskWindowForStartDate : Window
         }
 
     }
+    /// <summary>
+    /// dependency property of the task 
+    /// </summary>
     public BO.Task CurrentTask
     {
         get { return (BO.Task)GetValue(CurrentTaskProperty); }
@@ -51,7 +57,12 @@ public partial class TaskWindowForStartDate : Window
     // Using a DependencyProperty as the backing store for CurrentTask.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty CurrentTaskProperty =
         DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindowForStartDate), new PropertyMetadata(null));
-    private void updateStartTaskDate_Btn(object sender, SelectionChangedEventArgs e)
+   /// <summary>
+   /// update the actual start date
+   /// </summary>
+   /// <param name="sender"></param>
+   /// <param name="e"></param>
+    private void UpdateStartTaskDate_Btn(object sender, SelectionChangedEventArgs e)
     {
         var picker = sender as Calendar;
         DateTime? date = picker!.SelectedDate;
@@ -64,20 +75,19 @@ public partial class TaskWindowForStartDate : Window
         
     }
 
-    private void BtnDeleteTask_Click(object sender, RoutedEventArgs e)
-    {
-        MainWindow s = new MainWindow();
-        s.ShowDialog();
-        this.Close();
-
-    }
-
-    private void Button_Click(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// a button to return to the main window
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void BtnExit_Click(object sender, RoutedEventArgs e)
     {
         MainWindow s = new MainWindow();
         s.ShowDialog();
         this.Close();
     }
+
+ 
 }
 
 

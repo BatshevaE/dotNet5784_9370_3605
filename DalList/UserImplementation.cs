@@ -97,5 +97,5 @@ internal class UserImplementation:IUser
         else
             return DataSource.Users.FirstOrDefault(filter);
     }
-    public void clear() { DataSource.Users.Clear(); }
+    public void Clear() { DataSource.Users.Clear(); }
 }

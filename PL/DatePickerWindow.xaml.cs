@@ -20,25 +20,15 @@ namespace PL
     public partial class DatePickerWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
-        public DatePickerWindow(int id=0)
+        /// <summary>
+        /// ctor 
+        /// </summary>
+        /// <param name="id"></param>
+        public DatePickerWindow()
         {
             InitializeComponent();
             Clock=s_bl.Clock.Date;
-            Id = id;
         }
-
-
-        public int Id
-        {
-            get { return (int)GetValue(IdProperty); }
-            set { SetValue(IdProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Id.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IdProperty =
-            DependencyProperty.Register("Id", typeof(int), typeof(DatePickerWindow), new PropertyMetadata(0));
-
 
         public DateTime Clock
         {
@@ -50,14 +40,16 @@ namespace PL
         public static readonly DependencyProperty ClockProperty =
             DependencyProperty.Register("Clock", typeof(DateTime), typeof(DatePickerWindow), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// update the date of the project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void Date_Select(object sender,SelectionChangedEventArgs e)
         {
             var picker=sender as Calendar;
             DateTime? date= picker!.SelectedDate;
-            if ((Id==0)&&(date!=null))
-            {
                 try
                 {
                     BlImplementation.Project.CreateSchedele(date);
@@ -69,12 +61,7 @@ namespace PL
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     this.Close();
                 }
-            }
-            else 
-            {
-                try { s_bl.Task.UpdateActuallStartDate(date, Id); this.Close(); }
-                catch { }
-            }
+            
 
         }
     }

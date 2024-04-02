@@ -13,20 +13,28 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <DataGrid ItemsSource="{Binding Entries}" AutoGenerateColumns="True" >
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content.Text, Converter={StaticResource ConvertWordToColurKey}}"/>
-                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content.Text, Converter={StaticResource ConvertStatusToColurKey}}"/>
-                </Style>
-            </DataGrid.CellStyle>
-            <!-- <DataGrid.Columns>
-                <DataGridTextColumn Header="Task Id" Binding="{Binding TaskId}"/>
-                <DataGridTextColumn Header="Task Name"  Binding="{Binding TaskName }"/>
-                <DataGridTextColumn Header="Dependecies" Binding="{Binding Dependencies}"/>
-                
-            </DataGrid.Columns>-->
-           
-        </DataGrid>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <!--Internal, Upper Grid-->
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="700"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid ItemsSource="{Binding Entries}" AutoGenerateColumns="True" >
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content.Text, Converter={StaticResource ConvertWordToColurKey}}"/>
+                        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content.Text, Converter={StaticResource ConvertStatusToColurKey}}"/>
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+        </Grid>
+        <Label Content="Schedeled" HorizontalAlignment="Left" Margin="707,25,0,0" VerticalAlignment="Top" Foreground="White" Background="Orange" Height="39" Width="74" FontSize="13" FontWeight="Bold"/>
+        <Label Content="InJeopardy" HorizontalAlignment="Left" Margin="707,108,0,0" VerticalAlignment="Top"  Foreground="White" Background="Red" Height="39" Width="74" FontSize="10" FontWeight="Bold"/>
+        <Label Content="OnTrack" HorizontalAlignment="Left" Margin="707,186,0,0" VerticalAlignment="Top"  Foreground="White" Background="Fuchsia" Height="39" Width="74" FontSize="13" FontWeight="Bold"/>
+        <Label Content="Done" HorizontalAlignment="Left" Margin="707,268,0,0" VerticalAlignment="Top"  Foreground="White" Background="Pink" Height="39" Width="74" FontSize="13" FontWeight="Bold"/>
+
+
     </Grid>
 </Window>
