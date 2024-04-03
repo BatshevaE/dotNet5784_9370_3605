@@ -18,6 +18,7 @@ internal class UserImplementation:IUser
     /// <exception cref="DalAlreadyExistException"></exception>
     public int Create(User item)
     {
+        if (!(ReadAll().Any()) || ReadAll().Count() == 0) { User us = new(item.Password, item.Name, true, item.Id); DataSource.Users.Add(item);return item.Password; }
         if (Read(item.Password) != null)
             throw new DalAlreadyExistException("An user type object with such Password already exists");
         if((DataSource.Engineers.FirstOrDefault(t=>(t.Name==item.Name)||( t.Id == item.Id)) ==null)&&(item.Password!=111)&&(item.Password!=100))

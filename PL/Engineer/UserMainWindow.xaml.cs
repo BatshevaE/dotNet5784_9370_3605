@@ -76,7 +76,7 @@ namespace PL.Engineer
                
                 new UserMainWindow(Eng.Id).Show();
                 this.Close();
-            }
+            } 
             else 
             {
                 new TaskListWindow(Eng.Id).ShowDialog();

@@ -17,6 +17,7 @@ public class UserImplementation:IUser
     public int Create(User item)
     {
         List<User> Users = XMLTools.LoadListFromXMLSerializer<User>(s_users_xml);
+        if (!(Users.Any()) || Users.Count() == 0) { User user = new(item.Password, item.Name, true, item.Id); Users.Add(user); XMLTools.SaveListToXMLSerializer(Users, s_users_xml); return item.Password; }
         if (Read(item.Password) != null)
             throw new DalAlreadyExistException("An user type object with such an Password already exists");
         List<Engineer> Engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(s_engineers_xml);

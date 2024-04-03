@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        WindowStartupLocation ="CenterScreen"
+        WindowState="Maximized"
    	    DataContext="{Binding Clock, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
         Title="DatePickerWindow" Height="200" Width="200">
     <Grid >

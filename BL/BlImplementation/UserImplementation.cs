@@ -19,7 +19,13 @@ internal class UserImplementation:IUser
     {
         if ((item.Password <= 0) || (item.Name == ""))//check the input
             throw new BlWrongInput("wrong input");
-
+        if (!(ReadAll().Any())||ReadAll().Count()==0)
+        {
+            DO.User user = new(item.Password, item.Name, true, item.Id);
+            return _dal.User.Create(user); 
+           
+        }
+            
         DO.User doUser = new
           (item.Password, item.Name, item.IsManager,item.Id);
         try

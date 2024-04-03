@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
+        WindowStartupLocation ="CenterScreen"
+       WindowState="Maximized"
        DataContext="{Binding Eng, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
        Title="UserMainWindow" Height="450" Width="800">
     <Window.Resources>

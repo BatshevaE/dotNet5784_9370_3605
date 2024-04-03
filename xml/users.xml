@@ -3,38 +3,38 @@
   <User>
     <Password>123</Password>
     <Name>Daniel Cohen</Name>
-    <IsManager>false</IsManager>
-    <Id>325712240</Id>
+    <IsManager>true</IsManager>
+    <Id>262464097</Id>
   </User>
   <User>
     <Password>124</Password>
     <Name>Eli levi</Name>
     <IsManager>false</IsManager>
-    <Id>208167380</Id>
+    <Id>374789848</Id>
   </User>
   <User>
     <Password>125</Password>
     <Name>Yair Rosen</Name>
     <IsManager>false</IsManager>
-    <Id>314631148</Id>
+    <Id>308177127</Id>
   </User>
   <User>
     <Password>126</Password>
     <Name>shir Klein</Name>
     <IsManager>false</IsManager>
-    <Id>376099390</Id>
+    <Id>223045473</Id>
   </User>
   <User>
     <Password>127</Password>
     <Name>Dina Hill</Name>
     <IsManager>false</IsManager>
-    <Id>252296794</Id>
+    <Id>206221116</Id>
   </User>
   <User>
     <Password>128</Password>
     <Name>Shira Stone</Name>
     <IsManager>false</IsManager>
-    <Id>378272126</Id>
+    <Id>318241654</Id>
   </User>
   <User>
     <Password>111</Password>
